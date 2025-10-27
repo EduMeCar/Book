@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking by EMC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #000000;
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 100px 20px 80px;
+            text-align: center;
+            border-bottom: 2px solid #10B981;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #9CA3AF;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            font-size: 1rem;
+            color: #6B7280;
+            font-style: italic;
+        }
+
+        /* Metrics Section */
+        .metrics-section {
+            padding: 60px 20px;
+            background: #0a0a0a;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .metric-card {
+            background: #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2a2a2a;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+            border-color: #10B981;
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6B7280;
+        }
+
+        /* Distribution Section */
+        .distribution-section {
+            padding: 60px 20px;
+            background: #000000;
+        }
+
+        .distribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .distribution-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .distribution-country {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 20px;
+        }
+
+        .distribution-venues {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .distribution-percentage {
+            font-size: 1.2rem;
+            color: #6B7280;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #2a2a2a;
+            border-radius: 6px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            transition: width 1s ease;
+        }
+
+        /* Table Section */
+        .table-section {
+            padding: 60px 20px;
+            background: #0a0a0a;
+        }
+
+        .data-table {
+            width: 100%;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+        }
+
+        .data-table thead {
+            background: #10B981;
+        }
+
+        .data-table th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #000000;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 20px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #FFFFFF;
+        }
+
+        .data-table tr:hover {
+            background: #252525;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Genre Cards */
+        .genre-section {
+            padding: 60px 20px;
+            background: #000000;
+        }
+
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .genre-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .genre-card:hover {
+            transform: translateY(-5px);
+            border-color: #10B981;
+            background: #252525;
+        }
+
+        .genre-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .genre-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .genre-count {
+            font-size: 1.5rem;
+            color: #10B981;
+            font-weight: 700;
+        }
+
+        /* Contacts Section */
+        .contacts-section {
+            padding: 60px 20px;
+            background: #0a0a0a;
+        }
+
+        .contact-bars {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            margin-bottom: 25px;
+        }
+
+        .contact-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #FFFFFF;
+        }
+
+        .contact-bar {
+            width: 100%;
+            height: 30px;
+            background: #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .contact-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: width 1s ease;
+        }
+
+        /* Featured Venues */
+        .venues-section {
+            padding: 60px 20px;
+            background: #000000;
+        }
+
+        .venues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .venue-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+            border-color: #10B981;
+        }
+
+        .venue-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 10px;
+        }
+
+        .venue-city {
+            font-size: 1rem;
+            color: #9CA3AF;
+            margin-bottom: 15px;
+        }
+
+        .venue-capacity {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .venue-details {
+            color: #6B7280;
+            font-size: 0.95rem;
+        }
+
+        /* Modalidades Section */
+        .modalidades-section {
+            padding: 60px 20px;
+            background: #0a0a0a;
+        }
+
+        .modalidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .modalidad-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 30px;
+            border: 2px solid;
+        }
+
+        .modalidad-card.bajo {
+            border-color: #10B981;
+        }
+
+        .modalidad-card.medio {
+            border-color: #F59E0B;
+        }
+
+        .modalidad-card.alto {
+            border-color: #EF4444;
+        }
+
+        .modalidad-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modalidad-card.bajo .modalidad-title {
+            color: #10B981;
+        }
+
+        .modalidad-card.medio .modalidad-title {
+            color: #F59E0B;
+        }
+
+        .modalidad-card.alto .modalidad-title {
+            color: #EF4444;
+        }
+
+        .modalidad-list {
+            list-style: none;
+        }
+
+        .modalidad-list li {
+            padding: 10px 0;
+            color: #9CA3AF;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .modalidad-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Executive Summary */
+        .summary-section {
+            padding: 80px 20px;
+            background: #000000;
+        }
+
+        .summary-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 50px;
+            border-radius: 16px;
+            border: 2px solid #10B981;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15);
+        }
+
+        .summary-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .summary-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #E5E7EB;
+            text-align: justify;
+        }
+
+        .summary-text p {
+            margin-bottom: 20px;
+        }
+
+        .summary-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #10B981;
+        }
+
+        .footer-text {
+            color: #6B7280;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .metric-number {
+                font-size: 2.5rem;
+            }
+
+            .summary-card {
+                padding: 30px 20px;
+            }
+
+            .summary-title {
+                font-size: 1.5rem;
+            }
+
+            .summary-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <h1 class="hero-title">Booking by EMC</h1>
+            <p class="hero-subtitle">239 Venues | 86 Contactos | 30+ Géneros | 19 Ciudades</p>
+            <p class="hero-stats">Cobertura: México & España</p>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Métricas Clave</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">239+</div>
+                    <div class="metric-label">Venues</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">86+</div>
+                    <div class="metric-label">Contactos</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">30+</div>
+                    <div class="metric-label">Géneros Musicales</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">19+</div>
+                    <div class="metric-label">Ciudades Cubiertas</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">226</div>
+                    <div class="metric-label">México</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">13</div>
+                    <div class="metric-label">España</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distribution Section -->
+    <section class="distribution-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Distribución por País</h2>
+            </div>
+            <div class="distribution-grid">
+                <div class="distribution-card">
+                    <div class="distribution-country">🇲🇽 México</div>
+                    <div class="distribution-venues">226</div>
+                    <div class="distribution-percentage">94% del total</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%"></div>
+                    </div>
+                </div>
+                <div class="distribution-card">
+                    <div class="distribution-country">🇪🇸 España</div>
+                    <div class="distribution-venues">13</div>
+                    <div class="distribution-percentage">6% del total</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 6%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top States Table -->
+    <section class="table-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Top Estados México</h2>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Estado</th>
+                        <th>Venues</th>
+                        <th>Capacidad Máxima</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CDMX</strong></td>
+                        <td>110</td>
+                        <td>63,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jalisco</strong></td>
+                        <td>37</td>
+                        <td>46,232</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nuevo León</strong></td>
+                        <td>33</td>
+                        <td>51,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Puebla</strong></td>
+                        <td>10</td>
+                        <td>1,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Baja California</strong></td>
+                        <td>8</td>
+                        <td>300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Genre Categories -->
+    <section class="genre-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Géneros Musicales</h2>
+            </div>
+            <div class="genre-grid">
+                <div class="genre-card">
+                    <div class="genre-emoji">🎺</div>
+                    <div class="genre-name">Salsa & Cumbia</div>
+                    <div class="genre-count">20+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎷</div>
+                    <div class="genre-name">Jazz & Blues</div>
+                    <div class="genre-count">15+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🔥</div>
+                    <div class="genre-name">Reggaetón & Perreo</div>
+                    <div class="genre-count">20+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎸</div>
+                    <div class="genre-name">Rock, Metal, Punk</div>
+                    <div class="genre-count">50+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎤</div>
+                    <div class="genre-name">Indie & Alternativo</div>
+                    <div class="genre-count">40+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎧</div>
+                    <div class="genre-name">Electrónica & Techno</div>
+                    <div class="genre-count">30+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎵</div>
+                    <div class="genre-name">Todos/General</div>
+                    <div class="genre-count">30+ venues</div>
+                </div>
+                <div class="genre-card">
+                    <div class="genre-emoji">🎻</div>
+                    <div class="genre-name">Regional/Otros</div>
+                    <div class="genre-count">34+ venues</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts by Role -->
+    <section class="contacts-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Red por Rol</h2>
+            </div>
+            <div class="contact-bars">
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Venues/Promotores</span>
+                        <span>28 (33%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 33%"></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Productores</span>
+                        <span>18 (21%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 21%"></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Contactos/Red</span>
+                        <span>13 (15%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Otros</span>
+                        <span>13 (15%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Agencias</span>
+                        <span>8 (9%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 9%"></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">
+                        <span>Managers</span>
+                        <span>6 (7%)</span>
+                    </div>
+                    <div class="contact-bar">
+                        <div class="contact-fill" style="width: 7%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Venues -->
+    <section class="venues-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Venues Destacados</h2>
+            </div>
+            <div class="venues-grid">
+                <div class="venue-card">
+                    <div class="venue-name">Foro Sol</div>
+                    <div class="venue-city">CDMX</div>
+                    <div class="venue-capacity">63,500</div>
+                    <div class="venue-details">Festivales | Estadio</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">Estadio BBVA</div>
+                    <div class="venue-city">Monterrey</div>
+                    <div class="venue-capacity">51,000</div>
+                    <div class="venue-details">Masivos | Estadio</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">Razzmatazz</div>
+                    <div class="venue-city">Barcelona</div>
+                    <div class="venue-capacity">3,500</div>
+                    <div class="venue-details">Todos | Club/Venue</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">Arena CDMX</div>
+                    <div class="venue-city">CDMX</div>
+                    <div class="venue-capacity">22,300</div>
+                    <div class="venue-details">Todos | Arena</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modalidades -->
+    <section class="modalidades-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Modalidades de Negociación</h2>
+            </div>
+            <div class="modalidades-grid">
+                <div class="modalidad-card bajo">
+                    <div class="modalidad-title">BAJO RIESGO</div>
+                    <ul class="modalidad-list">
+                        <li>Fecha Comprada</li>
+                        <li>Versus Deal</li>
+                        <li>Residencia</li>
+                        <li>Festival Slot</li>
+                    </ul>
+                </div>
+                <div class="modalidad-card medio">
+                    <div class="modalidad-title">RIESGO MEDIO</div>
+                    <ul class="modalidad-list">
+                        <li>Copromoción</li>
+                        <li>Guarantee Plus</li>
+                        <li>Bar Deal</li>
+                    </ul>
+                </div>
+                <div class="modalidad-card alto">
+                    <div class="modalidad-title">ALTO RIESGO</div>
+                    <ul class="modalidad-list">
+                        <li>Door Deal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="summary-section">
+        <div class="container">
+            <div class="summary-card">
+                <h2 class="summary-title">Resumen Ejecutivo</h2>
+                <div class="summary-text">
+                    <p>Este documento, representa un activo estratégico de primer nivel para la industria musical en México y España. Con 239 venues cuidadosamente seleccionados y 86 contactos verificados, hemos construido una red que abarca la mayoria de géneros musicales conocidos y con un alcance de más de 19 ciudades en dos continentes.</p>
+
+                    <p>La concentración en México (94% de venues) no es casual: refleja la realidad de un mercado vibrante. CDMX lidera con 110 venues, seguida por Jalisco (37) y Nuevo León (33), formando el triángulo dorado del booking musical mexicano.</p>
+
+                    <p>Nuestra red de contactos está estratégicamente diversificada: desde venues y promotores (33%) hasta productores (21%), agencias (9%) y managers (7%), garantizando múltiples puntos de entrada a cada mercado. Las modalidades de negociación están categorizadas por nivel de riesgo, permitiendo decisiones informadas desde fechas compradas de bajo riesgo hasta door deals de alto riesgo.</p>
+
+                    <p>Este es más que un directorio: es una herramienta de inteligencia de mercado que permite identificar oportunidades, evaluar riesgos y ejecutar estrategias de booking con precisión quirúrgica. Cada contacto ha sido verificado, cada venue clasificado por capacidad y género, cada modalidad explicada con claridad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Booking by EMC</p>
+        </div>
+    </footer>
+</body>
+</html>
