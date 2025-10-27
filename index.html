@@ -167,46 +167,56 @@
             transition: width 1s ease;
         }
 
-        /* Table Section */
-        .table-section {
+        /* States Chart Section */
+        .states-section {
             padding: 60px 20px;
             background: #0a0a0a;
         }
 
-        .data-table {
-            width: 100%;
-            background: #1a1a1a;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #2a2a2a;
+        .states-chart {
+            max-width: 900px;
+            margin: 0 auto;
+            margin-top: 40px;
         }
 
-        .data-table thead {
-            background: #10B981;
+        .state-bar {
+            margin-bottom: 30px;
         }
 
-        .data-table th {
-            padding: 20px;
-            text-align: left;
+        .state-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .state-name {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #000000;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .data-table td {
-            padding: 20px;
-            border-bottom: 1px solid #2a2a2a;
             color: #FFFFFF;
         }
 
-        .data-table tr:hover {
-            background: #252525;
+        .state-count {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #10B981;
         }
 
-        .data-table tr:last-child td {
-            border-bottom: none;
+        .state-bar-bg {
+            width: 100%;
+            height: 45px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .state-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            transition: width 1.5s ease;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
 
         /* Genre Cards */
@@ -525,7 +535,7 @@
         </div>
     </section>
 
-    <!-- Metrics Section -->
+    <!-- Metrics Section (SOLO 4 TARJETAS) -->
     <section class="metrics-section">
         <div class="container">
             <div class="section-header">
@@ -579,48 +589,63 @@
         </div>
     </section>
 
-    <!-- Top States Table -->
-    <section class="table-section">
+    <!-- Top States Chart (SIN CAPACIDAD MÁXIMA) -->
+    <section class="states-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Top Estados México</h2>
             </div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Estado</th>
-                        <th>Venues</th>
-                        <th>Capacidad Máxima</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>CDMX</strong></td>
-                        <td>110</td>
-                        <td>63,500</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Jalisco</strong></td>
-                        <td>37</td>
-                        <td>46,232</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nuevo León</strong></td>
-                        <td>33</td>
-                        <td>51,000</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Puebla</strong></td>
-                        <td>10</td>
-                        <td>1,500</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Baja California</strong></td>
-                        <td>8</td>
-                        <td>300</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="states-chart">
+                <div class="state-bar">
+                    <div class="state-info">
+                        <span class="state-name">CDMX</span>
+                        <span class="state-count">110 venues</span>
+                    </div>
+                    <div class="state-bar-bg">
+                        <div class="state-bar-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <div class="state-bar">
+                    <div class="state-info">
+                        <span class="state-name">Jalisco</span>
+                        <span class="state-count">37 venues</span>
+                    </div>
+                    <div class="state-bar-bg">
+                        <div class="state-bar-fill" style="width: 34%"></div>
+                    </div>
+                </div>
+
+                <div class="state-bar">
+                    <div class="state-info">
+                        <span class="state-name">Nuevo León</span>
+                        <span class="state-count">33 venues</span>
+                    </div>
+                    <div class="state-bar-bg">
+                        <div class="state-bar-fill" style="width: 30%"></div>
+                    </div>
+                </div>
+
+                <div class="state-bar">
+                    <div class="state-info">
+                        <span class="state-name">Puebla</span>
+                        <span class="state-count">10 venues</span>
+                    </div>
+                    <div class="state-bar-bg">
+                        <div class="state-bar-fill" style="width: 9%"></div>
+                    </div>
+                </div>
+
+                <div class="state-bar">
+                    <div class="state-info">
+                        <span class="state-name">Baja California</span>
+                        <span class="state-count">8 venues</span>
+                    </div>
+                    <div class="state-bar-bg">
+                        <div class="state-bar-fill" style="width: 7%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -740,7 +765,7 @@
         </div>
     </section>
 
-    <!-- Featured Venues -->
+    <!-- Featured Venues (ACCESIBLES Y REALISTAS) -->
     <section class="venues-section">
         <div class="container">
             <div class="section-header">
@@ -748,28 +773,34 @@
             </div>
             <div class="venues-grid">
                 <div class="venue-card">
-                    <div class="venue-name">Foro Sol</div>
+                    <div class="venue-name">Foro Indie Rocks</div>
                     <div class="venue-city">CDMX</div>
-                    <div class="venue-capacity">63,500</div>
-                    <div class="venue-details">Festivales | Estadio</div>
+                    <div class="venue-capacity">600</div>
+                    <div class="venue-details">Indie, Rock | Foro</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">Estadio BBVA</div>
+                    <div class="venue-name">Café Iguana</div>
                     <div class="venue-city">Monterrey</div>
-                    <div class="venue-capacity">51,000</div>
-                    <div class="venue-details">Masivos | Estadio</div>
+                    <div class="venue-capacity">600</div>
+                    <div class="venue-details">Rock, Blues, Indie | Bar/Venue</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">Razzmatazz</div>
+                    <div class="venue-name">Foro Independencia</div>
+                    <div class="venue-city">Guadalajara</div>
+                    <div class="venue-capacity">499</div>
+                    <div class="venue-details">Todos | Foro</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">Sala Apolo</div>
                     <div class="venue-city">Barcelona</div>
-                    <div class="venue-capacity">3,500</div>
-                    <div class="venue-details">Todos | Club/Venue</div>
+                    <div class="venue-capacity">1,400</div>
+                    <div class="venue-details">Indie, Rock, Electrónica | Sala</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">Arena CDMX</div>
-                    <div class="venue-city">CDMX</div>
-                    <div class="venue-capacity">22,300</div>
-                    <div class="venue-details">Todos | Arena</div>
+                    <div class="venue-name">La Riviera</div>
+                    <div class="venue-city">Madrid</div>
+                    <div class="venue-capacity">2,500</div>
+                    <div class="venue-details">Rock, Indie | Sala</div>
                 </div>
             </div>
         </div>
