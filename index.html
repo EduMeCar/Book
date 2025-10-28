@@ -12,86 +12,94 @@
             margin: 0; padding: 0;
             min-height: 100vh;
         }
-        .wrap { max-width: 930px; margin:0 auto; padding:0 18px; }
+        .wrap { max-width: 960px; margin:0 auto; padding:0 18px;}
         .header {
-            display:flex;align-items:center;justify-content:space-between;
-            padding:38px 0 18px 0;
+            text-align:center;
+            margin:44px 0 22px 0;
         }
-        .logo-brand { width:150px; height:auto; margin-right:21px;}
-        .title { font-size:2.1rem; font-weight:900; }
-        .portfolio-link {
-            color: #fff;
-            background: #1db954;
-            border-radius: 10px;
-            padding:12px 35px;
-            text-decoration: none;
-            font-weight:700;
-            font-size:1.2rem;
-            border:1.5px solid #1db954;
-            box-shadow: 0 2px 10px #1db95422;
-            transition:background .13s, color .13s;
+        .logo-brand {
+            width: 165px;
+            height: auto;
+            display: block;
+            margin:0 auto;
         }
-        .portfolio-link:hover {
-            background: #fff;
-            color: #1db954;
-            border:1.5px solid #1db954;
+
+        /* Stats Bloque elegante */
+        .hero-stats-box {
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f7f9f9;
+            border-radius:18px;
+            box-shadow:0 4px 24px #dae8e855;
+            max-width:535px;
+            margin:0 auto 38px auto;
+            padding:27px 35px;
+            gap:30px;
         }
-        .hero-data { text-align:center; margin:43px 0 27px 0; }
-        .hero-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 48px;
-            margin-bottom: 15px;
+        .stat-block {
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
         }
-        .hero-stat {
-            font-size: 1.45rem;
-            font-weight: 900;
-            color: #18181a;
-            letter-spacing: .025em;
+        .stat-number {
+            font-size:2.1rem;
+            font-weight:900;
+            letter-spacing:.007em;
         }
-        .dot {
-            color: #b8b8b8;
-            font-size: 1.75rem;
-            margin: 0 0px;
+        .stat-label {
+            font-size:1.07rem;
+            margin-top:2px;
+            font-weight:600;
+            color:#1db954;
+        }
+        .stat-divider {
+            width:2px; height:55px; background:#ededed; margin:0 18px;
         }
         .hero-countries {
-            font-size:1.15rem;
+            font-size:1.21rem;
             font-weight:700;
             color:#1db954;
-            margin-bottom:2px;
+            margin:20px 0 0 0;
             letter-spacing:.01em;
+            text-align:center;
         }
+
         .divider {
-            border:0; border-top:1px solid #ededed; margin:33px 0 38px 0; width:100%;
+            border:0; border-top:1px solid #ededed; margin:38px 0 33px 0; width:100%;
         }
-        /* Distribución simétrica portada */
-        .distribution {
+
+        /* Países rectangulares anchura completa */
+        .distribution-section{
             display: flex;
-            justify-content: space-between;
-            gap: 28px;
-            margin:0 0 28px 0;
+            gap: 0;
+            margin-bottom: 17px;
         }
         .dist-block {
-            text-align:center; flex:1; margin:0 0px;
-            display:flex; flex-direction:column; align-items:center;
+            background:#f8fafb;
+            flex:1;
+            margin:0 6px;
+            border-radius:16px;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            box-shadow:0 4px 22px #e5e9e944;
+            padding: 0 0 24px 0;
+            overflow:hidden;
+            min-width:0;
         }
         .dist-img {
             width:100%;
-            max-width:370px;
+            min-height:190px;
             height:240px;
-            aspect-ratio:4/3;
-            object-fit: cover;
-            border-radius:0;
-            margin-bottom:13px;
-            box-shadow:none;
+            aspect-ratio:4/2;
+            object-fit:cover;
+            border-radius:0 0 0 0;
+            display:block;
+            margin-bottom:17px;
         }
         .dist-country {
-            font-weight:800; color:#1db954; margin-bottom:6px; margin-top:2px; font-size:1.15rem;
+            font-weight:800; color:#1db954; margin-bottom:4px; margin-top:2px; font-size:1.22rem;
         }
-        .dist-venues { font-size:1.32rem; font-weight:900; margin-bottom:4px;}
-        .dist-percent { font-size:1.02rem; color:#555;}
-        /* Genres grid editorial portada */
+        .dist-venues { font-size:1.28rem; font-weight:900; margin-bottom:3px;}
+        .dist-percent { font-size:1.02rem; color:#666;}
+        /* Genres grid editorial portada (sin cambios) */
         .genres {
             display:grid;
             grid-template-columns:repeat(4, 1fr);
@@ -125,68 +133,57 @@
             font-size:.98rem;
             font-weight:600;
         }
-        /* Venues destacados grid portada */
+        /* Venues destacados lista elegante */
         .venues-section {
             margin:48px auto 42px auto;
             text-align:center;
         }
         .venues-title {
-            font-size:1.12rem;font-weight:700;margin-bottom:16px;color:#282a29;
+            font-size:1.21rem;font-weight:900;margin-bottom:18px;color:#222;text-align:center;
+            letter-spacing:.03em;
         }
         .venues-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap:20px;
-            justify-items:center;
+            gap:26px;
         }
         .venue-card {
-            background: #f9f9f9;
-            border-radius: 0;
-            padding:0px 0px 16px 0px;
-            border:none;
-            box-shadow:none;
-            max-width:255px;
-            display:flex; flex-direction:column; align-items:center;
+            background: #fafbfa;
+            border-radius:12px;
+            padding:33px 10px 28px 10px;
+            box-shadow: 0 2px 18px #e5ecec2a;
+            display:flex; flex-direction:column; align-items:center; min-width:0;
         }
-        .venue-img {
-            width:100%;
-            height:210px;
-            aspect-ratio:4/3;
-            object-fit:cover;
-            border-radius:0;
-            margin-bottom:14px;
-            box-shadow:none;
-            display:block;
+        .venue-name {font-size:1.11rem;font-weight:900;margin-bottom:1px;color:#111;}
+        .venue-city {font-size:.97rem;color:#444;margin-bottom:0;}
+        .venue-capacity {
+            font-size:.97rem;
+            font-weight:700;
+            color:#1db954;
+            margin:6px 0 0 0;
         }
-        .venue-name {font-size:1.15rem;font-weight:900;margin-bottom:5px;color:#18181a;}
-        .venue-city {font-size:1.011rem;color:#888;margin-bottom:2px;}
-        .venue-capacity {font-size:1.01rem;font-weight:700;color:#1db954;}
-        .venue-details {font-size:.99rem; color:#444; margin-top:9px;}
-        /* Executive summary */
+        .venue-details {font-size:.96rem; color:#56595a; margin-top:8px;}
+        /* Executive summary editorial mismo ancho */
         .executive-summary {
-            max-width: 880px;
-            margin: 54px auto 38px auto;
+            max-width: 960px;
+            margin: 56px auto 38px auto;
             background:#fff;
             color:#232323;
-            font-size:1.02rem;
+            font-size:1.06rem;
             line-height:2.05;
-            padding:2px 24px 2px 24px;
+            padding:0 14px 0 14px;
             letter-spacing:.01em;
             text-align:justify;
         }
-        .executive-summary p {
-            margin-bottom:18px;
-        }
-        .executive-summary b, .executive-summary strong {
-            color:#1db954;
-        }
+        .executive-summary p {margin-bottom:18px;}
+        .executive-summary b, .executive-summary strong { color:#1db954;}
         /* Contacto centrado */
         .contact-title {
             margin:66px 0 12px 0;
             color:#18181a;
             font-weight:900;
             letter-spacing:.06em;
-            font-size:1.19rem;
+            font-size:1.16rem;
             text-align:center;
         }
         .contact-icons {
@@ -202,47 +199,50 @@
         .contact-icn:hover { background:#1db954; color:#fff;}
         .contact-icn svg { width:18px; height:18px;}
         @media (max-width:1100px) {
-            .genres, .venues-grid { grid-template-columns: repeat(2, 1fr);}
-            .dist-img {max-width:99vw;}
+            .genres, .venues-grid, .distribution-section { grid-template-columns: repeat(2, 1fr);}
+        }
+        @media (max-width:800px) {
+            .genres, .venues-grid { grid-template-columns:1fr 1fr;}
+            .distribution-section { flex-direction:column; gap:16px;}
         }
         @media (max-width:650px) {
-            .genres{grid-template-columns:1fr;}
-            .venues-grid{grid-template-columns:1fr;}
-            .genre-img, .venue-img, .dist-img {height:180px;max-width:99vw;}
-            .logo-brand{width:80px;}
-            .title{font-size:1.2rem;}
+            .genres, .venues-grid {grid-template-columns:1fr;}
+            .distribution-section{flex-direction:column;}
+            .venue-card,.dist-block{padding:19px 2vw;}
+            .executive-summary{padding:0 7vw;}
+            .logo-brand{width:85px;}
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <!-- Header Minimal, logo grande y Portfolio caja -->
+
+        <!-- Header SOLO LOGO -->
         <div class="header">
-            <div style="display: flex; align-items: center;">
-                <img src="logo-brand.svg" class="logo-brand" alt="Booking Plans Logo"/>
-                <span class="title">Booking Plans</span>
-            </div>
-            <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" target="_blank">
-                Portfolio
-            </a>
+            <img src="logo.svg" alt="Booking Plans Logo" class="logo-brand"/>
         </div>
 
-        <!-- Hero Data -->
-        <div class="hero-data">
-            <div class="hero-row">
-                <span class="hero-stat">+200 Venues</span>
-                <span class="dot">&middot;</span>
-                <span class="hero-stat">+30 Géneros</span>
-                <span class="dot">&middot;</span>
-                <span class="hero-stat">+20 Ciudades</span>
+        <!-- Bloque Stats elegante -->
+        <div class="hero-stats-box">
+            <div class="stat-block">
+                <div class="stat-number">+200</div>
+                <div class="stat-label">Venues</div>
             </div>
-            <div class="hero-countries">México & España</div>
-        </div>
-
+            <div class="stat-divider"></div>
+            <div class="stat-block">
+                <div class="stat-number">+30</div>
+                <div class="stat-label">Géneros</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-block">
+                <div class="stat-number">+20</div>
+                <div class="stat-label">Ciudades</div>
+            </div>
+            
         <hr class="divider">
 
-        <!-- Distribución Países portada editorial -->
-        <div class="distribution">
+        <!-- Distribución Países rectangulares portada -->
+        <div class="distribution-section">
             <div class="dist-block">
                 <img src="img/mexico.jpg" alt="México" class="dist-img"/>
                 <div class="dist-country">México</div>
@@ -259,7 +259,7 @@
 
         <hr class="divider">
 
-        <!-- Géneros Editorial Grid portada -->
+        <!-- Géneros Editorial Grid (sin cambios, está perfecto)  -->
         <div class="genres">
             <div class="genre">
                 <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
@@ -285,33 +285,29 @@
 
         <hr class="divider">
 
-        <!-- Venues Destacados portada -->
+        <!-- Venues destacados lista elegante tipo ficha -->
         <div class="venues-section">
             <div class="venues-title">Venues destacados</div>
             <div class="venues-grid">
                 <div class="venue-card">
-                    <img src="img/foro-indie-rocks.jpg" alt="Foro Indie Rocks" class="venue-img"/>
                     <div class="venue-name">Foro Indie Rocks</div>
                     <div class="venue-city">CDMX</div>
                     <div class="venue-capacity">Capacidad: 600</div>
                     <div class="venue-details">Indie, Rock | Foro</div>
                 </div>
                 <div class="venue-card">
-                    <img src="img/cafe-iguana.jpg" alt="Café Iguana" class="venue-img"/>
                     <div class="venue-name">Café Iguana</div>
                     <div class="venue-city">Monterrey</div>
                     <div class="venue-capacity">Capacidad: 600</div>
                     <div class="venue-details">Rock, Blues, Indie | Bar/Venue</div>
                 </div>
                 <div class="venue-card">
-                    <img src="img/sala-apolo.jpg" alt="Sala Apolo" class="venue-img"/>
                     <div class="venue-name">Sala Apolo</div>
                     <div class="venue-city">Barcelona</div>
                     <div class="venue-capacity">Capacidad: 1,400</div>
                     <div class="venue-details">Indie, Rock, Electrónica | Sala</div>
                 </div>
                 <div class="venue-card">
-                    <img src="img/la-riviera.jpg" alt="La Riviera" class="venue-img"/>
                     <div class="venue-name">La Riviera</div>
                     <div class="venue-city">Madrid</div>
                     <div class="venue-capacity">Capacidad: 2,500</div>
@@ -322,7 +318,7 @@
 
         <hr class="divider">
 
-        <!-- Executive Summary Editorial -->
+        <!-- Executive Summary editorial mismo margen -->
         <div class="executive-summary">
             <p><strong>Booking Plans reúne una infraestructura del circuito musical entre México y España.</strong> Con más de 200 venues seleccionados y contactos verificados, dibuja una red que refleja cómo se mueve la música hoy: entre escenas, ciudades y formas de producir.</p>
             <p><strong>La concentración en México no responde al azar.</strong> Es donde el ecosistema independiente y los proyectos emergentes encuentran espacio, público y energía. CDMX, Jalisco y Nuevo León forman el triángulo activo del directo, donde convergen los principales flujos del booking nacional.</p>
