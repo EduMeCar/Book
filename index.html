@@ -12,62 +12,70 @@
             margin: 0; padding: 0;
             min-height: 100vh;
         }
-        .wrap { max-width: 960px; margin:0 auto; padding:0 18px;}
+        .wrap { max-width: 965px; margin:0 auto; padding:0 18px;}
         .header {
-            text-align:center;
-            margin:44px 0 22px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 42px 0 22px 0;
         }
-        .logo {
-            width: 165px;
+        .logo-brand {
+            width: 150px;
             height: auto;
             display: block;
-            margin:0 auto;
         }
-
-        /* Stats Bloque elegante */
+        .portfolio-link {
+            color: #fff;
+            background: #1db954;
+            border-radius: 10px;
+            padding:13px 36px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.18rem;
+            border:1.5px solid #1db954;
+            box-shadow:0 2px 10px #1db95422;
+            transition: background .13s, color .13s;
+        }
+        .portfolio-link:hover {
+            background: #fff;
+            color: #1db954;
+            border:1.5px solid #1db954;
+        }
+        /* Estadísticas principal */
         .hero-stats-box {
-            display:flex;
-            justify-content:center;
-            align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background:#f7f9f9;
-            border-radius:18px;
-            box-shadow:0 4px 24px #dae8e855;
-            max-width:535px;
-            margin:0 auto 38px auto;
-            padding:27px 35px;
-            gap:30px;
+            border-radius:22px;
+            box-shadow:0 4px 30px #dae8e855;
+            max-width:580px;
+            margin:0 auto 44px auto;
+            padding:32px 47px;
+            gap:52px;
         }
         .stat-block {
             display:flex; flex-direction:column; align-items:center; justify-content:center;
         }
         .stat-number {
-            font-size:2.1rem;
+            font-size:2.2rem;
             font-weight:900;
             letter-spacing:.007em;
         }
         .stat-label {
-            font-size:1.07rem;
+            font-size:1.13rem;
             margin-top:2px;
-            font-weight:600;
+            font-weight:800;
             color:#1db954;
         }
         .stat-divider {
-            width:2px; height:55px; background:#ededed; margin:0 18px;
+            width:2px; height:64px; background:#ededed; margin:0 18px;
+            border-radius:10px;
         }
-        .hero-countries {
-            font-size:1.21rem;
-            font-weight:700;
-            color:#1db954;
-            margin:20px 0 0 0;
-            letter-spacing:.01em;
-            text-align:center;
-        }
-
         .divider {
             border:0; border-top:1px solid #ededed; margin:38px 0 33px 0; width:100%;
         }
-
-        /* Países rectangulares anchura completa */
+        /* Países */
         .distribution-section{
             display: flex;
             gap: 0;
@@ -99,7 +107,7 @@
         }
         .dist-venues { font-size:1.28rem; font-weight:900; margin-bottom:3px;}
         .dist-percent { font-size:1.02rem; color:#666;}
-        /* Genres grid editorial portada (sin cambios) */
+        /* Géneros */
         .genres {
             display:grid;
             grid-template-columns:repeat(4, 1fr);
@@ -133,7 +141,7 @@
             font-size:.98rem;
             font-weight:600;
         }
-        /* Venues destacados lista elegante */
+        /* Venues destacados tipo ficha */
         .venues-section {
             margin:48px auto 42px auto;
             text-align:center;
@@ -163,9 +171,8 @@
             margin:6px 0 0 0;
         }
         .venue-details {font-size:.96rem; color:#56595a; margin-top:8px;}
-        /* Executive summary editorial mismo ancho */
         .executive-summary {
-            max-width: 960px;
+            max-width: 965px;
             margin: 56px auto 38px auto;
             background:#fff;
             color:#232323;
@@ -210,19 +217,21 @@
             .distribution-section{flex-direction:column;}
             .venue-card,.dist-block{padding:19px 2vw;}
             .executive-summary{padding:0 7vw;}
-            .logo{width:85px;}
+            .logo-brand{width:85px;}
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-
-        <!-- Header SOLO LOGO -->
+        <!-- Header LOGO + Portfolio -->
         <div class="header">
-            <img src="logo.svg" alt="Booking Plans Logo" class="logo"/>
+            <img src="logo.svg" alt="Booking Plans Logo" class="logo-brand"/>
+            <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" target="_blank">
+                Portfolio
+            </a>
         </div>
 
-        <!-- Bloque Stats elegante -->
+        <!-- Estadísticas elegante -->
         <div class="hero-stats-box">
             <div class="stat-block">
                 <div class="stat-number">+200</div>
@@ -239,7 +248,6 @@
                 <div class="stat-label">Ciudades</div>
             </div>
         </div>
-        <div class="hero-countries">México & España</div>
 
         <hr class="divider">
 
@@ -261,7 +269,7 @@
 
         <hr class="divider">
 
-        <!-- Géneros Editorial Grid (sin cambios, está perfecto)  -->
+        <!-- Géneros Editorial Grid (sin cambios, está perfecto) -->
         <div class="genres">
             <div class="genre">
                 <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
