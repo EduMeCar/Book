@@ -17,7 +17,7 @@
             display:flex;align-items:center;justify-content:space-between;
             padding:38px 0 18px 0;
         }
-        .logo { width:120px; height:auto; margin-right:21px;}
+        .logo-brand { width:150px; height:auto; margin-right:21px;}
         .title { font-size:2.1rem; font-weight:900; }
         .portfolio-link {
             color: #fff;
@@ -65,40 +65,53 @@
         .divider {
             border:0; border-top:1px solid #ededed; margin:33px 0 38px 0; width:100%;
         }
-        /* Distribución simétrica */
+        /* Distribución simétrica portada */
         .distribution {
             display: flex;
             justify-content: space-between;
-            gap: 0;
+            gap: 28px;
             margin:0 0 28px 0;
         }
         .dist-block {
-            text-align:center; flex:1; margin:0 12px;
+            text-align:center; flex:1; margin:0 0px;
+            display:flex; flex-direction:column; align-items:center;
         }
         .dist-img {
-            width:120px; height:120px; object-fit:cover; border-radius:16px;
-            box-shadow:0 2px 18px #dadada22; margin-bottom:16px; border: 1.5px solid #f0f0f0;
+            width:100%;
+            max-width:370px;
+            height:240px;
+            aspect-ratio:4/3;
+            object-fit: cover;
+            border-radius:0;
+            margin-bottom:13px;
+            box-shadow:none;
         }
         .dist-country {
             font-weight:800; color:#1db954; margin-bottom:6px; margin-top:2px; font-size:1.15rem;
         }
         .dist-venues { font-size:1.32rem; font-weight:900; margin-bottom:4px;}
         .dist-percent { font-size:1.02rem; color:#555;}
-        /* Genres grid editorial */
+        /* Genres grid editorial portada */
         .genres {
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-            gap:36px;
+            grid-template-columns:repeat(4, 1fr);
+            gap:20px;
             margin:43px 0 40px 0;
         }
         .genre {
             text-align:center;
+            display:flex; flex-direction:column; align-items:center;
         }
         .genre-img {
-            width:120px; height:120px; object-fit:cover;
-            border-radius: 16px;
-            margin-bottom:17px;
-            box-shadow:0 2px 12px #ededed50;
+            width:100%;
+            max-width:255px;
+            height:210px;
+            aspect-ratio:4/3;
+            object-fit:cover;
+            border-radius:0;
+            margin-bottom:13px;
+            box-shadow:none;
+            display:block;
         }
         .genre-label {
             font-weight:900;
@@ -112,7 +125,7 @@
             font-size:.98rem;
             font-weight:600;
         }
-        /* Venues destacados */
+        /* Venues destacados grid portada */
         .venues-section {
             margin:48px auto 42px auto;
             text-align:center;
@@ -123,16 +136,27 @@
         .venues-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap:36px;
+            gap:20px;
             justify-items:center;
         }
         .venue-card {
             background: #f9f9f9;
-            border-radius: 17px;
-            padding:25px 13px 22px 13px;
-            border:1px solid #ededed;
-            box-shadow:0 3px 28px #20202008;
-            max-width:245px;
+            border-radius: 0;
+            padding:0px 0px 16px 0px;
+            border:none;
+            box-shadow:none;
+            max-width:255px;
+            display:flex; flex-direction:column; align-items:center;
+        }
+        .venue-img {
+            width:100%;
+            height:210px;
+            aspect-ratio:4/3;
+            object-fit:cover;
+            border-radius:0;
+            margin-bottom:14px;
+            box-shadow:none;
+            display:block;
         }
         .venue-name {font-size:1.15rem;font-weight:900;margin-bottom:5px;color:#18181a;}
         .venue-city {font-size:1.011rem;color:#888;margin-bottom:2px;}
@@ -178,30 +202,24 @@
         .contact-icn:hover { background:#1db954; color:#fff;}
         .contact-icn svg { width:18px; height:18px;}
         @media (max-width:1100px) {
-            .venues-grid { grid-template-columns: repeat(2, 1fr);}
-        }
-        @media (max-width:860px) {
-            .header {flex-direction:column;gap:11px;}
-            .logo{margin-bottom:6px;}
-            .distribution{flex-direction:column;gap:34px;}
-            .wrap{max-width:98vw;}
-            .hero-row{gap:15px;}
+            .genres, .venues-grid { grid-template-columns: repeat(2, 1fr);}
+            .dist-img {max-width:99vw;}
         }
         @media (max-width:650px) {
-            .genres{gap:19px;}
-            .venues-grid{grid-template-columns:1fr; gap:19px;}
-            .venue-card{min-width:90vw;}
-            .logo{width:70px;}
+            .genres{grid-template-columns:1fr;}
+            .venues-grid{grid-template-columns:1fr;}
+            .genre-img, .venue-img, .dist-img {height:180px;max-width:99vw;}
+            .logo-brand{width:80px;}
             .title{font-size:1.2rem;}
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <!-- Header Minimal, logo y título grandes, Portfolio caja -->
+        <!-- Header Minimal, logo grande y Portfolio caja -->
         <div class="header">
             <div style="display: flex; align-items: center;">
-                <img src="logo.svg" class="logo" alt="Booking Logo"/>
+                <img src="logo-brand.svg" class="logo-brand" alt="Booking Plans Logo"/>
                 <span class="title">Booking Plans</span>
             </div>
             <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" target="_blank">
@@ -218,11 +236,12 @@
                 <span class="dot">&middot;</span>
                 <span class="hero-stat">+20 Ciudades</span>
             </div>
+            <div class="hero-countries">México & España</div>
         </div>
 
         <hr class="divider">
 
-        <!-- Distribución Países -->
+        <!-- Distribución Países portada editorial -->
         <div class="distribution">
             <div class="dist-block">
                 <img src="img/mexico.jpg" alt="México" class="dist-img"/>
@@ -240,7 +259,7 @@
 
         <hr class="divider">
 
-        <!-- Géneros Editorial Grid -->
+        <!-- Géneros Editorial Grid portada -->
         <div class="genres">
             <div class="genre">
                 <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
@@ -266,29 +285,33 @@
 
         <hr class="divider">
 
-        <!-- Venues Destacados -->
+        <!-- Venues Destacados portada -->
         <div class="venues-section">
             <div class="venues-title">Venues destacados</div>
             <div class="venues-grid">
                 <div class="venue-card">
+                    <img src="img/foro-indie-rocks.jpg" alt="Foro Indie Rocks" class="venue-img"/>
                     <div class="venue-name">Foro Indie Rocks</div>
                     <div class="venue-city">CDMX</div>
                     <div class="venue-capacity">Capacidad: 600</div>
                     <div class="venue-details">Indie, Rock | Foro</div>
                 </div>
                 <div class="venue-card">
+                    <img src="img/cafe-iguana.jpg" alt="Café Iguana" class="venue-img"/>
                     <div class="venue-name">Café Iguana</div>
                     <div class="venue-city">Monterrey</div>
                     <div class="venue-capacity">Capacidad: 600</div>
                     <div class="venue-details">Rock, Blues, Indie | Bar/Venue</div>
                 </div>
                 <div class="venue-card">
+                    <img src="img/sala-apolo.jpg" alt="Sala Apolo" class="venue-img"/>
                     <div class="venue-name">Sala Apolo</div>
                     <div class="venue-city">Barcelona</div>
                     <div class="venue-capacity">Capacidad: 1,400</div>
                     <div class="venue-details">Indie, Rock, Electrónica | Sala</div>
                 </div>
                 <div class="venue-card">
+                    <img src="img/la-riviera.jpg" alt="La Riviera" class="venue-img"/>
                     <div class="venue-name">La Riviera</div>
                     <div class="venue-city">Madrid</div>
                     <div class="venue-capacity">Capacidad: 2,500</div>
@@ -303,7 +326,8 @@
         <div class="executive-summary">
             <p><strong>Booking Plans reúne una infraestructura del circuito musical entre México y España.</strong> Con más de 200 venues seleccionados y contactos verificados, dibuja una red que refleja cómo se mueve la música hoy: entre escenas, ciudades y formas de producir.</p>
             <p><strong>La concentración en México no responde al azar.</strong> Es donde el ecosistema independiente y los proyectos emergentes encuentran espacio, público y energía. CDMX, Jalisco y Nuevo León forman el triángulo activo del directo, donde convergen los principales flujos del booking nacional.</p>
-            <p><strong>Más que listar contactos, Booking Plans</strong> cartografía relaciones: venues, promotores, agencias y managers que ya dialogan entre sí, conectando contextos.</p>
+            <p><strong>Más que listar contactos,</strong> este documento cartografía relaciones: venues, promotores, agencias y managers que ya dialogan entre sí, conectando contextos.</p>
+            <p>Las modalidades de negociación se agrupan por nivel de riesgo, no para vender, sino para tomar decisiones informadas. Desde fechas cerradas hasta colaboraciones abiertas, cada formato cuenta una forma distinta de construir escena.</p>
             <p><strong>No es un directorio.</strong> Es una herramienta de inteligencia musical; una guía para entender dónde tocar, con quién hablar y cómo navegar dentro de la escena.</p>
         </div>
         
