@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Plans</title>
     <style>
         body {
@@ -12,175 +12,193 @@
             margin: 0; padding: 0;
             min-height: 100vh;
         }
-        .wrap { max-width: 920px; margin:0 auto; padding:0 18px; }
+        .wrap { max-width: 930px; margin:0 auto; padding:0 18px; }
         .header {
             display:flex;align-items:center;justify-content:space-between;
-            padding:34px 0 16px 0;
+            padding:38px 0 18px 0;
         }
-        .logo { width:70px; height:auto; }
-        .title { font-size:1.45rem; font-weight:800; }
+        .logo { width:90px; height:auto; margin-right:15px;}
+        .title { font-size:1.52rem; font-weight:900; }
         .portfolio-link {
-            color: #1db954;
-            font-weight:600;
-            text-decoration: underline;
-            background: none; border: none;
-            font-size:1.01rem;
-            cursor:pointer;
-            padding:0 2px;
-        }
-        .portfolio-link:hover { color:#0b7c43; }
-        .hero-data {
-            text-align:center;
-            margin:38px 0 29px 0;
-        }
-        .hero-stats {
-            font-size:1.09rem;
+            color: #fff;
+            background: #1db954;
+            border-radius: 10px;
+            padding:9px 28px;
+            text-decoration: none;
             font-weight:700;
-            margin-bottom:8px;
-            letter-spacing:.01em;
+            font-size:1.05rem;
+            border:1.5px solid #1db954;
+            box-shadow: 0 2px 10px #1db95422;
+            transition:background .13s, color .13s;
+        }
+        .portfolio-link:hover {
+            background: #fff;
+            color: #1db954;
+            border:1.5px solid #1db954;
+        }
+        .hero-data { text-align:center; margin:43px 0 27px 0; }
+        .hero-stats {
+            font-size:1.22rem;
+            font-weight:800;
+            margin:0 0 9px 0;
+            letter-spacing:.016em;
         }
         .hero-countries {
-            font-size:1.025rem;
+            font-size:1.08rem;
             font-weight:600;
-            color: #1db954;
+            color:#1db954;
             margin-bottom:2px;
         }
+        .divider {
+            border:0; border-top:1px solid #ededed; margin:33px 0 38px 0; width:100%;
+        }
+        /* Distribución simétrica */
         .distribution {
-            display:flex;
-            gap:38px;
-            justify-content:center;
-            margin:34px 0 36px 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 0;
+            margin:0 0 28px 0;
         }
         .dist-block {
-            text-align:center;
+            text-align:center; flex:1; margin:0 12px;
         }
         .dist-img {
-            width:58px; height:58px; object-fit:cover; border-radius: 37px;
-            box-shadow:0 2px 18px #dfdfdf44; margin-bottom:8px;
-            border:1px solid #f4f4f4;
+            width:120px; height:120px; object-fit:cover; border-radius:16px;
+            box-shadow:0 2px 18px #dadada22; margin-bottom:16px; border: 1.5px solid #f0f0f0;
         }
         .dist-country {
-            font-weight:700; color:#1db954; margin-bottom:4px; font-size:.99rem;
+            font-weight:800; color:#1db954; margin-bottom:6px; margin-top:2px; font-size:1.15rem;
         }
-        .dist-venues { font-size:1.22rem; font-weight:800; margin-bottom:4px;}
-        .dist-percent { font-size:.97rem; color:#555;}
-        /* Genres */
+        .dist-venues { font-size:1.32rem; font-weight:900; margin-bottom:4px;}
+        .dist-percent { font-size:1.02rem; color:#555;}
+        /* Genres grid editorial */
         .genres {
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-            gap:28px;
+            grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+            gap:36px;
             margin:43px 0 40px 0;
-            padding-bottom:4px;
         }
         .genre {
             text-align:center;
         }
         .genre-img {
-            width:112px; height:112px; object-fit:cover;
+            width:120px; height:120px; object-fit:cover;
             border-radius: 16px;
-            margin-bottom:13px;
+            margin-bottom:17px;
             box-shadow:0 2px 12px #ededed50;
         }
         .genre-label {
-            font-weight:800;
-            font-size:.92rem;
-            color: #242c29;
-            margin-bottom:4px;
-            letter-spacing:.02em;
+            font-weight:900;
+            font-size:1.08rem;
+            color: #18191a;
+            margin-bottom:3px;
+            letter-spacing:.01em;
         }
         .genre-count {
             color: #1db954;
-            font-size:.94rem;
+            font-size:.98rem;
+            font-weight:600;
         }
         /* Venues destacados */
         .venues-section {
-            margin:54px auto 39px auto;
+            margin:48px auto 42px auto;
             text-align:center;
         }
         .venues-title {
-            font-size:1.11rem;font-weight:700;margin-bottom:14px;color:#202320;
+            font-size:1.12rem;font-weight:700;margin-bottom:16px;color:#282a29;
         }
         .venues-grid {
             display: grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:30px;
+            grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
+            gap:36px;
             justify-items:center;
         }
         .venue-card {
-            background: #f6f6f6;
-            border-radius: 18px;
-            padding:25px 12px;
+            background: #f9f9f9;
+            border-radius: 17px;
+            padding:25px 13px 22px 13px;
             border:1px solid #ededed;
-            box-shadow:0 3px 28px #20202009;
-            max-width:224px;
-            margin:0 auto;
+            box-shadow:0 3px 28px #20202008;
+            max-width:245px;
         }
-        .venue-name {font-size:1.09rem;font-weight:800;margin-bottom:5px;color:#18181a;}
-        .venue-city {font-size:.98rem;color:#999;margin-bottom:2px;}
-        .venue-capacity {font-size:.98rem;font-weight:700;color:#1db954;}
-        .venue-details {font-size:.98rem; color:#444; margin-top:7px;}
+        .venue-name {font-size:1.15rem;font-weight:900;margin-bottom:5px;color:#18181a;}
+        .venue-city {font-size:1.011rem;color:#888;margin-bottom:2px;}
+        .venue-capacity {font-size:1.01rem;font-weight:700;color:#1db954;}
+        .venue-details {font-size:.99rem; color:#444; margin-top:9px;}
         /* Executive summary */
         .executive-summary {
-            max-width: 690px;
-            margin: 60px auto 42px auto;
+            max-width: 880px;
+            margin: 54px auto 38px auto;
             background:#fff;
             color:#232323;
-            font-size:1.10rem;
-            line-height:1.9;
+            font-size:1.02rem;
+            line-height:2.05;
             padding:2px 24px 2px 24px;
             letter-spacing:.01em;
+            text-align:justify;
         }
         .executive-summary p {
-            margin-bottom:17px;
+            margin-bottom:18px;
         }
         .executive-summary b, .executive-summary strong {
             color:#1db954;
         }
         /* Contacto centrado */
         .contact-title {
-            margin:44px 0 13px 0;
+            margin:66px 0 12px 0;
             color:#18181a;
-            font-weight:700;
-            letter-spacing:.05em;
-            font-size:1.09rem;
+            font-weight:900;
+            letter-spacing:.06em;
+            font-size:1.17rem;
             text-align:center;
         }
         .contact-icons {
             display:flex;
-            gap:20px;
+            gap:24px;
             justify-content:center;
-            margin-bottom:36px;
+            margin-bottom:44px;
         }
         .contact-icn {
-            width:29px; height:29px; display:flex; align-items:center; justify-content:center;
-            border-radius:50%; background:#e3e3e3; color:#1db954; text-decoration:none; border:1px solid #ededed;
+            width:33px; height:33px; display:flex; align-items:center; justify-content:center;
+            border-radius:50%; background:#e3e3e3; color:#1db954; text-decoration:none; border:1.4px solid #ededed;
         }
         .contact-icn:hover { background:#1db954; color:#fff;}
-        .contact-icn svg { width:16px; height:16px;}
-        @media (max-width:700px) {
-            .wrap {max-width:98vw;}
-            .header{flex-direction:column;gap:10px;}
-            .logo{margin-bottom:7px;}
-            .distribution{flex-direction:column;gap:18px;}
-            .genres{grid-template-columns:1fr;}
-            .venues-grid{grid-template-columns:1fr;}
+        .contact-icn svg { width:18px; height:18px;}
+        @media (max-width:860px) {
+            .header {flex-direction:column;gap:11px;}
+            .logo{margin-bottom:6px;}
+            .distribution{flex-direction:column;gap:34px;}
+            .wrap{max-width:98vw;}
+        }
+        @media (max-width:650px) {
+            .genres{gap:19px;}
+            .venues-grid{gap:19px;}
+            .venue-card{min-width:90vw;}
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-
-        <!-- Header Minimal -->
+        <!-- Header Minimal, simétrico y con portfolio en caja -->
         <div class="header">
-            <img src="logo.svg" class="logo" alt="Booking Logo"/>
-            <span class="title">Booking Plans</span>
-            <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" target="_blank">Portfolio</a>
+            <div style="display: flex; align-items: center;">
+                <img src="logo.svg" class="logo" alt="Booking Logo"/>
+                <span class="title">Booking Plans</span>
+            </div>
+            <a class="portfolio-link" href="https://edumecar.github.io/Portfolio/" target="_blank">
+                Portfolio
+            </a>
         </div>
 
         <!-- Hero Data -->
         <div class="hero-data">
-            <div class="hero-stats">+200 Venues&nbsp;|&nbsp;+30 Géneros&nbsp;|&nbsp;+20 Ciudades</div>
+            <div class="hero-stats">+200 Venues</div>
+            <div class="hero-stats">+30 Géneros</div>
+            <div class="hero-stats">+20 Ciudades</div>
+            <div class="hero-countries">México & España</div>
         </div>
+
+        <hr class="divider">
 
         <!-- Distribución Países -->
         <div class="distribution">
@@ -188,37 +206,43 @@
                 <img src="img/mexico.jpg" alt="México" class="dist-img"/>
                 <div class="dist-country">México</div>
                 <div class="dist-venues">+200</div>
+                <div class="dist-percent">94% del total</div>
             </div>
             <div class="dist-block">
                 <img src="img/espana.jpg" alt="España" class="dist-img"/>
                 <div class="dist-country">España</div>
                 <div class="dist-venues">+50</div>
+                <div class="dist-percent">6% del total</div>
             </div>
         </div>
+
+        <hr class="divider">
 
         <!-- Géneros Editorial Grid -->
         <div class="genres">
             <div class="genre">
-                <img src="img/salsa.png" alt="Salsa & Cumbia" class="genre-img"/>
+                <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
                 <div class="genre-label">SALSA & CUMBIA</div>
                 <div class="genre-count">20+ venues</div>
             </div>
             <div class="genre">
-                <img src="img/perreo.jpg" alt="Reggaetón & Perreo" class="genre-img"/>
+                <img src="img/reggaeton.jpg" alt="Reggaetón & Perreo" class="genre-img"/>
                 <div class="genre-label">REGGAETÓN & PERREO</div>
                 <div class="genre-count">20+ venues</div>
             </div>
             <div class="genre">
-                <img src="img/rock.png" alt="Rock, Metal, Punk" class="genre-img"/>
+                <img src="img/rock.jpg" alt="Rock, Metal, Punk" class="genre-img"/>
                 <div class="genre-label">ROCK, METAL & PUNK</div>
                 <div class="genre-count">50+ venues</div>
             </div>
             <div class="genre">
-                <img src="img/indie.png" alt="Indie & Alternativo" class="genre-img"/>
+                <img src="img/indie.jpg" alt="Indie & Alternativo" class="genre-img"/>
                 <div class="genre-label">INDIE & ALTERNATIVO</div>
                 <div class="genre-count">40+ venues</div>
             </div>
         </div>
+
+        <hr class="divider">
 
         <!-- Venues Destacados -->
         <div class="venues-section">
@@ -242,17 +266,28 @@
                     <div class="venue-capacity">Capacidad: 1,400</div>
                     <div class="venue-details">Indie, Rock, Electrónica | Sala</div>
                 </div>
+                <div class="venue-card">
+                    <div class="venue-name">La Riviera</div>
+                    <div class="venue-city">Madrid</div>
+                    <div class="venue-capacity">Capacidad: 2,500</div>
+                    <div class="venue-details">Rock, Indie | Sala</div>
+                </div>
             </div>
         </div>
 
+        <hr class="divider">
+
         <!-- Executive Summary Editorial -->
         <div class="executive-summary">
-            <p>Booking Plans reúne una infraestructura del circuito musical entre México y España. Con más de 200 venues seleccionados y contactos verificados, dibuja una red que refleja cómo se mueve la música hoy: entre escenas, ciudades y formas de producir.</p>
-            <p><b>La concentración en México no responde al azar.</b> Es donde el ecosistema independiente y los proyectos emergentes encuentran espacio, público y energía. CDMX, Jalisco y Nuevo León forman el triángulo activo del directo, donde convergen los principales flujos del booking nacional.</p>
-            <p><b>Más que listar contactos,</b> este documento cartografía relaciones: venues, promotores, agencias y managers que ya dialogan entre sí, conectando contextos.</p>
-            <p><b>Es una herramienta de inteligencia musical; una guía para entender dónde, con quién y cómo.</p>
+            <p><strong>Booking Plans reúne una infraestructura del circuito musical entre México y España.</strong> Con más de 200 venues seleccionados y contactos verificados, dibuja una red que refleja cómo se mueve la música hoy: entre escenas, ciudades y formas de producir.</p>
+            <p><strong>La concentración en México no responde al azar.</strong> Es donde el ecosistema independiente y los proyectos emergentes encuentran espacio, público y energía. CDMX, Jalisco y Nuevo León forman el triángulo activo del directo, donde convergen los principales flujos del booking nacional.</p>
+            <p><strong>Más que listar contactos,</strong> este documento cartografía relaciones: venues, promotores, agencias y managers que ya dialogan entre sí, conectando contextos.</p>
+            <p>Las modalidades de negociación se agrupan por nivel de riesgo, no para vender, sino para tomar decisiones informadas. Desde fechas cerradas hasta colaboraciones abiertas, cada formato cuenta una forma distinta de construir escena.</p>
+            <p><strong>No es un directorio.</strong> Es una herramienta de inteligencia musical; una guía para entender dónde tocar, con quién hablar y cómo navegar dentro de la escena.</p>
         </div>
-
+        
+        <hr class="divider">
+        
         <!-- Contacto editorial centrado -->
         <div class="contact-title">CONTACTO</div>
         <div class="contact-icons">
@@ -269,7 +304,6 @@
                 <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
             </a>
         </div>
-
     </div>
 </body>
 </html>
