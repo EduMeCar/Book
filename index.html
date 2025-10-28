@@ -17,16 +17,16 @@
             display:flex;align-items:center;justify-content:space-between;
             padding:38px 0 18px 0;
         }
-        .logo { width:90px; height:auto; margin-right:15px;}
-        .title { font-size:1.52rem; font-weight:900; }
+        .logo { width:120px; height:auto; margin-right:21px;}
+        .title { font-size:2.1rem; font-weight:900; }
         .portfolio-link {
             color: #fff;
             background: #1db954;
             border-radius: 10px;
-            padding:9px 28px;
+            padding:12px 35px;
             text-decoration: none;
             font-weight:700;
-            font-size:1.05rem;
+            font-size:1.2rem;
             border:1.5px solid #1db954;
             box-shadow: 0 2px 10px #1db95422;
             transition:background .13s, color .13s;
@@ -37,17 +37,30 @@
             border:1.5px solid #1db954;
         }
         .hero-data { text-align:center; margin:43px 0 27px 0; }
-        .hero-stats {
-            font-size:1.22rem;
-            font-weight:800;
-            margin:0 0 9px 0;
-            letter-spacing:.016em;
+        .hero-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            margin-bottom: 15px;
+        }
+        .hero-stat {
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: #18181a;
+            letter-spacing: .025em;
+        }
+        .dot {
+            color: #b8b8b8;
+            font-size: 1.75rem;
+            margin: 0 0px;
         }
         .hero-countries {
-            font-size:1.08rem;
-            font-weight:600;
+            font-size:1.15rem;
+            font-weight:700;
             color:#1db954;
             margin-bottom:2px;
+            letter-spacing:.01em;
         }
         .divider {
             border:0; border-top:1px solid #ededed; margin:33px 0 38px 0; width:100%;
@@ -149,7 +162,7 @@
             color:#18181a;
             font-weight:900;
             letter-spacing:.06em;
-            font-size:1.17rem;
+            font-size:1.19rem;
             text-align:center;
         }
         .contact-icons {
@@ -164,37 +177,48 @@
         }
         .contact-icn:hover { background:#1db954; color:#fff;}
         .contact-icn svg { width:18px; height:18px;}
+        @media (max-width:1100px) {
+            .venues-grid { grid-template-columns: repeat(2, 1fr);}
+        }
         @media (max-width:860px) {
             .header {flex-direction:column;gap:11px;}
             .logo{margin-bottom:6px;}
             .distribution{flex-direction:column;gap:34px;}
             .wrap{max-width:98vw;}
+            .hero-row{gap:15px;}
         }
         @media (max-width:650px) {
             .genres{gap:19px;}
-            .venues-grid{gap:19px;}
+            .venues-grid{grid-template-columns:1fr; gap:19px;}
             .venue-card{min-width:90vw;}
+            .logo{width:70px;}
+            .title{font-size:1.2rem;}
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <!-- Header Minimal, simétrico y con portfolio en caja -->
+        <!-- Header Minimal, logo y título grandes, Portfolio caja -->
         <div class="header">
             <div style="display: flex; align-items: center;">
                 <img src="logo.svg" class="logo" alt="Booking Logo"/>
                 <span class="title">Booking Plans</span>
             </div>
-            <a class="portfolio-link" href="https://edumecar.github.io/Portfolio/" target="_blank">
+            <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" target="_blank">
                 Portfolio
             </a>
         </div>
 
         <!-- Hero Data -->
         <div class="hero-data">
-            <div class="hero-stats">+200 Venues</div>
-            <div class="hero-stats">+30 Géneros</div>
-            <div class="hero-stats">+20 Ciudades</div>
+            <div class="hero-row">
+                <span class="hero-stat">+200 Venues</span>
+                <span class="dot">&middot;</span>
+                <span class="hero-stat">+30 Géneros</span>
+                <span class="dot">&middot;</span>
+                <span class="hero-stat">+20 Ciudades</span>
+            </div>
+            <div class="hero-countries">México & España</div>
         </div>
 
         <hr class="divider">
@@ -205,13 +229,13 @@
                 <img src="img/mexico.jpg" alt="México" class="dist-img"/>
                 <div class="dist-country">México</div>
                 <div class="dist-venues">+200</div>
-                <div class="dist-percent">94% del total</div>
+                <div class="dist-percent">80% del total</div>
             </div>
             <div class="dist-block">
                 <img src="img/espana.jpg" alt="España" class="dist-img"/>
                 <div class="dist-country">España</div>
                 <div class="dist-venues">+50</div>
-                <div class="dist-percent">6% del total</div>
+                <div class="dist-percent">20% del total</div>
             </div>
         </div>
 
@@ -222,22 +246,22 @@
             <div class="genre">
                 <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
                 <div class="genre-label">SALSA & CUMBIA</div>
-                <div class="genre-count">20+ venues</div>
+                <div class="genre-count">+20 venues</div>
             </div>
             <div class="genre">
                 <img src="img/reggaeton.jpg" alt="Reggaetón & Perreo" class="genre-img"/>
-                <div class="genre-label">REGGAETÓN & PERREO</div>
-                <div class="genre-count">20+ venues</div>
+                <div class="genre-label">REGGAETÓN</div>
+                <div class="genre-count">+20 venues</div>
             </div>
             <div class="genre">
                 <img src="img/rock.jpg" alt="Rock, Metal, Punk" class="genre-img"/>
                 <div class="genre-label">ROCK, METAL & PUNK</div>
-                <div class="genre-count">50+ venues</div>
+                <div class="genre-count">+50 venues</div>
             </div>
             <div class="genre">
                 <img src="img/indie.jpg" alt="Indie & Alternativo" class="genre-img"/>
                 <div class="genre-label">INDIE & ALTERNATIVO</div>
-                <div class="genre-count">40+ venues</div>
+                <div class="genre-count">+40 venues</div>
             </div>
         </div>
 
