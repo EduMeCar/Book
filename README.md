@@ -176,7 +176,7 @@ Book/
 ## 📧 Contacto
 
 **Eduardo Mejia (Booking by EMC)**  
-- 📧 Email: [eduardomejia554@gmail.com](mailto:eduardomejia554@gmail.com)
+- 📧 Email: [emc121091@me.com](mailto:emc121091@me.com)
 - 🌐 Website: [edumecar.github.io/Book](https://edumecar.github.io/Book/)
 - 📍 Location: Barcelona, España
 
