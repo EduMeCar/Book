@@ -14,13 +14,22 @@
             --border: #e3e3e3;
         }
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: 'Inter','Source Serif Pro', Arial, sans-serif;
             background: var(--main-bg);
             color: var(--main-text);
             margin: 0; padding: 0;
+            min-height: 100vh;
+            /* Urbano editorial en desktop */
+            background-image: url('img/texture.jpg'); /* Pon aquí una textura urbana B/N muy sutil */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        .wrap { max-width: 900px; margin:0 auto; padding:0 14px; }
-        /* HEADER LOGO + LINK */
+        .bg-mask {
+            background:rgba(255,255,255,0.91);
+            min-height:100vh;
+        }
+        .wrap { max-width: 930px; margin:0 auto; padding:0 14px; }
         .nav-bar {
             display:flex; align-items:center; justify-content:space-between;
             padding:32px 0 19px 0; gap:14px;
@@ -31,110 +40,82 @@
             color: var(--accent); text-decoration:none; font-weight:600; font-size:1.02rem; border:none; background:none; cursor:pointer;
         }
         .hero-link:hover { text-decoration:underline; }
-        /* Hero section */
         .hero {
-            text-align:center;
-            background: #fff;
-            padding:24px 0 15px 0;
-            border-bottom:1.5px solid var(--border);
+            text-align:center; background: #fff;
+            padding:24px 0 15px 0; border-bottom:1.5px solid var(--border);
         }
         .hero-stats {
-            font-size:1.15rem; font-weight:700;
-            letter-spacing:.02em; margin:0 0 8px 0;
+            font-size:1.15rem; font-weight:700; letter-spacing:.02em; margin:0 0 8px 0;
         }
         .hero-countries {
             font-size:1.08rem; color:var(--accent); margin-bottom:2px; font-weight:600;
         }
-        /* Distribución compacto */
         .distribution-grid {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            margin:32px 0 14px 0;
+            display: flex; justify-content: center; gap: 28px; margin:32px 0 14px 0;
         }
         .distribution-card {
-            background: var(--card);
-            border-radius:16px;
-            border:1px solid var(--border);
-            padding:19px 20px 14px 20px;
-            display:flex; flex-direction:column; align-items:center;
-            gap:7px; min-width:150px; max-width:170px;
+            background: var(--card); border-radius:16px; border:1px solid var(--border);
+            padding:22px 20px 14px 20px; display:flex;flex-direction:column;align-items:center; gap:7px; min-width:155px; max-width:170px;
+            box-shadow:0 3px 22px #00000011;
         }
         .distribution-card img {
             width:48px; height:48px; object-fit:cover; border-radius:50px; box-shadow:0 2px 12px #e3e3e350; margin-bottom:8px;
         }
-        .distribution-country { color:var(--accent); font-size:1.05rem; font-weight:700;}
+        .distribution-country { color:var(--accent); font-size:1.05rem; font-weight:800;}
         .distribution-venues { font-size:1.23rem; font-weight:700;}
         .distribution-percentage { color:#606c6d; font-weight:600; font-size:.98rem;}
-        /* Géneros musicales */
-        .genre-section { margin:43px 0 32px 0; }
-        .genre-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:23px; }
+        .genre-section { margin:43px 0 32px 0; text-align:center;}
+        .genre-title { font-size:1.15rem; font-weight:700; margin-bottom:15px;}
+        .genre-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:23px; justify-items:center;}
         .genre-card {
-            background: var(--card);
-            border-radius: 13px;
-            border: 1px solid var(--border);
-            padding: 17px 8px 17px 8px;
-            display: flex; flex-direction:column; align-items:center;
-            transition: box-shadow .13s;
+            background: var(--card); border-radius:13px; border:1px solid var(--border); padding:17px 8px 17px 8px;
+            display: flex; flex-direction:column; align-items:center; transition: box-shadow .13s; box-shadow:0 3px 22px #00000013;
+            min-width:140px;
         }
         .genre-card img { width:53px;height:53px;object-fit:cover;border-radius:7px;margin-bottom:11px;}
         .genre-name {font-size:1.05rem; font-weight:600; color:#1a2225;margin-bottom:4px;}
         .genre-count {font-size:.98rem;color:var(--accent);}
-        /* Venues destacados */
-        .venues-section { margin:37px 0 29px 0; }
-        .venues-title { font-size:1.1rem;font-weight:700;margin-bottom:10px;color:#111; }
-        .venues-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:21px;}
+        .venues-section { margin:37px auto 29px auto; text-align:center; max-width:820px;}
+        .venues-title { font-size:1.1rem;font-weight:700;margin-bottom:10px;color:#111; text-align:center;}
+        .venues-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(218px,1fr));gap:24px; justify-items:center;}
         .venue-card {
-            background:var(--card);border-radius:12px;border:1px solid var(--border);padding:17px 11px;
+            background:var(--card);border-radius:13px;border:1px solid var(--border);padding:21px 12px; min-width:185px; box-shadow:0 2px 20px #00000009;
+            display:flex;flex-direction:column;align-items:center;
         }
-        .venue-name {font-size:1.07rem;font-weight:700;color:var(--main-text);}
-        .venue-city {color:#888; font-size:.98rem;margin-top:2px;}
-        .venue-capacity {font-size:.99rem; font-weight:600; color:var(--accent);}
-        .venue-details {color:#666; font-size:.97rem; margin-top:6px;}
-        /* Executive summary, ahora abajo */
+        .venue-name { font-size:1.18rem;font-weight:700;color:var(--main-text);}
+        .venue-city {color:#888; font-size:.99rem; margin-top:2px;}
+        .venue-capacity {font-size:1rem; font-weight:800; color:var(--accent);}
+        .venue-details {color:#666; font-size:.98rem; margin-top:7px;}
         .summary-section {
-            display: flex; justify-content: center;
-            background: #fff; margin: 38px 0 0 0;
+            display: flex; justify-content: center; background: #fff; margin: 38px 0 0 0; padding:0 2vw;
         }
         .summary-card {
-            background: var(--card);
-            border-radius: 20px;
-            border:1px solid var(--border);
-            padding: 39px 30px 24px 30px;
-            box-shadow:0 2px 38px #00000014;
-            max-width: 730px;
-            min-width:280px;
-            width: 100%;
+            background: var(--card); border-radius: 20px; border:1px solid var(--border); padding: 39px 30px 24px 30px; box-shadow:0 2px 38px #00000014;
+            max-width: 730px; min-width:280px; width: 100%; text-align:center;
         }
         .summary-title {
-            font-size: 1.19rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom:20px;
-            text-align:center;
-            letter-spacing:.01em;
+            font-size: 1.19rem; font-weight: 800; color: var(--accent); margin-bottom:20px; letter-spacing:.01em;
         }
-        .summary-text p {
-            margin-bottom:16px; color:#222; font-size:1.07rem; line-height:1.76;
-        }
+        .summary-text p { margin-bottom:16px; color:#222; font-size:1.07rem; line-height:1.76; text-align:left;}
         .summary-text strong, .summary-text b { color:var(--accent);}
-        /* Contacto */
-        .contact-title { margin:28px 0 10px 0; color:var(--main-text); font-weight:700; letter-spacing:.06em; font-size:1.12rem;}
-        .contact-icons { display:flex;gap:16px;justify-content:center;margin-bottom:33px;}
+        .contact-title { margin:24px 0 11px 0; color:#18181b; font-weight:700; letter-spacing:.06em; font-size:1.12rem;text-align:center;}
+        .contact-icons { display:flex;gap:19px;justify-content:center;margin-bottom:33px;}
         .contact-icn { width:27px; height:27px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#e3e3e3; color:var(--accent); text-decoration:none; border:1px solid var(--border);}
         .contact-icn:hover { background:var(--accent); color:#fff;}
         .contact-icn svg { width:16px; height:16px;}
-        /* Responsive */
         @media (max-width:700px) {
+            body { background-image:none;}
+            .bg-mask { background:var(--main-bg);}
             .wrap {max-width:98vw;}
             .distribution-grid, .venues-grid, .genre-grid {grid-template-columns:1fr;}
             .nav-bar{padding:17px 0 10px 0;}
-            .snail-logo {width:50px;}
-            .summary-card {padding:14vw 5vw 14vw 5vw;}
+            .snail-logo {width:48px;}
+            .summary-card {padding:14vw 7vw 14vw 7vw;}
         }
     </style>
 </head>
 <body>
+<div class="bg-mask">
 <div class="wrap">
 
     <div class="nav-bar">
@@ -150,7 +131,7 @@
         <div class="hero-countries">México & España</div>
     </section>
 
-    <!-- Distribución con fotos compacta -->
+    <!-- Distribución con fotos ajustadas -->
     <div class="distribution-grid">
         <div class="distribution-card">
             <img src="img/mexico.jpg" alt="México"/>
@@ -168,6 +149,7 @@
 
     <!-- Géneros musicales -->
     <div class="genre-section">
+        <div class="genre-title">Géneros musicales</div>
         <div class="genre-grid">
             <div class="genre-card">
                 <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia">
@@ -228,7 +210,7 @@
         </div>
     </div>
 
-    <!-- Resumen Ejecutivo al final centrado y moderno -->
+    <!-- Resumen Ejecutivo final -->
     <section class="summary-section">
         <div class="summary-card">
             <div class="summary-title">Resumen Ejecutivo</div>
@@ -243,7 +225,7 @@
         </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- Contacto al centro -->
     <div class="contact-title">CONTACTO</div>
     <div class="contact-icons">
         <a class="contact-icn" href="https://wa.me/525512478139" title="WhatsApp" target="_blank" rel="noopener">
@@ -259,6 +241,8 @@
             <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
         </a>
     </div>
+
+</div>
 </div>
 </body>
 </html>
