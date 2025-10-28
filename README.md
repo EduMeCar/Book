@@ -1,4 +1,4 @@
-# 🎸 Booking by EMC
+# 🎸 Booking Plans
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://edumecar.github.io/Book/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue.svg)](https://github.com/edumecar/Book)
