@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 > **Base de datos profesional de venues musicales en México y España**  
-> 239 venues | 86 contactos | 30+ géneros | 19 ciudades
+> 300 venues | 100 contactos | 30+ géneros | 20 ciudades
 
 ---
 
@@ -17,17 +17,17 @@
 
 ## 📊 Datos Clave
 
-- **239+ Venues verificados** - Desde espacios íntimos (60 personas) hasta salas de 2,500+
-- **86+ Contactos clave** - Promotores, productores, managers, agencias
+- **200+ Venues verificados** - Desde espacios íntimos (60 personas) hasta salas de 2,500+
+- **100+ Contactos clave** - Promotores, productores, managers, agencias
 - **30+ Géneros musicales** - Rock, indie, jazz, salsa, reggaetón, electrónica, y más
-- **19+ Ciudades** - México (94%) y España (6%)
+- **20+ Ciudades** - México (94%) y España (6%)
 - **Cobertura estratégica** - CDMX, Guadalajara, Monterrey, Barcelona, Madrid
 
 ---
 
 ## 🎯 ¿Qué es esto?
 
-**Booking by EMC** es una herramienta de inteligencia de mercado para la industria musical. No es solo un directorio—es un **activo estratégico** que permite:
+**Booking Plans** es una herramienta de inteligencia de mercado para la industria musical. No es solo un directorio—es un **activo estratégico** que permite:
 
 ✅ Identificar venues por capacidad y género  
 ✅ Acceder a contactos verificados en la industria  
@@ -42,7 +42,6 @@
 - **Métricas en tiempo real** - Visualización de venues, contactos, géneros y cobertura
 - **Gráficos dinámicos** - Distribución por país y top estados con barras animadas
 - **100% responsive** - Funciona perfecto en móvil, tablet y desktop
-- **Diseño minimalista** - Colores mint green (#10B981), negro y blanco
 
 ### 🎵 Géneros Cubiertos
 - 🎺 Salsa & Cumbia (20+ venues)
@@ -94,45 +93,6 @@ Distribución estratégica por rol:
 **🔴 Alto Riesgo:**
 - Door Deal
 
----
-
-## 🛠️ Tecnologías
-
-- **HTML5** - Estructura semántica
-- **CSS3** - Diseño responsive con Grid y Flexbox
-- **JavaScript** - Animaciones suaves
-- **GitHub Pages** - Hosting gratis y confiable
-- **Sistema de fuentes** - Optimizado para todos los dispositivos
-
----
-
-## 🎨 Diseño
-
-### Paleta de Colores
-- **Primary:** Mint Green (#10B981)
-- **Background:** Negro (#000000)
-- **Text:** Blanco (#FFFFFF)
-- **Secondary:** Gris (#6B7280, #9CA3AF)
-
-### Tipografía
-- **Familia:** System fonts (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto)
-- **Tamaños:** Responsive (3.5rem → 2.5rem en móvil)
-
-### Animaciones
-- **Fade-in** al cargar
-- **Hover effects** en tarjetas
-- **Transiciones suaves** (0.3s - 1.5s)
-- **Barras animadas** con gradient
-
----
-
-## 📱 Responsive Design
-
-✅ **Desktop** (1200px+) - Layout amplio con 3-4 columnas  
-✅ **Tablet** (768px - 1199px) - 2 columnas adaptativas  
-✅ **Móvil** (< 768px) - 1 columna, scroll vertical  
-
----
 
 ## 🚀 Cómo Usar
 
