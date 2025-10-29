@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Plans - Donde la Música Encuentra su Escenario</title>
+    <title>Booking Plans - Conexión Internacional de Venues México-España</title>
     <style>
         :root {
             --primary: #1db954;
@@ -80,18 +80,18 @@
             to { transform: rotate(360deg) scale(1.1); }
         }
         
-        /* HEADLINE MEJORADO */
+        /* HEADLINE PROFESIONAL */
         .headline {
             text-align: center;
-            margin: 60px auto 80px auto;
-            max-width: 900px;
+            margin: 60px auto 50px auto;
+            max-width: 1000px;
         }
         
         .headline-main {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -100,10 +100,52 @@
         }
         
         .headline-sub {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--light-gray);
             line-height: 1.4;
+            margin-bottom: 30px;
+        }
+        
+        /* METRICS BAR IMPRESIONANTE */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 40px 0 60px 0;
+            padding: 0 10px;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .metric-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            font-weight: 500;
+            letter-spacing: 0.03em;
         }
         
         .divider {
@@ -177,13 +219,14 @@
             color: var(--light);
         }
         
-        .dist-percent { 
-            font-size: 1.1rem; 
+        .dist-details {
+            font-size: 1rem; 
             color: var(--medium-gray);
             font-weight: 500;
+            line-height: 1.4;
         }
         
-        /* Géneros mejorados */
+        /* Géneros actualizados con datos reales */
         .genres {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -333,7 +376,7 @@
             font-weight: 500;
         }
         
-        /* CALLS-TO-ACTION MEJORADOS */
+        /* CALLS-TO-ACTION PROFESIONALES */
         .cta-section {
             margin: 70px 0 60px 0;
             text-align: center;
@@ -356,7 +399,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            min-width: 200px;
+            min-width: 280px;
             text-align: center;
         }
         
@@ -399,7 +442,7 @@
             left: 100%;
         }
         
-        /* Executive summary mejorado */
+        /* Executive summary profesional */
         .executive-summary {
             max-width: 900px;
             margin: 70px auto 50px auto;
@@ -423,9 +466,14 @@
             font-weight: 700;
         }
         
-        /* Contacto mejorado */
+        /* Contacto profesional */
+        .contact-section {
+            margin: 70px 0 50px 0;
+            text-align: center;
+        }
+        
         .contact-title {
-            margin: 70px 0 25px 0;
+            margin: 0 0 25px 0;
             color: var(--light);
             font-weight: 800;
             letter-spacing: 0.03em;
@@ -444,6 +492,15 @@
             height: 3px;
             background: var(--primary);
             border-radius: 2px;
+        }
+        
+        .contact-subtitle {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .contact-icons {
@@ -481,9 +538,19 @@
             height: 24px;
         }
         
+        /* Footer profesional */
+        .professional-footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
         /* Responsividad mejorada */
         @media (max-width: 1200px) {
-            .genres, .venues-grid {
+            .genres, .venues-grid, .metrics-bar {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -493,21 +560,21 @@
             }
             
             .headline-main {
-                font-size: 2.5rem;
+                font-size: 2.3rem;
             }
             
             .headline-sub {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
         }
         
         @media (max-width: 850px) {
-            .genres, .venues-grid {
+            .genres, .venues-grid, .metrics-bar {
                 grid-template-columns: 1fr;
             }
             
-            .venue-card, .dist-block {
-                padding: 25px 20px;
+            .venue-card, .dist-block, .metric-card {
+                padding: 20px 15px;
             }
             
             .headline-main {
@@ -515,7 +582,7 @@
             }
             
             .headline-sub {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             
             .cta-section {
@@ -526,6 +593,14 @@
             .cta-link {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .metrics-bar {
+                gap: 10px;
+            }
+            
+            .metric-number {
+                font-size: 1.8rem;
             }
         }
         
@@ -540,7 +615,7 @@
             }
             
             .headline {
-                margin: 40px auto 50px auto;
+                margin: 40px auto 30px auto;
             }
             
             .headline-main {
@@ -548,7 +623,7 @@
             }
             
             .headline-sub {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .executive-summary {
@@ -563,145 +638,182 @@
             .distribution-section, .genres, .venues-grid {
                 gap: 20px;
             }
+            
+            .metric-number {
+                font-size: 1.6rem;
+            }
+            
+            .metric-card {
+                padding: 20px 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <!-- LOGO centrado arriba, grande -->
+        <!-- LOGO PROFESIONAL -->
         <div class="header-main">
-            <img src="logo.svg" alt="Booking Plans Logo" class="logo-brand"/>
+            <img src="logo.svg" alt="Booking Plans - Conexión Internacional de Venues" class="logo-brand"/>
         </div>
         
-        <!-- HEADLINE MEJORADO -->
+        <!-- HEADLINE PROFESIONAL -->
         <div class="headline">
-            <div class="headline-main">Donde la Música Encuentra su Escenario</div>
-            <div class="headline-sub">Inteligencia Musical. Conciencia Sonora. Dónde, cómo y cuándo.</div>
+            <div class="headline-main">239 Venues Verificados | 50 a 63,500 Capacidad</div>
+            <div class="headline-sub">Conectamos Artistas Internacionales con Escenarios México-España</div>
+        </div>
+        
+        <!-- METRICS BAR IMPRESIONANTE -->
+        <div class="metrics-bar">
+            <div class="metric-card">
+                <span class="metric-number">239</span>
+                <span class="metric-label">Venues Verificados</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">86</span>
+                <span class="metric-label">Contactos Activos</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">17</span>
+                <span class="metric-label">Regiones Cubiertas</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">50-63K</span>
+                <span class="metric-label">Capacidad Range</span>
+            </div>
         </div>
         
         <hr class="divider">
         
-        <!-- Países - portada express -->
+        <!-- Países con datos reales -->
         <div class="distribution-section">
             <div class="dist-block">
-                <img src="img/mexico.jpg" alt="México" class="dist-img"/>
+                <img src="img/mexico.jpg" alt="México - 226 Venues" class="dist-img"/>
                 <div class="dist-content">
                     <div class="dist-country">México</div>
-                    <div class="dist-venues">+200 venues verificados</div>
+                    <div class="dist-venues">226 Venues</div>
+                    <div class="dist-details">132 en CDMX + 94 en 16 estados</div>
                 </div>
             </div>
             <div class="dist-block">
-                <img src="img/espana.jpg" alt="España" class="dist-img"/>
+                <img src="img/espana.jpg" alt="España - 13 Venues" class="dist-img"/>
                 <div class="dist-content">
                     <div class="dist-country">España</div>
-                    <div class="dist-venues">+50 venues verificados</div>
+                    <div class="dist-venues">13 Venues</div>
+                    <div class="dist-details">Estratégicos en Madrid & Barcelona</div>
                 </div>
             </div>
         </div>
         
         <hr class="divider">
         
-        <!-- Géneros mejorados -->
+        <!-- Géneros actualizados con datos reales -->
         <div class="genres">
+            <div class="genre">
+                <div class="genre-img-container">
+                    <img src="img/reggaeton.jpg" alt="Reggaetón" class="genre-img"/>
+                </div>
+                <div class="genre-label">REGGAETÓN & URBANO</div>
+                <div class="genre-count">+35 venues</div>
+            </div>
             <div class="genre">
                 <div class="genre-img-container">
                     <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
                 </div>
                 <div class="genre-label">SALSA & CUMBIA</div>
-                <div class="genre-count">+20 venues</div>
-            </div>
-            <div class="genre">
-                <div class="genre-img-container">
-                    <img src="img/reggaeton.jpg" alt="Reggaetón & Perreo" class="genre-img"/>
-                </div>
-                <div class="genre-label">REGGAETÓN</div>
-                <div class="genre-count">+40 venues</div>
+                <div class="genre-count">+25 venues</div>
             </div>
             <div class="genre">
                 <div class="genre-img-container">
                     <img src="img/rock.jpg" alt="Rock, Metal, Punk" class="genre-img"/>
                 </div>
                 <div class="genre-label">ROCK, METAL & PUNK</div>
-                <div class="genre-count">+50 venues</div>
+                <div class="genre-count">+40 venues</div>
             </div>
             <div class="genre">
                 <div class="genre-img-container">
-                    <img src="img/indie.jpg" alt="Indie & Alternativo" class="genre-img"/>
+                    <img src="img/jazz.jpg" alt="Jazz & Blues" class="genre-img"/>
                 </div>
-                <div class="genre-label">INDIE & ALTERNATIVO</div>
-                <div class="genre-count">+40 venues</div>
+                <div class="genre-label">JAZZ & BLUES</div>
+                <div class="genre-count">+20 venues</div>
             </div>
         </div>
         
         <hr class="divider">
 
-        <!-- Venues destacados tipo ficha -->
+        <!-- Venues destacados actualizados -->
         <div class="venues-section">
-            <div class="venues-title">DESTACADOS</div>
+            <div class="venues-title">VENUES ESTRATÉGICOS</div>
             <div class="venues-grid">
                 <div class="venue-card">
-                    <div class="venue-name">Foro Indie Rocks</div>
-                    <div class="venue-city">CDMX</div>
-                    <div class="venue-capacity">Capacidad confirmada: 600</div>
-                    <div class="venue-details">Géneros: Indie, Rock | Tipo: Foro</div>
+                    <div class="venue-name">Foro Sol</div>
+                    <div class="venue-city">CDMX, México</div>
+                    <div class="venue-capacity">Capacidad: 63,500</div>
+                    <div class="venue-details">Estadio | Festivales Masivos</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">Café Iguana</div>
-                    <div class="venue-city">Monterrey</div>
-                    <div class="venue-capacity">Capacidad confirmada: 600</div>
-                    <div class="venue-details">Géneros: Rock, Blues, Indie | Tipo: Bar/Venue</div>
+                    <div class="venue-name">WiZink Center</div>
+                    <div class="venue-city">Madrid, España</div>
+                    <div class="venue-capacity">Capacidad: 17,000</div>
+                    <div class="venue-details">Arena | Eventos Internacionales</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">Sala Apolo</div>
-                    <div class="venue-city">Barcelona</div>
-                    <div class="venue-capacity">Capacidad confirmada: 1,400</div>
-                    <div class="venue-details">Géneros: Indie, Rock, Electrónica | Tipo: Sala</div>
+                    <div class="venue-name">Razzmatazz</div>
+                    <div class="venue-city">Barcelona, España</div>
+                    <div class="venue-capacity">Capacidad: 3,500</div>
+                    <div class="venue-details">Club/Venue | 5 Salas Especializadas</div>
                 </div>
                 <div class="venue-card">
-                    <div class="venue-name">La Riviera</div>
-                    <div class="venue-city">Madrid</div>
-                    <div class="venue-capacity">Capacidad confirmada: 2,500</div>
-                    <div class="venue-details">Géneros: Rock, Indie | Tipo: Sala</div>
+                    <div class="venue-name">El Plaza Condesa</div>
+                    <div class="venue-city">CDMX, México</div>
+                    <div class="venue-capacity">Capacidad: 1,900</div>
+                    <div class="venue-details">Venue | Indie & Electrónica</div>
                 </div>
             </div>
         </div>
         
         <hr class="divider">
         
-        <!-- CALLS-TO-ACTION MEJORADOS -->
+        <!-- CALLS-TO-ACTION PROFESIONALES -->
         <div class="cta-section">
-            <a class="cta-link primary" href="https://edumecar.github.io/portfolio/" target="_blank">
-                Explorar Venues ✓
+            <a class="cta-link primary" href="https://wa.me/525512478139" target="_blank">
+                📱 Contactar para Booking
             </a>
             <a class="cta-link secondary" href="https://wa.me/525512478139" target="_blank">
-                Contactar Ahora ↗
+                💬 Consultoría Gratuita
             </a>
         </div>
         
-        <!-- Executive summary mejorado -->
+        <!-- Executive summary profesional -->
         <div class="executive-summary">
-            <p><strong>Conectamos artistas con los escenarios perfectos.</strong> Más de <strong>200 venues verificados</strong> entre México y España, <strong>30+ géneros musicales</strong> y una red que mueve la música hoy.</p>
-            <p><strong>La concentración en México no responde al azar.</strong> CDMX, Jalisco y Nuevo León forman el triángulo activo donde convergen los principales flujos del booking nacional.</p>
-            <p><strong>Booking Plans</strong> cartografía relaciones reales: venues, promotores, agencias y managers que ya dialogan entre sí.</p>
+            <p><strong>Booking Plans conecta artistas internacionales con la red más extensa de venues verificados entre México y España.</strong> Con <strong>239 venues</strong> estratégicamente seleccionados, <strong>86 contactos activos</strong> en la industria y cobertura en <strong>17 regiones</strong>, ofrecemos acceso a escenarios desde <strong>50 hasta 63,500 personas</strong> de capacidad.</p>
+            
+            <p><strong>Especialistas en logística internacional</strong> para giras entre México y España. Gestionamos toda la coordinación de venues, promotores locales y producción para que los artistas se enfoquen únicamente en su música.</p>
+            
+            <p>Nuestra red incluye <strong>contactos directos en Onerom Publishing, Warner, Universal y las principales agencias</strong> para maximizar el impacto de cada presentación.</p>
         </div>
         
         <hr class="divider">
         
-        <!-- Contacto editorial centrado -->
-        <div class="contact-title">CONTACTO DIRECTO</div>
-        <div class="contact-icons">
-            <a class="contact-icn" href="https://wa.me/525512478139" title="WhatsApp" target="_blank" rel="noopener">
-                <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.5 4 15.2c0 2.4.8 4.7 2.1 6.7l-1.3 5.2c-.3 1.1.7 2.1 1.9 1.7l5.4-1.7c2 .8 4.1 1.3 6.3 1.3 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2.1 0-4.1-.5-5.9-1.3l-.4-.2-3.5 1.1 1-3.9-.2-.4c-1.3-2-2.1-4.2-2.1-6.7 0-5.1 4.4-9.2 9.8-9.2S25.8 8.3 25.8 15.2c0 5-4.4 9-9.8 9zm5.4-7.6c-.3 0-1.9-.9-2.2-1-1-.4-1.3-.9-2.1-1.7s-.7-1.3-.3-1.9c.3-.4.7-1 .1-1.7-.2-.3-1.3-2-1.8-2.3-.5-.5-1.1-.3-1.5-.2-.4.1-1.1.3-1.7.8-.5.4-.8 1-1.2 1.6s-.3 1.3-.4 2c0 .6 0 1.2.3 1.8.4.6.5.8 1.1 1.4.7.8 1.6 1.7 3 2.1.4.1.7.1 1.1.1.3 0 .4 0 .7-.1.2-.1 1.2-.5 1.4-1 .2-.4.8-1.9 1-2.5 0-.1.1-.2.1-.2z" fill="currentColor"/></svg>
-            </a>
-            <a class="contact-icn phone" href="tel:+34678497361" title="Llamada directa">
-                <svg viewBox="0 0 24 24"><path d="M21.72 16.7c-1.19-1.04-2.44-2.02-3.7-2.95-.96-.71-2.41-.5-3.2.22l-1.02.91c-1.13-.6-2.18-1.35-3.13-2.22-.99-.91-1.78-1.94-2.33-3.11l.93-.98c.71-.78.95-2.2.22-3.17-1-1.35-2-2.66-3.07-3.89-.53-.59-1.47-.58-2.03 0l-1.03 1.05c-.67.7-.96 1.62-.78 2.6C3.64 10.36 6.82 17.47 15 20.49c.93.34 1.9.13 2.56-.56l1-1.04c.6-.63.59-1.53.16-2.19z" fill="currentColor"/></svg>
-            </a>
-            <a class="contact-icn" href="mailto:emc121091@me.com" title="Email" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M3.99 4A2 2 0 0 0 2 6v12c0 1.1.89 2 1.99 2h16.02c1.1 0 1.99-.9 1.99-2V6a2 2 0 0 0-1.99-2H3.99zm8.01 7.66L4.42 6h15.17l-7.59 5.66zm-6.17 7.1c-.48 0-.89-.38-.89-.86V7.54l7.82 5.84c.22.16.48.24.72.24.25 0 .51-.08.73-.25l7.8-5.83v10.36c0 .48-.4.86-.89.86H5.83z" fill="currentColor"/></svg>
-            </a>
-            <a class="contact-icn" href="https://edumecar.github.io/Portfolio/" title="Portfolio" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor"/></svg>
-            </a>
+        <!-- Contacto profesional simplificado -->
+        <div class="contact-section">
+            <div class="contact-title">CONTACTO PROFESIONAL</div>
+            <div class="contact-subtitle">
+                WhatsApp empresarial para consultas de booking internacional
+            </div>
+            <div class="contact-icons">
+                <a class="contact-icn" href="https://wa.me/525512478139" title="WhatsApp Empresarial" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.5 4 15.2c0 2.4.8 4.7 2.1 6.7l-1.3 5.2c-.3 1.1.7 2.1 1.9 1.7l5.4-1.7c2 .8 4.1 1.3 6.3 1.3 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2.1 0-4.1-.5-5.9-1.3l-.4-.2-3.5 1.1 1-3.9-.2-.4c-1.3-2-2.1-4.2-2.1-6.7 0-5.1 4.4-9.2 9.8-9.2S25.8 8.3 25.8 15.2c0 5-4.4 9-9.8 9zm5.4-7.6c-.3 0-1.9-.9-2.2-1-1-.4-1.3-.9-2.1-1.7s-.7-1.3-.3-1.9c.3-.4.7-1 .1-1.7-.2-.3-1.3-2-1.8-2.3-.5-.5-1.1-.3-1.5-.2-.4.1-1.1.3-1.7.8-.5.4-.8 1-1.2 1.6s-.3 1.3-.4 2c0 .6 0 1.2.3 1.8.4.6.5.8 1.1 1.4.7.8 1.6 1.7 3 2.1.4.1.7.1 1.1.1.3 0 .4 0 .7-.1.2-.1 1.2-.5 1.4-1 .2-.4.8-1.9 1-2.5 0-.1.1-.2.1-.2z" fill="currentColor"/></svg>
+                </a>
+                <a class="contact-icn" href="mailto:emc121091@me.com" title="Email Corporativo" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M3.99 4A2 2 0 0 0 2 6v12c0 1.1.89 2 1.99 2h16.02c1.1 0 1.99-.9 1.99-2V6a2 2 0 0 0-1.99-2H3.99zm8.01 7.66L4.42 6h15.17l-7.59 5.66zm-6.17 7.1c-.48 0-.89-.38-.89-.86V7.54l7.82 5.84c.22.16.48.24.72.24.25 0 .51-.08.73-.25l7.8-5.83v10.36c0 .48-.4.86-.89.86H5.83z" fill="currentColor"/></svg>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer profesional -->
+        <div class="professional-footer">
+            &copy; 2024 Booking Plans - Conexión Internacional de Venues México-España<br>
+            <small>Plataforma profesional para artistas internacionales</small>
         </div>
     </div>
 </body>
