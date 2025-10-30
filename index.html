@@ -12,6 +12,7 @@
             --darker: #000000;
             --light: #f8f9fa;
             --medium-gray: #666;
+            --light-gray: #e3e3e3;
             --white: #ffffff;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -24,7 +25,7 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: var(--light);
             margin: 0; 
@@ -43,8 +44,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 80px 0 30px 0;
-            min-height: 180px;
+            margin: 80px 0 40px 0;
+            min-height: 200px;
         }
         
         .logo-brand {
@@ -80,20 +81,8 @@
         /* HEADLINE CON IDENTIDAD */
         .headline {
             text-align: center;
-            margin: 50px auto 40px auto;
+            margin: 60px auto 50px auto;
             max-width: 1000px;
-        }
-        
-        .headline-main {
-            font-size: 2.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
         }
         
         .headline-identity {
@@ -105,11 +94,24 @@
             font-style: italic;
         }
         
+        .headline-main {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
         .headline-sub {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--light);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--light-gray);
             line-height: 1.4;
+            margin-bottom: 30px;
         }
         
         /* METRICS BAR */
@@ -117,14 +119,14 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin: 40px 0 50px 0;
+            margin: 40px 0 60px 0;
             padding: 0 10px;
         }
         
         .metric-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 20px 15px;
+            padding: 25px 15px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -134,10 +136,11 @@
         .metric-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
+            box-shadow: var(--shadow-hover);
         }
         
         .metric-number {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 900;
             color: var(--primary);
             display: block;
@@ -146,94 +149,382 @@
         }
         
         .metric-label {
-            font-size: 0.85rem;
-            color: var(--light);
+            font-size: 0.9rem;
+            color: var(--light-gray);
             font-weight: 500;
+            letter-spacing: 0.03em;
         }
         
         .divider {
             border: 0; 
             height: 1px;
             background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
-            margin: 40px 0;
+            margin: 50px 0;
             width: 100%;
         }
         
-        /* Executive summary - ESTILOS MEJORADOS */
-        .executive-summary {
-            max-width: 900px;
-            margin: 60px auto 50px auto;
+        /* PAÍSES - MANTENIDO */
+        .distribution-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .dist-block {
             background: rgba(255, 255, 255, 0.05);
-            color: var(--light);
-            font-size: 1.1rem;
-            line-height: 1.7;
-            padding: 35px;
+            flex: 1;
             border-radius: 16px;
-            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-shadow: var(--shadow);
+            padding: 0;
+            overflow: hidden;
+            min-height: 380px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+        }
+        
+        .dist-block:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        
+        .dist-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .dist-block:hover .dist-img {
+            transform: scale(1.05);
+        }
+        
+        .dist-content {
+            padding: 25px 20px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .dist-country {
+            font-weight: 800; 
+            color: var(--primary); 
+            margin-bottom: 8px; 
+            font-size: 1.4rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .dist-venues { 
+            font-size: 1.5rem; 
+            font-weight: 900; 
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+        
+        .dist-details {
+            font-size: 1rem; 
+            color: var(--medium-gray);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        /* GÉNEROS - MANTENIDO */
+        .genres {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 60px 0 50px 0;
+        }
+        
+        .genre {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .genre:hover {
+            transform: translateY(-5px);
+        }
+        
+        .genre-img-container {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+        }
+        
+        .genre-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .genre:hover .genre-img {
+            transform: scale(1.08);
+        }
+        
+        .genre-label {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+        
+        .genre-count {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        /* VENUES - MANTENIDO */
+        .venues-section {
+            margin: 60px auto 40px auto;
             text-align: center;
         }
         
+        .venues-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--light);
+            text-align: center;
+            letter-spacing: -0.01em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .venues-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .venues-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        .venue-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 30px 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .venue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .venue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        
+        .venue-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--light);
+            text-align: center;
+        }
+        
+        .venue-city {
+            font-size: 1.05rem;
+            color: var(--medium-gray);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .venue-capacity {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 8px 0 5px 0;
+        }
+        
+        .venue-details {
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        /* CALLS-TO-ACTION CORREGIDOS */
+        .cta-section {
+            margin: 70px 0 60px 0;
+            text-align: center;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-link {
+            color: var(--white);
+            border-radius: 50px;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            display: inline-block;
+            letter-spacing: 0.03em;
+            transition: all 0.3s ease;
+            min-width: 280px;
+            text-align: center;
+        }
+        
+        .cta-link.primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+        }
+        
+        .cta-link.secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .cta-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .cta-link.primary:hover {
+            box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .cta-link.secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Executive summary */
+        .executive-summary {
+            max-width: 900px;
+            margin: 70px auto 50px auto;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(10px);
+        }
+        
         .executive-summary p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .executive-summary b, .executive-summary strong { 
             color: var(--primary);
             font-weight: 700;
         }
-
-        /* BOTONES MEJORADOS */
-        .cta-container {
+        
+        /* Contacto */
+        .contact-section {
+            margin: 70px 0 50px 0;
+            text-align: center;
+        }
+        
+        .contact-title {
+            margin: 0 0 25px 0;
+            color: var(--light);
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            font-size: 1.8rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .contact-icons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin: 40px 0;
-            flex-wrap: wrap;
+            margin-bottom: 60px;
         }
-
-        .btn {
-            padding: 16px 32px;
+        
+        .contact-icn {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary);
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
-            text-align: center;
-            min-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            border: 2px solid transparent;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .btn-secondary:hover {
+        
+        .contact-icn:hover {
             background: var(--primary);
             color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
-
+        
+        .contact-icn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
         .professional-footer {
-            margin-top: 40px;
-            padding: 25px 0;
+            margin-top: 50px;
+            padding: 30px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             color: var(--medium-gray);
@@ -242,11 +533,15 @@
         
         /* Responsive */
         @media (max-width: 1200px) {
-            .metrics-bar {
+            .genres, .venues-grid, .metrics-bar {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .distribution-section {
+                flex-direction: column;
+                gap: 25px;
+            }
             .headline-main {
-                font-size: 2rem;
+                font-size: 2.3rem;
             }
             .headline-identity {
                 font-size: 1.5rem;
@@ -254,20 +549,20 @@
         }
         
         @media (max-width: 850px) {
-            .metrics-bar {
+            .genres, .venues-grid, .metrics-bar {
                 grid-template-columns: 1fr;
             }
             .headline-main {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .headline-identity {
                 font-size: 1.3rem;
             }
-            .cta-container {
+            .cta-section {
                 flex-direction: column;
                 align-items: center;
             }
-            .btn {
+            .cta-link {
                 width: 100%;
                 max-width: 300px;
             }
@@ -275,24 +570,21 @@
         
         @media (max-width: 600px) {
             .logo-brand {
-                width: 70vw;
-                max-width: 220px;
+                width: 80vw;
+                max-width: 250px;
             }
             .wrap {
-                padding: 0 15px;
+                padding: 0 20px;
             }
             .headline-main {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             .headline-identity {
                 font-size: 1.2rem;
             }
-            .headline-sub {
-                font-size: 1.1rem;
-            }
             .executive-summary {
                 padding: 25px 20px;
-                font-size: 1rem;
+                font-size: 1.05rem;
             }
         }
     </style>
@@ -330,20 +622,125 @@
                 <span class="metric-label">Capacidad por Evento</span>
             </div>
         </div>
-
-        <!-- BOTONES MEJORADOS -->
-        <div class="cta-container">
-            <a href="mailto:contacto@bookingplans.com" class="btn btn-primary">Contacto por Email</a>
-            <a href="/portfolio" class="btn btn-secondary">Ver Portfolio</a>
+        
+        <hr class="divider">
+        
+        <!-- PAÍSES - MANTENIDO -->
+        <div class="distribution-section">
+            <div class="dist-block">
+                <img src="img/mexico.jpg" alt="México - 226 Venues" class="dist-img"/>
+                <div class="dist-content">
+                    <div class="dist-country">México</div>
+                    <div class="dist-venues">226 Venues</div>
+                    <div class="dist-details">132 en CDMX + 94 en 16 estados</div>
+                </div>
+            </div>
+            <div class="dist-block">
+                <img src="img/espana.jpg" alt="España - 13 Venues" class="dist-img"/>
+                <div class="dist-content">
+                    <div class="dist-country">España</div>
+                    <div class="dist-venues">13 Venues</div>
+                    <div class="dist-details">Estratégicos en Madrid & Barcelona</div>
+                </div>
+            </div>
         </div>
         
-        <!-- Executive summary MEJORADO -->
+        <hr class="divider">
+        
+        <!-- GÉNEROS - MANTENIDO -->
+        <div class="genres">
+            <div class="genre">
+                <div class="genre-img-container">
+                    <img src="img/reggaeton.jpg" alt="Reggaetón" class="genre-img"/>
+                </div>
+                <div class="genre-label">REGGAETÓN & URBANO</div>
+                <div class="genre-count">+35 venues</div>
+            </div>
+            <div class="genre">
+                <div class="genre-img-container">
+                    <img src="img/salsa-cumbia.jpg" alt="Salsa & Cumbia" class="genre-img"/>
+                </div>
+                <div class="genre-label">SALSA & CUMBIA</div>
+                <div class="genre-count">+25 venues</div>
+            </div>
+            <div class="genre">
+                <div class="genre-img-container">
+                    <img src="img/rock.jpg" alt="Rock, Metal, Punk" class="genre-img"/>
+                </div>
+                <div class="genre-label">ROCK, METAL & PUNK</div>
+                <div class="genre-count">+40 venues</div>
+            </div>
+            <div class="genre">
+                <div class="genre-img-container">
+                    <img src="img/jazz.jpg" alt="Jazz & Blues" class="genre-img"/>
+                </div>
+                <div class="genre-label">JAZZ & BLUES</div>
+                <div class="genre-count">+20 venues</div>
+            </div>
+        </div>
+        
+        <hr class="divider">
+
+        <!-- VENUES - MANTENIDO -->
+        <div class="venues-section">
+            <div class="venues-title">VENUES ESTRATÉGICOS</div>
+            <div class="venues-grid">
+                <div class="venue-card">
+                    <div class="venue-name">Foro Sol</div>
+                    <div class="venue-city">CDMX, México</div>
+                    <div class="venue-capacity">63,500</div>
+                    <div class="venue-details">Estadio | Festivales Masivos</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">WiZink Center</div>
+                    <div class="venue-city">Madrid, España</div>
+                    <div class="venue-capacity">17,000</div>
+                    <div class="venue-details">Arena | Eventos Internacionales</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">Razzmatazz</div>
+                    <div class="venue-city">Barcelona, España</div>
+                    <div class="venue-capacity">3,500</div>
+                    <div class="venue-details">Club/Venue | 5 Salas Especializadas</div>
+                </div>
+                <div class="venue-card">
+                    <div class="venue-name">El Plaza Condesa</div>
+                    <div class="venue-city">CDMX, México</div>
+                    <div class="venue-capacity">1,900</div>
+                    <div class="venue-details">Venue | Indie & Electrónica</div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <!-- CALLS-TO-ACTION CORREGIDOS -->
+        <div class="cta-section">
+            <a class="cta-link primary" href="mailto:contacto@bookingplans.com">
+                Contacto por Email
+            </a>
+            <a class="cta-link secondary" href="/portfolio">
+                Ver Portfolio
+            </a>
+        </div>
+        
+        <!-- Executive summary -->
         <div class="executive-summary">
             <p><strong>Booking Plans</strong> conecta artistas internacionales con <strong>239 venues verificados</strong> entre México y España. <strong>Inteligencia Musical</strong> para seleccionar los escenarios ideales, <strong>Conciencia Sonora</strong> para entender cada proyecto único.</p>
             
             <p>Desde <strong>50 hasta 63,500 personas</strong> de capacidad. <strong>86 contactos activos</strong> en la industria. Especialistas en logística de giras internacionales.</p>
 
-            <p>La concentración de la actividad en México no responde al azar. Es aquí donde el vibrante ecosistema musical y los proyectos emergentes encuentran su espacio, su público y la energía para crecer. Ciudad de México, Jalisco y Nuevo León constituyen el triángulo dinámico que impulsa la escena del directo, siendo el punto de convergencia de los principales flujos de <em>booking</em> a nivel nacional. Esta estrategia no es casual, es inteligencia aplicada.</p>
+            <p>La concentración en México no responde al azar. Es donde el ecosistema musical y los proyectos emergentes encuentran espacio, público y energía. CDMX, Jalisco y Nuevo León forman el triángulo activo del directo, donde convergen los principales flujos del booking nacional.</p>
+        </div>
+        
+        <!-- Contacto -->
+        <div class="contact-section">
+            <div class="contact-title">CONTACTO</div>
+            <div class="contact-icons">
+                <a class="contact-icn" href="mailto:contacto@bookingplans.com">
+                    <svg viewBox="0 0 24 24"><path d="M3.99 4A2 2 0 0 0 2 6v12c0 1.1.89 2 1.99 2h16.02c1.1 0 1.99-.9 1.99-2V6a2 2 0 0 0-1.99-2H3.99zm8.01 7.66L4.42 6h15.17l-7.59 5.66zm-6.17 7.1c-.48 0-.89-.38-.89-.86V7.54l7.82 5.84c.22.16.48.24.72.24.25 0 .51-.08.73-.25l7.8-5.83v10.36c0 .48-.4.86-.89.86H5.83z" fill="currentColor"/></svg>
+                </a>
+            </div>
         </div>
         
         <div class="professional-footer">
