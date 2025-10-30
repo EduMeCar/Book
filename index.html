@@ -3,168 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Plans</title>
+    <title>Booking Plans - Inteligencia Musical. Conciencia Sonora.</title>
     <style>
-        body {
+        :root {
+            --primary: #1db954;
+            --primary-dark: #1aa34a;
+            --dark: #0a0a0a;
+            --darker: #000000;
+            --light: #f8f9fa;
+            --medium-gray: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #F8FAFC;
-            color: #334155;
+            box-sizing: border-box;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .header {
-            color: #2A4B7F;
-            font-size: 1.8rem;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            margin: 0; 
+            padding: 0;
+            min-height: 100vh;
             line-height: 1.6;
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
         }
-
-        .metrics-grid {
+        
+        .wrap { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 24px;
+        }
+        
+        .header-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 80px 0 30px 0;
+            min-height: 180px;
+        }
+        
+        .logo-brand {
+            width: 240px;
+            height: auto;
+            display: block;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 6px 20px rgba(29, 185, 84, 0.3));
+            animation: gentleGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes gentleGlow {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 6px 20px rgba(29, 185, 84, 0.3));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 8px 25px rgba(29, 185, 84, 0.5));
+            }
+        }
+        
+        .logo-brand:hover {
+            animation: vinylSpin 0.8s linear;
+            filter: drop-shadow(0 10px 30px rgba(29, 185, 84, 0.7));
+        }
+        
+        @keyframes vinylSpin {
+            from { transform: rotate(0deg) scale(1.1); }
+            to { transform: rotate(360deg) scale(1.1); }
+        }
+        
+        /* HEADLINE CON IDENTIDAD */
+        .headline {
+            text-align: center;
+            margin: 50px auto 40px auto;
+            max-width: 1000px;
+        }
+        
+        .headline-main {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
+        .headline-identity {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.3;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .headline-sub {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--light);
+            line-height: 1.4;
+        }
+        
+        /* METRICS BAR */
+        .metrics-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 4rem;
+            gap: 15px;
+            margin: 40px 0 50px 0;
+            padding: 0 10px;
         }
-
+        
         .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px 15px;
             text-align: center;
-            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
         .metric-number {
-            color: #2A4B7F;
-            font-size: 2.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
         }
-
+        
         .metric-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #64748B;
+            font-size: 0.85rem;
+            color: var(--light);
+            font-weight: 500;
         }
-
-        .specialist-card {
+        
+        .divider {
+            border: 0; 
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+            margin: 40px 0;
+            width: 100%;
+        }
+        
+        /* Executive summary - ESTILOS MEJORADOS */
+        .executive-summary {
+            max-width: 900px;
+            margin: 60px auto 50px auto;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding: 35px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(10px);
             text-align: center;
-            padding: 1.5rem;
+        }
+        
+        .executive-summary p {
+            margin-bottom: 20px;
+        }
+        
+        .executive-summary b, .executive-summary strong { 
+            color: var(--primary);
+            font-weight: 700;
         }
 
-        .specialist-text {
-            color: #059669;
-            font-size: 2.2rem;
-            font-weight: bold;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
+        /* BOTONES MEJORADOS */
         .cta-container {
-            text-align: center;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 1rem 2.5rem;
+            padding: 16px 32px;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            margin: 0 0.5rem;
-            display: inline-block;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            text-align: center;
+            min-width: 180px;
         }
 
         .btn-primary {
-            background-color: #059669;
-            color: white;
-            border: 2px solid #059669;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: 2px solid transparent;
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: #2A4B7F;
-            border: 2px solid #2A4B7F;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
-        @media (max-width: 768px) {
-            .metrics-grid {
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .professional-footer {
+            margin-top: 40px;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .metrics-bar {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
             }
-            
-            .container {
-                padding: 2rem 1rem;
+            .headline-main {
+                font-size: 2rem;
             }
-            
-            .header {
-                font-size: 1.4rem;
+            .headline-identity {
+                font-size: 1.5rem;
             }
-            
-            .tagline {
+        }
+        
+        @media (max-width: 850px) {
+            .metrics-bar {
+                grid-template-columns: 1fr;
+            }
+            .headline-main {
+                font-size: 1.8rem;
+            }
+            .headline-identity {
+                font-size: 1.3rem;
+            }
+            .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .logo-brand {
+                width: 70vw;
+                max-width: 220px;
+            }
+            .wrap {
+                padding: 0 15px;
+            }
+            .headline-main {
+                font-size: 1.6rem;
+            }
+            .headline-identity {
+                font-size: 1.2rem;
+            }
+            .headline-sub {
+                font-size: 1.1rem;
+            }
+            .executive-summary {
+                padding: 25px 20px;
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="header">Booking Plans</h1>
+    <div class="wrap">
+        <!-- LOGO -->
+        <div class="header-main">
+            <img src="logo.svg" alt="Booking Plans" class="logo-brand"/>
+        </div>
         
-        <p class="tagline">
-            Conectamos artistas internacionales con <strong>239 venues verificados</strong> entre México y España. 
-            <span style="color: #2A4B7F;"><strong>Inteligencia Musical</strong></span> para seleccionar los escenarios ideales, 
-            <span style="color: #059669;"><strong>Conciencia Sonora</strong></span> para entender cada proyecto único.
-        </p>
-
-        <div class="metrics-grid">
+        <!-- HEADLINE CON IDENTIDAD -->
+        <div class="headline">
+            <div class="headline-identity">Inteligencia Musical. Conciencia Sonora.</div>
+            <div class="headline-main">239 Venues | 50 a 63,500 Capacidad</div>
+            <div class="headline-sub">Conexión Internacional México-España</div>
+        </div>
+        
+        <!-- METRICS BAR -->
+        <div class="metrics-bar">
             <div class="metric-card">
-                <div class="metric-number">50 - 63.5K</div>
-                <div class="metric-label">Capacidad</div>
+                <span class="metric-number">239</span>
+                <span class="metric-label">Venues & Scenes</span>
             </div>
-            
             <div class="metric-card">
-                <div class="metric-number">239</div>
-                <div class="metric-label">Venues Verificados</div>
+                <span class="metric-number">86</span>
+                <span class="metric-label">Conexiones Internacionales</span>
             </div>
-            
             <div class="metric-card">
-                <div class="metric-number">86</div>
-                <div class="metric-label">Contactos Activos</div>
+                <span class="metric-number">17</span>
+                <span class="metric-label">Regiones Mapeadas</span>
             </div>
-            
-            <div class="specialist-card">
-                <div class="specialist-text">Especialistas</div>
-                <div class="metric-label">Logística de Giras</div>
+            <div class="metric-card">
+                <span class="metric-number">50-63K</span>
+                <span class="metric-label">Capacidad por Evento</span>
             </div>
         </div>
 
+        <!-- BOTONES MEJORADOS -->
         <div class="cta-container">
             <a href="mailto:contacto@bookingplans.com" class="btn btn-primary">Contacto por Email</a>
             <a href="/portfolio" class="btn btn-secondary">Ver Portfolio</a>
+        </div>
+        
+        <!-- Executive summary MEJORADO -->
+        <div class="executive-summary">
+            <p><strong>Booking Plans</strong> conecta artistas internacionales con <strong>239 venues verificados</strong> entre México y España. <strong>Inteligencia Musical</strong> para seleccionar los escenarios ideales, <strong>Conciencia Sonora</strong> para entender cada proyecto único.</p>
+            
+            <p>Desde <strong>50 hasta 63,500 personas</strong> de capacidad. <strong>86 contactos activos</strong> en la industria. Especialistas en logística de giras internacionales.</p>
+
+            <p>La concentración de la actividad en México no responde al azar. Es aquí donde el vibrante ecosistema musical y los proyectos emergentes encuentran su espacio, su público y la energía para crecer. Ciudad de México, Jalisco y Nuevo León constituyen el triángulo dinámico que impulsa la escena del directo, siendo el punto de convergencia de los principales flujos de <em>booking</em> a nivel nacional. Esta estrategia no es casual, es inteligencia aplicada.</p>
+        </div>
+        
+        <div class="professional-footer">
+            &copy; 2024 Booking Plans - Inteligencia Musical. Conciencia Sonora.
         </div>
     </div>
 </body>
