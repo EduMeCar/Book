@@ -8,14 +8,17 @@
         :root {
             --primary: #1db954;
             --primary-dark: #1aa34a;
+            --primary-light: #4cd97a;
             --dark: #0a0a0a;
             --darker: #000000;
-            --light: #f8f9fa;
+            --dark-gray: #1a1a1a;
             --medium-gray: #666;
             --light-gray: #e3e3e3;
+            --light: #f8f9fa;
             --white: #ffffff;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.25);
+            --golden-ratio: 1.618;
         }
         
         * {
@@ -32,6 +35,7 @@
             padding: 0;
             min-height: 100vh;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .wrap { 
@@ -78,7 +82,7 @@
             to { transform: rotate(360deg) scale(1.1); }
         }
         
-        /* HEADLINE CON IDENTIDAD */
+        /* HEADLINE CON IDENTIDAD REFINADA */
         .headline {
             text-align: center;
             margin: 60px auto 50px auto;
@@ -92,10 +96,11 @@
             line-height: 1.3;
             margin-bottom: 20px;
             font-style: italic;
+            letter-spacing: -0.02em;
         }
         
         .headline-main {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 15px;
@@ -103,77 +108,101 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
         }
         
         .headline-sub {
             font-size: 1.4rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--light-gray);
             line-height: 1.4;
             margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        /* METRICS BAR */
+        /* METRICS BAR - MÁS REFINADO */
         .metrics-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 40px 0 60px 0;
+            gap: 20px;
+            margin: 60px 0 80px 0;
             padding: 0 10px;
         }
         
         .metric-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 25px 15px;
+            border-radius: 6px;
+            padding: 30px 20px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
         
         .metric-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--primary);
             box-shadow: var(--shadow-hover);
         }
         
+        .metric-card:hover::before {
+            transform: scaleX(1);
+        }
+        
         .metric-number {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--primary);
             display: block;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-feature-settings: "tnum";
         }
         
         .metric-label {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--light-gray);
             font-weight: 500;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         
         .divider {
             border: 0; 
             height: 1px;
             background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
-            margin: 50px 0;
+            margin: 60px 0;
             width: 100%;
         }
         
-        /* PAÍSES - MANTENIDO */
+        /* PAÍSES - MÁS ELEGANTE */
         .distribution-section {
             display: flex;
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
         
         .dist-block {
             background: rgba(255, 255, 255, 0.05);
             flex: 1;
-            border-radius: 16px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -181,24 +210,41 @@
             box-shadow: var(--shadow);
             padding: 0;
             overflow: hidden;
-            min-height: 380px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 420px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .dist-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
         
         .dist-block:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
             border-color: var(--primary);
         }
         
+        .dist-block:hover::before {
+            transform: scaleX(1);
+        }
+        
         .dist-img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
         
         .dist-block:hover .dist-img {
@@ -206,7 +252,7 @@
         }
         
         .dist-content {
-            padding: 25px 20px;
+            padding: 30px 25px;
             text-align: center;
             width: 100%;
         }
@@ -214,15 +260,15 @@
         .dist-country {
             font-weight: 800; 
             color: var(--primary); 
-            margin-bottom: 8px; 
-            font-size: 1.4rem;
+            margin-bottom: 10px; 
+            font-size: 1.5rem;
             letter-spacing: 0.02em;
         }
         
         .dist-venues { 
-            font-size: 1.5rem; 
+            font-size: 1.8rem; 
             font-weight: 900; 
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: var(--light);
         }
         
@@ -233,12 +279,12 @@
             line-height: 1.4;
         }
         
-        /* GÉNEROS - MANTENIDO */
+        /* GÉNEROS - MÁS PROFESIONAL */
         .genres {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 25px;
-            margin: 60px 0 50px 0;
+            margin: 60px 0 70px 0;
         }
         
         .genre {
@@ -246,27 +292,44 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .genre:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         
         .genre-img-container {
             width: 100%;
-            height: 220px;
-            border-radius: 12px;
+            height: 240px;
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .genre-img-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .genre:hover .genre-img-container::after {
+            transform: scaleX(1);
         }
         
         .genre-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
         
         .genre:hover .genre-img {
@@ -275,28 +338,28 @@
         
         .genre-label {
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--light);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             letter-spacing: 0.01em;
         }
         
         .genre-count {
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
         
-        /* VENUES - MANTENIDO */
+        /* VENUES - MÁS SOFISTICADO */
         .venues-section {
-            margin: 60px auto 40px auto;
+            margin: 70px auto 50px auto;
             text-align: center;
         }
         
         .venues-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: var(--light);
             text-align: center;
             letter-spacing: -0.01em;
@@ -307,10 +370,10 @@
         .venues-title::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 3px;
             background: var(--primary);
             border-radius: 2px;
@@ -324,14 +387,14 @@
         
         .venue-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 30px 20px;
+            border-radius: 8px;
+            padding: 35px 25px;
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -345,71 +408,98 @@
             width: 100%;
             height: 4px;
             background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
         
         .venue-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
             border-color: var(--primary);
         }
         
+        .venue-card:hover::before {
+            transform: scaleX(1);
+        }
+        
         .venue-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: var(--light);
             text-align: center;
         }
         
         .venue-city {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--medium-gray);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 500;
         }
         
         .venue-capacity {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
-            margin: 8px 0 5px 0;
+            margin: 10px 0 8px 0;
         }
         
         .venue-details {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--medium-gray);
-            margin-top: 10px;
+            margin-top: 12px;
             text-align: center;
             font-weight: 500;
         }
         
-        /* CALLS-TO-ACTION CORREGIDOS */
+        /* CALLS-TO-ACTION MÁS ELEGANTES */
         .cta-section {
-            margin: 70px 0 60px 0;
+            margin: 80px 0 70px 0;
             text-align: center;
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
         }
         
         .cta-link {
             color: var(--white);
-            border-radius: 50px;
-            padding: 18px 40px;
+            border-radius: 6px;
+            padding: 20px 45px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.2rem;
             border: none;
             display: inline-block;
             letter-spacing: 0.03em;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             min-width: 280px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            z-index: -1;
+            transition: all 0.4s ease;
+        }
+        
+        .cta-link.primary::before {
+            opacity: 1;
+        }
+        
+        .cta-link.secondary::before {
+            opacity: 0;
         }
         
         .cta-link.primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
         }
         
@@ -420,34 +510,51 @@
         }
         
         .cta-link:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .cta-link.primary:hover {
             box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
         }
         
         .cta-link.secondary:hover {
-            background: var(--primary);
             color: var(--white);
         }
         
-        /* Executive summary */
+        .cta-link.secondary:hover::before {
+            opacity: 1;
+        }
+        
+        /* Executive summary más refinado */
         .executive-summary {
             max-width: 900px;
-            margin: 70px auto 50px auto;
+            margin: 80px auto 60px auto;
             background: rgba(255, 255, 255, 0.05);
             color: var(--light);
             font-size: 1.15rem;
             line-height: 1.8;
-            padding: 40px;
-            border-radius: 16px;
+            padding: 45px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
             border-left: 4px solid var(--primary);
             backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.8s ease;
+        }
+        
+        .executive-summary:hover::before {
+            transform: scaleX(1);
         }
         
         .executive-summary p {
@@ -459,18 +566,18 @@
             font-weight: 700;
         }
         
-        /* Contacto */
+        /* Contacto más profesional */
         .contact-section {
-            margin: 70px 0 50px 0;
+            margin: 80px 0 60px 0;
             text-align: center;
         }
         
         .contact-title {
-            margin: 0 0 25px 0;
+            margin: 0 0 30px 0;
             color: var(--light);
             font-weight: 800;
             letter-spacing: 0.03em;
-            font-size: 1.8rem;
+            font-size: 2rem;
             text-align: center;
             position: relative;
         }
@@ -478,10 +585,10 @@
         .contact-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 3px;
             background: var(--primary);
             border-radius: 2px;
@@ -489,32 +596,50 @@
         
         .contact-icons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
         
         .contact-icn {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 6px;
             background: rgba(255, 255, 255, 0.1);
             color: var(--primary);
             text-decoration: none;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-icn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+            z-index: -1;
         }
         
         .contact-icn:hover {
-            background: var(--primary);
             color: var(--white);
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
+        }
+        
+        .contact-icn:hover::before {
+            transform: scaleY(1);
         }
         
         .contact-icn svg {
@@ -523,8 +648,8 @@
         }
         
         .professional-footer {
-            margin-top: 50px;
-            padding: 30px 0;
+            margin-top: 60px;
+            padding: 35px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             color: var(--medium-gray);
@@ -538,13 +663,13 @@
             }
             .distribution-section {
                 flex-direction: column;
-                gap: 25px;
+                gap: 30px;
             }
             .headline-main {
-                font-size: 2.3rem;
+                font-size: 2.8rem;
             }
             .headline-identity {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
         }
         
@@ -553,10 +678,10 @@
                 grid-template-columns: 1fr;
             }
             .headline-main {
-                font-size: 2rem;
+                font-size: 2.4rem;
             }
             .headline-identity {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
             .cta-section {
                 flex-direction: column;
@@ -577,14 +702,17 @@
                 padding: 0 20px;
             }
             .headline-main {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .headline-identity {
                 font-size: 1.2rem;
             }
             .executive-summary {
-                padding: 25px 20px;
+                padding: 30px 25px;
                 font-size: 1.05rem;
+            }
+            .dist-content, .venue-card {
+                padding: 25px 20px;
             }
         }
     </style>
@@ -599,6 +727,7 @@
         <!-- HEADLINE CON IDENTIDAD -->
         <div class="headline">
             <div class="headline-main">Inteligencia Musical. Conciencia Sonora.</div>
+            <div class="headline-sub">Ciencia y arte conjugado para conectar tu música con los escenarios perfectos</div>
         </div>
         
         <!-- METRICS BAR -->
@@ -623,7 +752,7 @@
         
         <hr class="divider">
         
-        <!-- PAÍSES - MANTENIDO -->
+        <!-- PAÍSES - MEJORADO -->
         <div class="distribution-section">
             <div class="dist-block">
                 <img src="img/mexico.jpg" alt="México - 250 Venues" class="dist-img"/>
@@ -645,7 +774,7 @@
         
         <hr class="divider">
         
-        <!-- GÉNEROS - MANTENIDO -->
+        <!-- GÉNEROS - MEJORADO -->
         <div class="genres">
             <div class="genre">
                 <div class="genre-img-container">
@@ -679,7 +808,7 @@
         
         <hr class="divider">
 
-        <!-- VENUES - MANTENIDO -->
+        <!-- VENUES - MEJORADO -->
         <div class="venues-section">
             <div class="venues-title">VENUES ESTRATÉGICOS</div>
             <div class="venues-grid">
@@ -712,12 +841,12 @@
         
         <hr class="divider">
         
-        <!-- CALLS-TO-ACTION CORREGIDOS -->
+        <!-- CALLS-TO-ACTION MEJORADOS -->
         <div class="cta-section">
             <a class="cta-link primary" href="emc121091@me.com">
                 Email
             </a>
-            <a class="cta-link primary" href="https://wa.me/525512478139" target="_blank">
+            <a class="cta-link secondary" href="https://wa.me/525512478139" target="_blank">
                 Whatsapp
             </a>
         </div>
