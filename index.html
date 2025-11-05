@@ -231,7 +231,7 @@
             border-radius: 50%;
         }
         
-        /* GENRES LED MARQUEE */
+        /* GENRES PROFESSIONAL MARQUEE */
         .genres-section {
             margin: 100px 0;
             overflow: hidden;
@@ -247,40 +247,66 @@
             text-align: center;
         }
         
-        .led-marquee {
-            background: rgba(29, 185, 84, 0.1);
-            border: 1px solid rgba(29, 185, 84, 0.3);
-            border-radius: 50px;
-            padding: 20px 0;
+        .professional-marquee {
+            background: transparent;
+            padding: 25px 0;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
         }
         
-        .marquee-container {
+        .professional-marquee::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .professional-marquee::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        .marquee-track {
             display: flex;
-            animation: marqueeScroll 30s linear infinite;
+            animation: smoothMarquee 40s linear infinite;
         }
         
-        @keyframes marqueeScroll {
+        @keyframes smoothMarquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
         
-        .genre-tag {
-            padding: 10px 25px;
-            margin: 0 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            font-weight: 700;
+        .genre-name {
+            padding: 0 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--light);
             white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
-        /* JOURNEY TIMELINE */
+        .genre-name::after {
+            content: '•';
+            position: absolute;
+            right: -5px;
+            color: var(--primary);
+        }
+        
+        .genre-name:last-child::after {
+            display: none;
+        }
+        
+        /* PROFESSIONAL JOURNEY */
         .journey-section {
-            margin: 100px 0;
+            margin: 120px 0;
         }
         
         .journey-title {
@@ -289,79 +315,87 @@
             color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             text-align: center;
         }
         
-        .journey-timeline {
-            position: relative;
-            max-width: 800px;
+        .professional-process {
+            max-width: 900px;
             margin: 0 auto;
         }
         
-        .journey-timeline::before {
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child)::after {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
+            left: 30px;
+            top: 70px;
+            bottom: -60px;
             width: 2px;
-            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
-            transform: translateX(-50%);
+            background: linear-gradient(to bottom, var(--primary), transparent);
         }
         
-        .journey-step {
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin: 60px 0;
-            position: relative;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-right: 30px;
+            flex-shrink: 0;
         }
         
-        .journey-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            border-radius: 12px;
-            width: 45%;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .journey-step:nth-child(odd) .journey-content {
-            margin-right: auto;
-        }
-        
-        .journey-step:nth-child(even) .journey-content {
-            margin-left: auto;
-        }
-        
-        .journey-content:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-        
-        .step-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-            text-align: center;
+        .step-content {
+            flex: 1;
+            padding-top: 8px;
         }
         
         .step-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--light);
             margin-bottom: 15px;
-            text-align: center;
         }
         
-        .step-desc {
+        .step-description {
             font-size: 1.1rem;
             color: var(--light-gray);
-            line-height: 1.6;
-            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .step-details {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--medium-gray);
+        }
+        
+        .detail-item:before {
+            content: '→';
+            color: var(--primary);
+            margin-right: 10px;
+            font-weight: 700;
         }
         
         /* CONTACT */
@@ -473,13 +507,20 @@
                 top: auto;
             }
             
-            .journey-timeline::before {
-                left: 30px;
+            .process-step {
+                flex-direction: column;
             }
             
-            .journey-content {
-                width: calc(100% - 80px);
-                margin-left: 80px !important;
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .process-step:not(:last-child)::after {
+                left: 30px;
+                top: 70px;
+                bottom: -60px;
+                height: auto;
             }
             
             .headline-main {
@@ -509,6 +550,14 @@
             .country-flag {
                 width: 100px;
                 height: 100px;
+            }
+            
+            .step-title {
+                font-size: 1.3rem;
+            }
+            
+            .step-description {
+                font-size: 1rem;
             }
         }
     </style>
@@ -560,72 +609,104 @@
             </div>
         </div>
         
-        <!-- GENRES LED MARQUEE -->
+        <!-- PROFESSIONAL GENRES MARQUEE -->
         <div class="genres-section">
-            <div class="section-title">Diversidad Musical: Todas las Voces, Todos los Movimientos</div>
-            <div class="led-marquee">
-                <div class="marquee-container">
-                    <span class="genre-tag">REGGAETÓN</span>
-                    <span class="genre-tag">ELECTRÓNICA</span>
-                    <span class="genre-tag">ROCK</span>
-                    <span class="genre-tag">INDIE</span>
-                    <span class="genre-tag">HIP HOP</span>
-                    <span class="genre-tag">SALSA</span>
-                    <span class="genre-tag">JAZZ</span>
-                    <span class="genre-tag">REGIONAL MEXICANO</span>
-                    <span class="genre-tag">POP</span>
-                    <span class="genre-tag">ALTERNATIVO</span>
-                    <span class="genre-tag">R&B</span>
-                    <span class="genre-tag">FUSIÓN</span>
+            <div class="section-title">Universalidad Musical: Todos los Géneros, Todas las Expresiones</div>
+            <div class="professional-marquee">
+                <div class="marquee-track">
+                    <span class="genre-name">REGGAETÓN</span>
+                    <span class="genre-name">ELECTRÓNICA</span>
+                    <span class="genre-name">ROCK</span>
+                    <span class="genre-name">INDIE</span>
+                    <span class="genre-name">HIP HOP</span>
+                    <span class="genre-name">SALSA</span>
+                    <span class="genre-name">JAZZ</span>
+                    <span class="genre-name">REGIONAL MEXICANO</span>
+                    <span class="genre-name">POP</span>
+                    <span class="genre-name">ALTERNATIVO</span>
+                    <span class="genre-name">R&B</span>
+                    <span class="genre-name">FUSIÓN</span>
                     <!-- Duplicado para efecto continuo -->
-                    <span class="genre-tag">REGGAETÓN</span>
-                    <span class="genre-tag">ELECTRÓNICA</span>
-                    <span class="genre-tag">ROCK</span>
-                    <span class="genre-tag">INDIE</span>
-                    <span class="genre-tag">HIP HOP</span>
-                    <span class="genre-tag">SALSA</span>
-                    <span class="genre-tag">JAZZ</span>
-                    <span class="genre-tag">REGIONAL MEXICANO</span>
-                    <span class="genre-tag">POP</span>
-                    <span class="genre-tag">ALTERNATIVO</span>
-                    <span class="genre-tag">R&B</span>
-                    <span class="genre-tag">FUSIÓN</span>
+                    <span class="genre-name">REGGAETÓN</span>
+                    <span class="genre-name">ELECTRÓNICA</span>
+                    <span class="genre-name">ROCK</span>
+                    <span class="genre-name">INDIE</span>
+                    <span class="genre-name">HIP HOP</span>
+                    <span class="genre-name">SALSA</span>
+                    <span class="genre-name">JAZZ</span>
+                    <span class="genre-name">REGIONAL MEXICANO</span>
+                    <span class="genre-name">POP</span>
+                    <span class="genre-name">ALTERNATIVO</span>
+                    <span class="genre-name">R&B</span>
+                    <span class="genre-name">FUSIÓN</span>
                 </div>
             </div>
         </div>
         
-        <!-- JOURNEY TIMELINE -->
+        <!-- PROFESSIONAL JOURNEY -->
         <div class="journey-section">
-            <div class="journey-title">El Viaje de Tu Sonido</div>
-            <div class="journey-timeline">
-                <div class="journey-step">
-                    <div class="journey-content">
-                        <div class="step-icon">🎯</div>
-                        <div class="step-title">Conectamos Tu Música</div>
-                        <div class="step-desc">
-                            Con +300 venues entre México y España mediante Inteligencia Musical 
-                            para seleccionar los escenarios ideales y Conciencia Sonora para 
-                            entender tu proyecto como único.
+            <div class="journey-title">Proceso de Arquitectura Musical</div>
+            <div class="professional-process">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Análisis Estratégico del Proyecto</div>
+                        <div class="step-description">
+                            Evaluación exhaustiva de tu música, audiencia objetivo y objetivos artísticos 
+                            para desarrollar una estrategia de booking personalizada.
+                        </div>
+                        <div class="step-details">
+                            <div class="detail-item">Análisis de sonido y propuesta artística única</div>
+                            <div class="detail-item">Identificación de audiencia objetivo y mercados potenciales</div>
+                            <div class="detail-item">Definición de objetivos de crecimiento y posicionamiento</div>
                         </div>
                     </div>
                 </div>
-                <div class="journey-step">
-                    <div class="journey-content">
-                        <div class="step-icon">🔍</div>
-                        <div class="step-title">Encontramos Tu Espacio Ideal</div>
-                        <div class="step-desc">
-                            Desde clubs íntimos (200 personas) hasta eventos especiales (2,000 personas). 
-                            Encontramos o creamos el espacio perfecto para tu sonido.
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Selección de Escenarios Ideales</div>
+                        <div class="step-description">
+                            Conexión con +300 venues verificados entre México y España, 
+                            seleccionando los espacios que mejor se alineen con tu proyecto.
+                        </div>
+                        <div class="step-details">
+                            <div class="detail-item">Match perfecto entre artista y venue según género y capacidad</div>
+                            <div class="detail-item">Negociación de condiciones y contratación profesional</div>
+                            <div class="detail-item">Coordinación de fechas y logística de presentación</div>
                         </div>
                     </div>
                 </div>
-                <div class="journey-step">
-                    <div class="journey-content">
-                        <div class="step-icon">⚡</div>
-                        <div class="step-title">Coordinamos La Experiencia Completa</div>
-                        <div class="step-desc">
-                            Logística integral, conexión con audiencias reales y gestión profesional 
-                            para que solo te enfoques en tu arte.
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Producción y Logística Integral</div>
+                        <div class="step-description">
+                            Gestión completa de todos los aspectos técnicos y operativos 
+                            para garantizar presentaciones impecables.
+                        </div>
+                        <div class="step-details">
+                            <div class="detail-item">Coordinación de riders técnicos y backline</div>
+                            <div class="detail-item">Gestión de hospedaje, transportación y viáticos</div>
+                            <div class="detail-item">Supervisión de montaje, soundcheck y desarrollo del evento</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Seguimiento y Desarrollo Continuo</div>
+                        <div class="step-description">
+                            Análisis post-evento y planificación estratégica para el crecimiento 
+                            sostenido de tu carrera musical.
+                        </div>
+                        <div class="step-details">
+                            <div class="detail-item">Evaluación de resultados y métricas de impacto</div>
+                            <div class="detail-item">Estrategia de siguientes pasos y nuevas oportunidades</div>
+                            <div class="detail-item">Construcción de relaciones a largo plazo con venues</div>
                         </div>
                     </div>
                 </div>
