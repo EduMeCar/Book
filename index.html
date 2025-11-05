@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Plans - Inteligencia Musical.</title>
+    <title>Booking Plans - Conciencia Sonora</title>
     <style>
         :root {
             --primary: #1db954;
@@ -81,7 +81,7 @@
             to { transform: rotate(360deg) scale(1.1); }
         }
         
-        /* HEADLINE MÁS LIMPIO */
+        /* HEADLINE */
         .headline {
             text-align: center;
             margin: 60px auto 80px auto;
@@ -105,13 +105,12 @@
             font-weight: 400;
             color: var(--light-gray);
             line-height: 1.5;
-            margin-bottom: 30px;
         }
         
-        /* HERO NUMBERS - REEMPLAZA METRICS BAR */
+        /* HERO NUMBERS */
         .hero-numbers {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0;
             margin: 80px 0;
             text-align: center;
@@ -156,7 +155,7 @@
             text-transform: uppercase;
         }
         
-        /* GEO VISUAL - REEMPLAZA DISTRIBUCIÓN */
+        /* GEO VISUAL */
         .geo-visual {
             margin: 100px 0;
             text-align: center;
@@ -232,9 +231,10 @@
             border-radius: 50%;
         }
         
-        /* GENRES LIST - REEMPLAZA TARJETAS DE GÉNEROS */
+        /* GENRES LED MARQUEE */
         .genres-section {
             margin: 100px 0;
+            overflow: hidden;
         }
         
         .section-title {
@@ -247,72 +247,59 @@
             text-align: center;
         }
         
-        .genres-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+        .led-marquee {
+            background: rgba(29, 185, 84, 0.1);
+            border: 1px solid rgba(29, 185, 84, 0.3);
+            border-radius: 50px;
+            padding: 20px 0;
             overflow: hidden;
-        }
-        
-        .genre-item {
-            padding: 30px;
-            background: var(--dark);
-            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
         }
         
-        .genre-item:nth-child(odd) {
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        .marquee-container {
+            display: flex;
+            animation: marqueeScroll 30s linear infinite;
         }
         
-        .genre-item:hover {
-            background: rgba(255, 255, 255, 0.03);
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         
-        .genre-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: var(--primary);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .genre-item:hover::before {
-            transform: scaleY(1);
-        }
-        
-        .genre-name {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--light);
-            margin-bottom: 8px;
-        }
-        
-        .genre-count {
-            font-size: 1.1rem;
-            color: var(--primary);
+        .genre-tag {
+            padding: 10px 25px;
+            margin: 0 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
             font-weight: 700;
+            color: var(--light);
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* VENUES TIMELINE - REEMPLAZA TARJETAS DE VENUES */
-        .venues-timeline {
+        /* JOURNEY TIMELINE */
+        .journey-section {
             margin: 100px 0;
         }
         
-        .timeline {
+        .journey-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .journey-timeline {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .timeline::before {
+        .journey-timeline::before {
             content: '';
             position: absolute;
             left: 50%;
@@ -323,7 +310,7 @@
             transform: translateX(-50%);
         }
         
-        .timeline-item {
+        .journey-step {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -331,84 +318,53 @@
             position: relative;
         }
         
-        .timeline-content {
+        .journey-content {
             background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 8px;
+            padding: 40px 30px;
+            border-radius: 12px;
             width: 45%;
             position: relative;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .timeline-item:nth-child(odd) .timeline-content {
+        .journey-step:nth-child(odd) .journey-content {
             margin-right: auto;
         }
         
-        .timeline-item:nth-child(even) .timeline-content {
+        .journey-step:nth-child(even) .journey-content {
             margin-left: auto;
         }
         
-        .timeline-content:hover {
+        .journey-content:hover {
             background: rgba(255, 255, 255, 0.08);
             transform: translateY(-5px);
+            border-color: var(--primary);
         }
         
-        .venue-name {
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        
+        .step-title {
             font-size: 1.4rem;
             font-weight: 800;
             color: var(--light);
-            margin-bottom: 8px;
-        }
-        
-        .venue-location {
-            font-size: 1.1rem;
-            color: var(--medium-gray);
-            margin-bottom: 10px;
-        }
-        
-        .venue-capacity {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .venue-type {
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-            margin-top: 8px;
-            font-style: italic;
-        }
-        
-        /* STATEMENT - REEMPLAZA EXECUTIVE SUMMARY */
-        .statement {
-            max-width: 700px;
-            margin: 100px auto;
+            margin-bottom: 15px;
             text-align: center;
-            position: relative;
         }
         
-        .statement-quote {
-            font-size: 1.4rem;
-            line-height: 1.7;
-            color: var(--light);
-            margin-bottom: 30px;
-            font-weight: 400;
+        .step-desc {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            line-height: 1.6;
+            text-align: center;
         }
         
-        .statement-highlight {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        
-        .statement-context {
-            font-size: 1rem;
-            color: var(--medium-gray);
-            font-style: italic;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-        }
-        
-        /* CONTACT - MANTENIDO PERO MEJORADO */
+        /* CONTACT */
         .contact-section {
             margin: 100px 0 60px 0;
             text-align: center;
@@ -493,11 +449,11 @@
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero-numbers {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
             
-            .hero-number:nth-child(2n)::after {
-                display: none;
+            .hero-number::after {
+                display: none !important;
             }
             
             .geo-map {
@@ -517,36 +473,17 @@
                 top: auto;
             }
             
-            .genres-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .genre-item:nth-child(odd) {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .timeline::before {
+            .journey-timeline::before {
                 left: 30px;
             }
             
-            .timeline-content {
+            .journey-content {
                 width: calc(100% - 80px);
                 margin-left: 80px !important;
             }
             
             .headline-main {
                 font-size: 2.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-numbers {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-number::after {
-                display: none !important;
             }
             
             .contact-actions {
@@ -557,6 +494,21 @@
             .contact-btn {
                 width: 100%;
                 max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-brand {
+                width: 200px;
+            }
+            
+            .headline-main {
+                font-size: 2rem;
+            }
+            
+            .country-flag {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -570,31 +522,23 @@
         
         <!-- HEADLINE -->
         <div class="headline">
-            <div class="headline-main">Conciencia Sonora.</div>
-            <div class="headline-sub">Conecta tu música con los escenarios perfectos.</div>
+            <div class="headline-main">Conciencia Sonora</div>
+            <div class="headline-sub">Donde cada nota encuentra su escenario ideal</div>
         </div>
         
-        <!-- HERO NUMBERS (reemplaza metrics bar) -->
+        <!-- HERO NUMBERS -->
         <div class="hero-numbers">
             <div class="hero-number">
-                <span class="number">+300</span>
-                <span class="number-label">Venues & Scenes</span>
+                <span class="number">400+</span>
+                <span class="number-label">Experiencias Musicales</span>
             </div>
             <div class="hero-number">
-                <span class="number">+100</span>
-                <span class="number-label">Conexiones</span>
-            </div>
-            <div class="hero-number">
-                <span class="number">+30</span>
-                <span class="number-label">Géneros</span>
-            </div>
-            <div class="hero-number">
-                <span class="number">50-63K</span>
-                <span class="number-label">Capacidad</span>
+                <span class="number">100%</span>
+                <span class="number-label">Enfoque Personalizado</span>
             </div>
         </div>
         
-        <!-- GEO VISUAL (reemplaza distribución) -->
+        <!-- GEO VISUAL -->
         <div class="geo-visual">
             <div class="geo-title">Conectando Territorios</div>
             <div class="geo-map">
@@ -616,85 +560,75 @@
             </div>
         </div>
         
-        <!-- GENRES LIST (reemplaza tarjetas de géneros) -->
+        <!-- GENRES LED MARQUEE -->
         <div class="genres-section">
-            <div class="section-title">Géneros Musicales</div>
-            <div class="genres-grid">
-                <div class="genre-item">
-                    <div class="genre-name">REGGAETÓN & URBANO</div>
-                    <div class="genre-count">+35 venues</div>
-                </div>
-                <div class="genre-item">
-                    <div class="genre-name">SALSA & CUMBIA</div>
-                    <div class="genre-count">+25 venues</div>
-                </div>
-                <div class="genre-item">
-                    <div class="genre-name">ROCK, METAL & PUNK</div>
-                    <div class="genre-count">+40 venues</div>
-                </div>
-                <div class="genre-item">
-                    <div class="genre-name">JAZZ & BLUES</div>
-                    <div class="genre-count">+20 venues</div>
-                </div>
-                <div class="genre-item">
-                    <div class="genre-name">ELECTRÓNICA & DJ</div>
-                    <div class="genre-count">+30 venues</div>
-                </div>
-                <div class="genre-item">
-                    <div class="genre-name">INDIE & ALTERNATIVO</div>
-                    <div class="genre-count">+28 venues</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- VENUES TIMELINE (reemplaza tarjetas de venues) -->
-        <div class="venues-timeline">
-            <div class="section-title">Venues Estratégicos</div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="venue-name">Foro Sol</div>
-                        <div class="venue-location">CDMX, México</div>
-                        <div class="venue-capacity">63,500</div>
-                        <div class="venue-type">Estadio | Festivales Masivos</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="venue-name">WiZink Center</div>
-                        <div class="venue-location">Madrid, España</div>
-                        <div class="venue-capacity">17,000</div>
-                        <div class="venue-type">Arena | Eventos Internacionales</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="venue-name">Razzmatazz</div>
-                        <div class="venue-location">Barcelona, España</div>
-                        <div class="venue-capacity">3,500</div>
-                        <div class="venue-type">Club/Venue | 5 Salas</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="venue-name">El Plaza Condesa</div>
-                        <div class="venue-location">CDMX, México</div>
-                        <div class="venue-capacity">1,900</div>
-                        <div class="venue-type">Venue | Indie & Electrónica</div>
-                    </div>
+            <div class="section-title">Diversidad Musical: Todas las Voces, Todos los Movimientos</div>
+            <div class="led-marquee">
+                <div class="marquee-container">
+                    <span class="genre-tag">REGGAETÓN</span>
+                    <span class="genre-tag">ELECTRÓNICA</span>
+                    <span class="genre-tag">ROCK</span>
+                    <span class="genre-tag">INDIE</span>
+                    <span class="genre-tag">HIP HOP</span>
+                    <span class="genre-tag">SALSA</span>
+                    <span class="genre-tag">JAZZ</span>
+                    <span class="genre-tag">REGIONAL MEXICANO</span>
+                    <span class="genre-tag">POP</span>
+                    <span class="genre-tag">ALTERNATIVO</span>
+                    <span class="genre-tag">R&B</span>
+                    <span class="genre-tag">FUSIÓN</span>
+                    <!-- Duplicado para efecto continuo -->
+                    <span class="genre-tag">REGGAETÓN</span>
+                    <span class="genre-tag">ELECTRÓNICA</span>
+                    <span class="genre-tag">ROCK</span>
+                    <span class="genre-tag">INDIE</span>
+                    <span class="genre-tag">HIP HOP</span>
+                    <span class="genre-tag">SALSA</span>
+                    <span class="genre-tag">JAZZ</span>
+                    <span class="genre-tag">REGIONAL MEXICANO</span>
+                    <span class="genre-tag">POP</span>
+                    <span class="genre-tag">ALTERNATIVO</span>
+                    <span class="genre-tag">R&B</span>
+                    <span class="genre-tag">FUSIÓN</span>
                 </div>
             </div>
         </div>
         
-        <!-- STATEMENT (reemplaza executive summary) -->
-        <div class="statement">
-            <div class="statement-quote">
-                Conectamos artistas con <span class="statement-highlight">+300 venues</span> entre México y España mediante 
-                <span class="statement-highlight">Inteligencia Musical</span> para seleccionar escenarios ideales y 
-                <span class="statement-highlight">Conciencia Sonora</span> para entender cada proyecto como único.
-            </div>
-            <div class="statement-context">
-                CDMX | GDL | MTY | BCN | MADRID 
+        <!-- JOURNEY TIMELINE -->
+        <div class="journey-section">
+            <div class="journey-title">El Viaje de Tu Sonido</div>
+            <div class="journey-timeline">
+                <div class="journey-step">
+                    <div class="journey-content">
+                        <div class="step-icon">🎯</div>
+                        <div class="step-title">Conectamos Tu Música</div>
+                        <div class="step-desc">
+                            Con +300 venues entre México y España mediante Inteligencia Musical 
+                            para seleccionar los escenarios ideales y Conciencia Sonora para 
+                            entender tu proyecto como único.
+                        </div>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-content">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-title">Encontramos Tu Espacio Ideal</div>
+                        <div class="step-desc">
+                            Desde clubs íntimos (200 personas) hasta eventos especiales (2,000 personas). 
+                            Encontramos o creamos el espacio perfecto para tu sonido.
+                        </div>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-content">
+                        <div class="step-icon">⚡</div>
+                        <div class="step-title">Coordinamos La Experiencia Completa</div>
+                        <div class="step-desc">
+                            Logística integral, conexión con audiencias reales y gestión profesional 
+                            para que solo te enfoques en tu arte.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -709,7 +643,7 @@
                     WhatsApp
                 </a>
             </div>
-            <a class="portfolio-link" href="https://edumecar.github.io/portfolio/" title="Dashboard" target="_blank">
+            <a class="portfolio-link" href="https://edumecar.github.io/Book/" title="Dashboard" target="_blank">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
                 </svg>
@@ -718,7 +652,7 @@
         </div>
         
         <div class="professional-footer">
-            &copy; 2024 Booking Plans - Inteligencia Musical. Conciencia Sonora.
+            &copy; 2024 Booking Plans - Conciencia Sonora
         </div>
     </div>
 </body>
