@@ -3,22 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conciencia Sonora - Elite Booking Network</title>
+    <title>Conciencia Sonora</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        
-        :root {
-            --electric: #1db954;
-            --electric-dark: #169043;
-            --electric-glow: rgba(29, 185, 84, 0.4);
-            --void: #000000;
-            --carbon: #0a0a0a;
-            --slate: #1a1a1a;
-            --steel: #2a2a2a;
-            --fog: rgba(255, 255, 255, 0.1);
-            --mist: rgba(255, 255, 255, 0.6);
-            --ghost: rgba(255, 255, 255, 0.05);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         * {
             margin: 0;
@@ -26,1019 +13,888 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #f5f5f5;
+            --accent: #3b82f6;
+            --text: #1a1a1a;
+            --text-dim: #666;
+        }
+        
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background: var(--void);
-            color: #fff;
+            background: var(--secondary);
+            color: var(--text);
             overflow-x: hidden;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            cursor: none;
         }
         
-        /* Animated vinyl background */
-        #vinyl-bg {
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.06;
             pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            mix-blend-mode: difference;
         }
         
-        .container {
-            position: relative;
-            z-index: 1;
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(10, 10, 10, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
         }
         
-        /* Hero - Full Impact */
-        .hero-impact {
-            min-height: 100vh;
+        .cursor.expand {
+            width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+        }
+        
+        /* Hero Full */
+        .hero-full {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            text-align: center;
+            padding: 0 60px;
             position: relative;
+            overflow: hidden;
         }
         
-        .logo-hero {
-            width: 280px;
-            height: auto;
+        .logo-float {
+            width: 200px;
             margin-bottom: 80px;
-            filter: drop-shadow(0 8px 40px var(--electric-glow));
-            animation: logoPulse 4s ease-in-out infinite;
-            transition: transform 0.3s ease;
-        }
-        
-        @keyframes logoPulse {
-            0%, 100% { 
-                filter: drop-shadow(0 8px 40px var(--electric-glow));
-            }
-            50% { 
-                filter: drop-shadow(0 12px 60px rgba(29, 185, 84, 0.6));
-            }
-        }
-        
-        .logo-hero:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-        
-        .hero-statement {
-            font-size: clamp(2.5rem, 8vw, 7rem);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--electric) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-        }
-        
-        .hero-punch {
-            font-size: clamp(1.3rem, 3vw, 2rem);
-            font-weight: 600;
-            color: var(--mist);
-            max-width: 900px;
-            margin: 0 auto 80px;
-            line-height: 1.5;
-        }
-        
-        .hero-proof {
-            display: flex;
-            gap: 80px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .proof-metric {
-            text-align: center;
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards;
+            animation: fadeUp 1s ease 0.2s forwards;
         }
         
-        .proof-metric:nth-child(1) { animation-delay: 0.2s; }
-        .proof-metric:nth-child(2) { animation-delay: 0.4s; }
-        .proof-metric:nth-child(3) { animation-delay: 0.6s; }
-        
-        @keyframes slideUp {
+        @keyframes fadeUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         
-        .metric-number {
-            font-size: 5rem;
+        .hero-title {
+            font-size: clamp(4rem, 15vw, 14rem);
             font-weight: 900;
-            color: var(--electric);
-            line-height: 1;
-            text-shadow: 0 0 40px var(--electric-glow);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+        
+        .hero-title span {
             display: block;
-            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 300;
+            max-width: 700px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+        
+        .hero-metrics {
+            display: flex;
+            gap: 80px;
+            margin-top: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.8s forwards;
+        }
+        
+        .metric {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .metric-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .metric-label {
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--mist);
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            font-weight: 600;
         }
         
-        .scroll-prompt {
+        .scroll-indicator {
             position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75rem;
+            bottom: 60px;
+            left: 60px;
+            font-size: 0.7rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: var(--mist);
-            opacity: 0.4;
-            animation: bounce 2s ease-in-out infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 10px); }
-        }
-        
-        /* Network Split */
-        .network-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-        }
-        
-        .territory {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .territory:hover {
-            flex: 1.1;
-        }
-        
-        .territory-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(0.4) brightness(0.5);
-            transition: all 0.6s ease;
-        }
-        
-        .territory:hover .territory-image {
-            filter: grayscale(0) brightness(0.75);
-            transform: scale(1.05);
-        }
-        
-        .territory-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 70%);
+            color: var(--text-dim);
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 60px;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
         }
         
-        .territory-flag {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            display: block;
-            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.8));
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: var(--text-dim);
+            animation: scrollLine 2s ease-in-out infinite;
         }
         
-        .territory-name {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            line-height: 1;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+        @keyframes scrollLine {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.3; }
         }
         
-        .territory-stats {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--electric);
-            margin-bottom: 12px;
-            text-shadow: 0 0 30px var(--electric-glow);
+        /* Bento Grid Section */
+        .bento-section {
+            padding: 150px 60px;
+            background: var(--primary);
+            color: white;
         }
         
-        .territory-cities {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.1em;
-        }
-        
-        /* Power Stats Section */
-        .power-stats {
-            padding: 150px 40px;
-            background: linear-gradient(180deg, var(--void) 0%, var(--carbon) 50%, var(--void) 100%);
-        }
-        
-        .section-intro {
-            text-align: center;
-            margin-bottom: 100px;
+        .section-header {
+            margin-bottom: 80px;
         }
         
         .section-tag {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: var(--electric);
+            letter-spacing: 0.3em;
+            color: var(--accent);
             margin-bottom: 20px;
-        }
-        
-        .section-headline {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            color: #fff;
-        }
-        
-        .stats-showcase {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 60px;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, var(--slate) 0%, var(--carbon) 100%);
-            border: 1px solid var(--fog);
-            border-radius: 16px;
-            padding: 50px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        
-        .stat-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--electric);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-        
-        .stat-card:hover::before {
-            transform: translateX(0);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-12px);
-            border-color: var(--electric);
-            box-shadow: 0 20px 60px var(--electric-glow);
-        }
-        
-        .stat-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            display: block;
-        }
-        
-        .stat-value {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--electric);
-            line-height: 1;
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px var(--electric-glow);
-        }
-        
-        .stat-description {
-            font-size: 1rem;
             font-weight: 600;
-            color: var(--mist);
-            line-height: 1.5;
         }
         
-        /* Genres Accelerated */
-        .genres-flow {
-            padding: 120px 0;
+        .section-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .bento-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
             overflow: hidden;
-            background: var(--void);
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
         
-        .genres-track {
+        .bento-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .bento-large {
+            grid-column: span 2;
+            grid-row: span 2;
+            min-height: 600px;
+        }
+        
+        .bento-wide {
+            grid-column: span 2;
+            min-height: 300px;
+        }
+        
+        .bento-tall {
+            grid-row: span 2;
+            min-height: 600px;
+        }
+        
+        .bento-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .bento-item:hover .bento-image {
+            transform: scale(1.05);
+        }
+        
+        .bento-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+            padding: 40px;
             display: flex;
-            animation: fastScroll 25s linear infinite;
-            gap: 40px;
+            flex-direction: column;
+            justify-content: flex-end;
         }
         
-        @keyframes fastScroll {
+        .bento-country {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .bento-stat {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .bento-detail {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .bento-content {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .bento-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, white 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bento-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Services Marquee */
+        .services-section {
+            padding: 150px 0;
+            background: white;
+            overflow: hidden;
+        }
+        
+        .services-header {
+            padding: 0 60px;
+            margin-bottom: 100px;
+        }
+        
+        .service-track {
+            display: flex;
+            gap: 30px;
+            animation: marquee 40s linear infinite;
+            will-change: transform;
+        }
+        
+        @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
         
+        .service-card {
+            min-width: 450px;
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .service-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .service-number {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .service-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+        }
+        
+        .service-card:hover .service-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Genres Flow */
+        .genres-section {
+            padding: 100px 0;
+            background: var(--secondary);
+        }
+        
+        .genres-track {
+            display: flex;
+            gap: 20px;
+            animation: marquee 35s linear infinite;
+        }
+        
         .genre-pill {
-            padding: 20px 45px;
-            background: linear-gradient(135deg, var(--slate), var(--steel));
-            border: 1px solid var(--fog);
+            padding: 20px 40px;
+            background: white;
             border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .genre-pill:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Magnetic CTA */
+        .cta-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 60px;
+            background: white;
+            position: relative;
+        }
+        
+        .cta-title {
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .magnetic-btn {
+            padding: 25px 60px;
             font-size: 1.1rem;
             font-weight: 700;
-            color: #fff;
-            white-space: nowrap;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            border-radius: 60px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
         
-        .genre-pill:hover {
-            background: var(--electric);
-            color: var(--void);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px var(--electric-glow);
-        }
-        
-        /* Process Reimagined */
-        .process-elevated {
-            padding: 150px 40px;
-            background: linear-gradient(180deg, var(--void) 0%, var(--carbon) 100%);
-        }
-        
-        .process-timeline {
-            max-width: 1200px;
-            margin: 80px auto 0;
-            position: relative;
-        }
-        
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--electric), transparent);
-            transform: translateX(-50%);
-        }
-        
-        .process-phase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 100px;
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .process-phase.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .process-phase:nth-child(even) {
-            direction: rtl;
-        }
-        
-        .process-phase:nth-child(even) .phase-content {
-            direction: ltr;
-        }
-        
-        .phase-number-wrap {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
-        
-        .phase-number {
-            width: 80px;
-            height: 80px;
-            background: var(--electric);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--void);
-            box-shadow: 0 0 0 8px var(--carbon), 0 0 40px var(--electric-glow);
-            transition: all 0.4s ease;
-        }
-        
-        .process-phase:hover .phase-number {
-            transform: scale(1.2) rotate(360deg);
-        }
-        
-        .phase-content {
-            background: linear-gradient(135deg, var(--slate), var(--carbon));
-            border: 1px solid var(--fog);
-            border-radius: 16px;
-            padding: 50px;
-            transition: all 0.4s ease;
-        }
-        
-        .process-phase:hover .phase-content {
-            border-color: var(--electric);
-            box-shadow: 0 15px 50px var(--electric-glow);
-        }
-        
-        .phase-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .phase-description {
-            font-size: 1.1rem;
-            color: var(--mist);
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-        
-        .phase-bullets {
-            list-style: none;
-        }
-        
-        .phase-bullets li {
-            padding: 12px 0 12px 30px;
-            position: relative;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease;
-        }
-        
-        .phase-bullets li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--electric);
-            font-weight: 900;
-            font-size: 1.2rem;
-        }
-        
-        .phase-bullets li:hover {
-            color: #fff;
-            padding-left: 35px;
-        }
-        
-        /* CTA Power */
-        .cta-power {
-            padding: 180px 40px;
-            text-align: center;
-            background: radial-gradient(circle at center, var(--carbon) 0%, var(--void) 70%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-power::before {
-            content: '';
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--electric-glow), transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulseRing 4s ease-out infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes pulseRing {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-        
-        .cta-headline {
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cta-subline {
-            font-size: 1.5rem;
-            color: var(--mist);
-            margin-bottom: 80px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cta-actions {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .btn-action {
-            padding: 25px 60px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-action::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--electric);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.5s ease;
-            z-index: -1;
-        }
-        
-        .btn-action:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
         .btn-primary {
-            background: var(--electric);
-            color: var(--void);
-            border: 2px solid var(--electric);
-            box-shadow: 0 10px 40px var(--electric-glow);
+            background: var(--primary);
+            color: white;
         }
         
         .btn-primary:hover {
-            background: transparent;
-            color: var(--electric);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px var(--electric-glow);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
         
         .btn-secondary {
             background: transparent;
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
         
         .btn-secondary:hover {
-            border-color: var(--electric);
-            color: var(--electric);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
         }
         
-        .portfolio-link-wrap {
-            margin-top: 80px;
-            position: relative;
-            z-index: 1;
+        .cta-footer {
+            margin-top: 100px;
         }
         
         .portfolio-link {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 35px;
-            border: 1px solid var(--fog);
-            border-radius: 8px;
-            color: var(--mist);
+            padding: 15px 30px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
             text-decoration: none;
+            color: var(--text-dim);
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         
         .portfolio-link:hover {
-            border-color: var(--electric);
-            color: var(--electric);
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px var(--electric-glow);
         }
         
         /* Footer */
         .footer {
-            padding: 60px 40px;
+            padding: 80px 60px;
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
             text-align: center;
-            border-top: 1px solid var(--fog);
-            color: rgba(255, 255, 255, 0.4);
             font-size: 0.85rem;
             letter-spacing: 0.1em;
         }
         
+        /* Parallax Images */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-image {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
         /* Responsive */
-        @media (max-width: 1024px) {
-            .network-split {
-                grid-template-columns: 1fr;
-                min-height: auto;
+        @media (max-width: 1200px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .territory {
-                min-height: 60vh;
-            }
-            
-            .process-timeline::before {
-                left: 40px;
-            }
-            
-            .process-phase {
-                grid-template-columns: 1fr;
-                padding-left: 100px;
-            }
-            
-            .process-phase:nth-child(even) {
-                direction: ltr;
-            }
-            
-            .phase-number-wrap {
-                left: 40px;
-                transform: translate(0, -50%);
+            .bento-large,
+            .bento-wide,
+            .bento-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+                min-height: 350px;
             }
         }
         
         @media (max-width: 768px) {
-            .hero-proof {
-                gap: 50px;
+            body {
+                cursor: auto;
             }
             
-            .metric-number {
-                font-size: 4rem;
+            .cursor,
+            .cursor-follower {
+                display: none;
             }
             
-            .territory-name {
-                font-size: 3rem;
+            .hero-full,
+            .bento-section,
+            .services-header,
+            .cta-section {
+                padding: 80px 30px;
             }
             
-            .stats-showcase {
-                grid-template-columns: 1fr;
+            .hero-metrics {
                 gap: 40px;
+                flex-wrap: wrap;
             }
             
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-track,
             .genres-track {
-                animation-duration: 20s;
+                animation-duration: 25s;
             }
             
-            .cta-actions {
-                flex-direction: column;
-                align-items: center;
+            .service-card {
+                min-width: 320px;
             }
             
-            .btn-action {
-                width: 100%;
-                max-width: 350px;
+            .scroll-indicator {
+                left: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="vinyl-bg"></canvas>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     
-    <div class="container">
-        <!-- Hero Impact -->
-        <section class="hero-impact">
-            <img src="logo.svg" alt="Conciencia Sonora" class="logo-hero" id="logo">
-            <h1 class="hero-statement">De México<br>a España</h1>
-            <p class="hero-punch">
-                Red profesional de booking. 400+ shows ejecutados.<br>
-                Construcción de carreras, no eventos aislados.
-            </p>
-            <div class="hero-proof">
-                <div class="proof-metric">
-                    <span class="metric-number">400+</span>
-                    <span class="metric-label">Shows</span>
-                </div>
-                <div class="proof-metric">
-                    <span class="metric-number">300+</span>
-                    <span class="metric-label">Venues</span>
-                </div>
-                <div class="proof-metric">
-                    <span class="metric-number">6</span>
-                    <span class="metric-label">Países</span>
-                </div>
-            </div>
-            <div class="scroll-prompt">↓ Explora</div>
-        </section>
+    <!-- Hero -->
+    <section class="hero-full">
+        <img src="logo.svg" alt="Conciencia Sonora" class="logo-float">
         
-        <!-- Network Split -->
-        <section class="network-split">
-            <div class="territory">
-                <img src="img/mexico.jpg" alt="México" class="territory-image">
-                <div class="territory-overlay">
-                    <span class="territory-flag">🇲🇽</span>
-                    <h2 class="territory-name">MÉXICO</h2>
-                    <div class="territory-stats">+200 Venues</div>
-                    <div class="territory-cities">CDMX · Monterrey · Guadalajara</div>
-                </div>
-            </div>
-            <div class="territory">
-                <img src="img/espana.jpg" alt="España" class="territory-image">
-                <div class="territory-overlay">
-                    <span class="territory-flag">🇪🇸</span>
-                    <h2 class="territory-name">ESPAÑA</h2>
-                    <div class="territory-stats">+30 Venues</div>
-                    <div class="territory-cities">Barcelona · Madrid · Valencia</div>
-                </div>
-            </div>
-        </section>
+        <h1 class="hero-title">
+            <span>México</span>
+            <span>España</span>
+        </h1>
         
-        <!-- Power Stats -->
-        <section class="power-stats">
-            <div class="section-intro">
-                <div class="section-tag">La Red</div>
-                <h2 class="section-headline">Infraestructura Real</h2>
-            </div>
-            <div class="stats-showcase">
-                <div class="stat-card" data-observe>
-                    <span class="stat-icon">🎸</span>
-                    <div class="stat-value">Todos</div>
-                    <div class="stat-description">Géneros musicales. De reggaetón a jazz, sin límites creativos.</div>
-                </div>
-                <div class="stat-card" data-observe>
-                    <span class="stat-icon">🌎</span>
-                    <div class="stat-value">2</div>
-                    <div class="stat-description">Continentes conectados. Expertise transcontinental verificado.</div>
-                </div>
-                <div class="stat-card" data-observe>
-                    <span class="stat-icon">🔥</span>
-                    <div class="stat-value">8+</div>
-                    <div class="stat-description">Años en la industria. Relaciones consolidadas, no contactos fríos.</div>
-                </div>
-                <div class="stat-card" data-observe>
-                    <span class="stat-icon">🎯</span>
-                    <div class="stat-value">100%</div>
-                    <div class="stat-description">Enfoque personalizado. Tu proyecto es único, la estrategia también.</div>
-                </div>
-            </div>
-        </section>
+        <p class="hero-subtitle">
+            Red de booking entre dos territorios. Construcción de carreras, no eventos aislados.
+        </p>
         
-        <!-- Genres Flow -->
-        <section class="genres-flow">
-            <div class="section-intro">
-                <div class="section-tag">Portfolio Sonoro</div>
+        <div class="hero-metrics">
+            <div class="metric">
+                <div class="metric-number">400+</div>
+                <div class="metric-label">Shows</div>
             </div>
-            <div class="genres-track">
-                <span class="genre-pill">Reggaetón</span>
-                <span class="genre-pill">Electrónica</span>
-                <span class="genre-pill">Rock</span>
-                <span class="genre-pill">Indie</span>
-                <span class="genre-pill">Hip Hop</span>
-                <span class="genre-pill">Salsa</span>
-                <span class="genre-pill">Jazz</span>
-                <span class="genre-pill">Regional</span>
-                <span class="genre-pill">Pop</span>
-                <span class="genre-pill">Alternativo</span>
-                <span class="genre-pill">R&B</span>
-                <span class="genre-pill">Fusión</span>
-                <!-- Duplicate for seamless loop -->
-                <span class="genre-pill">Reggaetón</span>
-                <span class="genre-pill">Electrónica</span>
-                <span class="genre-pill">Rock</span>
-                <span class="genre-pill">Indie</span>
-                <span class="genre-pill">Hip Hop</span>
-                <span class="genre-pill">Salsa</span>
-                <span class="genre-pill">Jazz</span>
-                <span class="genre-pill">Regional</span>
-                <span class="genre-pill">Pop</span>
-                <span class="genre-pill">Alternativo</span>
-                <span class="genre-pill">R&B</span>
-                <span class="genre-pill">Fusión</span>
+            <div class="metric">
+                <div class="metric-number">300+</div>
+                <div class="metric-label">Venues</div>
             </div>
-        </section>
+            <div class="metric">
+                <div class="metric-number">6</div>
+                <div class="metric-label">Países</div>
+            </div>
+        </div>
         
-        <!-- Process Elevated -->
-        <section class="process-elevated">
-            <div class="section-intro">
-                <div class="section-tag">Metodología</div>
-                <h2 class="section-headline">Cómo Construimos Éxito</h2>
-            </div>
-            <div class="process-timeline">
-                <div class="process-phase" data-observe>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Estrategia</h3>
-                        <p class="phase-description">
-                            Análisis profundo del proyecto: sonido, mercado, audiencia. Sin estrategia clara, no hay booking inteligente.
-                        </p>
-                        <ul class="phase-bullets">
-                            <li>Evaluación de propuesta artística y diferenciadores</li>
-                            <li>Mapeo de audiencia y territorios objetivo</li>
-                            <li>Definición de KPIs y objetivos medibles</li>
-                        </ul>
-                    </div>
-                    <div class="phase-number-wrap">
-                        <div class="phase-number">1</div>
-                    </div>
-                    <div></div>
-                </div>
-                
-                <div class="process-phase" data-observe>
-                    <div></div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Booking</h3>
-                        <p class="phase-description">
-                            Conexión directa con nuestra red de +300 venues. Negociación profesional, términos claros, fechas estratégicas.
-                        </p>
-                        <ul class="phase-bullets">
-                            <li>Selección de venues alineados con tu propuesta</li>
-                            <li>Negociación de cachet y condiciones óptimas</li>
-                            <li>Estructuración de tours multi-ciudad rentables</li>
-                        </ul>
-                    </div>
-                    <div class="phase-number-wrap">
-                        <div class="phase-number">2</div>
-                    </div>
-                </div>
-                
-                <div class="process-phase" data-observe>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Producción</h3>
-                        <p class="phase-description">
-                            Gestión end-to-end: técnico, logístico, operativo. Tú te enfocas en el show, nosotros en que todo funcione.
-                        </p>
-                        <ul class="phase-bullets">
-                            <li>Coordinación de riders técnicos y backline</li>
-                            <li>Logística completa: transporte, hospedaje, crew</li>
-                            <li>Supervisión en sitio y resolución en tiempo real</li>
-                        </ul>
-                    </div>
-                    <div class="phase-number-wrap">
-                        <div class="phase-number">3</div>
-                    </div>
-                    <div></div>
-                </div>
-                
-                <div class="process-phase" data-observe>
-                    <div></div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Crecimiento</h3>
-                        <p class="phase-description">
-                            Post-mortems, análisis de métricas, planificación de siguientes pasos. Construcción de carrera, no shows aislados.
-                        </p>
-                        <ul class="phase-bullets">
-                            <li>Evaluación de ROI y métricas por presentación</li>
-                            <li>Estrategia de expansión y escalamiento territorial</li>
-                            <li>Construcción de relaciones de largo plazo</li>
-                        </ul>
-                    </div>
-                    <div class="phase-number-wrap">
-                        <div class="phase-number">4</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="scroll-indicator">
+            Scroll
+        </div>
+    </section>
+    
+    <!-- Bento Grid -->
+    <section class="bento-section">
+        <div class="section-header">
+            <div class="section-tag">La Red</div>
+            <h2 class="section-title">Dos mercados,<br>una operación</h2>
+        </div>
         
-        <!-- CTA Power -->
-        <section class="cta-power">
-            <h2 class="cta-headline">¿Hablamos?</h2>
-            <p class="cta-subline">
-                Si estás listo para profesionalizar tu carrera y construir de verdad, conectemos.
-            </p>
-            <div class="cta-actions">
-                <a href="mailto:emc121091@me.com?subject=Conversación%20Booking&body=Hola,%20quiero%20hablar%20sobre%20estrategia%20de%20booking%20para%20mi%20proyecto." class="btn-action btn-primary">
-                    Email
-                </a>
-                <a href="https://wa.me/525512478139?text=Hola,%20quiero%20hablar%20sobre%20booking%20profesional%20con%20Conciencia%20Sonora." target="_blank" class="btn-action btn-secondary">
-                    WhatsApp
-                </a>
+        <div class="bento-grid">
+            <div class="bento-item bento-large parallax-container">
+                <img src="img/mexico.jpg" alt="México" class="bento-image parallax-image">
+                <div class="bento-overlay">
+                    <div class="bento-country">México</div>
+                    <div class="bento-stat">200+</div>
+                    <div class="bento-detail">Venues activos</div>
+                    <div class="bento-detail" style="margin-top: 10px; font-size: 0.9rem;">CDMX · Monterrey · Guadalajara</div>
+                </div>
             </div>
-            <div class="portfolio-link-wrap">
-                <a href="https://edumecar.github.io/portfolio/" target="_blank" class="portfolio-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                    </svg>
-                    Ver Portfolio
-                </a>
+            
+            <div class="bento-item bento-wide">
+                <div class="bento-content">
+                    <div class="bento-number">8+</div>
+                    <div class="bento-label">Años en la industria</div>
+                </div>
             </div>
-        </section>
+            
+            <div class="bento-item bento-tall parallax-container">
+                <img src="img/espana.jpg" alt="España" class="bento-image parallax-image">
+                <div class="bento-overlay">
+                    <div class="bento-country">España</div>
+                    <div class="bento-stat">30+</div>
+                    <div class="bento-detail">Venues activos</div>
+                    <div class="bento-detail" style="margin-top: 10px; font-size: 0.9rem;">Barcelona · Madrid · Valencia</div>
+                </div>
+            </div>
+            
+            <div class="bento-item">
+                <div class="bento-content">
+                    <div class="bento-number">100%</div>
+                    <div class="bento-label">Personalizado</div>
+                </div>
+            </div>
+            
+            <div class="bento-item">
+                <div class="bento-content">
+                    <div class="bento-number">12</div>
+                    <div class="bento-label">Géneros musicales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Marquee -->
+    <section class="services-section">
+        <div class="services-header">
+            <div class="section-tag">Qué hacemos</div>
+            <h2 class="section-title">Servicios</h2>
+        </div>
         
-        <footer class="footer">
-            Conciencia Sonora · Elite Booking Network · CDMX ↔ Barcelona · 2024
-        </footer>
-    </div>
+        <div class="service-track">
+            <div class="service-card">
+                <div class="service-number">[01]</div>
+                <h3 class="service-title">Booking & Giras</h3>
+                <p class="service-description">
+                    Conectamos tu proyecto con venues verificados. Negociación directa, términos claros, fechas estratégicas.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[02]</div>
+                <h3 class="service-title">Producción</h3>
+                <p class="service-description">
+                    Gestión técnica y logística completa. Tú te enfocas en el show, nosotros en que funcione todo.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[03]</div>
+                <h3 class="service-title">Estrategia</h3>
+                <p class="service-description">
+                    Planificación de carrera a mediano y largo plazo. De dónde vienes, a dónde vas, cómo llegamos.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[04]</div>
+                <h3 class="service-title">Expansión</h3>
+                <p class="service-description">
+                    Si tocas en México, te llevamos a España. Si estás en España, abrimos México. Ambas direcciones.
+                </p>
+            </div>
+            
+            <!-- Duplicate for seamless loop -->
+            <div class="service-card">
+                <div class="service-number">[01]</div>
+                <h3 class="service-title">Booking & Giras</h3>
+                <p class="service-description">
+                    Conectamos tu proyecto con venues verificados. Negociación directa, términos claros, fechas estratégicas.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[02]</div>
+                <h3 class="service-title">Producción</h3>
+                <p class="service-description">
+                    Gestión técnica y logística completa. Tú te enfocas en el show, nosotros en que funcione todo.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[03]</div>
+                <h3 class="service-title">Estrategia</h3>
+                <p class="service-description">
+                    Planificación de carrera a mediano y largo plazo. De dónde vienes, a dónde vas, cómo llegamos.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">[04]</div>
+                <h3 class="service-title">Expansión</h3>
+                <p class="service-description">
+                    Si tocas en México, te llevamos a España. Si estás en España, abrimos México. Ambas direcciones.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Genres -->
+    <section class="genres-section">
+        <div class="genres-track">
+            <span class="genre-pill">Reggaetón</span>
+            <span class="genre-pill">Electrónica</span>
+            <span class="genre-pill">Rock</span>
+            <span class="genre-pill">Indie</span>
+            <span class="genre-pill">Hip Hop</span>
+            <span class="genre-pill">Salsa</span>
+            <span class="genre-pill">Jazz</span>
+            <span class="genre-pill">Regional</span>
+            <span class="genre-pill">Pop</span>
+            <span class="genre-pill">Alternativo</span>
+            <span class="genre-pill">R&B</span>
+            <span class="genre-pill">Fusión</span>
+            <!-- Duplicate -->
+            <span class="genre-pill">Reggaetón</span>
+            <span class="genre-pill">Electrónica</span>
+            <span class="genre-pill">Rock</span>
+            <span class="genre-pill">Indie</span>
+            <span class="genre-pill">Hip Hop</span>
+            <span class="genre-pill">Salsa</span>
+            <span class="genre-pill">Jazz</span>
+            <span class="genre-pill">Regional</span>
+            <span class="genre-pill">Pop</span>
+            <span class="genre-pill">Alternativo</span>
+            <span class="genre-pill">R&B</span>
+            <span class="genre-pill">Fusión</span>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="cta-title">Hablemos</h2>
+        
+        <div class="cta-buttons">
+            <a href="mailto:emc121091@me.com?subject=Consulta%20Booking&body=Hola,%20quiero%20hablar%20sobre%20mi%20proyecto." class="magnetic-btn btn-primary">
+                Email
+            </a>
+            <a href="https://wa.me/525512478139?text=Hola,%20quiero%20hablar%20sobre%20booking." target="_blank" class="magnetic-btn btn-secondary">
+                WhatsApp
+            </a>
+        </div>
+        
+        <div class="cta-footer">
+            <a href="https://edumecar.github.io/portfolio/" target="_blank" class="portfolio-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                Portfolio
+            </a>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        Conciencia Sonora · CDMX ↔ Barcelona · 2024
+    </footer>
     
     <script>
-        // Vinyl canvas background
-        const canvas = document.getElementById('vinyl-bg');
-        const ctx = canvas.getContext('2d');
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
         
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let followerX = 0, followerY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.3;
+            cursorY += (mouseY - cursorY) * 0.3;
+            
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateCursor);
         }
         
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        animateCursor();
         
-        let rotation = 0;
+        // Expand cursor on hover
+        const hoverElements = document.querySelectorAll('a, button, .bento-item, .service-card, .genre-pill');
         
-        function drawVinyl() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('expand');
+            });
             
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = Math.min(canvas.width, canvas.height) * 0.4;
-            
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.rotate(rotation);
-            
-            // Vinyl grooves
-            for (let i = radius; i > 60; i -= 6) {
-                ctx.beginPath();
-                ctx.arc(0, 0, i, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(29, 185, 84, 0.04)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-            
-            // Center label
-            ctx.beginPath();
-            ctx.arc(0, 0, 50, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(29, 185, 84, 0.06)';
-            ctx.fill();
-            
-            ctx.restore();
-            
-            rotation += 0.002;
-            requestAnimationFrame(drawVinyl);
-        }
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('expand');
+            });
+        });
         
-        drawVinyl();
-        
-        // Logo parallax
-        const logo = document.getElementById('logo');
+        // Parallax on images
+        const parallaxImages = document.querySelectorAll('.parallax-image');
         
         document.addEventListener('mousemove', (e) => {
             const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
             const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
             
-            logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            parallaxImages.forEach(img => {
+                img.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+            });
         });
         
-        // Intersection Observer
+        // Smooth scroll reveal
         const observerOptions = {
-            threshold: 0.15,
+            threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
         
-        document.querySelectorAll('[data-observe]').forEach(el => {
+        document.querySelectorAll('.bento-item, .service-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             observer.observe(el);
         });
         
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+        // Magnetic buttons
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
             });
         });
         
-        // Performance: pause animations when not visible
-        let isVisible = true;
+        // Performance optimization
+        let ticking = false;
         
-        document.addEventListener('visibilitychange', () => {
-            isVisible = !document.hidden;
-            if (!isVisible) {
-                rotation = 0;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
     </script>
