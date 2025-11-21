@@ -37,10 +37,24 @@
             overflow-x: hidden;
         }
         
+        /* Subtle vinyl background */
+        #vinyl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
         .wrap { 
             max-width: 1200px; 
             margin: 0 auto; 
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
         
         .header-main {
@@ -55,9 +69,10 @@
             width: 240px;
             height: auto;
             display: block;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             filter: drop-shadow(0 6px 20px rgba(29, 185, 84, 0.3));
             animation: gentleGlow 4s ease-in-out infinite;
+            cursor: pointer;
         }
         
         @keyframes gentleGlow {
@@ -72,7 +87,7 @@
         }
         
         .logo-brand:hover {
-            animation: vinylSpin 0.8s linear;
+            animation: vinylSpin 0.8s ease-out;
             filter: drop-shadow(0 10px 30px rgba(29, 185, 84, 0.7));
         }
         
@@ -86,6 +101,17 @@
             text-align: center;
             margin: 60px auto 80px auto;
             max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .headline-main {
@@ -122,6 +148,8 @@
             padding: 40px 20px;
             position: relative;
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
         }
         
         .hero-number:not(:last-child)::after {
@@ -135,7 +163,8 @@
         }
         
         .hero-number:hover {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(29, 185, 84, 0.05);
+            transform: translateY(-5px);
         }
         
         .number {
@@ -145,6 +174,7 @@
             display: block;
             line-height: 1;
             margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
         }
         
         .number-label {
@@ -182,6 +212,18 @@
             text-align: center;
             flex: 1;
             max-width: 300px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .country.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .country:hover {
+            transform: scale(1.05);
         }
         
         .country-flag {
@@ -192,6 +234,14 @@
             margin: 0 auto 20px;
             border: 3px solid var(--primary);
             box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            filter: grayscale(0.2);
+        }
+        
+        .country:hover .country-flag {
+            filter: grayscale(0);
+            box-shadow: 0 8px 40px rgba(29, 185, 84, 0.4);
+            transform: rotate(5deg);
         }
         
         .country-name {
@@ -206,6 +256,7 @@
             font-weight: 900;
             color: var(--primary);
             margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(29, 185, 84, 0.4);
         }
         
         .country-details {
@@ -229,6 +280,13 @@
             height: 8px;
             background: var(--primary);
             border-radius: 50%;
+            box-shadow: 0 0 10px rgba(29, 185, 84, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
         }
         
         /* GENRES PROFESSIONAL MARQUEE */
@@ -279,6 +337,10 @@
             animation: smoothMarquee 40s linear infinite;
         }
         
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        
         @keyframes smoothMarquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -291,6 +353,12 @@
             color: var(--light);
             white-space: nowrap;
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .genre-name:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
         }
         
         .genre-name::after {
@@ -329,6 +397,14 @@
             align-items: flex-start;
             margin-bottom: 60px;
             position: relative;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .process-step.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .process-step:not(:last-child)::after {
@@ -354,6 +430,13 @@
             color: var(--dark);
             margin-right: 30px;
             flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .step-number {
+            transform: scale(1.15) rotate(360deg);
+            box-shadow: 0 6px 30px rgba(29, 185, 84, 0.6);
         }
         
         .step-content {
@@ -366,6 +449,11 @@
             font-weight: 800;
             color: var(--light);
             margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .process-step:hover .step-title {
+            color: var(--primary);
         }
         
         .step-description {
@@ -376,11 +464,17 @@
         }
         
         .step-details {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(29, 185, 84, 0.05);
             padding: 20px;
             border-radius: 8px;
             border-left: 3px solid var(--primary);
             margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .step-details {
+            background: rgba(29, 185, 84, 0.1);
+            border-left-width: 5px;
         }
         
         .detail-item {
@@ -389,6 +483,12 @@
             margin-bottom: 8px;
             font-size: 0.95rem;
             color: var(--medium-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .detail-item:hover {
+            color: var(--light);
+            transform: translateX(5px);
         }
         
         .detail-item:before {
@@ -428,9 +528,30 @@
             text-decoration: none;
             border-radius: 6px;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             min-width: 200px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+        
+        .contact-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .contact-btn.primary {
@@ -439,8 +560,8 @@
         }
         
         .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(29, 185, 84, 0.4);
         }
         
         .contact-btn.primary:hover {
@@ -449,7 +570,6 @@
         }
         
         .contact-btn:not(.primary):hover {
-            background: var(--primary);
             color: var(--white);
         }
         
@@ -469,6 +589,7 @@
             border-color: var(--primary);
             color: var(--primary);
             transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(29, 185, 84, 0.2);
         }
         
         .professional-footer {
@@ -478,6 +599,30 @@
             text-align: center;
             color: var(--medium-gray);
             font-size: 0.9rem;
+        }
+        
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            opacity: 0;
+            mix-blend-mode: difference;
+        }
+        
+        .custom-cursor.active {
+            opacity: 0.6;
+        }
+        
+        .custom-cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(29, 185, 84, 0.2);
         }
         
         /* RESPONSIVE */
@@ -563,10 +708,16 @@
     </style>
 </head>
 <body>
+    <!-- Subtle vinyl canvas -->
+    <canvas id="vinyl-canvas"></canvas>
+    
+    <!-- Custom cursor -->
+    <div class="custom-cursor"></div>
+    
     <div class="wrap">
         <!-- LOGO -->
         <div class="header-main">
-            <img src="logo.svg" alt="Booking Plans" class="logo-brand"/>
+            <img src="logo.svg" alt="Booking Plans" class="logo-brand" id="logo"/>
         </div>
         
         <!-- HEADLINE -->
@@ -591,7 +742,7 @@
         <div class="geo-visual">
             <div class="geo-title">Conectando Territorios</div>
             <div class="geo-map">
-                <div class="country">
+                <div class="country" data-observe>
                     <img src="img/mexico.jpg" alt="México" class="country-flag">
                     <div class="country-name">México</div>
                     <div class="country-stats">+200 Venues</div>
@@ -600,7 +751,7 @@
                 
                 <div class="geo-connector"></div>
                 
-                <div class="country">
+                <div class="country" data-observe>
                     <img src="img/espana.jpg" alt="España" class="country-flag">
                     <div class="country-name">España</div>
                     <div class="country-stats">+30 Venues</div>
@@ -647,7 +798,7 @@
         <div class="journey-section">
             <div class="journey-title">Proceso de Arquitectura Musical</div>
             <div class="professional-process">
-                <div class="process-step">
+                <div class="process-step" data-observe>
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Análisis Estratégico del Proyecto</div>
@@ -663,7 +814,7 @@
                     </div>
                 </div>
                 
-                <div class="process-step">
+                <div class="process-step" data-observe>
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <div class="step-title">Selección de Escenarios Ideales</div>
@@ -679,7 +830,7 @@
                     </div>
                 </div>
                 
-                <div class="process-step">
+                <div class="process-step" data-observe>
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <div class="step-title">Producción y Logística Integral</div>
@@ -695,7 +846,7 @@
                     </div>
                 </div>
                 
-                <div class="process-step">
+                <div class="process-step" data-observe>
                     <div class="step-number">4</div>
                     <div class="step-content">
                         <div class="step-title">Seguimiento y Desarrollo Continuo</div>
@@ -736,5 +887,174 @@
             &copy; 2024 Booking Plans - Conciencia Sonora
         </div>
     </div>
+    
+    <script>
+        // Subtle vinyl canvas background
+        const canvas = document.getElementById('vinyl-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        let rotation = 0;
+        
+        function drawVinyl() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) * 0.35;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(rotation);
+            
+            // Draw subtle vinyl grooves
+            for (let i = radius; i > 50; i -= 8) {
+                ctx.beginPath();
+                ctx.arc(0, 0, i, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(29, 185, 84, 0.03)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+            
+            // Center dot
+            ctx.beginPath();
+            ctx.arc(0, 0, 40, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(29, 185, 84, 0.05)';
+            ctx.fill();
+            
+            ctx.restore();
+            
+            rotation += 0.001; // Very slow rotation
+            requestAnimationFrame(drawVinyl);
+        }
+        
+        drawVinyl();
+        
+        // Logo follows mouse subtly
+        const logo = document.getElementById('logo');
+        let logoMouseX = 0;
+        let logoMouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 15;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 15;
+            
+            logoMouseX += (moveX - logoMouseX) * 0.1;
+            logoMouseY += (moveY - logoMouseY) * 0.1;
+            
+            logo.style.transform = `translate(${logoMouseX}px, ${logoMouseY}px)`;
+        });
+        
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        let cursorX = 0;
+        let cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            
+            if (!cursor.classList.contains('active')) {
+                cursor.classList.add('active');
+            }
+        });
+        
+        // Cursor hover effects
+        const interactiveElements = document.querySelectorAll('a, button, .country, .process-step, .hero-number');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements with data-observe attribute
+        document.querySelectorAll('[data-observe]').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Animate hero numbers on load
+        const heroNumbers = document.querySelectorAll('.hero-number');
+        heroNumbers.forEach((num, index) => {
+            setTimeout(() => {
+                num.style.opacity = '1';
+                num.style.transform = 'translateY(0)';
+            }, 600 + (index * 200));
+        });
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add parallax effect to geo flags on scroll
+        let scrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            
+            const flags = document.querySelectorAll('.country-flag');
+            flags.forEach((flag, index) => {
+                const speed = index % 2 === 0 ? 0.05 : -0.05;
+                const rect = flag.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    flag.style.transform = `translateY(${scrollY * speed}px) rotate(0deg)`;
+                }
+            });
+        });
+        
+        // Add subtle glow effect to primary button
+        const primaryBtn = document.querySelector('.contact-btn.primary');
+        if (primaryBtn) {
+            setInterval(() => {
+                primaryBtn.style.boxShadow = `0 0 ${20 + Math.sin(Date.now() / 1000) * 10}px rgba(29, 185, 84, 0.4)`;
+            }, 50);
+        }
+        
+        // Performance optimization: Reduce animations on mobile
+        if (window.innerWidth <= 768) {
+            canvas.style.opacity = '0.04';
+            cursor.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
