@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Red de booking musical entre México y España. 5 años conectando artistas con promotores directos.">
-    <title>Conciencia Sonora - Booking México & España</title>
+    <title>Conciencia Sonora - Booking Internacional</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
@@ -37,6 +37,11 @@
             background: var(--accent);
             color: white;
         }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
         
         /* Navigation Minimal */
         .nav {
@@ -50,6 +55,13 @@
             align-items: center;
             z-index: 100;
             background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
         }
         
         .logo {
@@ -90,6 +102,7 @@
             padding: 0;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
         
         .hero-content {
@@ -118,11 +131,12 @@
             margin-bottom: 30px;
             opacity: 0;
             animation: fadeIn 0.8s ease 0.8s forwards;
+            color: white;
         }
         
         .hero-subtitle {
             font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-            color: var(--muted);
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 400;
             line-height: 1.6;
             opacity: 0;
@@ -134,7 +148,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--muted);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.8rem;
             z-index: 2;
             opacity: 0;
@@ -157,6 +171,19 @@
             height: 100%;
         }
         
+        /* Continent Labels */
+        .continent-label {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .america { top: 45%; left: 25%; }
+        .europe { top: 35%; right: 25%; }
+        
         /* Editorial Blocks */
         .editorial-block {
             max-width: 800px;
@@ -166,6 +193,7 @@
         
         .block-header {
             margin-bottom: 80px;
+            text-align: center;
         }
         
         .block-label {
@@ -189,6 +217,8 @@
             font-size: 1.3rem;
             color: var(--muted);
             line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         /* Block 1: El Sistema */
@@ -201,7 +231,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            align-items: center;
+            align-items: start;
         }
         
         .system-text {
@@ -211,6 +241,30 @@
         
         .system-text p {
             margin-bottom: 24px;
+        }
+        
+        .system-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--muted);
         }
         
         .system-bg {
@@ -233,6 +287,8 @@
             grid-template-columns: 1fr 1fr;
             gap: 0;
             border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
         }
         
         .market-side {
@@ -296,8 +352,8 @@
             content: '';
             position: absolute;
             top: 40px;
-            left: 0;
-            right: 0;
+            left: 10%;
+            right: 10%;
             height: 2px;
             background: var(--border);
             z-index: 1;
@@ -344,6 +400,8 @@
         .filters-content {
             font-size: 1.1rem;
             line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .filters-list {
@@ -458,12 +516,17 @@
             .final-cta {
                 padding: 80px 24px;
             }
+            
+            .system-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
         <img src="logo.svg" alt="Conciencia Sonora" class="logo">
         <a href="mailto:emc121091@me.com?subject=Primera%20llamada%20-%20Booking" class="nav-link">Agendar llamada</a>
     </nav>
@@ -471,15 +534,17 @@
     <!-- Hero with Map -->
     <section class="hero-map">
         <div class="hero-content">
-            <div class="hero-tag">México ↔ España / 5 años operando</div>
+            <div class="hero-tag">Red Internacional / 5 años operando</div>
             <h1 class="hero-title">Conciencia Sonora</h1>
             <p class="hero-subtitle">
-                Red de booking entre territorios. Conexión directa con promotores.
+                Conexión directa entre América y Europa. Booking sin intermediarios.
             </p>
         </div>
         
         <div class="map-container">
             <canvas id="intercontinental-map"></canvas>
+            <div class="continent-label america">AMÉRICA</div>
+            <div class="continent-label europe">EUROPA</div>
         </div>
         
         <div class="scroll-indicator">Scroll ↓</div>
@@ -489,24 +554,42 @@
     <section class="editorial-block block-system">
         <div class="block-header">
             <div class="block-label">El sistema</div>
-            <h2 class="block-title">Dos territorios. Una red.</h2>
+            <h2 class="block-title">Red transatlántica</h2>
+            <p class="block-subtitle">Infraestructura probada entre continentes</p>
         </div>
         
         <div class="system-content">
             <div class="system-text">
-                <p>Operamos booking entre México y España desde 2019. No es una agencia con "contactos". Es infraestructura: contacto directo con promotores, workflows documentados, experiencia en 500+ eventos.</p>
+                <p>Operamos booking internacional desde 2019. No es una agencia con "contactos". Es infraestructura: workflows documentados, experiencia en 500+ eventos, conexión directa con promotores.</p>
                 
-                <p><strong>México:</strong> CDMX como hub. Cobertura en Guadalajara y Monterrey.<br>
-                <strong>España:</strong> Base en Barcelona. Conexiones Madrid.</p>
+                <p><strong>América:</strong> CDMX (hub), Guadalajara, Monterrey, Bogotá<br>
+                <strong>Europa:</strong> Barcelona (base), Madrid, Lisboa</p>
                 
-                <p>El modelo: conectar artistas con promotores sin intermediarios. El resultado: de primer contacto a show en 4 semanas.</p>
+                <p>El modelo: conectar artistas con promotores sin capas intermediarias. El resultado: de primer contacto a show en 4 semanas.</p>
             </div>
             <div class="system-text">
                 <p>No trabajamos con "tarifas estándar". Cada negociación es según el nivel del artista, tracción comprobable y timing del mercado.</p>
                 
                 <p>Infraestructura probada: desde coordinación de visas hasta rider técnico, pagos internacionales y logística de backline.</p>
                 
-                <p>Focus en resultados medibles: shows ejecutados, pagos cumplidos, relaciones construidas.</p>
+                <div class="system-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Eventos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">7</div>
+                        <div class="stat-label">Ciudades</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Continentes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Semanas</div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -517,34 +600,34 @@
     <section class="editorial-block block-markets">
         <div class="block-header">
             <div class="block-label">Los mercados no son iguales</div>
-            <h2 class="block-title">México vs España: diferencias operativas</h2>
+            <h2 class="block-title">América vs Europa: diferencias operativas</h2>
             <p class="block-subtitle">Conocer esto no es opcional. Es supervivencia.</p>
         </div>
         
         <div class="markets-comparison">
             <div class="market-side mexico">
-                <div class="market-flag">🇲🇽</div>
-                <h3 class="market-title">México</h3>
+                <div class="market-flag">🇲🇽🇨🇴</div>
+                <h3 class="market-title">América</h3>
                 <ul class="market-features">
                     <li>Facturación opcional (90% no la pide)</li>
                     <li>Contratos verbales comunes</li>
                     <li>Pago en efectivo frecuente</li>
                     <li>Venta en puerta fuerte</li>
-                    <li>Capacidades: 100 a 5,000 personas</li>
-                    <li>Timing rápido: 2-3 semanas para confirmar</li>
+                    <li>Timing rápido: 2-3 semanas</li>
+                    <li>Flexibilidad en riders técnicos</li>
                 </ul>
             </div>
             
             <div class="market-side spain">
-                <div class="market-flag">🇪🇸</div>
-                <h3 class="market-title">España</h3>
+                <div class="market-flag">🇪🇸🇵🇹</div>
+                <h3 class="market-title">Europa</h3>
                 <ul class="market-features">
                     <li>Facturación obligatoria (IVA 21%)</li>
                     <li>Contratos siempre escritos</li>
                     <li>Transferencia bancaria</li>
                     <li>70-80% preventa online</li>
-                    <li>Capacidades: 150 a 3,000 personas</li>
-                    <li>Timing: 3-4 semanas para confirmar</li>
+                    <li>Timing: 3-4 semanas</li>
+                    <li>Riders técnicos estrictos</li>
                 </ul>
             </div>
         </div>
@@ -599,9 +682,10 @@
             <p><strong>Con quién trabajamos:</strong></p>
             
             <ul class="filters-list">
-                <li>Artistas con tracción verificable</li>
-                <li>Si tienes oyentes activos en CDMX, Guadalajara, Monterrey o Barcelona, y puedes mostrar data, hablemos</li>
-                <li>Proyectos con material profesional: EPK, rider técnico, links funcionando</li>
+                <li>Artistas con tracción verificable en CDMX, Guadalajara, Monterrey, Bogotá, Barcelona, Madrid o Lisboa</li>
+                <li>Proyectos que pueden mostrar data de audiencia activa</li>
+                <li>Material profesional: EPK, rider técnico, links funcionando</li>
+                <li>Estrategia a 6-12 meses, no "una fecha sola"</li>
             </ul>
             
             <p><strong>Si no tienes tracción todavía, te diremos qué necesitas construir antes de intentar fechas.</strong></p>
@@ -640,9 +724,19 @@
     </footer>
     
     <script>
-        // Enhanced Tech Style Map
+        // Enhanced Tech Style Map with Continents
         const canvas = document.getElementById('intercontinental-map');
         const ctx = canvas.getContext('2d');
+        
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
         
         // Responsive canvas
         function resizeCanvas() {
@@ -657,23 +751,24 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        // Enhanced node data with more tech style
+        // Enhanced node data with symmetrical distribution
         const nodes = [
+            // América - symmetrical left side
             { 
                 id: 'cdmx', 
                 x: 0.25, 
                 y: 0.55, 
-                size: 14, 
+                size: 16, 
                 label: 'CDMX', 
                 detail: 'HUB PRINCIPAL · 500+ EVENTOS',
                 color: '#2563eb',
-                connections: ['gdl', 'mty', 'bcn']
+                connections: ['gdl', 'mty', 'bogota', 'bcn']
             },
             { 
                 id: 'gdl', 
                 x: 0.20, 
                 y: 0.48, 
-                size: 10, 
+                size: 12, 
                 label: 'GDL', 
                 detail: 'INDIEROCK · ELECTRÓNICA',
                 color: '#2563eb',
@@ -683,21 +778,53 @@
                 id: 'mty', 
                 x: 0.28, 
                 y: 0.45, 
-                size: 10, 
+                size: 12, 
                 label: 'MTY', 
                 detail: 'ROCK · METAL · NORTEÑO',
                 color: '#2563eb',
                 connections: ['cdmx']
             },
             { 
-                id: 'bcn', 
-                x: 0.75, 
-                y: 0.35, 
-                size: 14, 
-                label: 'BCN', 
-                detail: 'BASE EUROPEA · CONEXIÓN EU',
+                id: 'bogota', 
+                x: 0.23, 
+                y: 0.65, 
+                size: 12, 
+                label: 'BOG', 
+                detail: 'HUB SUR · CONEXIÓN LATAM',
                 color: '#2563eb',
                 connections: ['cdmx']
+            },
+            
+            // Europa - symmetrical right side
+            { 
+                id: 'bcn', 
+                x: 0.75, 
+                y: 0.45, 
+                size: 16, 
+                label: 'BCN', 
+                detail: 'BASE EUROPEA · CONEXIÓN EU',
+                color: '#10b981',
+                connections: ['cdmx', 'madrid', 'lisboa']
+            },
+            { 
+                id: 'madrid', 
+                x: 0.70, 
+                y: 0.52, 
+                size: 12, 
+                label: 'MAD', 
+                detail: 'CAPITAL · ESCENA INDIE',
+                color: '#10b981',
+                connections: ['bcn']
+            },
+            { 
+                id: 'lisboa', 
+                x: 0.65, 
+                y: 0.48, 
+                size: 12, 
+                label: 'LIS', 
+                detail: 'ATLÁNTICO · ESCENA EMERGENTE',
+                color: '#10b981',
+                connections: ['bcn']
             }
         ];
         
@@ -750,18 +877,50 @@
         // Initialize particles for all connections
         nodes.forEach(node => {
             node.connections.forEach(connection => {
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 4; i++) {
                     setTimeout(() => {
                         particles.push(new Particle(node.id, connection));
-                    }, i * 800);
+                    }, i * 1000);
                 }
             });
         });
         
+        // Draw continent outlines
+        function drawContinents(ctx, width, height) {
+            // Simple continent shapes (stylized)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([10, 5]);
+            
+            // América (left side)
+            ctx.beginPath();
+            ctx.moveTo(width * 0.1, height * 0.3);
+            ctx.lineTo(width * 0.15, height * 0.4);
+            ctx.lineTo(width * 0.12, height * 0.6);
+            ctx.lineTo(width * 0.2, height * 0.7);
+            ctx.lineTo(width * 0.3, height * 0.65);
+            ctx.lineTo(width * 0.35, height * 0.5);
+            ctx.lineTo(width * 0.3, height * 0.35);
+            ctx.stroke();
+            
+            // Europa (right side)
+            ctx.beginPath();
+            ctx.moveTo(width * 0.6, height * 0.35);
+            ctx.lineTo(width * 0.65, height * 0.4);
+            ctx.lineTo(width * 0.7, height * 0.5);
+            ctx.lineTo(width * 0.75, height * 0.55);
+            ctx.lineTo(width * 0.8, height * 0.5);
+            ctx.lineTo(width * 0.85, height * 0.45);
+            ctx.lineTo(width * 0.8, height * 0.35);
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+        }
+        
         // Draw grid background
         function drawGrid(ctx, width, height) {
             const gridSize = 40;
-            ctx.strokeStyle = 'rgba(37, 99, 235, 0.05)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
             ctx.lineWidth = 1;
             
             // Vertical lines
@@ -791,8 +950,11 @@
             // Draw subtle grid
             drawGrid(ctx, width, height);
             
+            // Draw continent outlines
+            drawContinents(ctx, width, height);
+            
             // Draw connections with tech style
-            ctx.strokeStyle = 'rgba(37, 99, 235, 0.15)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
             ctx.lineWidth = 2;
             ctx.setLineDash([5, 5]);
             
@@ -852,10 +1014,10 @@
                 ctx.fill();
                 
                 // Node label (tech style)
-                ctx.fillStyle = 'rgba(37, 99, 235, 0.9)';
-                ctx.font = '600 12px Inter';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.font = '600 14px Inter';
                 ctx.textAlign = 'center';
-                ctx.fillText(node.label, x, y + node.size + 20);
+                ctx.fillText(node.label, x, y + node.size + 25);
             });
             
             requestAnimationFrame(animate);
