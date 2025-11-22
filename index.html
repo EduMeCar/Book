@@ -21,14 +21,14 @@
             --accent-light: #3b82f6;
             --muted: #737373;
             --border: #e5e5e5;
-            --success: #10b981;
         }
         
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--paper);
             color: var(--ink);
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 18px;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -38,7 +38,7 @@
             color: white;
         }
         
-        /* Navigation */
+        /* Navigation Minimal */
         .nav {
             position: fixed;
             top: 0;
@@ -49,7 +49,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: linear-gradient(180deg, var(--paper) 0%, transparent 100%);
+            background: transparent;
         }
         
         .logo {
@@ -80,21 +80,24 @@
             transform: translateY(-2px);
         }
         
-        /* Hero with Map */
+        /* Hero Map Fullscreen */
         .hero-map {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 100px 40px 60px;
+            padding: 0;
             position: relative;
+            overflow: hidden;
         }
         
         .hero-content {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             max-width: 900px;
+            z-index: 2;
+            position: relative;
         }
         
         .hero-tag {
@@ -126,12 +129,25 @@
             animation: fadeIn 0.8s ease 1s forwards;
         }
         
-        /* Map Container */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--muted);
+            font-size: 0.8rem;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1.4s forwards;
+        }
+        
+        /* Map Container Tech Style */
         .map-container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-            height: 500px;
-            position: relative;
+            height: 100%;
             opacity: 0;
             animation: fadeIn 1s ease 1.2s forwards;
         }
@@ -141,315 +157,254 @@
             height: 100%;
         }
         
-        .node-tooltip {
-            position: absolute;
-            background: var(--ink);
-            color: var(--paper);
-            padding: 16px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            white-space: nowrap;
-            z-index: 10;
-        }
-        
-        .node-tooltip.active {
-            opacity: 1;
-        }
-        
-        .tooltip-city {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-        
-        .tooltip-detail {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
-        }
-        
-        /* Territory Grid */
-        .territories {
-            padding: 120px 40px;
-            background: white;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
+        /* Editorial Blocks */
+        .editorial-block {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: 120px 40px;
         }
         
-        .section-label {
+        .block-header {
+            margin-bottom: 80px;
+        }
+        
+        .block-label {
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--accent);
             margin-bottom: 16px;
             letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+        .block-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 900;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         
-        .section-desc {
-            font-size: 1.1rem;
+        .block-subtitle {
+            font-size: 1.3rem;
             color: var(--muted);
             line-height: 1.7;
         }
         
-        .territory-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2px;
-            background: var(--border);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .territory-card {
+        /* Block 1: El Sistema */
+        .block-system {
             background: white;
-            padding: 60px 50px;
-            transition: all 0.4s ease;
-            cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
         
-        .territory-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent);
-            transform: scaleY(0);
-            transition: transform 0.4s ease;
+        .system-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
         
-        .territory-card:hover::before {
-            transform: scaleY(1);
+        .system-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
-        .territory-card:hover {
-            background: var(--paper);
-        }
-        
-        .territory-name {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-        
-        .territory-desc {
-            font-size: 1rem;
-            color: var(--muted);
-            line-height: 1.7;
+        .system-text p {
             margin-bottom: 24px;
         }
         
-        .territory-specs {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--muted);
+        .system-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(37, 99, 235, 0.03) 100%);
+            z-index: 0;
         }
         
-        .spec-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* Block 2: Los Mercados */
+        .block-markets {
+            background: var(--paper);
         }
         
-        .spec-item::before {
-            content: '•';
-            color: var(--accent);
-            font-weight: 900;
-        }
-        
-        /* How it works */
-        .how-it-works {
-            padding: 120px 40px;
-            background: var(--ink);
-            color: var(--paper);
-        }
-        
-        .process-grid {
+        .markets-comparison {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--border);
         }
         
-        .process-step {
-            text-align: center;
+        .market-side {
+            padding: 60px 40px;
+            position: relative;
         }
         
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
+        .market-side.mexico {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
+            border-right: 1px solid var(--border);
+        }
+        
+        .market-side.spain {
+            background: linear-gradient(135deg, transparent 0%, rgba(37, 99, 235, 0.02) 100%);
+        }
+        
+        .market-flag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.1;
+        }
+        
+        .market-title {
+            font-size: 2rem;
             font-weight: 900;
-            margin: 0 auto 24px;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
         }
         
-        .step-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+        .market-features {
+            list-style: none;
         }
         
-        .step-desc {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
+        .market-features li {
+            margin-bottom: 16px;
+            padding-left: 0;
+            position: relative;
         }
         
-        /* Who we work with */
-        .who-we-work {
-            padding: 120px 40px;
+        .market-features li::before {
+            content: "—";
+            color: var(--accent);
+            margin-right: 8px;
+        }
+        
+        /* Block 3: Timeline */
+        .block-timeline {
             background: white;
         }
         
-        .criteria-grid {
+        .timeline {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            position: relative;
         }
         
-        .criteria-card {
-            padding: 40px;
-            background: var(--paper);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            z-index: 1;
         }
         
-        .criteria-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        .timeline-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
-        .criteria-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
         }
         
-        .criteria-title {
-            font-size: 1.3rem;
+        .timeline-week {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 12px;
         }
         
-        .criteria-desc {
+        .timeline-desc {
             color: var(--muted);
             line-height: 1.7;
         }
         
-        /* CTA */
-        .cta-section {
-            padding: 140px 40px;
+        /* Block 4: Filtros */
+        .block-filters {
             background: var(--paper);
+        }
+        
+        .filters-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .filters-list {
+            margin: 40px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .filters-list li {
+            margin-bottom: 16px;
+            padding-left: 0;
+        }
+        
+        .filters-list li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: 900;
+            margin-right: 12px;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            background: var(--ink);
+            color: white;
+            padding: 140px 40px;
             text-align: center;
         }
         
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         .cta-title {
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 900;
             letter-spacing: -0.03em;
             margin-bottom: 30px;
-            line-height: 1.1;
+            line-height: 1.2;
         }
         
         .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+        
+        .contact-info {
+            margin-top: 60px;
+        }
+        
+        .contact-email {
             font-size: 1.3rem;
-            color: var(--muted);
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-        
-        .btn {
-            padding: 18px 45px;
-            font-size: 1rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background: var(--ink);
-            color: var(--paper);
-        }
-        
-        .btn-primary:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--ink);
-            border: 2px solid var(--ink);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--ink);
-            color: var(--paper);
-            transform: translateY(-3px);
-        }
-        
-        .portfolio-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--muted);
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
         
-        .portfolio-link:hover {
-            background: var(--ink);
-            color: var(--paper);
-            border-color: var(--ink);
-            transform: translateY(-2px);
+        .contact-whatsapp {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         /* Footer */
@@ -463,12 +418,27 @@
         
         /* Responsive */
         @media (max-width: 1024px) {
-            .territory-grid {
+            .system-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .markets-comparison {
                 grid-template-columns: 1fr;
             }
             
-            .map-container {
-                height: 600px;
+            .market-side.mexico {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            .timeline {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .timeline::before {
+                display: none;
             }
         }
         
@@ -477,35 +447,16 @@
                 padding: 20px 24px;
             }
             
-            .hero-map {
-                padding: 80px 24px 40px;
-            }
-            
-            .map-container {
-                height: 500px;
-            }
-            
-            .territories,
-            .how-it-works,
-            .who-we-work,
-            .cta-section {
+            .editorial-block {
                 padding: 80px 24px;
             }
             
-            .territory-card {
-                padding: 40px 30px;
+            .market-side {
+                padding: 40px 24px;
             }
             
-            .process-grid {
-                gap: 50px;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: stretch;
-                max-width: 350px;
-                margin-left: auto;
-                margin-right: auto;
+            .final-cta {
+                padding: 80px 24px;
             }
         }
     </style>
@@ -520,161 +471,167 @@
     <!-- Hero with Map -->
     <section class="hero-map">
         <div class="hero-content">
-            <div class="hero-tag">Booking transoceánico</div>
-            <h1 class="hero-title">México ↔ España</h1>
+            <div class="hero-tag">México ↔ España / 5 años operando</div>
+            <h1 class="hero-title">Conciencia Sonora</h1>
             <p class="hero-subtitle">
-                Red de booking entre territorios. 5 años conectando artistas con promotores directos. Sin intermediarios.
+                Red de booking entre territorios. Conexión directa con promotores.
             </p>
         </div>
         
         <div class="map-container">
             <canvas id="intercontinental-map"></canvas>
-            <div class="node-tooltip" id="tooltip">
-                <div class="tooltip-city"></div>
-                <div class="tooltip-detail"></div>
+        </div>
+        
+        <div class="scroll-indicator">Scroll ↓</div>
+    </section>
+    
+    <!-- Block 1: El Sistema -->
+    <section class="editorial-block block-system">
+        <div class="block-header">
+            <div class="block-label">El sistema</div>
+            <h2 class="block-title">Dos territorios. Una red.</h2>
+        </div>
+        
+        <div class="system-content">
+            <div class="system-text">
+                <p>Operamos booking entre México y España desde 2019. No es una agencia con "contactos". Es infraestructura: contacto directo con promotores, workflows documentados, experiencia en 500+ eventos.</p>
+                
+                <p><strong>México:</strong> CDMX como hub. Cobertura en Guadalajara y Monterrey.<br>
+                <strong>España:</strong> Base en Barcelona. Conexiones Madrid.</p>
+                
+                <p>El modelo: conectar artistas con promotores sin intermediarios. El resultado: de primer contacto a show en 4 semanas.</p>
+            </div>
+            <div class="system-text">
+                <p>No trabajamos con "tarifas estándar". Cada negociación es según el nivel del artista, tracción comprobable y timing del mercado.</p>
+                
+                <p>Infraestructura probada: desde coordinación de visas hasta rider técnico, pagos internacionales y logística de backline.</p>
+                
+                <p>Focus en resultados medibles: shows ejecutados, pagos cumplidos, relaciones construidas.</p>
+            </div>
+        </div>
+        
+        <div class="system-bg"></div>
+    </section>
+    
+    <!-- Block 2: Los Mercados -->
+    <section class="editorial-block block-markets">
+        <div class="block-header">
+            <div class="block-label">Los mercados no son iguales</div>
+            <h2 class="block-title">México vs España: diferencias operativas</h2>
+            <p class="block-subtitle">Conocer esto no es opcional. Es supervivencia.</p>
+        </div>
+        
+        <div class="markets-comparison">
+            <div class="market-side mexico">
+                <div class="market-flag">🇲🇽</div>
+                <h3 class="market-title">México</h3>
+                <ul class="market-features">
+                    <li>Facturación opcional (90% no la pide)</li>
+                    <li>Contratos verbales comunes</li>
+                    <li>Pago en efectivo frecuente</li>
+                    <li>Venta en puerta fuerte</li>
+                    <li>Capacidades: 100 a 5,000 personas</li>
+                    <li>Timing rápido: 2-3 semanas para confirmar</li>
+                </ul>
+            </div>
+            
+            <div class="market-side spain">
+                <div class="market-flag">🇪🇸</div>
+                <h3 class="market-title">España</h3>
+                <ul class="market-features">
+                    <li>Facturación obligatoria (IVA 21%)</li>
+                    <li>Contratos siempre escritos</li>
+                    <li>Transferencia bancaria</li>
+                    <li>70-80% preventa online</li>
+                    <li>Capacidades: 150 a 3,000 personas</li>
+                    <li>Timing: 3-4 semanas para confirmar</li>
+                </ul>
             </div>
         </div>
     </section>
     
-    <!-- Territories -->
-    <section class="territories">
-        <div class="section-header">
-            <div class="section-label">Territorios activos</div>
-            <h2 class="section-title">Dos mercados.<br>Una operación.</h2>
-            <p class="section-desc">
-                Contacto directo con promotores. De primer contacto a show: 4 semanas.
+    <!-- Block 3: Timeline -->
+    <section class="editorial-block block-timeline">
+        <div class="block-header">
+            <div class="block-label">Cómo trabajamos</div>
+            <h2 class="block-title">De lead a show en 4 semanas</h2>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-step">
+                <div class="timeline-marker"></div>
+                <div class="timeline-week">Semana 1</div>
+                <h3 class="timeline-title">Análisis</h3>
+                <p class="timeline-desc">Revisamos tracción. Oyentes activos en ciudades objetivo. Si no hay data, no hay show.</p>
+            </div>
+            
+            <div class="timeline-step">
+                <div class="timeline-marker"></div>
+                <div class="timeline-week">Semana 2</div>
+                <h3 class="timeline-title">Conexión</h3>
+                <p class="timeline-desc">Contacto directo con promotores. Negociamos según tu nivel. No hay "tarifa estándar".</p>
+            </div>
+            
+            <div class="timeline-step">
+                <div class="timeline-marker"></div>
+                <div class="timeline-week">Semana 3</div>
+                <h3 class="timeline-title">Producción</h3>
+                <p class="timeline-desc">Coordinamos rider técnico, logística, confirmaciones. Tú te enfocas en el show.</p>
+            </div>
+            
+            <div class="timeline-step">
+                <div class="timeline-marker"></div>
+                <div class="timeline-week">Semana 4</div>
+                <h3 class="timeline-title">Ejecución</h3>
+                <p class="timeline-desc">Show. Pago. Evaluación de siguiente paso.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Block 4: Filtros -->
+    <section class="editorial-block block-filters">
+        <div class="block-header">
+            <div class="block-label">Filtros</div>
+            <h2 class="block-title">Con quién funciona esto y con quién no</h2>
+        </div>
+        
+        <div class="filters-content">
+            <p><strong>Con quién trabajamos:</strong></p>
+            
+            <ul class="filters-list">
+                <li>Artistas con tracción verificable</li>
+                <li>Si tienes oyentes activos en CDMX, Guadalajara, Monterrey o Barcelona, y puedes mostrar data, hablemos</li>
+                <li>Proyectos con material profesional: EPK, rider técnico, links funcionando</li>
+            </ul>
+            
+            <p><strong>Si no tienes tracción todavía, te diremos qué necesitas construir antes de intentar fechas.</strong></p>
+            
+            <p><strong>No financiamos giras.<br>
+            No prometemos "llenar venues".<br>
+            No hacemos social media (tenemos freelancers si necesitas).</strong></p>
+            
+            <p>Hacemos booking, producción técnica, y estrategia territorial.</p>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Primera llamada: 30 minutos, sin costo</h2>
+            <p class="cta-subtitle">
+                Te preguntamos:<br>
+                - Links (Spotify, Instagram)<br>
+                - Ciudades donde tienes audiencia<br>
+                - Fechas disponibles<br>
+                - Presupuesto estimado<br><br>
+                Si tiene sentido, seguimos.<br>
+                Si no, te decimos por qué.
             </p>
-        </div>
-        
-        <div class="territory-grid">
-            <div class="territory-card">
-                <h3 class="territory-name">México</h3>
-                <p class="territory-desc">
-                    Hub en CDMX. Cobertura consolidada en Guadalajara y Monterrey.
-                </p>
-                <div class="territory-specs">
-                    <div class="spec-item">Capacidades: 100 a 5,000 personas</div>
-                    <div class="spec-item">Todos los géneros operativos</div>
-                    <div class="spec-item">Triángulo dorado activo</div>
-                </div>
-            </div>
             
-            <div class="territory-card">
-                <h3 class="territory-name">España</h3>
-                <p class="territory-desc">
-                    Base en Barcelona. Conexiones en Madrid.
-                </p>
-                <div class="territory-specs">
-                    <div class="spec-item">Capacidades: 150 a 3,000 personas</div>
-                    <div class="spec-item">Enfoque: indie, rock, electrónica, urbano</div>
-                    <div class="spec-item">Mercado europeo gateway</div>
-                </div>
+            <div class="contact-info">
+                <div class="contact-email">emc121091@me.com</div>
+                <div class="contact-whatsapp">WhatsApp: +52 55 1247 8139</div>
             </div>
-        </div>
-    </section>
-    
-    <!-- How it works -->
-    <section class="how-it-works">
-        <div class="section-header">
-            <div class="section-label" style="color: var(--accent);">Proceso</div>
-            <h2 class="section-title">De lead a show en 4 semanas</h2>
-            <p class="section-desc" style="color: rgba(255, 255, 255, 0.7);">
-                Sistema probado. Sin improvisación.
-            </p>
-        </div>
-        
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3 class="step-title">Análisis</h3>
-                <p class="step-desc">
-                    Revisamos tracción, audiencia activa en ciudades objetivo, y timing.
-                </p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3 class="step-title">Conexión</h3>
-                <p class="step-desc">
-                    Contacto directo con promotores. Negociamos términos según tu nivel.
-                </p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3 class="step-title">Producción</h3>
-                <p class="step-desc">
-                    Coordinamos logística técnica. Tú llegas, enchufas, tocas.
-                </p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3 class="step-title">Ejecución</h3>
-                <p class="step-desc">
-                    Show ejecutado. Pago confirmado. Evaluamos siguiente paso.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Who we work with -->
-    <section class="who-we-work">
-        <div class="section-header">
-            <div class="section-label">Con quién trabajamos</div>
-            <h2 class="section-title">Artistas con tracción<br>verificable</h2>
-        </div>
-        
-        <div class="criteria-grid">
-            <div class="criteria-card">
-                <div class="criteria-icon">✓</div>
-                <h3 class="criteria-title">Tienes audiencia activa</h3>
-                <p class="criteria-desc">
-                    Oyentes mensuales en Spotify. Seguidores que interactúan. Data que muestra dónde está tu público.
-                </p>
-            </div>
-            
-            <div class="criteria-card">
-                <div class="criteria-icon">✓</div>
-                <h3 class="criteria-title">Entregas material profesional</h3>
-                <p class="criteria-desc">
-                    EPK actualizado. Links funcionando. Photos de calidad. Rider técnico claro.
-                </p>
-            </div>
-            
-            <div class="criteria-card">
-                <div class="criteria-icon">✓</div>
-                <h3 class="criteria-title">Buscas construir, no solo tocar</h3>
-                <p class="criteria-desc">
-                    No aceptamos proyectos que buscan "una fecha". Trabajamos en estrategia territorial a 6-12 meses.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA -->
-    <section class="cta-section">
-        <h2 class="cta-title">Primera llamada:<br>30 minutos, sin costo</h2>
-        <p class="cta-subtitle">
-            Revisamos tu proyecto, analizamos viabilidad en estos mercados, y te decimos si tiene sentido trabajar juntos. Si no hay fit, te explicamos por qué y qué necesitas construir.
-        </p>
-        
-        <div class="cta-buttons">
-            <a href="mailto:emc121091@me.com?subject=Primera%20llamada%20-%20Booking&body=Hola,%0A%0AQuiero%20agendar%20una%20llamada%20para%20hablar%20sobre%20mi%20proyecto.%0A%0ANombre%20artista:%0ALink%20Spotify:%0AMercado%20objetivo%20(CDMX/GDL/MTY/BCN/MAD):%0AFechas%20disponibles:%0A%0AGracias." class="btn btn-primary">
-                Agendar por Email
-            </a>
-            <a href="https://wa.me/525512478139?text=Hola,%20quiero%20agendar%20una%20llamada%20para%20hablar%20sobre%20booking%20profesional." target="_blank" class="btn btn-secondary">
-                WhatsApp directo
-            </a>
-        </div>
-        
-        <div style="margin-top: 60px;">
-            <a href="https://edumecar.github.io/portfolio/" target="_blank" class="portfolio-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                </svg>
-                Ver portfolio completo
-            </a>
         </div>
     </section>
     
@@ -683,10 +640,9 @@
     </footer>
     
     <script>
-        // Intercontinental Map
+        // Enhanced Tech Style Map
         const canvas = document.getElementById('intercontinental-map');
         const ctx = canvas.getContext('2d');
-        const tooltip = document.getElementById('tooltip');
         
         // Responsive canvas
         function resizeCanvas() {
@@ -701,64 +657,62 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        // Node data
+        // Enhanced node data with more tech style
         const nodes = [
             { 
                 id: 'cdmx', 
                 x: 0.25, 
                 y: 0.55, 
-                size: 12, 
+                size: 14, 
                 label: 'CDMX', 
-                detail: 'Hub principal · 100-5000 cap.',
-                color: '#2563eb'
+                detail: 'HUB PRINCIPAL · 500+ EVENTOS',
+                color: '#2563eb',
+                connections: ['gdl', 'mty', 'bcn']
             },
             { 
                 id: 'gdl', 
                 x: 0.20, 
                 y: 0.48, 
-                size: 8, 
-                label: 'Guadalajara', 
-                detail: 'Indie · Rock · Electrónica',
-                color: '#2563eb'
+                size: 10, 
+                label: 'GDL', 
+                detail: 'INDIEROCK · ELECTRÓNICA',
+                color: '#2563eb',
+                connections: ['cdmx']
             },
             { 
                 id: 'mty', 
                 x: 0.28, 
                 y: 0.45, 
-                size: 8, 
-                label: 'Monterrey', 
-                detail: 'Rock · Metal · Norteño',
-                color: '#2563eb'
+                size: 10, 
+                label: 'MTY', 
+                detail: 'ROCK · METAL · NORTEÑO',
+                color: '#2563eb',
+                connections: ['cdmx']
             },
             { 
                 id: 'bcn', 
                 x: 0.75, 
                 y: 0.35, 
-                size: 12, 
-                label: 'Barcelona', 
-                detail: 'Base europea · Indie · Urbano',
-                color: '#10b981'
+                size: 14, 
+                label: 'BCN', 
+                detail: 'BASE EUROPEA · CONEXIÓN EU',
+                color: '#2563eb',
+                connections: ['cdmx']
             }
         ];
         
-        // Connections
-        const connections = [
-            ['cdmx', 'gdl'],
-            ['cdmx', 'mty'],
-            ['cdmx', 'bcn'], // Main transatlantic
-            ['gdl', 'mty']
-        ];
-        
-        // Particles for data flow
+        // Tech style particles for data flow
         let particles = [];
+        let pulseOffset = 0;
         
         class Particle {
             constructor(from, to) {
                 this.from = nodes.find(n => n.id === from);
                 this.to = nodes.find(n => n.id === to);
-                this.progress = 0;
-                this.speed = 0.002 + Math.random() * 0.003;
-                this.size = 2 + Math.random() * 2;
+                this.progress = Math.random();
+                this.speed = 0.001 + Math.random() * 0.002;
+                this.size = 1 + Math.random() * 2;
+                this.opacity = 0.3 + Math.random() * 0.4;
             }
             
             update() {
@@ -772,64 +726,118 @@
                 const x = this.from.x + (this.to.x - this.from.x) * this.progress;
                 const y = this.from.y + (this.to.y - this.from.y) * this.progress;
                 
+                // Create tech-style glow effect
+                const gradient = ctx.createRadialGradient(
+                    x * width, y * height, 0,
+                    x * width, y * height, this.size * 3
+                );
+                gradient.addColorStop(0, `rgba(37, 99, 235, ${this.opacity})`);
+                gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                
+                ctx.beginPath();
+                ctx.arc(x * width, y * height, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                // Core particle
                 ctx.beginPath();
                 ctx.arc(x * width, y * height, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(37, 99, 235, 0.6)';
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + 0.3})`;
                 ctx.fill();
             }
         }
         
-        // Initialize particles
-        connections.forEach(([from, to]) => {
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    particles.push(new Particle(from, to));
-                }, i * 1000);
-            }
+        // Initialize particles for all connections
+        nodes.forEach(node => {
+            node.connections.forEach(connection => {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        particles.push(new Particle(node.id, connection));
+                    }, i * 800);
+                }
+            });
         });
         
-        // Animation
-        let pulseOffset = 0;
+        // Draw grid background
+        function drawGrid(ctx, width, height) {
+            const gridSize = 40;
+            ctx.strokeStyle = 'rgba(37, 99, 235, 0.05)';
+            ctx.lineWidth = 1;
+            
+            // Vertical lines
+            for (let x = 0; x <= width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+            
+            // Horizontal lines
+            for (let y = 0; y <= height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+        }
         
+        // Animation loop
         function animate() {
             const width = canvas.parentElement.offsetWidth;
             const height = canvas.parentElement.offsetHeight;
             
             ctx.clearRect(0, 0, width, height);
             
-            // Draw connections
-            ctx.strokeStyle = 'rgba(37, 99, 235, 0.2)';
-            ctx.lineWidth = 2;
+            // Draw subtle grid
+            drawGrid(ctx, width, height);
             
-            connections.forEach(([from, to]) => {
-                const fromNode = nodes.find(n => n.id === from);
-                const toNode = nodes.find(n => n.id === to);
-                
-                ctx.beginPath();
-                ctx.moveTo(fromNode.x * width, fromNode.y * height);
-                ctx.lineTo(toNode.x * width, toNode.y * height);
-                ctx.stroke();
+            // Draw connections with tech style
+            ctx.strokeStyle = 'rgba(37, 99, 235, 0.15)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            
+            nodes.forEach(node => {
+                node.connections.forEach(connection => {
+                    const toNode = nodes.find(n => n.id === connection);
+                    ctx.beginPath();
+                    ctx.moveTo(node.x * width, node.y * height);
+                    ctx.lineTo(toNode.x * width, toNode.y * height);
+                    ctx.stroke();
+                });
             });
             
-            // Draw particles
+            ctx.setLineDash([]);
+            
+            // Update and draw particles
             particles.forEach(p => {
                 p.update();
                 p.draw(ctx, width, height);
             });
             
-            // Draw nodes
-            pulseOffset += 0.02;
+            // Draw nodes with tech-style effects
+            pulseOffset += 0.03;
             
             nodes.forEach(node => {
                 const x = node.x * width;
                 const y = node.y * height;
-                const pulse = Math.sin(pulseOffset) * 2;
+                const pulse = Math.sin(pulseOffset + node.x * 2) * 3;
                 
-                // Outer glow
+                // Outer tech glow
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, node.size + 15);
+                gradient.addColorStop(0, node.color + '40');
+                gradient.addColorStop(1, node.color + '00');
+                
                 ctx.beginPath();
-                ctx.arc(x, y, node.size + pulse + 4, 0, Math.PI * 2);
-                ctx.fillStyle = node.color + '20';
+                ctx.arc(x, y, node.size + 15, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
                 ctx.fill();
+                
+                // Pulsing ring
+                ctx.beginPath();
+                ctx.arc(x, y, node.size + 8 + pulse, 0, Math.PI * 2);
+                ctx.strokeStyle = node.color + '30';
+                ctx.lineWidth = 2;
+                ctx.stroke();
                 
                 // Main node
                 ctx.beginPath();
@@ -837,11 +845,17 @@
                 ctx.fillStyle = node.color;
                 ctx.fill();
                 
-                // Inner highlight
+                // Inner highlight for tech look
                 ctx.beginPath();
-                ctx.arc(x - 2, y - 2, node.size / 3, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.arc(x - node.size/3, y - node.size/3, node.size/4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
                 ctx.fill();
+                
+                // Node label (tech style)
+                ctx.fillStyle = 'rgba(37, 99, 235, 0.9)';
+                ctx.font = '600 12px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(node.label, x, y + node.size + 20);
             });
             
             requestAnimationFrame(animate);
@@ -849,44 +863,7 @@
         
         animate();
         
-        // Mouse interaction
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const width = rect.width;
-            const height = rect.height;
-            
-            let hovered = null;
-            
-            nodes.forEach(node => {
-                const nodeX = node.x * width;
-                const nodeY = node.y * height;
-                const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
-                
-                if (distance < node.size + 10) {
-                    hovered = node;
-                }
-            });
-            
-            if (hovered) {
-                tooltip.querySelector('.tooltip-city').textContent = hovered.label;
-                tooltip.querySelector('.tooltip-detail').textContent = hovered.detail;
-                tooltip.style.left = (hovered.x * width) + 'px';
-                tooltip.style.top = (hovered.y * height - 70) + 'px';
-                tooltip.classList.add('active');
-                canvas.style.cursor = 'pointer';
-            } else {
-                tooltip.classList.remove('active');
-                canvas.style.cursor = 'default';
-            }
-        });
-        
-        canvas.addEventListener('mouseleave', () => {
-            tooltip.classList.remove('active');
-        });
-        
-        // Smooth scroll reveal
+        // Smooth scroll reveal for editorial blocks
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -896,7 +873,8 @@
             });
         }, { threshold: 0.1 });
         
-        document.querySelectorAll('.territory-card, .process-step, .criteria-card').forEach(el => {
+        // Observe all editorial content
+        document.querySelectorAll('.system-content, .markets-comparison, .timeline, .filters-content').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
