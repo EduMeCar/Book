@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conciencia Sonora</title>
+    <meta name="description" content="Red de booking musical entre México y España. 5 años conectando artistas con promotores directos.">
+    <title>Conciencia Sonora - Booking México & España</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         * {
             margin: 0;
@@ -14,774 +15,665 @@
         }
         
         :root {
-            --primary: #0a0a0a;
-            --secondary: #f5f5f5;
-            --accent: #3b82f6;
-            --text: #1a1a1a;
-            --text-dim: #666;
+            --ink: #0f0f0f;
+            --paper: #fafafa;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --muted: #737373;
+            --border: #e5e5e5;
+            --success: #10b981;
         }
         
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background: var(--secondary);
-            color: var(--text);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            cursor: none;
         }
         
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.15s ease;
-            mix-blend-mode: difference;
-        }
-        
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(10, 10, 10, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            mix-blend-mode: difference;
-        }
-        
-        .cursor.expand {
-            width: 60px;
-            height: 60px;
-            background: rgba(59, 130, 246, 0.2);
-            border-color: var(--accent);
-        }
-        
-        /* Hero Full */
-        .hero-full {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 60px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .logo-float {
-            width: 200px;
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s ease 0.2s forwards;
-        }
-        
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero-title {
-            font-size: clamp(4rem, 15vw, 14rem);
-            font-weight: 900;
-            line-height: 0.9;
-            letter-spacing: -0.05em;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeUp 1s ease 0.4s forwards;
-        }
-        
-        .hero-title span {
-            display: block;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
-            font-weight: 300;
-            max-width: 700px;
-            color: var(--text-dim);
-            line-height: 1.5;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s ease 0.6s forwards;
-        }
-        
-        .hero-metrics {
-            display: flex;
-            gap: 80px;
-            margin-top: 100px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s ease 0.8s forwards;
-        }
-        
-        .metric {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .metric-number {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .metric-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-dim);
-            font-weight: 600;
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 60px;
-            left: 60px;
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            opacity: 0;
-            animation: fadeUp 1s ease 1s forwards;
-        }
-        
-        .scroll-indicator::after {
-            content: '';
-            width: 1px;
-            height: 40px;
-            background: var(--text-dim);
-            animation: scrollLine 2s ease-in-out infinite;
-        }
-        
-        @keyframes scrollLine {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(10px); opacity: 0.3; }
-        }
-        
-        /* Bento Grid Section */
-        .bento-section {
-            padding: 150px 60px;
-            background: var(--primary);
-            color: white;
-        }
-        
-        .section-header {
-            margin-bottom: 80px;
-        }
-        
-        .section-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--accent);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .section-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1;
-        }
-        
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-        
-        .bento-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .bento-item:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .bento-large {
-            grid-column: span 2;
-            grid-row: span 2;
-            min-height: 600px;
-        }
-        
-        .bento-wide {
-            grid-column: span 2;
-            min-height: 300px;
-        }
-        
-        .bento-tall {
-            grid-row: span 2;
-            min-height: 600px;
-        }
-        
-        .bento-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        
-        .bento-item:hover .bento-image {
-            transform: scale(1.05);
-        }
-        
-        .bento-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        
-        .bento-country {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .bento-stat {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-        
-        .bento-detail {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .bento-content {
-            padding: 40px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .bento-number {
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, white 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .bento-label {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* Services Marquee */
-        .services-section {
-            padding: 150px 0;
-            background: white;
-            overflow: hidden;
-        }
-        
-        .services-header {
-            padding: 0 60px;
-            margin-bottom: 100px;
-        }
-        
-        .service-track {
-            display: flex;
-            gap: 30px;
-            animation: marquee 40s linear infinite;
-            will-change: transform;
-        }
-        
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        .service-card {
-            min-width: 450px;
-            background: var(--secondary);
-            border-radius: 20px;
-            padding: 50px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
-        }
-        
-        .service-card:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-5px);
-        }
-        
-        .service-number {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-        
-        .service-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-        
-        .service-description {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-dim);
-        }
-        
-        .service-card:hover .service-description {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        /* Genres Flow */
-        .genres-section {
-            padding: 100px 0;
-            background: var(--secondary);
-        }
-        
-        .genres-track {
-            display: flex;
-            gap: 20px;
-            animation: marquee 35s linear infinite;
-        }
-        
-        .genre-pill {
-            padding: 20px 40px;
-            background: white;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .genre-pill:hover {
+        ::selection {
             background: var(--accent);
             color: white;
-            transform: translateY(-3px);
         }
         
-        /* Magnetic CTA */
-        .cta-section {
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, var(--paper) 0%, transparent 100%);
+        }
+        
+        .logo {
+            width: 140px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.2s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .nav-link {
+            padding: 10px 24px;
+            background: var(--ink);
+            color: var(--paper);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.4s forwards;
+        }
+        
+        .nav-link:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero with Map */
+        .hero-map {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 100px 60px;
-            background: white;
+            padding: 100px 40px 60px;
             position: relative;
         }
         
-        .cta-title {
-            font-size: clamp(4rem, 12vw, 10rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 80px;
+        .hero-content {
             text-align: center;
+            margin-bottom: 80px;
+            max-width: 900px;
+        }
+        
+        .hero-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.6s forwards;
+        }
+        
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: var(--muted);
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1s forwards;
+        }
+        
+        /* Map Container */
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 500px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+        
+        #intercontinental-map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .node-tooltip {
+            position: absolute;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        
+        .node-tooltip.active {
+            opacity: 1;
+        }
+        
+        .tooltip-city {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .tooltip-detail {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+        
+        /* Territory Grid */
+        .territories {
+            padding: 120px 40px;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        
+        .territory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .territory-card {
+            background: white;
+            padding: 60px 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .territory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .territory-card:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .territory-card:hover {
+            background: var(--paper);
+        }
+        
+        .territory-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .territory-desc {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .territory-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .spec-item::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: 900;
+        }
+        
+        /* How it works */
+        .how-it-works {
+            padding: 120px 40px;
+            background: var(--ink);
+            color: var(--paper);
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .process-step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin: 0 auto 24px;
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .step-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+        
+        /* Who we work with */
+        .who-we-work {
+            padding: 120px 40px;
+            background: white;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .criteria-card {
+            padding: 40px;
+            background: var(--paper);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .criteria-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .criteria-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .criteria-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .criteria-desc {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        
+        /* CTA */
+        .cta-section {
+            padding: 140px 40px;
+            background: var(--paper);
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.3rem;
+            color: var(--muted);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
+            gap: 20px;
             justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
         }
         
-        .magnetic-btn {
-            padding: 25px 60px;
-            font-size: 1.1rem;
+        .btn {
+            padding: 18px 45px;
+            font-size: 1rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 60px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
         
         .btn-primary {
-            background: var(--primary);
-            color: white;
+            background: var(--ink);
+            color: var(--paper);
         }
         
         .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
         }
         
         .btn-secondary {
             background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: var(--ink);
+            border: 2px solid var(--ink);
         }
         
         .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .cta-footer {
-            margin-top: 100px;
+            background: var(--ink);
+            color: var(--paper);
+            transform: translateY(-3px);
         }
         
         .portfolio-link {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 15px 30px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50px;
+            gap: 10px;
+            padding: 12px 24px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
             text-decoration: none;
-            color: var(--text-dim);
+            color: var(--muted);
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         
         .portfolio-link:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-3px);
+            background: var(--ink);
+            color: var(--paper);
+            border-color: var(--ink);
+            transform: translateY(-2px);
         }
         
         /* Footer */
         .footer {
-            padding: 80px 60px;
-            background: var(--primary);
-            color: rgba(255, 255, 255, 0.6);
+            padding: 60px 40px;
+            background: var(--ink);
+            color: rgba(255, 255, 255, 0.5);
             text-align: center;
             font-size: 0.85rem;
-            letter-spacing: 0.1em;
-        }
-        
-        /* Parallax Images */
-        .parallax-container {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .parallax-image {
-            transition: transform 0.1s ease-out;
-            will-change: transform;
         }
         
         /* Responsive */
-        @media (max-width: 1200px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 1024px) {
+            .territory-grid {
+                grid-template-columns: 1fr;
             }
             
-            .bento-large,
-            .bento-wide,
-            .bento-tall {
-                grid-column: span 1;
-                grid-row: span 1;
-                min-height: 350px;
+            .map-container {
+                height: 600px;
             }
         }
         
         @media (max-width: 768px) {
-            body {
-                cursor: auto;
+            .nav {
+                padding: 20px 24px;
             }
             
-            .cursor,
-            .cursor-follower {
-                display: none;
+            .hero-map {
+                padding: 80px 24px 40px;
             }
             
-            .hero-full,
-            .bento-section,
-            .services-header,
+            .map-container {
+                height: 500px;
+            }
+            
+            .territories,
+            .how-it-works,
+            .who-we-work,
             .cta-section {
-                padding: 80px 30px;
+                padding: 80px 24px;
             }
             
-            .hero-metrics {
-                gap: 40px;
-                flex-wrap: wrap;
+            .territory-card {
+                padding: 40px 30px;
             }
             
-            .bento-grid {
-                grid-template-columns: 1fr;
+            .process-grid {
+                gap: 50px;
             }
             
-            .service-track,
-            .genres-track {
-                animation-duration: 25s;
-            }
-            
-            .service-card {
-                min-width: 320px;
-            }
-            
-            .scroll-indicator {
-                left: 30px;
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                max-width: 350px;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <img src="logo.svg" alt="Conciencia Sonora" class="logo">
+        <a href="mailto:emc121091@me.com?subject=Primera%20llamada%20-%20Booking" class="nav-link">Agendar llamada</a>
+    </nav>
     
-    <!-- Hero -->
-    <section class="hero-full">
-        <img src="logo.svg" alt="Conciencia Sonora" class="logo-float">
-        
-        <h1 class="hero-title">
-            <span>México</span>
-            <span>España</span>
-        </h1>
-        
-        <p class="hero-subtitle">
-            Red de booking entre dos territorios. Construcción de carreras, no eventos aislados.
-        </p>
-        
-        <div class="hero-metrics">
-            <div class="metric">
-                <div class="metric-number">400+</div>
-                <div class="metric-label">Shows</div>
-            </div>
-            <div class="metric">
-                <div class="metric-number">300+</div>
-                <div class="metric-label">Venues</div>
-            </div>
-            <div class="metric">
-                <div class="metric-number">6</div>
-                <div class="metric-label">Países</div>
-            </div>
+    <!-- Hero with Map -->
+    <section class="hero-map">
+        <div class="hero-content">
+            <div class="hero-tag">Booking transoceánico</div>
+            <h1 class="hero-title">México ↔ España</h1>
+            <p class="hero-subtitle">
+                Red de booking entre territorios. 5 años conectando artistas con promotores directos. Sin intermediarios.
+            </p>
         </div>
         
-        <div class="scroll-indicator">
-            Scroll
+        <div class="map-container">
+            <canvas id="intercontinental-map"></canvas>
+            <div class="node-tooltip" id="tooltip">
+                <div class="tooltip-city"></div>
+                <div class="tooltip-detail"></div>
+            </div>
         </div>
     </section>
     
-    <!-- Bento Grid -->
-    <section class="bento-section">
+    <!-- Territories -->
+    <section class="territories">
         <div class="section-header">
-            <div class="section-tag">La Red</div>
-            <h2 class="section-title">Dos mercados,<br>una operación</h2>
+            <div class="section-label">Territorios activos</div>
+            <h2 class="section-title">Dos mercados.<br>Una operación.</h2>
+            <p class="section-desc">
+                Contacto directo con promotores. De primer contacto a show: 4 semanas.
+            </p>
         </div>
         
-        <div class="bento-grid">
-            <div class="bento-item bento-large parallax-container">
-                <img src="img/mexico.jpg" alt="México" class="bento-image parallax-image">
-                <div class="bento-overlay">
-                    <div class="bento-country">México</div>
-                    <div class="bento-stat">200+</div>
-                    <div class="bento-detail">Venues activos</div>
-                    <div class="bento-detail" style="margin-top: 10px; font-size: 0.9rem;">CDMX · Monterrey · Guadalajara</div>
+        <div class="territory-grid">
+            <div class="territory-card">
+                <h3 class="territory-name">México</h3>
+                <p class="territory-desc">
+                    Hub en CDMX. Cobertura consolidada en Guadalajara y Monterrey.
+                </p>
+                <div class="territory-specs">
+                    <div class="spec-item">Capacidades: 100 a 5,000 personas</div>
+                    <div class="spec-item">Todos los géneros operativos</div>
+                    <div class="spec-item">Triángulo dorado activo</div>
                 </div>
             </div>
             
-            <div class="bento-item bento-wide">
-                <div class="bento-content">
-                    <div class="bento-number">8+</div>
-                    <div class="bento-label">Años en la industria</div>
-                </div>
-            </div>
-            
-            <div class="bento-item bento-tall parallax-container">
-                <img src="img/espana.jpg" alt="España" class="bento-image parallax-image">
-                <div class="bento-overlay">
-                    <div class="bento-country">España</div>
-                    <div class="bento-stat">30+</div>
-                    <div class="bento-detail">Venues activos</div>
-                    <div class="bento-detail" style="margin-top: 10px; font-size: 0.9rem;">Barcelona · Madrid · Valencia</div>
-                </div>
-            </div>
-            
-            <div class="bento-item">
-                <div class="bento-content">
-                    <div class="bento-number">100%</div>
-                    <div class="bento-label">Personalizado</div>
-                </div>
-            </div>
-            
-            <div class="bento-item">
-                <div class="bento-content">
-                    <div class="bento-number">12</div>
-                    <div class="bento-label">Géneros musicales</div>
+            <div class="territory-card">
+                <h3 class="territory-name">España</h3>
+                <p class="territory-desc">
+                    Base en Barcelona. Conexiones en Madrid.
+                </p>
+                <div class="territory-specs">
+                    <div class="spec-item">Capacidades: 150 a 3,000 personas</div>
+                    <div class="spec-item">Enfoque: indie, rock, electrónica, urbano</div>
+                    <div class="spec-item">Mercado europeo gateway</div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Services Marquee -->
-    <section class="services-section">
-        <div class="services-header">
-            <div class="section-tag">Qué hacemos</div>
-            <h2 class="section-title">Servicios</h2>
+    <!-- How it works -->
+    <section class="how-it-works">
+        <div class="section-header">
+            <div class="section-label" style="color: var(--accent);">Proceso</div>
+            <h2 class="section-title">De lead a show en 4 semanas</h2>
+            <p class="section-desc" style="color: rgba(255, 255, 255, 0.7);">
+                Sistema probado. Sin improvisación.
+            </p>
         </div>
         
-        <div class="service-track">
-            <div class="service-card">
-                <div class="service-number">[01]</div>
-                <h3 class="service-title">Booking & Giras</h3>
-                <p class="service-description">
-                    Conectamos tu proyecto con venues verificados. Negociación directa, términos claros, fechas estratégicas.
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Análisis</h3>
+                <p class="step-desc">
+                    Revisamos tracción, audiencia activa en ciudades objetivo, y timing.
                 </p>
             </div>
             
-            <div class="service-card">
-                <div class="service-number">[02]</div>
-                <h3 class="service-title">Producción</h3>
-                <p class="service-description">
-                    Gestión técnica y logística completa. Tú te enfocas en el show, nosotros en que funcione todo.
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Conexión</h3>
+                <p class="step-desc">
+                    Contacto directo con promotores. Negociamos términos según tu nivel.
                 </p>
             </div>
             
-            <div class="service-card">
-                <div class="service-number">[03]</div>
-                <h3 class="service-title">Estrategia</h3>
-                <p class="service-description">
-                    Planificación de carrera a mediano y largo plazo. De dónde vienes, a dónde vas, cómo llegamos.
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Producción</h3>
+                <p class="step-desc">
+                    Coordinamos logística técnica. Tú llegas, enchufas, tocas.
                 </p>
             </div>
             
-            <div class="service-card">
-                <div class="service-number">[04]</div>
-                <h3 class="service-title">Expansión</h3>
-                <p class="service-description">
-                    Si tocas en México, te llevamos a España. Si estás en España, abrimos México. Ambas direcciones.
-                </p>
-            </div>
-            
-            <!-- Duplicate for seamless loop -->
-            <div class="service-card">
-                <div class="service-number">[01]</div>
-                <h3 class="service-title">Booking & Giras</h3>
-                <p class="service-description">
-                    Conectamos tu proyecto con venues verificados. Negociación directa, términos claros, fechas estratégicas.
-                </p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-number">[02]</div>
-                <h3 class="service-title">Producción</h3>
-                <p class="service-description">
-                    Gestión técnica y logística completa. Tú te enfocas en el show, nosotros en que funcione todo.
-                </p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-number">[03]</div>
-                <h3 class="service-title">Estrategia</h3>
-                <p class="service-description">
-                    Planificación de carrera a mediano y largo plazo. De dónde vienes, a dónde vas, cómo llegamos.
-                </p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-number">[04]</div>
-                <h3 class="service-title">Expansión</h3>
-                <p class="service-description">
-                    Si tocas en México, te llevamos a España. Si estás en España, abrimos México. Ambas direcciones.
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Ejecución</h3>
+                <p class="step-desc">
+                    Show ejecutado. Pago confirmado. Evaluamos siguiente paso.
                 </p>
             </div>
         </div>
     </section>
     
-    <!-- Genres -->
-    <section class="genres-section">
-        <div class="genres-track">
-            <span class="genre-pill">Reggaetón</span>
-            <span class="genre-pill">Electrónica</span>
-            <span class="genre-pill">Rock</span>
-            <span class="genre-pill">Indie</span>
-            <span class="genre-pill">Hip Hop</span>
-            <span class="genre-pill">Salsa</span>
-            <span class="genre-pill">Jazz</span>
-            <span class="genre-pill">Regional</span>
-            <span class="genre-pill">Pop</span>
-            <span class="genre-pill">Alternativo</span>
-            <span class="genre-pill">R&B</span>
-            <span class="genre-pill">Fusión</span>
-            <!-- Duplicate -->
-            <span class="genre-pill">Reggaetón</span>
-            <span class="genre-pill">Electrónica</span>
-            <span class="genre-pill">Rock</span>
-            <span class="genre-pill">Indie</span>
-            <span class="genre-pill">Hip Hop</span>
-            <span class="genre-pill">Salsa</span>
-            <span class="genre-pill">Jazz</span>
-            <span class="genre-pill">Regional</span>
-            <span class="genre-pill">Pop</span>
-            <span class="genre-pill">Alternativo</span>
-            <span class="genre-pill">R&B</span>
-            <span class="genre-pill">Fusión</span>
+    <!-- Who we work with -->
+    <section class="who-we-work">
+        <div class="section-header">
+            <div class="section-label">Con quién trabajamos</div>
+            <h2 class="section-title">Artistas con tracción<br>verificable</h2>
+        </div>
+        
+        <div class="criteria-grid">
+            <div class="criteria-card">
+                <div class="criteria-icon">✓</div>
+                <h3 class="criteria-title">Tienes audiencia activa</h3>
+                <p class="criteria-desc">
+                    Oyentes mensuales en Spotify. Seguidores que interactúan. Data que muestra dónde está tu público.
+                </p>
+            </div>
+            
+            <div class="criteria-card">
+                <div class="criteria-icon">✓</div>
+                <h3 class="criteria-title">Entregas material profesional</h3>
+                <p class="criteria-desc">
+                    EPK actualizado. Links funcionando. Photos de calidad. Rider técnico claro.
+                </p>
+            </div>
+            
+            <div class="criteria-card">
+                <div class="criteria-icon">✓</div>
+                <h3 class="criteria-title">Buscas construir, no solo tocar</h3>
+                <p class="criteria-desc">
+                    No aceptamos proyectos que buscan "una fecha". Trabajamos en estrategia territorial a 6-12 meses.
+                </p>
+            </div>
         </div>
     </section>
     
     <!-- CTA -->
     <section class="cta-section">
-        <h2 class="cta-title">Hablemos</h2>
+        <h2 class="cta-title">Primera llamada:<br>30 minutos, sin costo</h2>
+        <p class="cta-subtitle">
+            Revisamos tu proyecto, analizamos viabilidad en estos mercados, y te decimos si tiene sentido trabajar juntos. Si no hay fit, te explicamos por qué y qué necesitas construir.
+        </p>
         
         <div class="cta-buttons">
-            <a href="mailto:emc121091@me.com?subject=Consulta%20Booking&body=Hola,%20quiero%20hablar%20sobre%20mi%20proyecto." class="magnetic-btn btn-primary">
-                Email
+            <a href="mailto:emc121091@me.com?subject=Primera%20llamada%20-%20Booking&body=Hola,%0A%0AQuiero%20agendar%20una%20llamada%20para%20hablar%20sobre%20mi%20proyecto.%0A%0ANombre%20artista:%0ALink%20Spotify:%0AMercado%20objetivo%20(CDMX/GDL/MTY/BCN/MAD):%0AFechas%20disponibles:%0A%0AGracias." class="btn btn-primary">
+                Agendar por Email
             </a>
-            <a href="https://wa.me/525512478139?text=Hola,%20quiero%20hablar%20sobre%20booking." target="_blank" class="magnetic-btn btn-secondary">
-                WhatsApp
+            <a href="https://wa.me/525512478139?text=Hola,%20quiero%20agendar%20una%20llamada%20para%20hablar%20sobre%20booking%20profesional." target="_blank" class="btn btn-secondary">
+                WhatsApp directo
             </a>
         </div>
         
-        <div class="cta-footer">
+        <div style="margin-top: 60px;">
             <a href="https://edumecar.github.io/portfolio/" target="_blank" class="portfolio-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
                 </svg>
-                Portfolio
+                Ver portfolio completo
             </a>
         </div>
     </section>
@@ -791,68 +683,210 @@
     </footer>
     
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
+        // Intercontinental Map
+        const canvas = document.getElementById('intercontinental-map');
+        const ctx = canvas.getContext('2d');
+        const tooltip = document.getElementById('tooltip');
         
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let followerX = 0, followerY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.3;
-            cursorY += (mouseY - cursorY) * 0.3;
-            
-            followerX += (mouseX - followerX) * 0.1;
-            followerY += (mouseY - followerY) * 0.1;
-            
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            
-            follower.style.left = followerX + 'px';
-            follower.style.top = followerY + 'px';
-            
-            requestAnimationFrame(animateCursor);
+        // Responsive canvas
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth * window.devicePixelRatio;
+            canvas.height = container.offsetHeight * window.devicePixelRatio;
+            canvas.style.width = container.offsetWidth + 'px';
+            canvas.style.height = container.offsetHeight + 'px';
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         }
         
-        animateCursor();
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
         
-        // Expand cursor on hover
-        const hoverElements = document.querySelectorAll('a, button, .bento-item, .service-card, .genre-pill');
+        // Node data
+        const nodes = [
+            { 
+                id: 'cdmx', 
+                x: 0.25, 
+                y: 0.55, 
+                size: 12, 
+                label: 'CDMX', 
+                detail: 'Hub principal · 100-5000 cap.',
+                color: '#2563eb'
+            },
+            { 
+                id: 'gdl', 
+                x: 0.20, 
+                y: 0.48, 
+                size: 8, 
+                label: 'Guadalajara', 
+                detail: 'Indie · Rock · Electrónica',
+                color: '#2563eb'
+            },
+            { 
+                id: 'mty', 
+                x: 0.28, 
+                y: 0.45, 
+                size: 8, 
+                label: 'Monterrey', 
+                detail: 'Rock · Metal · Norteño',
+                color: '#2563eb'
+            },
+            { 
+                id: 'bcn', 
+                x: 0.75, 
+                y: 0.35, 
+                size: 12, 
+                label: 'Barcelona', 
+                detail: 'Base europea · Indie · Urbano',
+                color: '#10b981'
+            }
+        ];
         
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('expand');
-            });
+        // Connections
+        const connections = [
+            ['cdmx', 'gdl'],
+            ['cdmx', 'mty'],
+            ['cdmx', 'bcn'], // Main transatlantic
+            ['gdl', 'mty']
+        ];
+        
+        // Particles for data flow
+        let particles = [];
+        
+        class Particle {
+            constructor(from, to) {
+                this.from = nodes.find(n => n.id === from);
+                this.to = nodes.find(n => n.id === to);
+                this.progress = 0;
+                this.speed = 0.002 + Math.random() * 0.003;
+                this.size = 2 + Math.random() * 2;
+            }
             
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('expand');
-            });
+            update() {
+                this.progress += this.speed;
+                if (this.progress >= 1) {
+                    this.progress = 0;
+                }
+            }
+            
+            draw(ctx, width, height) {
+                const x = this.from.x + (this.to.x - this.from.x) * this.progress;
+                const y = this.from.y + (this.to.y - this.from.y) * this.progress;
+                
+                ctx.beginPath();
+                ctx.arc(x * width, y * height, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(37, 99, 235, 0.6)';
+                ctx.fill();
+            }
+        }
+        
+        // Initialize particles
+        connections.forEach(([from, to]) => {
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    particles.push(new Particle(from, to));
+                }, i * 1000);
+            }
         });
         
-        // Parallax on images
-        const parallaxImages = document.querySelectorAll('.parallax-image');
+        // Animation
+        let pulseOffset = 0;
         
-        document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+        function animate() {
+            const width = canvas.parentElement.offsetWidth;
+            const height = canvas.parentElement.offsetHeight;
             
-            parallaxImages.forEach(img => {
-                img.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw connections
+            ctx.strokeStyle = 'rgba(37, 99, 235, 0.2)';
+            ctx.lineWidth = 2;
+            
+            connections.forEach(([from, to]) => {
+                const fromNode = nodes.find(n => n.id === from);
+                const toNode = nodes.find(n => n.id === to);
+                
+                ctx.beginPath();
+                ctx.moveTo(fromNode.x * width, fromNode.y * height);
+                ctx.lineTo(toNode.x * width, toNode.y * height);
+                ctx.stroke();
             });
+            
+            // Draw particles
+            particles.forEach(p => {
+                p.update();
+                p.draw(ctx, width, height);
+            });
+            
+            // Draw nodes
+            pulseOffset += 0.02;
+            
+            nodes.forEach(node => {
+                const x = node.x * width;
+                const y = node.y * height;
+                const pulse = Math.sin(pulseOffset) * 2;
+                
+                // Outer glow
+                ctx.beginPath();
+                ctx.arc(x, y, node.size + pulse + 4, 0, Math.PI * 2);
+                ctx.fillStyle = node.color + '20';
+                ctx.fill();
+                
+                // Main node
+                ctx.beginPath();
+                ctx.arc(x, y, node.size + pulse, 0, Math.PI * 2);
+                ctx.fillStyle = node.color;
+                ctx.fill();
+                
+                // Inner highlight
+                ctx.beginPath();
+                ctx.arc(x - 2, y - 2, node.size / 3, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Mouse interaction
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const width = rect.width;
+            const height = rect.height;
+            
+            let hovered = null;
+            
+            nodes.forEach(node => {
+                const nodeX = node.x * width;
+                const nodeY = node.y * height;
+                const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+                
+                if (distance < node.size + 10) {
+                    hovered = node;
+                }
+            });
+            
+            if (hovered) {
+                tooltip.querySelector('.tooltip-city').textContent = hovered.label;
+                tooltip.querySelector('.tooltip-detail').textContent = hovered.detail;
+                tooltip.style.left = (hovered.x * width) + 'px';
+                tooltip.style.top = (hovered.y * height - 70) + 'px';
+                tooltip.classList.add('active');
+                canvas.style.cursor = 'pointer';
+            } else {
+                tooltip.classList.remove('active');
+                canvas.style.cursor = 'default';
+            }
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            tooltip.classList.remove('active');
         });
         
         // Smooth scroll reveal
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -860,42 +894,13 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
         
-        document.querySelectorAll('.bento-item, .service-card').forEach(el => {
+        document.querySelectorAll('.territory-card, .process-step, .criteria-card').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(50px)';
+            el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             observer.observe(el);
-        });
-        
-        // Magnetic buttons
-        const magneticBtns = document.querySelectorAll('.magnetic-btn');
-        
-        magneticBtns.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0) scale(1)';
-            });
-        });
-        
-        // Performance optimization
-        let ticking = false;
-        
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    ticking = false;
-                });
-                ticking = true;
-            }
         });
     </script>
 </body>
