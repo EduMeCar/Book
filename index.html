@@ -1,160 +1,716 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookingPlanes: Booking Internacional Inteligente</title>
-  <meta name="description" content="La red empresarial definitiva para llevar artistas entre América y Europa. No solo booking: estrategia, tecnología, negocios y resultados reales.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #2233ee;
-      --accent: #121d39;
-      --light: #f4f7fa;
-      --success: #22b573;
-      --danger: #cb4154;
-      --ink: #151515;
-      --muted: #80888e;
-    }
-    html { scroll-behavior: smooth; background: var(--light);}
-    body { font-family: 'Inter', sans-serif; color: var(--ink); margin: 0; }
-    .header {
-      background: linear-gradient(120deg, var(--primary) 55%, var(--accent) 100%);
-      color: #fff; padding: 64px 30px 48px 30px; text-align: center;
-    }
-    .logo-main { font-weight:900; font-size:3.1rem; letter-spacing:-2px; margin:12px 0 0;}
-    .logo-tag { background: #fff2; padding: 4px 18px; border-radius: 13px; font-size: 0.95rem; margin-top:8px; display: inline-block;}
-    .main-lead { font-size: 1.6rem; max-width: 600px; margin: 32px auto 0; font-weight:400; }
-    .cta-btn { margin-top:24px; background:var(--success); color: #fff; border:none; padding: 18px 57px; font-size:1.1rem; border-radius: 8px; cursor:pointer; box-shadow:0 2px 9px #0002; font-weight:bold; transition:.14s;}
-    .cta-btn:hover { background: #198b5c;}
-    nav { display: flex; justify-content: flex-end; gap: 24px; align-items: center; background: none; padding:16px 30px; position: fixed; width: 100%; z-index: 999; top:0;}
-    nav a { color: #151515; background: #fff; border-radius: 7px; padding: 8px 28px; text-decoration:none; font-weight:600; border: 2px solid #eee;}
-    nav a:hover { border-color:var(--primary); color:var(--primary);}
-    .section { max-width:1100px; margin:96px auto 0; padding:0 24px;}
-    .section-title { font-size:2.4rem; font-weight:900; margin: 28px 0 16px;}
-    .section-desc { color:var(--muted); font-size:1.15rem; margin-bottom:49px;}
-    .features-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:30px; margin-top:18px;}
-    .feature { background:#fff; border-radius:10px; padding:38px 34px; box-shadow:0 2px 12px #2233ee09;}
-    .feature strong { font-size:1.1rem; color:var(--primary);}
-    .steps { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:18px;}
-    .step { background:var(--primary); color:#fff; border-radius:9px; padding:24px 18px; text-align:center;}
-    .step h3 { margin-top:0; font-size:1.3rem;}
-    .metrics { display: flex; gap: 40px; margin-top:38px; flex-wrap:wrap;}
-    .metric { font-size:1.8rem; font-weight:900; color:var(--primary);}
-    .metric-label { color: var(--muted); font-size:1.0rem;}
-    .testimonials, .network { background:#f1f1f9; border-radius: 16px; padding: 70px 40px 30px 40px; margin: 60px 0;}
-    .testimonial { font-style:italic; margin-bottom:23px;}
-    .testimonial-person { color:var(--accent); font-weight:bold;}
-    .network-logos img { height:48px; margin:0 13px 19px 0;}
-    .divider { border: none; border-top:2px solid var(--primary); width:72px; margin:32px auto;}
-    @media (max-width:1024px){.features-grid, .steps{grid-template-columns:1fr 1fr;}.metrics{flex-wrap:wrap;gap:24px;}}
-    @media (max-width:700px){
-      .features-grid, .steps { grid-template-columns:1fr; gap:23px;}
-      nav{flex-direction:column;gap:10px;}
-      .metrics{flex-direction:column;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Intelligence - Data-Driven Music Management</title>
+    <style>
+        :root {
+            --primary: #1db954;
+            --primary-dark: #1aa34a;
+            --primary-light: #4cd97a;
+            --dark: #0a0a0a;
+            --darker: #000000;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #666;
+            --light-gray: #e3e3e3;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.25);
+            --accent-glow: 0 0 30px rgba(29, 185, 84, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Data Visualization Background */
+        .data-visualization {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background: 
+                radial-gradient(circle at 20% 80%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--primary) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 48%, var(--primary) 49%, var(--primary) 51%, transparent 52%);
+            background-size: 300% 300%;
+            animation: dataFlow 20s ease-in-out infinite;
+        }
+
+        @keyframes dataFlow {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Professional Header */
+        .professional-header {
+            text-align: center;
+            padding: 100px 0 60px 0;
+            position: relative;
+        }
+
+        .header-graphic {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            background: conic-gradient(from 0deg, var(--primary) 0%, transparent 25%, var(--primary) 50%, transparent 75%, var(--primary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: dataSpin 10s linear infinite;
+            box-shadow: var(--accent-glow);
+        }
+
+        @keyframes dataSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-graphic-inner {
+            width: 80px;
+            height: 80px;
+            background: var(--darker);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 50%, var(--light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: titleShimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes titleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Data Intelligence Section */
+        .intelligence-section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--light);
+            line-height: 1.2;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .data-card {
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.05) 0%, rgba(29, 185, 84, 0.02) 100%);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(29, 185, 84, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(29, 185, 84, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .data-card:hover::before {
+            left: 100%;
+        }
+
+        .data-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(29, 185, 84, 0.3);
+            box-shadow: var(--shadow-hover), var(--accent-glow);
+        }
+
+        .data-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(29, 185, 84, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .data-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 15px;
+        }
+
+        .data-description {
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+
+        /* Geo Intelligence */
+        .geo-intelligence {
+            padding: 100px 0;
+        }
+
+        .geo-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 60px;
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .market {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.03) 0%, transparent 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .market:hover {
+            border-color: rgba(29, 185, 84, 0.2);
+            transform: scale(1.05);
+        }
+
+        .market-flag {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary);
+            box-shadow: var(--accent-glow);
+        }
+
+        .market-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        .market-stats {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+        }
+
+        .market-details {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+        }
+
+        .geo-connector-advanced {
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            position: relative;
+        }
+
+        .geo-connector-advanced::before {
+            content: '↕';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--primary);
+            background: var(--darker);
+            padding: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* Process Intelligence */
+        .process-intelligence {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.02) 0%, transparent 50%);
+        }
+
+        .intelligence-process {
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .intelligence-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .intelligence-step:hover {
+            background: rgba(29, 185, 84, 0.05);
+            transform: translateX(10px);
+        }
+
+        .step-indicator {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--dark);
+            margin-right: 25px;
+            flex-shrink: 0;
+            box-shadow: var(--accent-glow);
+        }
+
+        .step-content-intelligence {
+            flex: 1;
+        }
+
+        .step-title-intelligence {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 12px;
+        }
+
+        .step-description-intelligence {
+            color: var(--light-gray);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .step-data {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .data-tag {
+            background: rgba(29, 185, 84, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(29, 185, 84, 0.2);
+        }
+
+        /* Contact Intelligence */
+        .contact-intelligence {
+            padding: 100px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .intelligence-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .intelligence-btn {
+            padding: 18px 35px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intelligence-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(29, 185, 84, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .intelligence-btn:hover::before {
+            left: 100%;
+        }
+
+        .intelligence-btn.primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .intelligence-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover), var(--accent-glow);
+        }
+
+        .intelligence-btn.primary:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .portfolio-intelligence {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light-gray);
+            text-decoration: none;
+            padding: 15px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .portfolio-intelligence:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .professional-footer {
+            padding: 60px 0 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+        }
+
+        .footer-philosophy {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .geo-comparison {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .geo-connector-advanced {
+                width: 100px;
+                height: 2px;
+                margin: 0 auto;
+            }
+
+            .geo-connector-advanced::before {
+                content: '↔';
+            }
+
+            .intelligence-step {
+                flex-direction: column;
+            }
+
+            .step-indicator {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .intelligence-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .intelligence-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <a href="#servicios">Servicios</a>
-    <a href="#network">Red</a>
-    <a href="#artistas">Artistas</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-  <header class="header">
-    <div class="logo-main">BookingPlanes</div>
-    <div class="logo-tag">Booking internacional ·  Empresa, tecnología y música real</div>
-    <div class="main-lead">Operamos entre América y Europa. <br>Acceso, expertise y red propia: gestionamos resultados, diseñamos rutas y conectamos oportunidades. <br>Tu plataforma, tu booking, tu próximo escenario.</div>
-    <a href="#contacto" class="cta-btn">Comienza tu booking</a>
-  </header>
+    <!-- Data Visualization Background -->
+    <div class="data-visualization"></div>
+    
+    <div class="container">
+        <!-- Professional Header -->
+        <header class="professional-header">
+            <div class="header-graphic">
+                <div class="header-graphic-inner">Data × Music</div>
+            </div>
+            <h1 class="main-title">Booking Intelligence</h1>
+            <p class="tagline">Where data-driven strategy meets musical intuition. Transforming analytics into unforgettable live experiences.</p>
+        </header>
 
-  <section class="section" id="servicios">
-    <h2 class="section-title">¿Por qué BookingPlanes?</h2>
-    <div class="section-desc">Más que una agencia, una operación: booking, management, estrategia y tecnología para artistas y promotores con ambición internacional. Somos <b>red, metodología y resultados.</b></div>
-    <div class="features-grid">
-      <div class="feature">
-        <strong>Conexión directa</strong><br>
-        Sin intermediarios innecesarios, acceso a decision makers reales en México, España y LatAm.
-      </div>
-      <div class="feature">
-        <strong>Expertise validado</strong><br>
-        +10 años, cientos de shows, decenas de artistas, partners estratégicos y procesos sólidos.
-      </div>
-      <div class="feature">
-        <strong>Soluciones profesionales</strong><br>
-        Booking, producción, management, asesoría legal y financiera, digital y analítica.
-      </div>
+        <!-- Data Intelligence Section -->
+        <section class="intelligence-section">
+            <div class="section-header">
+                <div class="section-label">Inteligencia Aplicada</div>
+                <h2 class="section-title">Decisiones Basadas en Datos,<br>Ejecutadas con Conciencia</h2>
+            </div>
+            
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-icon">📊</div>
+                    <h3 class="data-title">Market Analytics</h3>
+                    <p class="data-description">Análisis profundo de tendencias, audiencias y oportunidades en mercados México-España. Identificamos gaps y potencial no explotado.</p>
+                </div>
+                
+                <div class="data-card">
+                    <div class="data-icon">🎯</div>
+                    <h3 class="data-title">Audience Intelligence</h3>
+                    <p class="data-description">Mapping detallado de comportamientos de audiencia, patrones de consumo y rutas de descubrimiento musical.</p>
+                </div>
+                
+                <div class="data-card">
+                    <div class="data-icon">⚡</div>
+                    <h3 class="data-title">Performance Metrics</h3>
+                    <p class="data-description">Seguimiento en tiempo real de KPIs: engagement, conversión, retención y crecimiento orgánico.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geo Intelligence -->
+        <section class="geo-intelligence">
+            <div class="section-header">
+                <div class="section-label">Conectividad Estratégica</div>
+                <h2 class="section-title">Puente Musical<br>México-España</h2>
+            </div>
+            
+            <div class="geo-comparison">
+                <div class="market">
+                    <div class="market-flag" style="background: conic-gradient(#006847 0% 33%, #ce1126 33% 66%, #ffffff 66% 100%);"></div>
+                    <div class="market-name">México</div>
+                    <div class="market-stats">+200 Venues</div>
+                    <div class="market-details">CDMX · GDL · MTY · MÉRIDA</div>
+                </div>
+                
+                <div class="geo-connector-advanced"></div>
+                
+                <div class="market">
+                    <div class="market-flag" style="background: linear-gradient(#c60b1e 25%, #ffc400 25% 75%, #c60b1e 75% 100%);"></div>
+                    <div class="market-name">España</div>
+                    <div class="market-stats">+30 Venues</div>
+                    <div class="market-details">MADRID · BARCELONA · VALENCIA</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Intelligence -->
+        <section class="process-intelligence">
+            <div class="section-header">
+                <div class="section-label">Metodología Comprobada</div>
+                <h2 class="section-title">Arquitectura de Éxito<br>Paso a Paso</h2>
+            </div>
+            
+            <div class="intelligence-process">
+                <div class="intelligence-step">
+                    <div class="step-indicator">01</div>
+                    <div class="step-content-intelligence">
+                        <h3 class="step-title-intelligence">Diagnóstico Estratégico</h3>
+                        <p class="step-description-intelligence">Análisis integral de tu propuesta artística, posicionamiento actual y potencial real en el mercado.</p>
+                        <div class="step-data">
+                            <span class="data-tag">Audience Analysis</span>
+                            <span class="data-tag">Market Positioning</span>
+                            <span class="data-tag">Growth Potential</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-step">
+                    <div class="step-indicator">02</div>
+                    <div class="step-content-intelligence">
+                        <h3 class="step-title-intelligence">Planificación Data-Driven</h3>
+                        <p class="step-description-intelligence">Desarrollo de estrategia personalizada basada en insights de mercado y proyecciones realistas.</p>
+                        <div class="step-data">
+                            <span class="data-tag">Data Modeling</span>
+                            <span class="data-tag">Revenue Projections</span>
+                            <span class="data-tag">Risk Assessment</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="intelligence-step">
+                    <div class="step-indicator">03</div>
+                    <div class="step-content-intelligence">
+                        <h3 class="step-title-intelligence">Ejecución Inteligente</h3>
+                        <p class="step-description-intelligence">Implementación con seguimiento continuo y ajustes en tiempo real según métricas de performance.</p>
+                        <div class="step-data">
+                            <span class="data-tag">Real-time Analytics</span>
+                            <span class="data-tag">Performance Tracking</span>
+                            <span class="data-tag">Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Intelligence -->
+        <section class="contact-intelligence">
+            <div class="section-header">
+                <div class="section-label">Iniciemos el Proyecto</div>
+                <h2 class="section-title">Conversación Estratégica</h2>
+            </div>
+            
+            <p class="contact-subtitle">Analicemos tus datos, definamos objetivos reales y construyamos tu camino al éxito internacional.</p>
+            
+            <div class="intelligence-actions">
+                <a class="intelligence-btn primary" href="mailto:emc121091@me.com?subject=Análisis%20Estratégico%20Booking&body=Hola,%20quiero%20explorar%20una%20colaboración%20estratégica%20basada%20en%20datos%20y%20resultados.">
+                    Análisis Estratégico
+                </a>
+                <a class="intelligence-btn" href="https://wa.me/525512478139?text=Hola,%20me%20interesa%20conversar%20sobre%20una%20estrategia%20data-driven%20para%20mi%20proyecto%20musical.">
+                    Consulta Inmediata
+                </a>
+            </div>
+            
+            <a class="portfolio-intelligence" href="https://edumecar.github.io/portfolio/" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                Ver Casos de Estudio
+            </a>
+        </section>
+
+        <footer class="professional-footer">
+            <p class="footer-philosophy">"En la intersección entre datos y alma musical, encontramos el camino hacia experiencias auténticas y resultados medibles."</p>
+            <div>&copy; 2024 Booking Intelligence - Data-Driven Music Strategy</div>
+        </footer>
     </div>
-    <div class="metrics">
-      <div>
-        <div class="metric">500+</div>
-        <div class="metric-label">Shows producidos</div>
-      </div>
-      <div>
-        <div class="metric">20+</div>
-        <div class="metric-label">Ciudades cubiertas</div>
-      </div>
-      <div>
-        <div class="metric">150+</div>
-        <div class="metric-label">Venues y promotores</div>
-      </div>
-      <div>
-        <div class="metric">100%</div>
-        <div class="metric-label">Gestión personalizada</div>
-      </div>
-    </div>
-  </section>
 
-  <hr class="divider">
+    <script>
+        // Data flow animation enhancement
+        const dataVisualization = document.querySelector('.data-visualization');
+        
+        // Add interactive data points
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            dataVisualization.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
 
-  <section class="section" id="network">
-    <h2 class="section-title">Red internacional y comunidad</h2>
-    <div class="section-desc">Nuestra fuerza: una red propia y activa entre América, España y LatAm.<br>
-      <b>Acceso real, acuerdos confidenciales y una comunidad en crecimiento.</b></div>
-    <div class="network-logos">
-      <!-- Agrega los logos de partners, venues, festivales con los que operas: -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Razzmatazz_logo.png" alt="Razzmatazz">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Sala_Apolo_logo.png" alt="Sala Apolo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/WiZink_Center_logo.png" alt="WiZink Center">
-      <!-- ... y así sucesivamente -->
-    </div>
-  </section>
+        // Intersection Observer for step animations
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.3 });
 
-  <hr class="divider">
+        // Observe intelligence steps
+        document.querySelectorAll('.intelligence-step').forEach((step, index) => {
+            step.style.opacity = '0';
+            step.style.transform = 'translateX(-30px)';
+            step.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            stepObserver.observe(step);
+        });
 
-  <section class="section" id="artistas">
-    <h2 class="section-title">Artistas impulsados</h2>
-    <div class="section-desc">Crecimiento medible: casos de éxito entre dos continentes, tours, showcases y trabajo integral. <br><b>Testimonios y resultados hablan.</b></div>
-    <div class="testimonials">
-      <div class="testimonial">"Desde que trabajamos con BookingPlanes, logramos nuestra primera gira europea y colaboraciones de alto impacto."<br>
-        <span class="testimonial-person">Ángel López, Manager</span>
-      </div>
-      <div class="testimonial">"No es solo booking, es estrategia de verdad. Saben decir cuándo, cómo y con quién."<br>
-        <span class="testimonial-person">Lucía Díaz, Promotora BCN</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <section class="section" id="contacto">
-    <h2 class="section-title">¿Listo/a para profesionalizar tu booking?</h2>
-    <div class="section-desc">Haz tu solicitud, agenda una llamada o escribe tu propuesta. Te escuchamos y te guiamos.</div>
-    <form style="display:flex;flex-direction:column;gap:18px;max-width:440px;">
-      <input type="text" placeholder="Nombre">
-      <input type="email" placeholder="Email">
-      <input type="text" placeholder="Ciudad/interés">
-      <textarea placeholder="¿Cómo podemos ayudarte?" style="height:80px"></textarea>
-      <button type="submit" class="cta-btn" style="margin:0;">Enviar</button>
-    </form>
-    <div style="margin-top:26px;font-size:1.09rem;">
-      O contacta directo por WhatsApp: <a href="https://wa.me/525512478139" target="_blank" style="color:var(--primary);text-decoration:underline;">+52 55 1247 8139</a>
-    </div>
-  </section>
-
-  <footer style="background:#151515;color:#fff;text-align:center;padding:44px 0 16px 0;font-size:.97rem;margin-top:90px;">
-    BookingPlanes: Booking Internacional · Tu puente México–España · Powered by experiencia, datos y personas reales.
-  </footer>
+        // Data cards hover enhancement
+        document.querySelectorAll('.data-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, rgba(29, 185, 84, 0.05) 100%)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(135deg, rgba(29, 185, 84, 0.05) 0%, rgba(29, 185, 84, 0.02) 100%)';
+            });
+        });
+    </script>
 </body>
 </html>
