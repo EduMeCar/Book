@@ -1,783 +1,1549 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conciencia Sonora</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOOKING PLANS | Giras Internacionales que Funcionan</title>
     <style>
+        :root {
+            --negro: #000000;
+            --blanco: #ffffff;
+            --rojo: #ff2b2b;
+            --rojo-oscuro: #c21010;
+            --gris-oscuro: #050505;
+            --gris-medio: #141414;
+            --gris: #777777;
+            --gris-claro: #b3b3b3;
+            --borde-suave: rgba(255, 255, 255, 0.08);
+            --borde-fuerte: rgba(255, 255, 255, 0.16);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #000;
-            color: #fff;
+            background: radial-gradient(circle at top, #1a0000 0%, #020202 55%, #000000 100%);
+            color: var(--blanco);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        /* World Map Hero */
-        .world-map {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 50%, #0a1628 0%, #000 100%);
-            overflow: hidden;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        #map-canvas {
-            position: absolute;
+
+        /* HEADER */
+        .header {
+            position: fixed;
+            inset-inline: 0;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--borde-suave);
+            transition: background 0.2s ease-out, border-color 0.2s ease-out;
         }
-        
-        .map-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-            pointer-events: none;
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            border-color: var(--borde-fuerte);
         }
-        
-        .map-title {
-            font-size: clamp(4rem, 12vw, 14rem);
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            line-height: 0.9;
-            margin-bottom: 30px;
-            text-shadow: 0 0 60px rgba(59, 130, 246, 0.8);
-        }
-        
-        .map-subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-        
-        .logo-float {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            width: 160px;
-            z-index: 20;
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
-        }
-        
-        .contact-float {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            z-index: 20;
-        }
-        
-        .contact-btn {
-            padding: 12px 28px;
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-btn:hover {
-            background: rgba(59, 130, 246, 0.4);
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-        
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            opacity: 0.5;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, 0); }
-            50% { opacity: 1; transform: translate(-50%, -10px); }
-        }
-        
-        /* Genres Flow */
-        .genres-section {
-            padding: 120px 0;
-            background: #000;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .genres-label {
-            text-align: center;
-            font-size: 0.9rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 60px;
-        }
-        
-        .genre-track {
+
+        .header-content {
             display: flex;
-            gap: 30px;
-            animation: scroll 40s linear infinite;
-            margin-bottom: 30px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
         }
-        
-        .genre-track:nth-child(3) {
-            animation-direction: reverse;
-        }
-        
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        .genre-item {
-            padding: 20px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-        
-        .genre-item:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-            transform: translateY(-5px);
-        }
-        
-        /* Network Stats */
-        .network-stats {
-            padding: 150px 40px;
-            background: linear-gradient(180deg, #000 0%, #0a1628 50%, #000 100%);
-            position: relative;
-        }
-        
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 60px;
-        }
-        
-        .stat-card {
-            text-align: center;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 12px;
-            transition: all 0.4s ease;
-        }
-        
-        .stat-card:hover {
-            background: rgba(59, 130, 246, 0.05);
-            border-color: #3b82f6;
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
-        }
-        
-        .stat-number {
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .stat-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.05em;
-        }
-        
-        .stat-detail {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 10px;
-        }
-        
-        /* Territory Deep Dive */
-        .territory-dive {
-            padding: 150px 40px;
-            background: #000;
-        }
-        
-        .territory-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-        
-        .territory-block {
-            position: relative;
-            padding: 60px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(6, 182, 212, 0.05));
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 16px;
-            transition: all 0.4s ease;
-        }
-        
-        .territory-block:hover {
-            border-color: #3b82f6;
-            transform: scale(1.02);
-        }
-        
-        .territory-flag {
-            font-size: 4rem;
-            margin-bottom: 30px;
-            display: block;
-        }
-        
-        .territory-name {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
-        }
-        
-        .territory-hub {
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 1.2rem;
-            color: #3b82f6;
-            font-weight: 600;
-            margin-bottom: 30px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
         }
-        
-        .territory-specs {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .spec-line {
-            padding-left: 25px;
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #ff6666 0%, #ff2b2b 35%, #470000 100%);
+            box-shadow: 0 0 24px rgba(255, 43, 43, 0.6);
             position: relative;
+            overflow: hidden;
         }
-        
-        .spec-line::before {
-            content: '→';
+
+        .logo-mark::after {
+            content: '';
             position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: 900;
+            inset: 6px;
+            border-radius: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.24);
         }
-        
-        /* Reality Check */
-        .reality-check {
-            padding: 150px 40px;
-            background: #0a1628;
-            text-align: center;
+
+        .logo span {
+            color: var(--rojo);
         }
-        
-        .reality-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            margin-bottom: 60px;
-            letter-spacing: -0.03em;
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
-        
-        .reality-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
-            background: rgba(59, 130, 246, 0.2);
+
+        .header-link {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+            text-decoration: none;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
-        
-        .reality-item {
-            padding: 50px 40px;
-            background: #000;
-            text-align: left;
+
+        .header-link:hover {
+            color: var(--blanco);
+            border-color: rgba(255, 255, 255, 0.36);
         }
-        
-        .reality-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
+
+        .header-cta {
+            padding: 9px 18px;
+            background: var(--rojo);
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: all 0.2s ease-out;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.0);
         }
-        
-        .reality-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.9);
+
+        .header-cta:hover {
+            background: var(--rojo-oscuro);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px rgba(255, 43, 43, 0.4);
         }
-        
-        /* Contact Zone */
-        .contact-zone {
+
+        .header-cta:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 16px rgba(255, 43, 43, 0.3);
+        }
+
+        /* HERO */
+        .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 100px 40px;
-            background: #000;
-            text-align: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .contact-mega-title {
-            font-size: clamp(4rem, 10vw, 10rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+
+        .hero::before {
+            content: '';
+            position: fixed;
+            inset: auto auto -40vh -40vw;
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(255, 43, 43, 0.12) 0%, transparent 65%);
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: -1;
         }
-        
-        .contact-info {
-            font-size: 1.4rem;
-            margin-bottom: 60px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            max-width: 700px;
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+            gap: 40px;
+            align-items: center;
         }
-        
-        .contact-actions {
+
+        .hero-tag-row {
             display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 80px;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 26px;
         }
-        
-        .contact-mega-btn {
-            padding: 25px 60px;
-            font-size: 1.2rem;
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 43, 43, 0.08);
+            border-radius: 999px;
+            border: 1px solid rgba(255, 43, 43, 0.38);
+            color: var(--rojo);
+            font-size: 0.7rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+        }
+
+        .hero-tag-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #19ff6a;
+            box-shadow: 0 0 10px rgba(25, 255, 106, 0.7);
+        }
+
+        .hero-subtag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 5vw, 4.4rem);
+            font-weight: 900;
+            line-height: 0.96;
+            letter-spacing: -0.045em;
+            margin-bottom: 22px;
+        }
+
+        .hero-title span {
+            color: var(--rojo);
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--gris-claro);
+            line-height: 1.7;
+            margin-bottom: 28px;
+            max-width: 30rem;
+        }
+
+        .hero-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .hero-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gris-claro);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .hero-bullet {
+            width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hero-bullet-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--rojo);
+            box-shadow: 0 0 10px rgba(255, 43, 43, 0.7);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .btn-primary {
+            padding: 14px 26px;
+            background: var(--rojo);
+            color: var(--blanco);
             text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-blue {
-            background: #3b82f6;
-            color: #fff;
-        }
-        
-        .btn-blue:hover {
-            background: #2563eb;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-ghost:hover {
-            border-color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        .portfolio-final {
-            margin-top: 60px;
-        }
-        
-        .portfolio-final a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
+            font-weight: 700;
             font-size: 0.9rem;
-            padding: 12px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease-out;
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.0);
         }
-        
-        .portfolio-final a:hover {
-            color: #3b82f6;
-            border-color: #3b82f6;
+
+        .btn-primary:hover {
+            background: var(--rojo-oscuro);
+            transform: translateY(-1px);
+            box-shadow: 0 14px 40px rgba(255, 43, 43, 0.5);
         }
-        
-        .footer-minimal {
-            padding: 40px;
-            text-align: center;
+
+        .btn-primary span {
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary {
+            padding: 13px 22px;
+            background: transparent;
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 999px;
+            border: 1px solid var(--borde-suave);
+            transition: all 0.2s ease-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--borde-fuerte);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-caption {
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.3);
-            background: #000;
+            color: var(--gris);
         }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .territory-container,
-            .reality-grid {
-                grid-template-columns: 1fr;
+
+        .hero-caption strong {
+            color: var(--gris-claro);
+        }
+
+        /* HERO SIDE CARD */
+        .hero-card {
+            background: radial-gradient(circle at top, rgba(255, 43, 43, 0.14) 0%, rgba(0, 0, 0, 0.9) 60%);
+            border-radius: 18px;
+            border: 1px solid var(--borde-fuerte);
+            padding: 20px 20px 18px;
+            box-shadow:
+                0 22px 60px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(255, 43, 43, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .hero-card-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+        }
+
+        .hero-card-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--gris-claro);
+        }
+
+        .hero-card-metric {
+            margin-bottom: 14px;
+        }
+
+        .hero-card-metric-label {
+            font-size: 0.75rem;
+            color: var(--gris);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .hero-card-metric-main {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .hero-card-metric-main span:first-child {
+            font-size: 2.4rem;
+            font-weight: 800;
+        }
+
+        .hero-card-metric-main span:last-child {
+            font-size: 0.85rem;
+            color: var(--gris-claro);
+        }
+
+        .hero-card-bar {
+            position: relative;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .hero-card-bar-fill {
+            position: absolute;
+            inset: 0;
+            width: 76%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #ff8161, #ff2b2b, #ffcf5f);
+            box-shadow: 0 0 16px rgba(255, 99, 71, 0.7);
+        }
+
+        .hero-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+            font-size: 0.75rem;
+        }
+
+        .hero-card-pill {
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-card-pill-label {
+            color: var(--gris);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-bottom: 4px;
+        }
+
+        .hero-card-pill-value {
+            font-weight: 600;
+            color: var(--gris-claro);
+        }
+
+        .hero-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+            margin-top: 16px;
+            padding-top: 12px;
+        }
+
+        .hero-card-footer span {
+            font-size: 0.75rem;
+            color: var(--gris);
+        }
+
+        .hero-card-footer strong {
+            color: var(--gris-claro);
+        }
+
+        .hero-card-pill--success {
+            border-color: rgba(25, 255, 106, 0.42);
+            background: rgba(8, 39, 21, 0.9);
+        }
+
+        .hero-card-pill--warning {
+            border-color: rgba(255, 205, 56, 0.4);
+            background: rgba(39, 34, 8, 0.9);
+        }
+
+        /* SECCIÓN PROBLEMA */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section.dark {
+            background: radial-gradient(circle at top, rgba(50, 0, 0, 0.6) 0%, #020202 40%, #000000 100%);
+        }
+
+        .section-tag {
+            color: var(--rojo);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 14px;
+        }
+
+        .section-kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--gris-claro);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 18px;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--gris-claro);
+            max-width: 40rem;
+            line-height: 1.7;
+        }
+
+        .problema-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .problema-list {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .problema-list li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--gris-claro);
+            display: flex;
+            gap: 10px;
+        }
+
+        .problema-list span {
+            font-size: 1rem;
+            color: var(--gris);
+        }
+
+        .problema-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 18px;
+            border: 1px solid var(--borde-fuerte);
+            padding: 18px 18px 16px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 14px;
+            font-size: 0.8rem;
+        }
+
+        .problema-card-block {
+            padding-right: 8px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .problema-card-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+            margin-bottom: 8px;
+        }
+
+        .problema-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 0.7rem;
+            color: var(--gris-claro);
+            margin-bottom: 8px;
+        }
+
+        .problema-card-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffcf5f;
+        }
+
+        .problema-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .problema-card small {
+            color: var(--gris);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .problema-card-tag {
+            display: inline-flex;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            font-size: 0.7rem;
+            color: var(--gris-claro);
+            margin-top: 4px;
+        }
+
+        /* SOLUCIÓN / PILARES */
+        .solucion-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .solucion-header .section-lead {
+            margin: 0 auto;
+        }
+
+        .pilares {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 32px;
+        }
+
+        .pilar {
+            background: radial-gradient(circle at top, rgba(255, 43, 43, 0.12) 0%, rgba(12, 12, 12, 0.98) 55%);
+            padding: 22px 20px 18px;
+            border-radius: 16px;
+            border: 1px solid var(--borde-suave);
+            transition: transform 0.22s ease-out, border-color 0.22s ease-out, box-shadow 0.22s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pilar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255, 99, 71, 0.32) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.22s ease-out;
+        }
+
+        .pilar:hover {
+            border-color: rgba(255, 43, 43, 0.6);
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(255, 43, 43, 0.35);
+        }
+
+        .pilar:hover::before {
+            opacity: 1;
+        }
+
+        .pilar-inner {
+            position: relative;
+        }
+
+        .pilar-numero {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--gris-claro);
+            margin-bottom: 14px;
+        }
+
+        .pilar-numero span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            margin-right: 8px;
+            font-size: 0.7rem;
+        }
+
+        .pilar h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .pilar p {
+            color: var(--gris-claro);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .pilar-list {
+            list-style: none;
+            font-size: 0.8rem;
+            color: var(--gris-claro);
+        }
+
+        .pilar-list li {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .pilar-list span {
+            color: var(--gris);
+        }
+
+        /* PÚBLICO OBJETIVO */
+        .publico-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .targets {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .target {
+            background: rgba(8, 8, 8, 0.98);
+            padding: 22px 20px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--borde-suave);
+            transition: transform 0.22s ease-out, border-color 0.22s ease-out, box-shadow 0.22s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .target::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255, 43, 43, 0.22) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.22s ease-out;
+        }
+
+        .target:hover {
+            border-color: rgba(255, 43, 43, 0.7);
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(255, 43, 43, 0.35);
+        }
+
+        .target:hover::before {
+            opacity: 1;
+        }
+
+        .target-inner {
+            position: relative;
+        }
+
+        .target-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .target-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+            margin-bottom: 3px;
+        }
+
+        .target h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .target-problema {
+            color: var(--gris);
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .target-solucion {
+            color: var(--gris-claro);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .target-meta {
+            font-size: 0.8rem;
+            color: var(--gris);
+            margin-bottom: 12px;
+        }
+
+        .target-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            background: transparent;
+            color: var(--rojo);
+            border: 1px solid var(--rojo);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 999px;
+            transition: all 0.18s ease-out;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .target-cta:hover {
+            background: var(--rojo);
+            color: var(--blanco);
+        }
+
+        .target-cta span {
+            font-size: 1rem;
+        }
+
+        /* PRUEBA SOCIAL */
+        .prueba-social {
+            padding: 80px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card {
+            padding: 18px 16px 14px;
+            border-radius: 16px;
+            border: 1px solid var(--borde-suave);
+            background: rgba(4, 4, 4, 0.96);
+            text-align: left;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--gris-claro);
+            margin-bottom: 10px;
+        }
+
+        .stat-numero {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--rojo);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .stat-sub {
+            font-size: 0.8rem;
+            color: var(--gris-claro);
+        }
+
+        .stat-note {
+            font-size: 0.7rem;
+            color: var(--gris);
+            margin-top: 8px;
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            padding: 90px 0 80px;
+            background: radial-gradient(circle at center, rgba(255, 43, 43, 0.16) 0%, #050000 45%, #000000 100%);
+        }
+
+        .cta-final-content {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 18px;
+            letter-spacing: -0.04em;
+        }
+
+        .cta-final p {
+            font-size: 1rem;
+            color: var(--gris-claro);
+            margin-bottom: 26px;
+            line-height: 1.7;
+        }
+
+        .cta-note {
+            font-size: 0.8rem;
+            color: var(--gris);
+            margin-top: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 40px 0 30px;
+            border-top: 1px solid var(--borde-suave);
+            text-align: center;
+            background: #020202;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--rojo);
+        }
+
+        .footer-text {
+            color: var(--gris);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--rojo);
+            margin: 18px auto;
+            opacity: 0.5;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.5fr);
             }
-            
+
+            .pilares {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .targets {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
-        
+
         @media (max-width: 768px) {
-            .logo-float {
-                width: 120px;
-                top: 20px;
-                left: 20px;
+            .header-content {
+                padding-inline: 4px;
             }
-            
-            .contact-float {
-                top: 20px;
-                right: 20px;
+
+            .header-right {
+                gap: 8px;
             }
-            
-            .contact-btn {
-                padding: 10px 20px;
-                font-size: 0.8rem;
+
+            .header-link {
+                display: none;
             }
-            
-            .territory-block {
-                padding: 40px 30px;
+
+            .hero {
+                padding-top: 110px;
             }
-            
-            .contact-actions {
+
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-side {
+                order: -1;
+            }
+
+            .hero-title {
+                font-size: clamp(2.4rem, 9vw, 3rem);
+            }
+
+            .hero-subtitle {
+                max-width: none;
+            }
+
+            .hero-buttons {
                 flex-direction: column;
-                width: 100%;
-                max-width: 350px;
             }
-            
+
+            .btn-primary,
+            .btn-secondary {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .problema-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .problema-card {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .problema-card-block {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding-right: 0;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+
+            .pilares {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .targets {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .section {
+                padding-block: 70px;
+            }
+
+            .cta-final {
+                padding-block: 70px;
             }
         }
+
+        /* ANIMACIONES BÁSICAS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-animate > * {
+            animation: fadeInUp 0.7s ease-out backwards;
+        }
+
+        .hero-tag-row { animation-delay: 0.05s; }
+        .hero-title { animation-delay: 0.1s; }
+        .hero-subtitle { animation-delay: 0.16s; }
+        .hero-list { animation-delay: 0.22s; }
+        .hero-buttons { animation-delay: 0.28s; }
+        .hero-caption { animation-delay: 0.34s; }
     </style>
 </head>
 <body>
-    <!-- World Map -->
-    <section class="world-map">
-        <img src="logo.svg" alt="Conciencia Sonora" class="logo-float">
-        <div class="contact-float">
-            <a href="mailto:emc121091@me.com" class="contact-btn">Hablar</a>
-        </div>
-        
-        <canvas id="map-canvas"></canvas>
-        
-        <div class="map-overlay">
-            <h1 class="map-title">MEX → ESP</h1>
-            <p class="map-subtitle">La Red</p>
-        </div>
-        
-        <div class="scroll-hint">Scroll ↓</div>
-    </section>
-    
-    <!-- Genres Flow -->
-    <section class="genres-section">
-        <div class="genres-label">Portfolio Sonoro</div>
-        
-        <div class="genre-track">
-            <span class="genre-item">REGGAETÓN</span>
-            <span class="genre-item">ELECTRÓNICA</span>
-            <span class="genre-item">ROCK</span>
-            <span class="genre-item">INDIE</span>
-            <span class="genre-item">HIP HOP</span>
-            <span class="genre-item">SALSA</span>
-            <!-- Duplicate for infinite -->
-            <span class="genre-item">REGGAETÓN</span>
-            <span class="genre-item">ELECTRÓNICA</span>
-            <span class="genre-item">ROCK</span>
-            <span class="genre-item">INDIE</span>
-            <span class="genre-item">HIP HOP</span>
-            <span class="genre-item">SALSA</span>
-        </div>
-        
-        <div class="genre-track">
-            <span class="genre-item">JAZZ</span>
-            <span class="genre-item">REGIONAL</span>
-            <span class="genre-item">POP</span>
-            <span class="genre-item">ALTERNATIVO</span>
-            <span class="genre-item">R&B</span>
-            <span class="genre-item">FUSIÓN</span>
-            <!-- Duplicate -->
-            <span class="genre-item">JAZZ</span>
-            <span class="genre-item">REGIONAL</span>
-            <span class="genre-item">POP</span>
-            <span class="genre-item">ALTERNATIVO</span>
-            <span class="genre-item">R&B</span>
-            <span class="genre-item">FUSIÓN</span>
-        </div>
-    </section>
-    
-    <!-- Network Stats -->
-    <section class="network-stats">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">239</div>
-                <div class="stat-label">Venues Verificados</div>
-                <div class="stat-detail">Red activa</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Años Operando</div>
-                <div class="stat-detail">500+ shows ejecutados</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">86</div>
-                <div class="stat-label">Contactos Directos</div>
-                <div class="stat-detail">Promotores y productores</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">4</div>
-                <div class="stat-label">Semanas</div>
-                <div class="stat-detail">De lead a show</div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Territories -->
-    <section class="territory-dive">
-        <div class="territory-container">
-            <div class="territory-block">
-                <span class="territory-flag">🇲🇽</span>
-                <h2 class="territory-name">México</h2>
-                <div class="territory-hub">Hub: CDMX</div>
-                <div class="territory-specs">
-                    <div class="spec-line">226 venues activos</div>
-                    <div class="spec-line">Guadalajara + Monterrey consolidados</div>
-                    <div class="spec-line">Capacidades: 100 a 5,000 pax</div>
-                    <div class="spec-line">Todos los géneros operativos</div>
-                    <div class="spec-line">Triángulo dorado: CDMX-GDL-MTY</div>
+    <!-- HEADER -->
+    <header class="header" id="top-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-mark"></div>
+                    BOOKING<span>PLANS</span>
                 </div>
-            </div>
-            
-            <div class="territory-block">
-                <span class="territory-flag">🇪🇸</span>
-                <h2 class="territory-name">España</h2>
-                <div class="territory-hub">Hub: Barcelona</div>
-                <div class="territory-specs">
-                    <div class="spec-line">13 venues activos</div>
-                    <div class="spec-line">Barcelona + Madrid</div>
-                    <div class="spec-line">Capacidades: 150 a 3,000 pax</div>
-                    <div class="spec-line">Indie, rock, electrónica, urbano</div>
-                    <div class="spec-line">Gateway Europa</div>
+                <div class="header-right">
+                    <a href="#problema" class="header-link">El problema</a>
+                    <a href="#como" class="header-link">Cómo funciona</a>
+                    <a href="#publico" class="header-link">Para quién</a>
+                    <a href="#empezar" class="header-cta">Empezar ahora</a>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <!-- Reality Check -->
-    <section class="reality-check">
-        <h2 class="reality-title">Sin Filtros</h2>
-        <div class="reality-grid">
-            <div class="reality-item">
-                <div class="reality-icon">✓</div>
-                <div class="reality-text">Contacto directo con promotores. Sin intermediarios. Sin comisiones escondidas.</div>
-            </div>
-            <div class="reality-item">
-                <div class="reality-icon">✓</div>
-                <div class="reality-text">Si tienes tracción verificable en estas ciudades, hablemos. Si no, te decimos qué construir.</div>
-            </div>
-            <div class="reality-item">
-                <div class="reality-icon">✗</div>
-                <div class="reality-text">No financiamos giras. No prometemos "llenar venues". No hacemos milagros.</div>
-            </div>
-            <div class="reality-item">
-                <div class="reality-icon">✗</div>
-                <div class="reality-text">No aceptamos proyectos sin data. No trabajamos con artistas que buscan "una fecha".</div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-main hero-animate">
+                    <div class="hero-tag-row">
+                        <div class="hero-tag">
+                            <span class="hero-tag-dot"></span>
+                            España ↔ México
+                        </div>
+                        <div class="hero-subtag">Giras internacionales que sí pasan</div>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Giras internacionales<br />
+                        <span>sin humo ni promesas vacías</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Conectamos artistas, sellos y venues entre España y Latinoamérica
+                        con datos reales, red verificada y acuerdos claros desde el minuto uno.
+                    </p>
+
+                    <ul class="hero-list">
+                        <li>
+                            <div class="hero-bullet"><div class="hero-bullet-dot"></div></div>
+                            Validamos tu audiencia real antes de hablar de fechas.
+                        </li>
+                        <li>
+                            <div class="hero-bullet"><div class="hero-bullet-dot"></div></div>
+                            Solo trabajamos con venues activos y pagadores.
+                        </li>
+                        <li>
+                            <div class="hero-bullet"><div class="hero-bullet-dot"></div></div>
+                            Modelo sin riesgo: cobramos si el show sucede.
+                        </li>
+                    </ul>
+
+                    <div class="hero-buttons">
+                        <a href="#empezar" class="btn-primary">
+                            Validar mi potencial
+                            <span>→</span>
+                        </a>
+                        <a href="#como" class="btn-secondary">
+                            Ver cómo funciona
+                        </a>
+                    </div>
+
+                    <p class="hero-caption">
+                        <strong>En menos de 48 horas</strong> sabes si tiene sentido cruzar el
+                        Atlántico ahora o qué tendría que pasar para que sí lo tenga.
+                    </p>
+                </div>
+
+                <!-- CARD LADO DERECHO: "snapshot" de análisis -->
+                <aside class="hero-side">
+                    <div class="hero-card" aria-label="Ejemplo de análisis de potencial de gira">
+                        <div class="hero-card-header">
+                            <div class="hero-card-title">Snapshot de gira potencial</div>
+                            <span class="hero-card-badge">Ejemplo real / anonimizado</span>
+                        </div>
+
+                        <div class="hero-card-metric">
+                            <div class="hero-card-metric-label">Audiencia activa en México</div>
+                            <div class="hero-card-metric-main">
+                                <span id="metric-fans">23.4k</span>
+                                <span>oyentes mensuales concentrados en 4 ciudades</span>
+                            </div>
+                            <div class="hero-card-bar">
+                                <div class="hero-card-bar-fill" id="metric-bar"></div>
+                            </div>
+                        </div>
+
+                        <div class="hero-card-grid">
+                            <div class="hero-card-pill hero-card-pill--success">
+                                <div class="hero-card-pill-label">Ciudades con sentido</div>
+                                <div class="hero-card-pill-value" id="metric-cities">
+                                    CDMX · GDL · MTY · Puebla
+                                </div>
+                            </div>
+                            <div class="hero-card-pill hero-card-pill--warning">
+                                <div class="hero-card-pill-label">Riesgos detectados</div>
+                                <div class="hero-card-pill-value" id="metric-risks">
+                                    Fines de semana limitados · Festivales en fechas clave
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hero-card-footer">
+                            <span>Ventana recomendada:<br /><strong>Abril – Mayo</strong></span>
+                            <span>Aforo estimado por ciudad:<br /><strong>120–250 pax</strong></span>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>
-    
-    <!-- Contact -->
-    <section class="contact-zone">
-        <h2 class="contact-mega-title">Hablemos</h2>
-        <p class="contact-info">
-            Primera llamada: 30 minutos, sin costo.<br>
-            Revisamos tracción, viabilidad, timing.<br>
-            Si hay fit, seguimos. Si no, te explicamos por qué.
-        </p>
-        <div class="contact-actions">
-            <a href="mailto:emc121091@me.com?subject=Primera%20llamada&body=Hola,%0A%0AQuiero%20hablar%20sobre:%0AProyecto:%0ASpotify:%0ACiudad%20objetivo:%0A%0AGracias." class="contact-mega-btn btn-blue">Email</a>
-            <a href="https://wa.me/525512478139?text=Hola,%20quiero%20hablar%20sobre%20booking." target="_blank" class="contact-mega-btn btn-ghost">WhatsApp</a>
-        </div>
-        <div class="portfolio-final">
-            <a href="https://edumecar.github.io/portfolio/" target="_blank">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                </svg>
-                Portfolio
-            </a>
+
+    <!-- EL PROBLEMA -->
+    <section class="section dark" id="problema">
+        <div class="container">
+            <div class="problema-layout">
+                <div>
+                    <div class="section-tag">El problema real</div>
+                    <h2 class="section-title">
+                        La industria está llena de<br />
+                        contactos que nunca responden.
+                    </h2>
+                    <p class="section-lead">
+                        Artistas que se queman en giras mal armadas. Sellos que pierden talento
+                        porque no pueden ofrecer expansión internacional. Venues que arriesgan
+                        en nombres sin datos.
+                    </p>
+                    <ul class="problema-list">
+                        <li><span>—</span> Decenas de mails enviados sin contexto ni datos.</li>
+                        <li><span>—</span> Agencias prometiendo giras que nunca se cierran.</li>
+                        <li><span>—</span> Artistas pagando vuelos para tocar ante 50 personas.</li>
+                        <li><span>—</span> Venues diciendo “no” por falta de información real.</li>
+                    </ul>
+                    <p class="section-lead" style="margin-top: 14px; max-width: 32rem;">
+                        <strong>Resultado:</strong> todos pierden tiempo, dinero y credibilidad
+                        en un sistema roto.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="problema-card" aria-label="Antes vs después de trabajar con Booking Plans">
+                        <div class="problema-card-block">
+                            <div class="problema-card-title">Antes</div>
+                            <div class="problema-card-badge">
+                                <span class="problema-card-badge-dot"></span>
+                                Gira “a ver qué pasa”
+                            </div>
+                            <strong>Mail genérico + presskit</strong>
+                            <small>Sin datos de audiencia · Sin histórico de shows · Sin contexto local</small>
+                            <span class="problema-card-tag">Tasa de respuesta: baja</span>
+                        </div>
+                        <div>
+                            <div class="problema-card-title">Después</div>
+                            <div class="problema-card-badge">
+                                <span class="problema-card-badge-dot" style="background:#19ff6a;"></span>
+                                Propuesta con datos
+                            </div>
+                            <strong>Dossier con análisis de ciudad y riesgo</strong>
+                            <small>Audiencia real por ciudad · Historial de shows · Condiciones claras</small>
+                            <span class="problema-card-tag">Tasa de cierre: saludable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    
-    <footer class="footer-minimal">
-        Conciencia Sonora · CDMX ↔ Barcelona · 2024
+
+    <!-- LA SOLUCIÓN -->
+    <section class="section" id="como">
+        <div class="container">
+            <div class="solucion-header">
+                <div class="section-kicker">Nuestra forma de trabajar</div>
+                <div class="section-tag">Tres pilares que eliminan el humo</div>
+                <h2 class="section-title">Si no hay datos, no hay gira. Así de simple.</h2>
+                <p class="section-lead">
+                    Booking Plans no es una agencia que “promete”. Es un sistema que cruza
+                    datos, red real y acuerdos transparentes. Sin magia, sin humo, sin fantasía.
+                </p>
+            </div>
+
+            <div class="pilares">
+                <article class="pilar">
+                    <div class="pilar-inner">
+                        <div class="pilar-numero"><span>01</span> Análisis con datos</div>
+                        <h3>Validamos tu potencial antes de hablar de fechas.</h3>
+                        <p>
+                            Miramos tu audiencia real en el país destino: Spotify, redes,
+                            ciudades top, engagement, histórico de tickets si lo hay.
+                        </p>
+                        <ul class="pilar-list">
+                            <li><span>•</span> Informe en lenguaje claro (sin palabreo técnico vacío).</li>
+                            <li><span>•</span> Ciudades y rangos de aforo realistas.</li>
+                            <li><span>•</span> Recomendación honesta: “sí ahora” / “todavía no”.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="pilar">
+                    <div class="pilar-inner">
+                        <div class="pilar-numero"><span>02</span> Red verificada</div>
+                        <h3>Solo venues que pagan y que programan de verdad.</h3>
+                        <p>
+                            Más de 300 salas, clubs y espacios activos con histórico de shows reales
+                            y pagos confirmados.
+                        </p>
+                        <ul class="pilar-list">
+                            <li><span>•</span> Contactos con nombre y apellido, no listas viejas.</li>
+                            <li><span>•</span> Contexto de cachés, condiciones y aforos.</li>
+                            <li><span>•</span> Feedback real de experiencias anteriores.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="pilar">
+                    <div class="pilar-inner">
+                        <div class="pilar-numero"><span>03</span> Riesgo controlado</div>
+                        <h3>Modelo claro: tú no pagas si el show no sucede.</h3>
+                        <p>
+                            Solo entramos cuando tiene sentido para todas las partes. Si no hay
+                            base, te lo decimos. Si la hay, armamos algo sostenible.
+                        </p>
+                        <ul class="pilar-list">
+                            <li><span>•</span> Cobramos sobre shows cerrados, no sobre promesas.</li>
+                            <li><span>•</span> Los venues reciben datos, no PDFs genéricos.</li>
+                            <li><span>•</span> Transparencia total en condiciones y reparto.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PÚBLICO OBJETIVO -->
+    <section class="section dark" id="publico">
+        <div class="container">
+            <div class="publico-header">
+                <div class="section-tag">Para quién es Booking Plans</div>
+                <h2 class="section-title">Tres roles. Un mismo objetivo: giras que cierran.</h2>
+                <p class="section-lead" style="margin:0 auto; max-width:40rem;">
+                    Artistas, sellos y venues tienen problemas distintos, pero todos necesitan lo mismo:
+                    información honesta, red activa y acuerdos claros.
+                </p>
+            </div>
+
+            <div class="targets">
+                <!-- ARTISTAS -->
+                <article class="target">
+                    <div class="target-inner">
+                        <div class="target-icon">🎸</div>
+                        <div class="target-label">Perfil</div>
+                        <h3>Artistas / Managers</h3>
+                        <p class="target-problema">
+                            “Tengo oyentes en México/España, pero no sé si realmente puedo llenar una sala.”
+                        </p>
+                        <p class="target-solucion">
+                            Sube tu música y contexto. Analizamos tu audiencia país por país y ciudad por ciudad.
+                            Si el momento es bueno, te conectamos con venues verificados que pagan. Si no,
+                            te damos un mapa claro de lo que falta.
+                        </p>
+                        <p class="target-meta">
+                            Ideal si ya tienes base digital y al menos algunas experiencias en vivo en tu país.
+                        </p>
+                        <a href="#empezar" class="target-cta">
+                            Validar ahora
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- SELLOS -->
+                <article class="target">
+                    <div class="target-inner">
+                        <div class="target-icon">🏢</div>
+                        <div class="target-label">Perfil</div>
+                        <h3>Sellos / Colectivos</h3>
+                        <p class="target-problema">
+                            “Mis artistas se van porque no puedo ofrecerles giras internacionales serias.”
+                        </p>
+                        <p class="target-solucion">
+                            Añade expansión internacional a tu propuesta sin montar un equipo de booking interno.
+                            Nosotros nos encargamos del análisis, los contactos y los deals. Tú retienes talento y
+                            cuidas tu catálogo.
+                        </p>
+                        <p class="target-meta">
+                            Trabajamos por proyecto: roster completo o artistas concretos con potencial claro.
+                        </p>
+                        <a href="#empezar" class="target-cta">
+                            Ver opciones para sellos
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- VENUES -->
+                <article class="target">
+                    <div class="target-inner">
+                        <div class="target-icon">🎪</div>
+                        <div class="target-label">Perfil</div>
+                        <h3>Venues / Programadores</h3>
+                        <p class="target-problema">
+                            “Arriesgo en artistas internacionales sin saber si realmente tienen público aquí.”
+                        </p>
+                        <p class="target-solucion">
+                            Recibes propuestas con datos de audiencia real en tu ciudad: reproducciones,
+                            seguidores, ticket history si existe y contexto de escena. Tomas decisiones con
+                            información, no con intuición solamente.
+                        </p>
+                        <p class="target-meta">
+                            Te unes a una red donde todos entendemos que una noche bien pensada es mejor que tres al azar.
+                        </p>
+                        <a href="#empezar" class="target-cta">
+                            Unirme a la red
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRUEBA SOCIAL -->
+    <section class="prueba-social">
+        <div class="container">
+            <div class="solucion-header" style="margin-bottom:30px;">
+                <div class="section-kicker">No es teoría</div>
+                <div class="section-tag">Trabajo ya ejecutado</div>
+                <h2 class="section-title">Lo que hay detrás de Booking Plans.</h2>
+                <p class="section-lead" style="margin:0 auto; max-width:40rem;">
+                    Antes de ponerle nombre a esto ya estábamos girando artistas,
+                    conectando continentes y aprendiendo a base de prueba, error y datos.
+                </p>
+            </div>
+
+            <div class="stats-grid" aria-label="Resultados aproximados acumulados">
+                <article class="stat-card">
+                    <div class="stat-label">Shows ejecutados</div>
+                    <div class="stat-numero" data-target="400">400+</div>
+                    <div class="stat-sub">Entre España, México y LATAM</div>
+                    <p class="stat-note">No contamos promesas, sólo fechas que sucedieron.</p>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Venues en red</div>
+                    <div class="stat-numero" data-target="300">300+</div>
+                    <div class="stat-sub">Salas, clubs y espacios activos</div>
+                    <p class="stat-note">Con histórico de shows y pagos verificados.</p>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Países conectados</div>
+                    <div class="stat-numero" data-target="15">15+</div>
+                    <div class="stat-sub">Principalmente eje España–LATAM</div>
+                    <p class="stat-note">Cada uno con su lógica de escena y tiempos.</p>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-label">Riesgo inicial para ti</div>
+                    <div class="stat-numero" data-target="0">0%</div>
+                    <div class="stat-sub">Si no hay base, no forzamos la gira.</div>
+                    <p class="stat-note">Preferimos decir “aún no” que quemar tu nombre.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final" id="empezar">
+        <div class="container">
+            <div class="cta-final-content">
+                <div class="section-tag">Primer paso</div>
+                <h2>¿Tiene sentido girar ahora o en seis meses?</h2>
+                <p>
+                    En menos de 48 horas te devolvemos un “sí”, “no aún” o “sí, pero así”.
+                    Sin plantillas genéricas. Con tu realidad de datos.
+                </p>
+                <a href="#contacto" class="btn-primary" style="font-size:0.95rem; padding:14px 26px; margin-top:4px;">
+                    Empezar validación
+                    <span>→</span>
+                </a>
+                <p class="cta-note">
+                    No prometemos fechas mágicas. Prometemos honestidad brutal y un mapa concreto.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contacto">
+        <div class="container">
+            <div class="footer-logo">
+                <div class="logo-mark"></div>
+                BOOKING<span>PLANS</span>
+            </div>
+            <div class="footer-text">
+                El puente real entre España y México · Datos verificables · Red activa · Resultados que se pueden contar.<br />
+                Escríbenos y cuéntanos en qué punto estás: artista, sello o venue.
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-text" style="font-size:0.75rem; color:#555;">
+                © 2024 Booking Plans · Giras que realmente suceden, o todavía no, pero con un plan claro.
+            </div>
+        </div>
     </footer>
-    
+
     <script>
-        // World Map with Mexico & Spain
-        const canvas = document.getElementById('map-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        function resize() {
-            canvas.width = window.innerWidth * window.devicePixelRatio;
-            canvas.height = window.innerHeight * window.devicePixelRatio;
-            canvas.style.width = window.innerWidth + 'px';
-            canvas.style.height = window.innerHeight + 'px';
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        }
-        
-        resize();
-        window.addEventListener('resize', resize);
-        
-        // Cities
-        const cities = [
-            // Mexico
-            { x: 0.28, y: 0.52, size: 8, label: 'CDMX', pulse: 0 },
-            { x: 0.25, y: 0.48, size: 5, label: 'GDL', pulse: 0.5 },
-            { x: 0.30, y: 0.46, size: 5, label: 'MTY', pulse: 1 },
-            // Spain
-            { x: 0.72, y: 0.38, size: 8, label: 'BCN', pulse: 1.5 },
-            { x: 0.70, y: 0.40, size: 5, label: 'MAD', pulse: 2 }
-        ];
-        
-        // Connections
-        const connections = [
-            [0, 3], // CDMX to Barcelona (main)
-            [0, 1], // CDMX to GDL
-            [0, 2], // CDMX to MTY
-            [3, 4]  // BCN to MAD
-        ];
-        
-        // Particles
-        let particles = [];
-        
-        class Particle {
-            constructor(from, to, delay = 0) {
-                this.from = cities[from];
-                this.to = cities[to];
-                this.progress = -delay;
-                this.speed = 0.001 + Math.random() * 0.002;
-                this.size = 2 + Math.random() * 2;
-            }
-            
-            update() {
-                this.progress += this.speed;
-                if (this.progress > 1) this.progress = 0;
-            }
-            
-            draw() {
-                if (this.progress < 0 || this.progress > 1) return;
-                
-                const x = this.from.x + (this.to.x - this.from.x) * this.progress;
-                const y = this.from.y + (this.to.y - this.from.y) * this.progress;
-                
-                ctx.beginPath();
-                ctx.arc(x * window.innerWidth, y * window.innerHeight, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(59, 130, 246, 0.8)';
-                ctx.fill();
-            }
-        }
-        
-        // Create particles
-        connections.forEach(([from, to]) => {
-            for (let i = 0; i < 5; i++) {
-                particles.push(new Particle(from, to, i * 0.2));
-            }
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
-        
-        let time = 0;
-        
-        function animate() {
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            
-            time += 0.01;
-            
-            // Draw grid
-            ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < window.innerWidth; i += 50) {
-                ctx.beginPath();
-                ctx.moveTo(i, 0);
-                ctx.lineTo(i, window.innerHeight);
-                ctx.stroke();
+
+        // Header scroll state
+        const header = document.getElementById('top-header');
+        function updateHeaderState() {
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-            for (let i = 0; i < window.innerHeight; i += 50) {
-                ctx.beginPath();
-                ctx.moveTo(0, i);
-                ctx.lineTo(window.innerWidth, i);
-                ctx.stroke();
-            }
-            
-            // Draw connections
-            ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)';
-            ctx.lineWidth = 2;
-            connections.forEach(([from, to]) => {
-                ctx.beginPath();
-                ctx.moveTo(cities[from].x * window.innerWidth, cities[from].y * window.innerHeight);
-                ctx.lineTo(cities[to].x * window.innerWidth, cities[to].y * window.innerHeight);
-                ctx.stroke();
-            });
-            
-            // Update and draw particles
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            
-            // Draw cities
-            cities.forEach((city, i) => {
-                const pulse = Math.sin(time + city.pulse) * 3;
-                const x = city.x * window.innerWidth;
-                const y = city.y * window.innerHeight;
-                
-                // Glow
-                ctx.beginPath();
-                ctx.arc(x, y, city.size + pulse + 10, 0, Math.PI * 2);
-                const glow = ctx.createRadialGradient(x, y, 0, x, y, city.size + pulse + 10);
-                glow.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
-                glow.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                ctx.fillStyle = glow;
-                ctx.fill();
-                
-                // City dot
-                ctx.beginPath();
-                ctx.arc(x, y, city.size + pulse, 0, Math.PI * 2);
-                ctx.fillStyle = '#3b82f6';
-                ctx.fill();
-                
-                // Label
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                ctx.font = '600 12px -apple-system';
-                ctx.textAlign = 'center';
-                ctx.fillText(city.label, x, y - city.size - pulse - 15);
-            });
-            
-            requestAnimationFrame(animate);
         }
-        
-        animate();
+        window.addEventListener('scroll', updateHeaderState);
+        updateHeaderState();
+
+        // Stats counter on scroll
+        let statsAnimated = false;
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-numero[data-target]');
+            stats.forEach((stat) => {
+                const finalValue = Number(stat.dataset.target) || 0;
+                let currentValue = 0;
+                const steps = 40;
+                const increment = finalValue / steps;
+                const duration = 1400;
+                const interval = duration / steps;
+
+                const isPercentage = finalValue === 0;
+                const suffix = isPercentage ? '%' : '+';
+
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= finalValue) {
+                        stat.textContent = finalValue + suffix;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(currentValue) + suffix;
+                    }
+                }, interval);
+            });
+        }
+
+        function checkScrollForStats() {
+            if (statsAnimated) return;
+            const section = document.querySelector('.prueba-social');
+            if (!section) return;
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 120) {
+                statsAnimated = true;
+                animateStats();
+            }
+        }
+
+        window.addEventListener('scroll', checkScrollForStats);
+        checkScrollForStats();
+
+        // Sutil "pulso" en la barrita del snapshot
+        const bar = document.getElementById('metric-bar');
+        if (bar) {
+            bar.animate(
+                [
+                    { transform: 'scaleX(1)', transformOrigin: 'left center' },
+                    { transform: 'scaleX(1.05)', transformOrigin: 'left center' },
+                    { transform: 'scaleX(1)', transformOrigin: 'left center' }
+                ],
+                {
+                    duration: 2200,
+                    iterations: Infinity,
+                    easing: 'ease-in-out'
+                }
+            );
+        }
     </script>
 </body>
 </html>
