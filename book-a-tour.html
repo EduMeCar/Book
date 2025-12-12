@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOOK A TOUR | BOOKING PLANS</title>
+  <meta name="description" content="Booking intake questionnaire." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --black:#000;
+      --white:#fff;
+      --line:#1f1f1f;
+      --muted:#a9a9a9;
+      --accent:#ff3300;
+      --wa:#25D366;
+      --mono:'Space Mono', monospace;
+      --sans:'Inter', -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      --max: 900px;
+      --pad: 22px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth; overflow-x:hidden;}
+    body{
+      background:var(--black);
+      color:var(--white);
+      font-family:var(--sans);
+      line-height:1.3;
+      overflow-x:hidden;
+    }
+    ::selection{background:var(--accent); color:var(--black);}
+
+    .top{
+      padding:26px var(--pad);
+      border-bottom:2px solid var(--line);
+      position:sticky;
+      top:0;
+      background:rgba(0,0,0,0.9);
+      backdrop-filter:blur(10px);
+      z-index:10;
+    }
+    .top-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      text-decoration:none;
+      color:var(--white);
+      white-space:nowrap;
+      font-size:14px;
+      font-family:var(--mono);
+    }
+    .brand span{color:var(--accent);}
+    .back{
+      text-decoration:none;
+      color:rgba(255,255,255,0.75);
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      border:2px solid var(--line);
+      padding:10px 12px;
+    }
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:44px var(--pad) 90px;
+    }
+
+    h1{
+      font-size: clamp(44px, 6vw, 76px);
+      font-weight:900;
+      letter-spacing:-0.03em;
+      text-transform:uppercase;
+      line-height:0.9;
+      margin-bottom:16px;
+    }
+    .sub{
+      font-family:var(--mono);
+      color:rgba(255,255,255,0.75);
+      letter-spacing:0.10em;
+      line-height:1.7;
+      font-size:12px;
+      border-left:3px solid var(--accent);
+      padding-left:14px;
+      margin-bottom:26px;
+      max-width:760px;
+    }
+
+    .card{
+      border:2px solid var(--line);
+      background:rgba(255,255,255,0.02);
+      padding:18px;
+    }
+
+    .steps{
+      display:flex;
+      gap:10px;
+      margin-bottom:16px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.28em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.7);
+      flex-wrap:wrap;
+    }
+    .badge{
+      border:2px solid var(--line);
+      padding:8px 10px;
+    }
+    .badge.active{
+      border-color:var(--accent);
+      color:var(--white);
+    }
+
+    form{
+      display:grid;
+      gap:16px;
+      margin-top:12px;
+    }
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 760px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    label{
+      display:block;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.20em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.75);
+      margin-bottom:8px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:14px 12px;
+      border:2px solid var(--line);
+      background:rgba(0,0,0,0.55);
+      color:var(--white);
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:0.06em;
+      outline:none;
+    }
+    textarea{min-height:120px; resize:vertical;}
+    input:focus, select:focus, textarea:focus{
+      border-color:var(--accent);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:2px solid var(--accent);
+      background:transparent;
+      color:var(--white);
+      text-decoration:none;
+      font-family:var(--mono);
+      font-weight:900;
+      font-size:11px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      border-color:var(--line);
+      color:rgba(255,255,255,0.85);
+    }
+
+    .note{
+      margin-top:12px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+      line-height:1.7;
+    }
+
+    /* WhatsApp flotante */
+    .wa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:99;
+      text-decoration:none;
+      width:72px;
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:3px solid var(--black);
+      background:var(--wa);
+      color:var(--black);
+      font-family:var(--mono);
+      font-weight:900;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html#book-a-tour">BOOKING<span>PLANS</span></a>
+      <a class="back" href="index.html#book-a-tour">← BACK</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>BOOK A TOUR</h1>
+    <p class="sub">
+      Intake en 2 pasos: primero contacto y contexto, después territorios, fechas y links.
+      (Este demo no envía a servidor; luego se conecta a tu backend o a un provider.)
+    </p>
+
+    <section class="card">
+      <div class="steps" aria-label="Steps">
+        <div class="badge active" id="b1">STEP 1</div>
+        <div class="badge" id="b2">STEP 2</div>
+      </div>
+
+      <form id="tourForm">
+        <!-- STEP 1 -->
+        <div class="step" id="step1">
+          <div class="grid">
+            <div>
+              <label for="name">Name / Project *</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div>
+              <label for="role">Role *</label>
+              <select id="role" name="role" required>
+                <option value="" selected disabled>Select</option>
+                <option>Artist</option>
+                <option>Manager</option>
+                <option>Label</option>
+                <option>Venue</option>
+              </select>
+            </div>
+            <div>
+              <label for="service">Service (from landing)</label>
+              <select id="service" name="service">
+                <option value="" selected>Not specified</option>
+                <option value="artist">Artist Booking</option>
+                <option value="label">Label Services</option>
+                <option value="venue">Venue Programming</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="button" id="toStep2">CONTINUE →</button>
+            <a class="btn secondary" href="index.html#services">VIEW SERVICES</a>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" id="step2" style="display:none;">
+          <div class="grid">
+            <div>
+              <label for="territories">Territories / Cities</label>
+              <input id="territories" name="territories" type="text" placeholder="Barcelona, Madrid, Lisbon..." />
+            </div>
+            <div>
+              <label for="datewindow">Date window</label>
+              <input id="datewindow" name="datewindow" type="text" placeholder="Mar–Apr 2026" />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div>
+              <label for="links">Links (EPK / Spotify / Press)</label>
+              <input id="links" name="links" type="url" placeholder="https://..." />
+            </div>
+            <div>
+              <label for="budget">Budget range (optional)</label>
+              <input id="budget" name="budget" type="text" placeholder="Optional" />
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Routing constraints, tech rider notes, preferred deal terms..."></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn secondary" type="button" id="backStep1">← BACK</button>
+            <button class="btn" type="submit">SUBMIT</button>
+          </div>
+
+          <div class="note">
+            * Required fields are in Step 1.
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <a class="wa"
+     href="https://wa.me/34123456789?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour"
+     target="_blank" rel="noopener"
+     aria-label="WhatsApp">
+    WA
+  </a>
+
+  <script>
+    // Prefill service from URL (?service=artist|label|venue)
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get('service');
+    if (serviceParam) {
+      const serviceSelect = document.getElementById('service');
+      if ([...serviceSelect.options].some(o => o.value === serviceParam)) {
+        serviceSelect.value = serviceParam;
+      }
+    }
+
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const b1 = document.getElementById('b1');
+    const b2 = document.getElementById('b2');
+
+    function showStep(n){
+      const is1 = n === 1;
+      step1.style.display = is1 ? 'block' : 'none';
+      step2.style.display = is1 ? 'none' : 'block';
+      b1.classList.toggle('active', is1);
+      b2.classList.toggle('active', !is1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('toStep2').addEventListener('click', () => {
+      // Validar campos required de Step 1 antes de pasar
+      const required = ['name','email','role'];
+      const ok = required.every(id => document.getElementById(id).checkValidity());
+      if (!ok) {
+        // dispara UI nativa de validación
+        required.forEach(id => document.getElementById(id).reportValidity());
+        return;
+      }
+      showStep(2);
+    });
+
+    document.getElementById('backStep1').addEventListener('click', () => showStep(1));
+
+    document.getElementById('tourForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Submitted (demo). Connect this form to your backend / email automation next.');
+      showStep(1);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
