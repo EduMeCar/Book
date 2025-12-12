@@ -850,23 +850,28 @@
   <script src="i18n.js"></script>
   
   <script>
-    // ====== Language toggle (ES/EN) ======
-    const langBtns = document.querySelectorAll('.lang-btn');
-    let currentLang = 'es';
+    // ====== Language toggle (ES/EN) - i18n.js ======
+const langBtns = document.querySelectorAll('.lang-btn');
 
-    function setLanguage(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
+function syncLangButtons(lang) {
+  langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+}
 
-      langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+langBtns.forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const lang = btn.dataset.lang;
+    await window.BP_I18N.setLang(lang);
+    syncLangButtons(lang);
+  });
+});
 
-      document.querySelectorAll('[data-es]').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (text) el.textContent = text;
-      });
-    }
+// Aplicar idioma al cargar (URL ?lang= o localStorage)
+(async () => {
+  const lang = window.BP_I18N.getLang();
+  await window.BP_I18N.setLang(lang);
+  syncLangButtons(lang);
+})();
 
-    langBtns.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
 
     // ====== Hero typing effect ======
     const typingText = document.getElementById('typing-text');
