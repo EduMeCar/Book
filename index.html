@@ -1,1338 +1,974 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BOOKING PLANS | International Booking Agency</title>
-    <style>
-        :root {
-            --negro-puro: #000000;
-            --blanco: #FFFFFF;
-            --rojo: #FF0000;
-            --rojo-oscuro: #CC0000;
-            --gris-metal: #111111;
-            --gris-medio: #222222;
-            --gris-texto: #888888;
-            --gris-claro: #CCCCCC;
-            --borde: #333333;
-            --azul-elec: #0044FF;
-            --amarillo-elec: #FFDD00;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--negro-puro);
-            color: var(--blanco);
-            font-family: 'SF Mono', 'Roboto Mono', 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.4;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* TIPOGRAFÍA BRUTALISTA */
-        h1, h2, h3, h4, .logo, .btn {
-            font-family: 'Inter', -apple-system, sans-serif;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
-        }
-
-        /* HEADER - ROLAND STYLE */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--negro-puro);
-            border-bottom: 1px solid var(--borde);
-            z-index: 1000;
-            padding: 20px 0;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--blanco);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--rojo);
-        }
-
-        .nav {
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-link {
-            color: var(--gris-texto);
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: var(--blanco);
-        }
-
-        .nav-cta {
-            color: var(--rojo);
-            font-weight: 700;
-        }
-
-        /* HERO - CON ANIMACIÓN DE CONEXIÓN */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 140px 40px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-connection {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--rojo) 20%,
-                var(--rojo) 80%, 
-                transparent 100%);
-            z-index: 0;
-            opacity: 0.2;
-        }
-
-        .hero-connection::before,
-        .hero-connection::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 1px solid var(--rojo);
-            opacity: 0.1;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: pulseRing 4s ease-in-out infinite;
-        }
-
-        .hero-connection::before {
-            left: 15%;
-            animation-delay: 0s;
-        }
-
-        .hero-connection::after {
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        @keyframes pulseRing {
-            0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.1; }
-            50% { transform: translateY(-50%) scale(1.1); opacity: 0.3; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            padding: 8px 16px;
-            background: var(--rojo);
-            color: var(--blanco);
-            font-size: 11px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            border: none;
-        }
-
-        .hero-title {
-            font-size: clamp(48px, 8vw, 120px);
-            line-height: 0.9;
-            margin-bottom: 40px;
-            color: var(--blanco);
-        }
-
-        .hero-title span {
-            color: var(--rojo);
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--gris-texto);
-            max-width: 600px;
-            margin-bottom: 60px;
-            line-height: 1.6;
-        }
-
-        .hero-territories {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 80px;
-            padding: 40px 0;
-            border-top: 1px solid var(--borde);
-            border-bottom: 1px solid var(--borde);
-        }
-
-        .territory {
-            text-align: center;
-            position: relative;
-        }
-
-        .territory-city {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--blanco);
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .territory-city::after {
-            content: '●';
-            color: var(--rojo);
-            position: absolute;
-            top: -10px;
-            right: -20px;
-            font-size: 14px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .territory-country {
-            font-size: 14px;
-            color: var(--gris-texto);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .territory-connector {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--rojo) 20%,
-                var(--rojo) 80%, 
-                transparent 100%);
-            position: relative;
-            margin: 0 40px;
-        }
-
-        .territory-connector::before {
-            content: '→';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--rojo);
-            font-size: 24px;
-            animation: moveRightLeft 3s ease-in-out infinite;
-        }
-
-        @keyframes moveRightLeft {
-            0%, 100% { transform: translate(-50%, -50%); }
-            50% { transform: translate(-30%, -50%); }
-        }
-
-        /* SECCIÓN TERRITORIOS DINÁMICA */
-        .territories {
-            padding: 120px 40px;
-            background: var(--gris-metal);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .territories-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .territories-tag {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid var(--rojo);
-            color: var(--rojo);
-            font-size: 11px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .territories-title {
-            font-size: clamp(36px, 6vw, 72px);
-            line-height: 1;
-            margin-bottom: 20px;
-            color: var(--blanco);
-        }
-
-        .territories-map {
-            position: relative;
-            height: 500px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: var(--negro-puro);
-            border: 1px solid var(--borde);
-            overflow: hidden;
-        }
-
-        .map-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(to right, var(--borde) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--borde) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.1;
-        }
-
-        .map-node {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 2;
-        }
-
-        .map-node.active {
-            animation: nodePulse 2s infinite;
-        }
-
-        @keyframes nodePulse {
-            0%, 100% { box-shadow: 0 0 20px currentColor; }
-            50% { box-shadow: 0 0 40px currentColor; }
-        }
-
-        .map-node.madrid {
-            top: 40%;
-            left: 70%;
-            background: var(--rojo);
-            color: var(--blanco);
-            border: 2px solid var(--rojo);
-        }
-
-        .map-node.barcelona {
-            top: 35%;
-            left: 75%;
-            background: transparent;
-            color: var(--rojo);
-            border: 2px solid var(--rojo);
-        }
-
-        .map-node.mexico {
-            top: 45%;
-            left: 20%;
-            background: var(--rojo);
-            color: var(--blanco);
-            border: 2px solid var(--rojo);
-        }
-
-        .map-node.guadalajara {
-            top: 40%;
-            left: 15%;
-            background: transparent;
-            color: var(--rojo);
-            border: 2px solid var(--rojo);
-        }
-
-        .map-node.monterrey {
-            top: 35%;
-            left: 25%;
-            background: transparent;
-            color: var(--rojo);
-            border: 2px solid var(--rojo);
-        }
-
-        .map-node.lisbon {
-            top: 40%;
-            left: 65%;
-            background: transparent;
-            color: var(--gris-texto);
-            border: 2px solid var(--gris-texto);
-            opacity: 0.5;
-        }
-
-        .map-node.paris {
-            top: 30%;
-            left: 60%;
-            background: transparent;
-            color: var(--gris-texto);
-            border: 2px solid var(--gris-texto);
-            opacity: 0.5;
-        }
-
-        .map-connection {
-            position: absolute;
-            height: 2px;
-            background: var(--rojo);
-            transform-origin: left center;
-            z-index: 1;
-            animation: connectionFlow 3s linear infinite;
-        }
-
-        .map-connection.spain-mexico {
-            top: 42.5%;
-            left: 22%;
-            width: 48%;
-            transform: rotate(0deg);
-        }
-
-        .map-connection.madrid-barcelona {
-            top: 37.5%;
-            left: 72%;
-            width: 5%;
-            transform: rotate(0deg);
-        }
-
-        .map-connection.mexico-guadalajara {
-            top: 42.5%;
-            left: 17%;
-            width: 8%;
-            transform: rotate(-10deg);
-        }
-
-        @keyframes connectionFlow {
-            0% { background: linear-gradient(90deg, transparent, var(--rojo)); }
-            50% { background: linear-gradient(90deg, var(--rojo), var(--rojo)); }
-            100% { background: linear-gradient(90deg, var(--rojo), transparent); }
-        }
-
-        .map-data {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 3;
-        }
-
-        .data-item {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--borde);
-            padding: 15px;
-            min-width: 150px;
-        }
-
-        .data-label {
-            font-size: 11px;
-            color: var(--gris-texto);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .data-value {
-            font-size: 24px;
-            color: var(--rojo);
-            font-weight: 900;
-        }
-
-        .data-sub {
-            font-size: 11px;
-            color: var(--gris-texto);
-        }
-
-        .territories-legend {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            font-size: 12px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--gris-texto);
-        }
-
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .legend-dot.active {
-            background: var(--rojo);
-            animation: dotPulse 2s infinite;
-        }
-
-        .legend-dot.future {
-            background: var(--gris-texto);
-            opacity: 0.5;
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* SERVICIOS - ACTUALIZADO */
-        .services {
-            padding: 120px 40px;
-            background: var(--negro-puro);
-            border-top: 1px solid var(--borde);
-        }
-
-        .services-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .services-tag {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid var(--rojo);
-            color: var(--rojo);
-            font-size: 11px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .services-title {
-            font-size: clamp(36px, 6vw, 72px);
-            line-height: 1;
-            margin-bottom: 20px;
-            color: var(--blanco);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: var(--gris-metal);
-            border: 1px solid var(--borde);
-            padding: 40px;
-            transition: all 0.3s;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 0, 0, 0.1), 
-                transparent);
-            transition: left 0.6s;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            border-color: var(--rojo);
-        }
-
-        .service-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-
-        .service-card-number {
-            font-size: 14px;
-            color: var(--rojo);
-            font-weight: 700;
-            letter-spacing: 0.2em;
-        }
-
-        .service-card-type {
-            font-size: 11px;
-            color: var(--gris-texto);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-
-        .service-card-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--blanco);
-        }
-
-        .service-card-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .service-card-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--borde);
-            color: var(--gris-texto);
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .service-card-list li:last-child {
-            border-bottom: none;
-        }
-
-        .service-card-list strong {
-            color: var(--gris-claro);
-        }
-
-        .service-card-cta {
-            display: inline-block;
-            padding: 15px 30px;
-            background: transparent;
-            color: var(--rojo);
-            border: 1px solid var(--rojo);
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .service-card-cta:hover {
-            background: var(--rojo);
-            color: var(--blanco);
-        }
-
-        /* CTA FINAL CON ANIMACIÓN */
-        .cta {
-            padding: 120px 40px;
-            background: var(--gris-metal);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 49%, var(--rojo) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, var(--rojo) 50%, transparent 51%);
-            background-size: 100px 100px;
-            animation: moveGrid 20s linear infinite;
-            opacity: 0.05;
-            z-index: 0;
-        }
-
-        @keyframes moveGrid {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-title {
-            font-size: clamp(48px, 8vw, 96px);
-            line-height: 1;
-            margin-bottom: 40px;
-            color: var(--blanco);
-        }
-
-        .cta-title span {
-            color: var(--rojo);
-            position: relative;
-        }
-
-        .cta-title span::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--rojo);
-            animation: widthPulse 3s infinite;
-        }
-
-        @keyframes widthPulse {
-            0%, 100% { width: 100%; opacity: 1; }
-            50% { width: 80%; opacity: 0.8; }
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 60px;
-        }
-
-        .btn-primary {
-            padding: 20px 40px;
-            background: var(--rojo);
-            color: var(--blanco);
-            border: none;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn-primary:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary:hover {
-            background: var(--rojo-oscuro);
-        }
-
-        .btn-secondary {
-            padding: 20px 40px;
-            background: transparent;
-            color: var(--gris-texto);
-            border: 1px solid var(--borde);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--rojo);
-            color: var(--rojo);
-        }
-
-        /* FOOTER - TÉCNICO */
-        .footer {
-            padding: 60px 40px 40px;
-            background: var(--negro-puro);
-            border-top: 1px solid var(--borde);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 60px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-col h3 {
-            font-size: 14px;
-            color: var(--rojo);
-            margin-bottom: 20px;
-            letter-spacing: 0.2em;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col a {
-            color: var(--gris-texto);
-            text-decoration: none;
-            font-size: 12px;
-            transition: color 0.2s;
-        }
-
-        .footer-col a:hover {
-            color: var(--blanco);
-        }
-
-        .footer-bottom {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid var(--borde);
-            text-align: center;
-            color: var(--gris-texto);
-            font-size: 11px;
-            letter-spacing: 0.1em;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 0 20px;
-            }
-            
-            .hero {
-                padding: 120px 20px 60px;
-            }
-            
-            .hero-territories {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .territory-connector {
-                width: 1px;
-                height: 100px;
-                margin: 20px 0;
-                transform: rotate(90deg);
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .territories-map {
-                height: 400px;
-            }
-            
-            .map-node {
-                width: 50px;
-                height: 50px;
-                font-size: 12px;
-            }
-            
-            .map-data {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .nav {
-                display: none;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* EFECTOS DE SONIDO/VISUALES */
-        .grid-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-            background-image: 
-                linear-gradient(to right, var(--borde) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--borde) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.03;
-        }
-
-        /* EFECTO DE OSCILOSCOPIO */
-        .oscilloscope {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 200px;
-            height: 100px;
-            border: 1px solid var(--rojo);
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        .oscilloscope-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--rojo);
-            transform: translateY(-50%);
-            animation: oscillate 2s ease-in-out infinite;
-        }
-
-        @keyframes oscillate {
-            0%, 100% { transform: translateY(-50%) scaleY(0.1); }
-            50% { transform: translateY(-50%) scaleY(2); }
-        }
-
-        /* ANIMACIÓN DE PARPADEO TIPO ROLAND */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .blink {
-            animation: blink 2s infinite;
-        }
-
-        /* ESTILOS DE CÓDIGO/TECH */
-        .code-style {
-            font-family: 'SF Mono', 'Roboto Mono', monospace;
-            font-size: 11px;
-            color: var(--gris-texto);
-            letter-spacing: 0.1em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOOKING PLANS | International Booking Agency</title>
+  <meta name="description" content="Analog booking network. Underground touring. Direct deals." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --black:#000;
+      --white:#fff;
+      --ink:#0b0b0b;
+      --panel:#101217;
+      --line:#202020;
+      --muted:#a9a9a9;
+
+      /* Acento controlado (no saturar) */
+      --accent:#ff3300;
+
+      /* WhatsApp */
+      --wa:#25D366;
+
+      --mono:'Space Mono', monospace;
+      --sans:'Inter', -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+
+      --max: 1400px;
+      --pad: 40px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth; overflow-x:hidden;}
+    body{
+      background:var(--black);
+      color:var(--white);
+      font-family:var(--sans);
+      line-height:1.25;
+      overflow-x:hidden;
+    }
+    ::selection{background:var(--accent); color:var(--black);}
+
+    /* Sutil textura analógica global (muy baja opacidad) */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:0.06;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:0.05;
+      background:linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.04) 50%);
+      background-size:100% 4px;
+      animation:scan 0.9s linear infinite;
+    }
+    @keyframes scan{to{transform:translateY(4px)}}
+
+    /* Contenedor base para asegurar capas por encima del ruido */
+    .layer{position:relative; z-index:1;}
+
+    /* HEADER */
+    .header{
+      position:fixed; top:0; left:0; right:0;
+      z-index:2000;
+      background:rgba(0,0,0,0.92);
+      border-bottom:2px solid var(--line);
+      backdrop-filter:blur(10px);
+    }
+    .header-inner{
+      max-width:1600px;
+      margin:0 auto;
+      padding:14px var(--pad);
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:18px;
+    }
+    .metric{
+      font-weight:900;
+      font-size:22px;
+      letter-spacing:0.02em;
+      text-transform:uppercase;
+      color:var(--white);
+      line-height:1;
+    }
+    .metric span{
+      display:block;
+      margin-top:6px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.35em;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .logo{
+      text-decoration:none;
+      color:var(--white);
+      font-weight:900;
+      font-size:30px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      position:relative;
+      padding:0 44px;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .logo span{color:var(--accent);}
+    .logo::before,.logo::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      width:30px; height:2px;
+      background:var(--accent);
+      transform:translateY(-50%);
+      opacity:0.9;
+    }
+    .logo::before{left:0;}
+    .logo::after{right:0;}
+
+    /* ES/EN estilo portfolio */
+    .lang-toggle{
+      justify-self:end;
+      display:flex;
+      border:2px solid var(--white);
+      background:transparent;
+      box-shadow:6px 6px 0 rgba(255,255,255,0.10);
+    }
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--white);
+      padding:10px 14px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.32em;
+      font-weight:800;
+      text-transform:uppercase;
+      cursor:pointer;
+      border-right:2px solid var(--white);
+    }
+    .lang-btn:last-child{border-right:none;}
+    .lang-btn.active{
+      background:var(--white);
+      color:var(--black);
+    }
+
+    /* Secciones */
+    section{width:100%;}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 var(--pad);
+    }
+
+    /* HERO con video */
+    .hero{
+      min-height:100vh;
+      padding-top:120px; /* header offset */
+      padding-bottom:60px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      border-bottom:2px solid var(--line);
+      overflow:hidden;
+    }
+    .hero-video{
+      position:absolute; inset:0;
+      z-index:0;
+      background:#000;
+    }
+    .hero-video video{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      min-width:100%;
+      min-height:100%;
+      width:auto;
+      height:auto;
+      filter: grayscale(85%) contrast(115%) brightness(45%);
+    }
+    .hero-video::after{
+      content:"";
+      position:absolute; inset:0;
+      background:rgba(0,0,0,0.70);
+    }
+    .hero-content{
+      position:relative; z-index:1;
+      width:100%;
+    }
+    .tag{
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:0.45em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:24px;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+    }
+    .tag::before{
+      content:"";
+      width:14px; height:2px;
+      background:var(--accent);
+      display:inline-block;
+    }
+    .hero-title{
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-0.03em;
+      line-height:0.85;
+      font-size: clamp(54px, 9vw, 140px);
+      margin-bottom:22px;
+    }
+    .hero-title .live{
+      display:block;
+      color:var(--accent);
+      height:1em;
+      overflow:hidden;
+    }
+    .hero-sub{
+      max-width:760px;
+      font-family:var(--mono);
+      color:rgba(255,255,255,0.78);
+      border-top:1px solid var(--line);
+      padding-top:18px;
+      letter-spacing:0.08em;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    /* TERRITORIES (splitflap gigante) */
+    .territories{
+      padding:70px 0 90px;
+      border-bottom:2px solid var(--line);
+      background:var(--black);
+    }
+    .section-label{
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:0.45em;
+      color:var(--muted);
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .splitflap-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .splitflap-row{
+      display:flex;
+      flex-wrap:nowrap;
+      gap:2px;
+      justify-content:center;
+      perspective:1000px;
+      width:100%;
+      overflow:hidden;
+      padding:18px 0;
+    }
+    .cell{
+      flex:0 0 auto;
+      width: clamp(38px, 4.2vw, 68px);
+      height: clamp(56px, 6vw, 96px);
+      background:#0f1116;
+      border:1px solid #000;
+      border-radius:4px;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.88), 0 6px 18px rgba(0,0,0,0.88);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size: clamp(22px, 3.2vw, 52px);
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      position:relative;
+      transform-style:preserve-3d;
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+      color:#fdfdfd;
+    }
+    .cell::before{
+      content:"";
+      position:absolute;
+      top:50%; left:0; right:0;
+      height:1px;
+      background:rgba(0,0,0,0.9);
+      opacity:0.9;
+    }
+    .cell.flip-out{ transform: rotateX(90deg) scale(0.92); opacity:0.12; }
+    .cell.flip-in{ transform: rotateX(-90deg) scale(0.92); opacity:0.12; }
+    .cell.ready{ transform: rotateX(0deg) scale(1); opacity:1; }
+    .cell.separator{
+      width: 18px;
+      background:transparent;
+      border:none;
+      box-shadow:none;
+    }
+    .cell.highlight{ color:var(--accent); }
+
+    /* SERVICES (light invert) */
+    .services{
+      padding:110px 0 120px;
+      background:var(--white);
+      color:var(--black);
+      border-bottom:2px solid var(--black);
+    }
+    .services .section-label{color:rgba(0,0,0,0.75);}
+    .services h2{
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-0.03em;
+      line-height:0.9;
+      margin-bottom:18px;
+    }
+    .services .sub{
+      max-width:820px;
+      font-family:var(--mono);
+      color:rgba(0,0,0,0.78);
+      border-left:4px solid var(--black);
+      padding-left:16px;
+      letter-spacing:0.06em;
+      line-height:1.65;
+      font-size:14px;
+      margin-bottom:34px;
+    }
+
+    .tabs{
+      border:2px solid var(--black);
+      box-shadow:10px 10px 0 rgba(0,0,0,0.85);
+      background:var(--white);
+    }
+    .tablist{
+      display:flex;
+      gap:0;
+      border-bottom:2px solid var(--black);
+      flex-wrap:wrap;
+    }
+    .tab{
+      flex:1 1 auto;
+      min-width:240px;
+      padding:18px 16px;
+      border:0;
+      border-right:2px solid var(--black);
+      background:var(--white);
+      cursor:pointer;
+      font-family:var(--mono);
+      font-weight:800;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      text-align:left;
+    }
+    .tab:last-child{border-right:none;}
+    .tab[aria-selected="true"]{
+      background:var(--black);
+      color:var(--white);
+    }
+    .tabpanel{
+      padding:28px 18px 22px;
+      display:none;
+    }
+    .tabpanel.active{display:block;}
+    .service-title{
+      font-size:28px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      margin-bottom:12px;
+    }
+    .service-points{
+      list-style:none;
+      margin:0 0 18px 0;
+      padding:0;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,0.75);
+    }
+    .service-points li{
+      padding:10px 0;
+      border-bottom:1px solid rgba(0,0,0,0.15);
+    }
+
+    .mini-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      padding:14px 18px;
+      border:2px solid var(--black);
+      color:var(--black);
+      background:var(--white);
+      font-family:var(--mono);
+      font-weight:900;
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      box-shadow:7px 7px 0 rgba(0,0,0,0.85);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .mini-cta:hover{
+      transform:translate(4px,4px);
+      box-shadow:3px 3px 0 rgba(0,0,0,0.85);
+    }
+
+    /* BOOK A TOUR (pre-form) */
+    .book{
+      padding:100px 0 110px;
+      background:var(--black);
+      border-bottom:2px solid var(--line);
+    }
+    /* Para que el anchor no quede oculto por header fixed */
+    #book-a-tour{ scroll-margin-top: 120px; }
+
+    .book-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:30px;
+      align-items:end;
+      border:2px solid var(--line);
+      padding:26px;
+      background:rgba(255,255,255,0.02);
+    }
+    .book h2{
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-0.03em;
+      line-height:0.9;
+      margin-bottom:10px;
+    }
+    .book p{
+      font-family:var(--mono);
+      color:rgba(255,255,255,0.78);
+      letter-spacing:0.08em;
+      line-height:1.65;
+      font-size:13px;
+      max-width:720px;
+    }
+    .book-actions{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:stretch;
+    }
+    .cta-primary{
+      display:inline-flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:20px 18px;
+      border:2px solid var(--accent);
+      background:transparent;
+      color:var(--white);
+      text-decoration:none;
+      font-family:var(--mono);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      box-shadow: 10px 10px 0 rgba(255,51,0,0.25);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .cta-primary:hover{
+      transform:translate(4px,4px);
+      box-shadow: 4px 4px 0 rgba(255,51,0,0.25);
+    }
+    .cta-secondary{
+      display:inline-flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:16px 18px;
+      border:2px solid var(--line);
+      background:transparent;
+      color:rgba(255,255,255,0.9);
+      text-decoration:none;
+      font-family:var(--mono);
+      font-weight:800;
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+    }
+
+    /* FOOTER (tipo código 1) */
+    footer{
+      padding:64px 0 44px;
+      background:#070707;
+      border-top:2px solid var(--line);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:34px;
+    }
+    .f-col h3{
+      color:var(--accent);
+      font-size:13px;
+      letter-spacing:0.28em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+      font-weight:900;
+    }
+    .f-col ul{list-style:none;}
+    .f-col li{margin-bottom:10px;}
+    .f-col a{
+      color:rgba(255,255,255,0.70);
+      text-decoration:none;
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+    }
+    .f-col a:hover{color:var(--white);}
+    .footer-bottom{
+      margin-top:38px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+      line-height:1.8;
+    }
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--wa);
+      box-shadow:0 0 0 3px rgba(37,211,102,0.18);
+    }
+
+    /* WhatsApp flotante brutalista */
+    .wa-float{
+      position:fixed;
+      bottom:28px;
+      right:28px;
+      z-index:3000;
+      text-decoration:none;
+    }
+    .wa-box{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 14px;
+      border:3px solid var(--wa);
+      background:var(--black);
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.7);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      min-width: 210px;
+    }
+    .wa-box:hover{
+      transform:translate(4px,4px);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.7);
+      border-color: var(--accent);
+    }
+    .wa-icon{
+      width:46px;height:46px;
+      display:flex;align-items:center;justify-content:center;
+      background:var(--wa);
+      color:var(--black);
+      border:3px solid var(--black);
+      font-weight:900;
+      font-family:var(--mono);
+      font-size:16px;
+    }
+    .wa-text{
+      flex:1;
+      min-width:0;
+    }
+    .wa-title{
+      color:var(--wa);
+      font-family:var(--mono);
+      font-weight:900;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      margin-bottom:2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .wa-sub{
+      color:rgba(255,255,255,0.55);
+      font-family:var(--mono);
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      font-size:9px;
+    }
+    .wa-arrow{
+      color:var(--accent);
+      font-weight:900;
+      font-size:18px;
+      margin-left:6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px){
+      :root{ --pad: 18px; }
+      .header-inner{grid-template-columns:1fr; text-align:center;}
+      .lang-toggle{justify-self:center;}
+      .metric{justify-self:center;}
+      .logo{padding:0 36px;}
+      .book-grid{grid-template-columns:1fr; align-items:start;}
+      .footer-grid{grid-template-columns: repeat(2, 1fr);}
+      .wa-box{min-width: 190px;}
+    }
+    @media (max-width: 640px){
+      .footer-grid{grid-template-columns:1fr;}
+      .tab{min-width: 100%;}
+      .wa-float{right:16px; bottom:16px;}
+      .wa-box{min-width: 170px; padding:12px;}
+      .wa-icon{width:42px;height:42px;}
+    }
+  </style>
 </head>
+
 <body>
-    <!-- LÍNEAS DE GRID BACKGROUND -->
-    <div class="grid-lines"></div>
-
-    <!-- OSCILOSCOPIO (OPCIONAL) -->
-    <div class="oscilloscope">
-        <div class="oscilloscope-line"></div>
-    </div>
-
+  <div class="layer">
     <!-- HEADER -->
     <header class="header">
-        <div class="header-container">
-            <a href="#" class="logo">BOOKING<span>PLANS</span></a>
-            <nav class="nav">
-                <a href="#services" class="nav-link">SERVICES</a>
-                <a href="#territories" class="nav-link">TERRITORIES</a>
-                <a href="#process" class="nav-link">PROCESS</a>
-                <a href="#contact" class="nav-link nav-cta">INQUIRE</a>
-            </nav>
+      <div class="header-inner">
+        <div class="metric">
+          07
+          <span data-es="MERCADOS ACTIVOS" data-en="ACTIVE MARKETS">MERCADOS ACTIVOS</span>
         </div>
+
+        <a href="#hero" class="logo" aria-label="Booking Plans">
+          BOOKING<span>PLANS</span>
+        </a>
+
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn active" data-lang="es" type="button">ES</button>
+          <button class="lang-btn" data-lang="en" type="button">EN</button>
+        </div>
+      </div>
     </header>
 
-    <!-- HERO CON CONEXIÓN VISUAL -->
-    <section class="hero">
-        <div class="hero-connection"></div>
-        <div class="hero-content">
-            <div class="hero-tag">SPAIN ↔ MEXICO</div>
-            <h1 class="hero-title">
-                ARTIST BOOKING<br>
-                <span>DATA-DRIVEN</span>
-            </h1>
-            <p class="hero-subtitle">
-                We book international tours between Spain and Mexico. 
-                No promises, no hype—only data, verified venues, and transparent deals.
-            </p>
-            
-            <div class="hero-territories">
-                <div class="territory">
-                    <div class="territory-city">MADRID</div>
-                    <div class="territory-country">SPAIN</div>
-                </div>
-                
-                <div class="territory-connector"></div>
-                
-                <div class="territory">
-                    <div class="territory-city">MEXICO CITY</div>
-                    <div class="territory-country">MEXICO</div>
-                </div>
-            </div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-video" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="video/concierto-background.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="wrap hero-content">
+        <div class="tag" data-es="RED INTERNACIONAL DE BOOKING" data-en="INTERNATIONAL BOOKING NETWORK">
+          RED INTERNACIONAL DE BOOKING
         </div>
+
+        <h1 class="hero-title">
+          ARTIST<br>
+          <span class="live" id="typing-text">BOOKING</span>
+        </h1>
+
+        <p class="hero-sub" data-es="Cinemática analógica. Escena underground. Tratos directos. Routing eficiente."
+           data-en="Analog cinema. Underground scene. Direct deals. Efficient routing.">
+          Cinemática analógica. Escena underground. Tratos directos. Routing eficiente.
+        </p>
+      </div>
     </section>
 
-    <!-- MAPA DE TERRITORIOS INTERACTIVO -->
+    <!-- TERRITORIES -->
     <section class="territories" id="territories">
-        <div class="territories-header">
-            <div class="territories-tag">TERRITORIES</div>
-            <h2 class="territories-title">OPERATIONAL NETWORK</h2>
+      <div class="wrap">
+        <div class="section-label" data-es="TERRITORIES • NETWORK LIVE" data-en="TERRITORIES • LIVE NETWORK">
+          TERRITORIES • NETWORK LIVE
         </div>
 
-        <div class="territories-map">
-            <div class="map-grid"></div>
-            
-            <!-- CONEXIONES -->
-            <div class="map-connection spain-mexico"></div>
-            <div class="map-connection madrid-barcelona"></div>
-            <div class="map-connection mexico-guadalajara"></div>
-            
-            <!-- NODOS -->
-            <div class="map-node madrid active" data-city="madrid">MAD</div>
-            <div class="map-node barcelona" data-city="barcelona">BCN</div>
-            <div class="map-node mexico active" data-city="mexico">CDMX</div>
-            <div class="map-node guadalajara" data-city="guadalajara">GDL</div>
-            <div class="map-node monterrey" data-city="monterrey">MTY</div>
-            <div class="map-node lisbon" data-city="lisbon">LIS</div>
-            <div class="map-node paris" data-city="paris">PAR</div>
-            
-            <!-- DATOS EN TIEMPO REAL -->
-            <div class="map-data">
-                <div class="data-item">
-                    <div class="data-label">ACTIVE MARKETS</div>
-                    <div class="data-value">02</div>
-                    <div class="data-sub">SPAIN · MEXICO</div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">VENUES</div>
-                    <div class="data-value">300+</div>
-                    <div class="data-sub">VERIFIED NETWORK</div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">ROUTES</div>
-                    <div class="data-value">15+</div>
-                    <div class="data-sub">ACTIVE CONNECTIONS</div>
-                </div>
-            </div>
+        <div class="splitflap-wrap" aria-label="Territories city board">
+          <div class="splitflap-row" id="city-row"></div>
         </div>
-
-        <div class="territories-legend">
-            <div class="legend-item">
-                <div class="legend-dot active"></div>
-                <span>ACTIVE MARKETS</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-dot future"></div>
-                <span>FUTURE EXPANSION</span>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- SERVICIOS -->
+    <!-- SERVICES (LIGHT INVERT) -->
     <section class="services" id="services">
-        <div class="services-header">
-            <div class="services-tag">SERVICES</div>
-            <h2 class="services-title">HOW WE WORK</h2>
+      <div class="wrap">
+        <div class="section-label" data-es="SERVICES" data-en="SERVICES">SERVICES</div>
+        <h2 data-es="HOW WE WORK" data-en="HOW WE WORK">HOW WE WORK</h2>
+        <p class="sub" data-es="Tres líneas claras. Sin humo. Cada servicio tiene un camino directo al cuestionario."
+           data-en="Three clear lines. No noise. Each service has a direct path to the questionnaire.">
+          Tres líneas claras. Sin humo. Cada servicio tiene un camino directo al cuestionario.
+        </p>
+
+        <div class="tabs" id="services-tabs">
+          <div class="tablist" role="tablist" aria-label="Services tabs">
+            <button class="tab" role="tab" aria-selected="true" aria-controls="panel-booking" id="tab-booking" type="button"
+              data-es="ARTIST BOOKING" data-en="ARTIST BOOKING">ARTIST BOOKING</button>
+
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-label" id="tab-label" type="button"
+              data-es="LABEL SERVICES" data-en="LABEL SERVICES">LABEL SERVICES</button>
+
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-venue" id="tab-venue" type="button"
+              data-es="VENUE PROGRAMMING" data-en="VENUE PROGRAMMING">VENUE PROGRAMMING</button>
+          </div>
+
+          <div class="tabpanel active" role="tabpanel" id="panel-booking" aria-labelledby="tab-booking">
+            <div class="service-title" data-es="Artist Booking" data-en="Artist Booking">Artist Booking</div>
+            <ul class="service-points">
+              <li data-es="Tour booking internacional" data-en="International tour booking">Tour booking internacional</li>
+              <li data-es="Routing por red + datos" data-en="Network + data routing">Routing por red + datos</li>
+              <li data-es="Deals directos y claros" data-en="Direct, clear deals">Deals directos y claros</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=artist" data-es="SUBMIT ARTIST →" data-en="SUBMIT ARTIST →">SUBMIT ARTIST →</a>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-label" aria-labelledby="tab-label">
+            <div class="service-title" data-es="Label Services" data-en="Label Services">Label Services</div>
+            <ul class="service-points">
+              <li data-es="Paquetes por territorio" data-en="Territory-based packages">Paquetes por territorio</li>
+              <li data-es="Estrategia + timing" data-en="Strategy + timing">Estrategia + timing</li>
+              <li data-es="Tour support multiciudad" data-en="Multi-city tour support">Tour support multiciudad</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=label" data-es="REQUEST PACKAGE →" data-en="REQUEST PACKAGE →">REQUEST PACKAGE →</a>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-venue" aria-labelledby="tab-venue">
+            <div class="service-title" data-es="Venue Programming" data-en="Venue Programming">Venue Programming</div>
+            <ul class="service-points">
+              <li data-es="Curaduría por escena" data-en="Scene-led curation">Curaduría por escena</li>
+              <li data-es="Matches rápidos" data-en="Fast matching">Matches rápidos</li>
+              <li data-es="Fechas listas para ruta" data-en="Dates ready for routing">Fechas listas para ruta</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=venue" data-es="SUBMIT DATES →" data-en="SUBMIT DATES →">SUBMIT DATES →</a>
+          </div>
         </div>
-
-        <div class="services-grid">
-            <!-- ARTIST DIVISION -->
-            <div class="service-card">
-                <div class="service-card-header">
-                    <div class="service-card-number">ARTIST</div>
-                    <div class="service-card-type">DIVISION 01</div>
-                </div>
-                <h3 class="service-card-title">Artist Booking</h3>
-                <ul class="service-card-list">
-                    <li><strong>SERVICE</strong> <span>International Tour Booking</span></li>
-                    <li><strong>CLIENT</strong> <span>Artists & Managers</span></li>
-                    <li><strong>PROCESS</strong> <span>Data Analysis → Booking → Routing</span></li>
-                    <li><strong>TERRITORY</strong> <span>Spain ↔ Mexico</span></li>
-                </ul>
-                <a href="/artist-booking" class="service-card-cta">SUBMIT MUSIC</a>
-            </div>
-
-            <!-- LABEL DIVISION -->
-            <div class="service-card">
-                <div class="service-card-header">
-                    <div class="service-card-number">LABEL</div>
-                    <div class="service-card-type">DIVISION 02</div>
-                </div>
-                <h3 class="service-card-title">Label Services</h3>
-                <ul class="service-card-list">
-                    <li><strong>SERVICE</strong> <span>Tour Package Development</span></li>
-                    <li><strong>CLIENT</strong> <span>Labels & Distributors</span></li>
-                    <li><strong>PROCESS</strong> <span>Roster Analysis → Package Design → Execution</span></li>
-                    <li><strong>TERRITORY</strong> <span>Multi-Country</span></li>
-                </ul>
-                <a href="/label-services" class="service-card-cta">REQUEST PACKAGE</a>
-            </div>
-
-            <!-- VENUE DIVISION -->
-            <div class="service-card">
-                <div class="service-card-header">
-                    <div class="service-card-number">VENUE</div>
-                    <div class="service-card-type">DIVISION 03</div>
-                </div>
-                <h3 class="service-card-title">Venue Programming</h3>
-                <ul class="service-card-list">
-                    <li><strong>SERVICE</strong> <span>Artist Recommendations</span></li>
-                    <li><strong>CLIENT</strong> <span>Venues & Promoters</span></li>
-                    <li><strong>PROCESS</strong> <span>Date Input → Artist Match → Booking</span></li>
-                    <li><strong>TERRITORY</strong> <span>Local & International</span></li>
-                </ul>
-                <a href="/venue-programming" class="service-card-cta">SUBMIT DATES</a>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta" id="contact">
-        <div class="cta-content">
-            <h2 class="cta-title">
-                READY TO<br>
-                <span>BOOK YOUR TOUR?</span>
-            </h2>
-            
-            <div class="cta-buttons">
-                <a href="/artist-submission" class="btn-primary">ARTIST SUBMISSION</a>
-                <a href="/label-inquiry" class="btn-secondary">LABEL INQUIRY</a>
-                <a href="/venue-submission" class="btn-secondary">VENUE SUBMISSION</a>
-            </div>
+    <!-- BOOK A TOUR (pre-form, scroll target) -->
+    <section class="book" id="book-a-tour">
+      <div class="wrap">
+        <div class="book-grid">
+          <div>
+            <div class="section-label" data-es="BOOKING INTAKE" data-en="BOOKING INTAKE">BOOKING INTAKE</div>
+            <h2 data-es="BOOK A TOUR" data-en="BOOK A TOUR">BOOK A TOUR</h2>
+            <p data-es="Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos."
+               data-en="Quick questionnaire to understand your project, date window, and territories. No bureaucracy: one step and we move.">
+              Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.
+            </p>
+          </div>
+
+          <div class="book-actions">
+            <a class="cta-primary" href="book-a-tour.html"
+               data-es="CONTINUE TO QUESTIONNAIRE"
+               data-en="CONTINUE TO QUESTIONNAIRE">
+              CONTINUE TO QUESTIONNAIRE <span aria-hidden="true">→</span>
+            </a>
+            <a class="cta-secondary" href="#territories"
+               data-es="BACK TO TERRITORIES"
+               data-en="BACK TO TERRITORIES">
+              BACK TO TERRITORIES <span aria-hidden="true">↑</span>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
+    <!-- FOOTER (tipo código 1) -->
+    <footer>
+      <div class="wrap">
         <div class="footer-grid">
-            <div class="footer-col">
-                <h3>SERVICES</h3>
-                <ul>
-                    <li><a href="/artist-booking">Artist Booking</a></li>
-                    <li><a href="/label-services">Label Services</a></li>
-                    <li><a href="/venue-programming">Venue Programming</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>TERRITORIES</h3>
-                <ul>
-                    <li><a href="#" class="active-territory">Spain</a></li>
-                    <li><a href="#" class="active-territory">Mexico</a></li>
-                    <li><a href="#" class="future-territory">Lisbon (2025)</a></li>
-                    <li><a href="#" class="future-territory">Paris (2025)</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>COMPANY</h3>
-                <ul>
-                    <li><a href="#">Process</a></li>
-                    <li><a href="#">Network</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>CONTACT</h3>
-                <ul>
-                    <li><a href="mailto:booking@bookingplans.com">booking@bookingplans.com</a></li>
-                    <li><a href="#">Barcelona Office</a></li>
-                    <li><a href="#">Mexico City Office</a></li>
-                </ul>
-            </div>
+          <div class="f-col">
+            <h3>SERVICES</h3>
+            <ul>
+              <li><a href="#services" data-es="Artist Booking" data-en="Artist Booking">Artist Booking</a></li>
+              <li><a href="#services" data-es="Label Services" data-en="Label Services">Label Services</a></li>
+              <li><a href="#services" data-es="Venue Programming" data-en="Venue Programming">Venue Programming</a></li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <h3>NETWORK</h3>
+            <ul>
+              <li><a href="#hero" data-es="Active Markets" data-en="Active Markets">Active Markets</a></li>
+              <li><a href="#hero" data-es="Verified Venues" data-en="Verified Venues">Verified Venues</a></li>
+              <li><a href="#territories" data-es="Territories" data-en="Territories">Territories</a></li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <h3>PROCESS</h3>
+            <ul>
+              <li><a href="#services" data-es="Data Intake" data-en="Data Intake">Data Intake</a></li>
+              <li><a href="#services" data-es="Routing Build" data-en="Routing Build">Routing Build</a></li>
+              <li><a href="#services" data-es="Deal Structure" data-en="Deal Structure">Deal Structure</a></li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <h3>CONTACT</h3>
+            <ul>
+              <li><a href="mailto:booking@bookingplans.com">booking@bookingplans.com</a></li>
+              <li><a href="#" data-es="Barcelona HQ" data-en="Barcelona HQ">Barcelona HQ</a></li>
+              <li><a href="#" data-es="Mexico City" data-en="Mexico City">Mexico City</a></li>
+            </ul>
+          </div>
         </div>
-        
+
         <div class="footer-bottom">
-            <p>BOOKING PLANS © 2024 | INTERNATIONAL BOOKING AGENCY | SPAIN ↔ MEXICO</p>
-            <p style="margin-top: 10px;" class="code-style">SYSTEM STATUS: OPERATIONAL | ACTIVE CONNECTIONS: 18</p>
+          <div>BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK</div>
+          <div class="status" style="margin-top:6px;">
+            <span class="dot" aria-hidden="true"></span>
+            <span>SYSTEM STATUS: OPERATIONAL</span>
+          </div>
         </div>
+      </div>
     </footer>
 
-    <script>
-        // Sistema de nodos interactivos
-        const nodes = document.querySelectorAll('.map-node');
-        const connections = document.querySelectorAll('.map-connection');
-        
-        nodes.forEach(node => {
-            node.addEventListener('mouseenter', function() {
-                const city = this.getAttribute('data-city');
-                
-                // Resaltar nodo
-                this.style.transform = 'scale(1.2)';
-                
-                // Resaltar conexiones relacionadas
-                connections.forEach(conn => {
-                    if (conn.classList.contains(city)) {
-                        conn.style.opacity = '1';
-                        conn.style.height = '3px';
-                    }
-                });
-                
-                // Mostrar datos de la ciudad
-                showCityData(city);
-            });
-            
-            node.addEventListener('mouseleave', function() {
-                const city = this.getAttribute('data-city');
-                
-                // Restaurar nodo
-                this.style.transform = 'scale(1)';
-                
-                // Restaurar conexiones
-                connections.forEach(conn => {
-                    conn.style.opacity = '0.6';
-                    conn.style.height = '2px';
-                });
-            });
-        });
-        
-        function showCityData(city) {
-            const dataMap = {
-                'madrid': '15 venues | 2 festivals | 12k capacity',
-                'barcelona': '12 venues | 3 festivals | 15k capacity',
-                'mexico': '25 venues | 4 festivals | 30k capacity',
-                'guadalajara': '8 venues | 1 festival | 10k capacity',
-                'monterrey': '6 venues | 2 festivals | 8k capacity',
-                'lisbon': 'Coming 2025',
-                'paris': 'Coming 2025'
-            };
-            
-            // Actualizar display (podría ser un tooltip o un display fijo)
-            console.log(`${city.toUpperCase()}: ${dataMap[city]}`);
-        }
-        
-        // Animación de conexiones
-        function animateConnections() {
-            connections.forEach((conn, index) => {
-                // Establecer delay diferente para cada conexión
-                conn.style.animationDelay = `${index * 0.5}s`;
-            });
-        }
-        
-        animateConnections();
-        
-        // Efecto de grid dinámico
-        const gridLines = document.querySelector('.grid-lines');
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            gridLines.style.backgroundPosition = `${x * 100}px ${y * 100}px`;
-        });
-        
-        // Efecto de escritura tipo terminal
-        const heroTitle = document.querySelector('.hero-title span');
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < originalText.length) {
-                heroTitle.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(() => {
-                    heroTitle.classList.add('blink');
-                }, 500);
+    <!-- WhatsApp flotante -->
+    <a class="wa-float"
+       href="https://wa.me/34123456789?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour"
+       target="_blank" rel="noopener"
+       aria-label="Direct WhatsApp">
+      <div class="wa-box">
+        <div class="wa-icon">WA</div>
+        <div class="wa-text">
+          <div class="wa-title">LIVE BOOKING</div>
+          <div class="wa-sub">DIRECT WHATSAPP</div>
+        </div>
+        <div class="wa-arrow" aria-hidden="true">→</div>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    // ====== Language toggle (ES/EN) ======
+    const langBtns = document.querySelectorAll('.lang-btn');
+    let currentLang = 'es';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+
+      document.querySelectorAll('[data-es]').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.textContent = text;
+      });
+    }
+
+    langBtns.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+    // ====== Hero typing effect ======
+    const typingText = document.getElementById('typing-text');
+    const words = ['BOOKING', 'TOURING', 'NETWORK', 'ROUTING'];
+    let wordIndex = 0, charIndex = 0, isDeleting = false;
+
+    function typeEffect() {
+      const w = words[wordIndex];
+      typingText.textContent = isDeleting ? w.substring(0, charIndex - 1) : w.substring(0, charIndex + 1);
+      charIndex += isDeleting ? -1 : 1;
+
+      if (!isDeleting && charIndex === w.length) {
+        isDeleting = true; setTimeout(typeEffect, 1200); return;
+      }
+      if (isDeleting && charIndex === 0) {
+        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(typeEffect, 350); return;
+      }
+      setTimeout(typeEffect, isDeleting ? 55 : 90);
+    }
+    setTimeout(typeEffect, 800);
+
+    // ====== Services tabs ======
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.tabpanel'));
+
+    function activateTab(tab) {
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
+      panels.forEach(p => p.classList.toggle('active', p.id === tab.getAttribute('aria-controls')));
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
+
+    // ====== Territories splitflap (random, no immediate repeat) ======
+    const cities = [
+      "CIUDAD DE MEXICO",
+      "BARCELONA",
+      "GUADALAJARA",
+      "LISBON",
+      "MADRID",
+      "MONTERREY",
+      "PARIS"
+    ];
+
+    const cityRow = document.getElementById('city-row');
+    let currentCityIndex = 0;
+
+    function renderCityMechanical(name) {
+      if (!cityRow) return;
+
+      const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
+
+      existingCells.forEach((cell, i) => {
+        setTimeout(() => {
+          cell.classList.remove('ready');
+          cell.classList.add('flip-out');
+        }, i * 18);
+      });
+
+      const totalOutTime = existingCells.length * 18 + 180;
+
+      setTimeout(() => {
+        cityRow.innerHTML = '';
+
+        let isStartOfWord = true;
+        const chars = [...name];
+
+        chars.forEach((char, i) => {
+          const cell = document.createElement('div');
+
+          if (char === ' ') {
+            cell.className = 'cell separator ready';
+            cell.textContent = '';
+            isStartOfWord = true;
+          } else {
+            cell.className = 'cell flip-in';
+            if (isStartOfWord) {
+              cell.classList.add('highlight');
+              isStartOfWord = false;
             }
-        }
-        
-        setTimeout(typeWriter, 1000);
-        
-        // Simulación de datos en tiempo real
-        function updateLiveData() {
-            const connectionsElement = document.querySelector('.footer-bottom .code-style');
-            let connectionsCount = 18;
-            
-            setInterval(() => {
-                // Variación aleatoria entre 15-20 conexiones
-                connectionsCount = 15 + Math.floor(Math.random() * 6);
-                connectionsElement.textContent = `SYSTEM STATUS: OPERATIONAL | ACTIVE CONNECTIONS: ${connectionsCount}`;
-            }, 5000);
-        }
-        
-        updateLiveData();
-        
-        // Efecto de sonido visual en botones
-        document.querySelectorAll('.btn-primary, .service-card-cta').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                // Crear efecto de onda
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size/2;
-                const y = e.clientY - rect.top - size/2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.3);
-                    transform: scale(0);
-                    animation: ripple-animation 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
+            cell.textContent = char;
+          }
+
+          cityRow.appendChild(cell);
+
+          setTimeout(() => {
+            cell.classList.remove('flip-in');
+            cell.classList.add('ready');
+          }, totalOutTime + (i * 18));
         });
-        
-        // Añadir estilo para la animación de ripple
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Simulación de sistema
-        console.log('%cBOOKING PLANS NETWORK INITIALIZED', 'color: #FF0000; font-size: 16px; font-weight: bold;');
-        console.log('%c> Connecting to Madrid node...', 'color: #888;');
-        console.log('%c> Connecting to Mexico City node...', 'color: #888;');
-        console.log('%c> Establishing Spain ↔ Mexico route...', 'color: #888;');
-        console.log('%c> Network active. Ready for bookings.', 'color: #00FF00;');
-    </script>
+      }, totalOutTime);
+    }
+
+    function nextCity() {
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * cities.length);
+      } while (nextIndex === currentCityIndex);
+
+      currentCityIndex = nextIndex;
+      renderCityMechanical(cities[currentCityIndex]);
+    }
+
+    renderCityMechanical(cities[currentCityIndex]);
+    setInterval(nextCity, 3000);
+  </script>
 </body>
 </html>
