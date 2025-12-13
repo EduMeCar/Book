@@ -228,21 +228,21 @@
   <header class="top">
     <div class="top-inner">
       <a class="brand" href="index.html#book-a-tour">BOOKING<span>PLANS</span></a>
-      <a class="back" href="index.html#book-a-tour">← BACK</a>
+      <a class="back" href="index.html#book-a-tour" data-i18n="book.back">← BACK</a>
     </div>
   </header>
 
   <main class="wrap">
-    <h1>BOOK A TOUR</h1>
-    <p class="sub">
+    <h1 data-i18n="book.title">BOOK A TOUR</h1>
+    <p class="sub" data-i18n="book.sub">
       Intake en 2 pasos: primero contacto y contexto, después territorios, fechas y links.
       (Este demo no envía a servidor; luego se conecta a tu backend o a un provider.)
     </p>
 
     <section class="card">
       <div class="steps" aria-label="Steps">
-        <div class="badge active" id="b1">STEP 1</div>
-        <div class="badge" id="b2">STEP 2</div>
+        <div class="badge active" id="b1" data-i18n="book.step1">STEP 1</div>
+        <div class="badge" id="b2" data-i18n="book.step2">STEP 2</div>
       </div>
 
       <form id="tourForm">
@@ -250,40 +250,40 @@
         <div class="step" id="step1">
           <div class="grid">
             <div>
-              <label for="name">Name / Project *</label>
+              <label for="name" data-i18n="book.label_name">Name / Project *</label>
               <input id="name" name="name" type="text" autocomplete="name" required />
             </div>
             <div>
-              <label for="email">Email *</label>
+              <label for="email" data-i18n="book.label_email">Email *</label>
               <input id="email" name="email" type="email" autocomplete="email" required />
             </div>
           </div>
 
           <div class="grid">
             <div>
-              <label for="role">Role *</label>
+              <label for="role" data-i18n="book.label_role">Role *</label>
               <select id="role" name="role" required>
-                <option value="" selected disabled>Select</option>
-                <option>Artist</option>
-                <option>Manager</option>
-                <option>Label</option>
-                <option>Venue</option>
+                <option value="" selected disabled data-i18n="book.role_select">Select</option>
+                <option value="artist" data-i18n="book.role_artist">Artist</option>
+                <option value="manager" data-i18n="book.role_manager">Manager</option>
+                <option value="label" data-i18n="book.role_label">Label</option>
+                <option value="venue" data-i18n="book.role_venue">Venue</option>
               </select>
             </div>
             <div>
-              <label for="service">Service (from landing)</label>
+              <label for="service" data-i18n="book.label_service">Service (from landing)</label>
               <select id="service" name="service">
-                <option value="" selected>Not specified</option>
-                <option value="artist">Artist Booking</option>
-                <option value="label">Label Services</option>
-                <option value="venue">Venue Programming</option>
+                <option value="" selected data-i18n="book.service_not_specified">Not specified</option>
+                <option value="artist" data-i18n="book.service_artist">Artist Booking</option>
+                <option value="label" data-i18n="book.service_label">Label Services</option>
+                <option value="venue" data-i18n="book.service_venue">Venue Programming</option>
               </select>
             </div>
           </div>
 
           <div class="actions">
-            <button class="btn" type="button" id="toStep2">CONTINUE →</button>
-            <a class="btn secondary" href="index.html#services">VIEW SERVICES</a>
+            <button class="btn" type="button" id="toStep2" data-i18n="book.btn_continue">CONTINUE →</button>
+            <a class="btn secondary" href="index.html#services" data-i18n="book.btn_view_services">VIEW SERVICES</a>
           </div>
         </div>
 
@@ -291,37 +291,37 @@
         <div class="step" id="step2" style="display:none;">
           <div class="grid">
             <div>
-              <label for="territories">Territories / Cities</label>
+              <label for="territories" data-i18n="book.label_territories">Territories / Cities</label>
               <input id="territories" name="territories" type="text" placeholder="Barcelona, Madrid, Lisbon..." />
             </div>
             <div>
-              <label for="datewindow">Date window</label>
+              <label for="datewindow" data-i18n="book.label_datewindow">Date window</label>
               <input id="datewindow" name="datewindow" type="text" placeholder="Mar–Apr 2026" />
             </div>
           </div>
 
           <div class="grid">
             <div>
-              <label for="links">Links (EPK / Spotify / Press)</label>
+              <label for="links" data-i18n="book.label_links">Links (EPK / Spotify / Press)</label>
               <input id="links" name="links" type="url" placeholder="https://..." />
             </div>
             <div>
-              <label for="budget">Budget range (optional)</label>
+              <label for="budget" data-i18n="book.label_budget">Budget range (optional)</label>
               <input id="budget" name="budget" type="text" placeholder="Optional" />
             </div>
           </div>
 
           <div>
-            <label for="notes">Notes</label>
+            <label for="notes" data-i18n="book.label_notes">Notes</label>
             <textarea id="notes" name="notes" placeholder="Routing constraints, tech rider notes, preferred deal terms..."></textarea>
           </div>
 
           <div class="actions">
-            <button class="btn secondary" type="button" id="backStep1">← BACK</button>
-            <button class="btn" type="submit">SUBMIT</button>
+            <button class="btn secondary" type="button" id="backStep1" data-i18n="book.btn_back">← BACK</button>
+            <button class="btn" type="submit" data-i18n="book.btn_submit">SUBMIT</button>
           </div>
 
-          <div class="note">
+          <div class="note" data-i18n="book.note_required">
             * Required fields are in Step 1.
           </div>
         </div>
@@ -336,51 +336,76 @@
     WA
   </a>
 
-  <script>
-    // Prefill service from URL (?service=artist|label|venue)
-    const params = new URLSearchParams(window.location.search);
-    const serviceParam = params.get('service');
-    if (serviceParam) {
+  <script src="i18n.js" defer></script>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1) Aplicar idioma (lee ?lang= o localStorage y traduce [data-i18n])
+      try {
+        await window.BP_I18N.setLang(window.BP_I18N.getLang());
+      } catch (e) {
+        console.error('i18n error:', e);
+      }
+
+      // 2) Prefill service desde URL (?service=artist|label|venue)
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get('service');
+
       const serviceSelect = document.getElementById('service');
-      if ([...serviceSelect.options].some(o => o.value === serviceParam)) {
-        serviceSelect.value = serviceParam;
+      if (serviceParam && serviceSelect) {
+        const exists = [...serviceSelect.options].some(o => o.value === serviceParam);
+        if (exists) serviceSelect.value = serviceParam;
       }
-    }
 
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const b1 = document.getElementById('b1');
-    const b2 = document.getElementById('b2');
+      // 3) Navegación step1/step2
+      const step1 = document.getElementById('step1');
+      const step2 = document.getElementById('step2');
+      const b1 = document.getElementById('b1');
+      const b2 = document.getElementById('b2');
 
-    function showStep(n){
-      const is1 = n === 1;
-      step1.style.display = is1 ? 'block' : 'none';
-      step2.style.display = is1 ? 'none' : 'block';
-      b1.classList.toggle('active', is1);
-      b2.classList.toggle('active', !is1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    document.getElementById('toStep2').addEventListener('click', () => {
-      // Validar campos required de Step 1 antes de pasar
-      const required = ['name','email','role'];
-      const ok = required.every(id => document.getElementById(id).checkValidity());
-      if (!ok) {
-        // dispara UI nativa de validación
-        required.forEach(id => document.getElementById(id).reportValidity());
-        return;
+      function showStep(n) {
+        if (!step1 || !step2) return;
+        const is1 = n === 1;
+        step1.style.display = is1 ? 'block' : 'none';
+        step2.style.display = is1 ? 'none' : 'block';
+        if (b1) b1.classList.toggle('active', is1);
+        if (b2) b2.classList.toggle('active', !is1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      showStep(2);
-    });
 
-    document.getElementById('backStep1').addEventListener('click', () => showStep(1));
+      const toStep2Btn = document.getElementById('toStep2');
+      if (toStep2Btn) {
+        toStep2Btn.addEventListener('click', () => {
+          const required = ['name', 'email', 'role'];
+          const ok = required.every(id => {
+            const el = document.getElementById(id);
+            return el ? el.checkValidity() : false;
+          });
+          if (!ok) {
+            required.forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.reportValidity();
+            });
+            return;
+          }
+          showStep(2);
+        });
+      }
 
-    document.getElementById('tourForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Submitted (demo). Connect this form to your backend / email automation next.');
-      showStep(1);
-      e.target.reset();
+      const backBtn = document.getElementById('backStep1');
+      if (backBtn) backBtn.addEventListener('click', () => showStep(1));
+
+      const form = document.getElementById('tourForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          alert('Submitted (demo). Connect this form to your backend / email automation next.');
+          showStep(1);
+          form.reset();
+        });
+      }
     });
   </script>
+
 </body>
 </html>
