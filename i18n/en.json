@@ -1,5 +1,37 @@
 {
   "hero.tag": "INTERNATIONAL BOOKING NETWORK",
+  "hero.sub": "Analog cinema. Underground scene. Direct deals. Efficient routing.",
+
   "book.title": "BOOK A TOUR",
-  "hero.sub": "Analog cinema. Underground scene. Direct deals. Efficient routing."
+  "book.sub": "2-step intake: first contact and context, then territories, dates and links. (This demo does not send to a server; connect it later to your backend or a provider.)",
+  "book.back": "← BACK",
+
+  "book.step1": "STEP 1",
+  "book.step2": "STEP 2",
+
+  "book.label_name": "Name / Project *",
+  "book.label_email": "Email *",
+  "book.label_role": "Role *",
+  "book.role_select": "Select",
+  "book.role_artist": "Artist",
+  "book.role_manager": "Manager",
+  "book.role_label": "Label",
+  "book.role_venue": "Venue",
+
+  "book.label_service": "Service (from landing)",
+  "book.service_not_specified": "Not specified",
+  "book.service_artist": "Artist Booking",
+  "book.service_label": "Label Services",
+  "book.service_venue": "Venue Programming",
+
+  "book.btn_continue": "CONTINUE →",
+  "book.btn_view_services": "VIEW SERVICES",
+  "book.label_territories": "Territories / Cities",
+  "book.label_datewindow": "Date window",
+  "book.label_links": "Links (EPK / Spotify / Press)",
+  "book.label_budget": "Budget range (optional)",
+  "book.label_notes": "Notes",
+  "book.btn_back": "← BACK",
+  "book.btn_submit": "SUBMIT",
+  "book.note_required": "* Required fields are in Step 1."
 }
