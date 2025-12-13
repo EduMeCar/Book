@@ -33,5 +33,10 @@
   "book.label_notes": "Notas",
   "book.btn_back": "← VOLVER",
   "book.btn_submit": "ENVIAR",
-  "book.note_required": "* Los campos obligatorios están en el Paso 1."
+  "book.note_required": "* Los campos obligatorios están en el Paso 1.",
+  "book.ph_territories": "Barcelona, Madrid, Lisboa...",
+  "book.ph_datewindow": "Mar–Abr 2026",
+  "book.ph_links": "https://...",
+  "book.ph_budget": "Opcional",
+  "book.ph_notes": "Restricciones de routing, notas de rider técnico, términos de deal preferidos..."
 }
