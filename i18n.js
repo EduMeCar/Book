@@ -28,6 +28,19 @@
       const key = el.getAttribute("data-i18n-placeholder");
       if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
     });
+
+    // WhatsApp link dynamic text (external links are not rewritten later)
+    if (dict["wa.text"]) {
+      document.querySelectorAll('a[href*="wa.me/"]').forEach((a) => {
+        try {
+          const u = new URL(a.href);
+          u.searchParams.set("text", dict["wa.text"]);
+          a.href = u.toString();
+        } catch (e) {
+          // Ignore malformed URLs
+        }
+      });
+    }
   };
 
   const setLang = async (lang) => {
