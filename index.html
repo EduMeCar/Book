@@ -913,33 +913,47 @@ langBtns.forEach(btn => {
       "MONTERREY",
       "PARIS"
     ];
-
+    
+    // ✅ Alias solo para móvil (sin tocar desktop)
+    const CITY_ALIASES_MOBILE = {
+      "CIUDAD DE MEXICO": "CDMX",
+      "GUADALAJARA": "GDL"
+    };
+    
+    const isMobileMQ = window.matchMedia("(max-width: 480px)");
+    
+    function cityDisplayName(name) {
+      return (isMobileMQ.matches && CITY_ALIASES_MOBILE[name])
+        ? CITY_ALIASES_MOBILE[name]
+        : name;
+    }
+    
     const cityRow = document.getElementById('city-row');
     let currentCityIndex = 0;
-
+    
     function renderCityMechanical(name) {
       if (!cityRow) return;
-
+    
       const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
-
+    
       existingCells.forEach((cell, i) => {
         setTimeout(() => {
           cell.classList.remove('ready');
           cell.classList.add('flip-out');
         }, i * 18);
       });
-
+    
       const totalOutTime = existingCells.length * 18 + 180;
-
+    
       setTimeout(() => {
         cityRow.innerHTML = '';
-
+    
         let isStartOfWord = true;
         const chars = [...name];
-
+    
         chars.forEach((char, i) => {
           const cell = document.createElement('div');
-
+    
           if (char === ' ') {
             cell.className = 'cell separator ready';
             cell.textContent = '';
@@ -952,9 +966,9 @@ langBtns.forEach(btn => {
             }
             cell.textContent = char;
           }
-
+    
           cityRow.appendChild(cell);
-
+    
           setTimeout(() => {
             cell.classList.remove('flip-in');
             cell.classList.add('ready');
@@ -962,19 +976,27 @@ langBtns.forEach(btn => {
         });
       }, totalOutTime);
     }
-
+    
     function nextCity() {
       let nextIndex;
       do {
         nextIndex = Math.floor(Math.random() * cities.length);
       } while (nextIndex === currentCityIndex);
-
+    
       currentCityIndex = nextIndex;
-      renderCityMechanical(cities[currentCityIndex]);
+      renderCityMechanical(cityDisplayName(cities[currentCityIndex])); // ✅
     }
-
-    renderCityMechanical(cities[currentCityIndex]);
+    
+    // ✅ Render inicial
+    renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
+    
+    // ✅ Opcional: si cambia el breakpoint (rotación / resize), re-render del nombre actual
+    isMobileMQ.addEventListener("change", () => {
+      renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
+    });
+    
     setInterval(nextCity, 3000);
+
   </script>
 </body>
 </html>
