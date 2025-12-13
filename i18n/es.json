@@ -72,5 +72,11 @@
   "footer.contact.mexico": "Ciudad de México",
   "footer.copyright": "BOOKING PLANS © 2025 | RED DE BOOKING BASADA EN DATOS",
   "footer.status": "ESTADO DEL SISTEMA: OPERATIVO",
+  "header.metric.markets": "Mercados Activos",
+  "territories.live_label": "TERRITORIES • NETWORK LIVE",
+  "book.section_label": "BOOKING INTAKE",
+  "book.lead": "Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.",
+  "book.cta_continue": "CONTINUAR AL CUESTIONARIO",
+  "book.cta_back_territories": "VOLVER A TERRITORIOS",
   "wa.text": "Hola BOOKING PLANS, quiero reservar un tour"
 }
