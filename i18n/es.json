@@ -38,5 +38,30 @@
   "book.ph_datewindow": "Mar–Abr 2026",
   "book.ph_links": "https://...",
   "book.ph_budget": "Opcional",
-  "book.ph_notes": "Restricciones de routing, notas de rider técnico, términos de deal preferidos..."
+  "book.ph_notes": "Restricciones de routing, notas de rider técnico, términos de deal preferidos..."  ,
+  "services.label": "SERVICES",
+  "services.heading": "CÓMO TRABAJAMOS",
+  "services.sub": "Tres líneas claras. Sin humo. Cada servicio tiene un camino directo al cuestionario.",
+  
+  "services.tab_artist": "ARTIST BOOKING",
+  "services.tab_label": "LABEL SERVICES",
+  "services.tab_venue": "VENUE PROGRAMMING",
+  
+  "services.artist.title": "Artist Booking",
+  "services.artist.point1": "Tour booking internacional",
+  "services.artist.point2": "Routing por red + datos",
+  "services.artist.point3": "Deals directos y claros",
+  "services.artist.cta": "SUBMIT ARTIST →",
+  
+  "services.label_service.title": "Label Services",
+  "services.label_service.point1": "Paquetes por territorio",
+  "services.label_service.point2": "Estrategia + timing",
+  "services.label_service.point3": "Tour support multiciudad",
+  "services.label_service.cta": "REQUEST PACKAGE →",
+  
+  "services.venue.title": "Venue Programming",
+  "services.venue.point1": "Curaduría por escena",
+  "services.venue.point2": "Matches rápidos",
+  "services.venue.point3": "Fechas listas para ruta",
+  "services.venue.cta": "SUBMIT DATES →"
 }
