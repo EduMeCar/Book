@@ -72,5 +72,11 @@
   "footer.contact.mexico": "Mexico City",
   "footer.copyright": "BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK",
   "footer.status": "SYSTEM STATUS: OPERATIONAL",
+  "header.metric.markets": "Active Markets",
+  "territories.live_label": "TERRITORIES • LIVE NETWORK",
+  "book.section_label": "BOOKING INTAKE",
+  "book.lead": "Quick questionnaire to understand your project, date windows and territories. No bureaucracy: one step and we move on.",
+  "book.cta_continue": "CONTINUE TO QUESTIONNAIRE",
+  "book.cta_back_territories": "BACK TO TERRITORIES",
   "wa.text": "Hi BOOKING PLANS, I want to book a tour"
 }
