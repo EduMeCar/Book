@@ -644,7 +644,7 @@
       <div class="header-inner">
         <div class="metric">
           07
-          <span data-es="MERCADOS ACTIVOS" data-en="ACTIVE MARKETS">MERCADOS ACTIVOS</span>
+          <span data-i18n="header.metric.markets">MERCADOS ACTIVOS</span>
         </div>
 
         <a href="#hero" class="logo" aria-label="Booking Plans">
@@ -667,9 +667,7 @@
       </div>
 
       <div class="wrap hero-content">
-        <div class="tag" data-es="RED INTERNACIONAL DE BOOKING" data-en="INTERNATIONAL BOOKING NETWORK">
-          RED INTERNACIONAL DE BOOKING
-        </div>
+        <div class="tag" data-i18n="hero.tag">RED INTERNACIONAL DE BOOKING</div>
 
         <h1 class="hero-title">
           ARTIST<br>
@@ -685,9 +683,7 @@
     <!-- TERRITORIES -->
     <section class="territories" id="territories">
       <div class="wrap">
-        <div class="section-label" data-es="TERRITORIES • NETWORK LIVE" data-en="TERRITORIES • LIVE NETWORK">
-          TERRITORIES • NETWORK LIVE
-        </div>
+        <div class="section-label" data-i18n="territories.live_label">TERRITORIES • NETWORK LIVE</div>
 
         <div class="splitflap-wrap" aria-label="Territories city board">
           <div class="splitflap-row" id="city-row"></div>
@@ -755,24 +751,17 @@
       <div class="wrap">
         <div class="book-grid">
           <div>
-            <div class="section-label" data-es="BOOKING INTAKE" data-en="BOOKING INTAKE">BOOKING INTAKE</div>
+            <div class="section-label" data-i18n="book.section_label">BOOKING INTAKE</div>
             <h2 data-i18n="book.title">BOOK A TOUR</h2>
-            <p data-es="Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos."
-               data-en="Quick questionnaire to understand your project, date window, and territories. No bureaucracy: one step and we move.">
-              Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.
-            </p>
+            <p data-i18n="book.lead">Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.</p>
           </div>
 
           <div class="book-actions">
-            <a class="cta-primary" href="book-a-tour.html"
-               data-es="CONTINUE TO QUESTIONNAIRE"
-               data-en="CONTINUE TO QUESTIONNAIRE">
-              CONTINUE TO QUESTIONNAIRE <span aria-hidden="true">→</span>
+            <a class="cta-primary" href="book-a-tour.html">
+              <span data-i18n="book.cta_continue">CONTINUE TO QUESTIONNAIRE</span> <span aria-hidden="true">→</span>
             </a>
-            <a class="cta-secondary" href="#territories"
-               data-es="BACK TO TERRITORIES"
-               data-en="BACK TO TERRITORIES">
-              BACK TO TERRITORIES <span aria-hidden="true">↑</span>
+            <a class="cta-secondary" href="#territories">
+              <span data-i18n="book.cta_back_territories">BACK TO TERRITORIES</span> <span aria-hidden="true">↑</span>
             </a>
           </div>
         </div>
@@ -847,7 +836,7 @@
   </div>
 
   <script src="i18n.js"></script>
-  
+
   <script>
     // ====== Language toggle (ES/EN) - i18n.js ======
 const langBtns = document.querySelectorAll('.lang-btn');
@@ -913,47 +902,47 @@ langBtns.forEach(btn => {
       "MONTERREY",
       "PARIS"
     ];
-    
+
     // ✅ Alias solo para móvil (sin tocar desktop)
     const CITY_ALIASES_MOBILE = {
       "CIUDAD DE MEXICO": "CDMX",
       "GUADALAJARA": "GDL"
     };
-    
+
     const isMobileMQ = window.matchMedia("(max-width: 480px)");
-    
+
     function cityDisplayName(name) {
       return (isMobileMQ.matches && CITY_ALIASES_MOBILE[name])
         ? CITY_ALIASES_MOBILE[name]
         : name;
     }
-    
+
     const cityRow = document.getElementById('city-row');
     let currentCityIndex = 0;
-    
+
     function renderCityMechanical(name) {
       if (!cityRow) return;
-    
+
       const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
-    
+
       existingCells.forEach((cell, i) => {
         setTimeout(() => {
           cell.classList.remove('ready');
           cell.classList.add('flip-out');
         }, i * 18);
       });
-    
+
       const totalOutTime = existingCells.length * 18 + 180;
-    
+
       setTimeout(() => {
         cityRow.innerHTML = '';
-    
+
         let isStartOfWord = true;
         const chars = [...name];
-    
+
         chars.forEach((char, i) => {
           const cell = document.createElement('div');
-    
+
           if (char === ' ') {
             cell.className = 'cell separator ready';
             cell.textContent = '';
@@ -966,9 +955,9 @@ langBtns.forEach(btn => {
             }
             cell.textContent = char;
           }
-    
+
           cityRow.appendChild(cell);
-    
+
           setTimeout(() => {
             cell.classList.remove('flip-in');
             cell.classList.add('ready');
@@ -976,25 +965,25 @@ langBtns.forEach(btn => {
         });
       }, totalOutTime);
     }
-    
+
     function nextCity() {
       let nextIndex;
       do {
         nextIndex = Math.floor(Math.random() * cities.length);
       } while (nextIndex === currentCityIndex);
-    
+
       currentCityIndex = nextIndex;
       renderCityMechanical(cityDisplayName(cities[currentCityIndex])); // ✅
     }
-    
+
     // ✅ Render inicial
     renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
-    
+
     // ✅ Opcional: si cambia el breakpoint (rotación / resize), re-render del nombre actual
     isMobileMQ.addEventListener("change", () => {
       renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
     });
-    
+
     setInterval(nextCity, 3000);
 
   </script>
