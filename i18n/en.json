@@ -1,14 +1,11 @@
 {
   "hero.tag": "INTERNATIONAL BOOKING NETWORK",
   "hero.sub": "Analog cinema. Underground scene. Direct deals. Efficient routing.",
-
   "book.title": "BOOK A TOUR",
   "book.sub": "2-step intake: first contact and context, then territories, dates and links. (This demo does not send to a server; connect it later to your backend or a provider.)",
   "book.back": "← BACK",
-
   "book.step1": "STEP 1",
   "book.step2": "STEP 2",
-
   "book.label_name": "Name / Project *",
   "book.label_email": "Email *",
   "book.label_role": "Role *",
@@ -17,13 +14,11 @@
   "book.role_manager": "Manager",
   "book.role_label": "Label",
   "book.role_venue": "Venue",
-
   "book.label_service": "Service (from landing)",
   "book.service_not_specified": "Not specified",
   "book.service_artist": "Artist Booking",
   "book.service_label": "Label Services",
   "book.service_venue": "Venue Programming",
-
   "book.btn_continue": "CONTINUE →",
   "book.btn_view_services": "VIEW SERVICES",
   "book.label_territories": "Territories / Cities",
@@ -42,47 +37,40 @@
   "services.label": "SERVICES",
   "services.heading": "HOW WE WORK",
   "services.sub": "Three clear lines. No noise. Each service has a direct path to the questionnaire.",
-  
   "services.tab_artist": "ARTIST BOOKING",
   "services.tab_label": "LABEL SERVICES",
   "services.tab_venue": "VENUE PROGRAMMING",
-  
   "services.artist.title": "Artist Booking",
   "services.artist.point1": "International tour booking",
   "services.artist.point2": "Network + data routing",
   "services.artist.point3": "Direct, clear deals",
   "services.artist.cta": "SUBMIT ARTIST →",
-  
   "services.label_service.title": "Label Services",
   "services.label_service.point1": "Territory-based packages",
   "services.label_service.point2": "Strategy + timing",
   "services.label_service.point3": "Multi-city tour support",
   "services.label_service.cta": "REQUEST PACKAGE →",
-  
   "services.venue.title": "Venue Programming",
   "services.venue.point1": "Scene-led curation",
   "services.venue.point2": "Fast matching",
   "services.venue.point3": "Dates ready for routing",
-  "services.venue.cta": "SUBMIT DATES →"  ,
+  "services.venue.cta": "SUBMIT DATES →",
   "footer.services.title": "SERVICES",
   "footer.services.artist": "Artist Booking",
   "footer.services.label": "Label Services",
   "footer.services.venue": "Venue Programming",
-  
   "footer.network.title": "NETWORK",
   "footer.network.markets": "Active Markets",
   "footer.network.venues": "Verified Venues",
   "footer.network.territories": "Territories",
-  
   "footer.process.title": "PROCESS",
   "footer.process.intake": "Data Intake",
   "footer.process.routing": "Routing Build",
   "footer.process.deals": "Deal Structure",
-  
   "footer.contact.title": "CONTACT",
   "footer.contact.barcelona": "Barcelona HQ",
   "footer.contact.mexico": "Mexico City",
-  
   "footer.copyright": "BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK",
-  "footer.status": "SYSTEM STATUS: OPERATIONAL"
+  "footer.status": "SYSTEM STATUS: OPERATIONAL",
+  "wa.text": "Hi BOOKING PLANS, I want to book a tour"
 }
