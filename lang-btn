@@ -86,23 +86,61 @@
       align-items:center;
       gap:18px;
     }
-    .metric{
-      font-weight:900;
-      font-size:22px;
-      letter-spacing:0.02em;
-      text-transform:uppercase;
-      color:var(--white);
-      line-height:1;
+
+    /* ====== MINI PLAYER (header-left) ====== */
+    .player-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-self:start;
     }
-    .metric span{
-      display:block;
-      margin-top:6px;
+    .pp-btn{
+      width:38px;
+      height:38px;
+      border:2px solid var(--white);
+      background:transparent;
+      color:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .pp-icon{ font-weight:900; font-size:14px; line-height:1; }
+    .pp-meta{ display:flex; flex-direction:column; line-height:1; }
+    .pp-title{
       font-family:var(--mono);
       font-size:10px;
-      letter-spacing:0.35em;
-      color:var(--muted);
-      font-weight:700;
+      letter-spacing:0.22em;
+      color:rgba(255,255,255,0.75);
+      text-transform:uppercase;
     }
+    .pp-status{
+      margin-top:6px;
+      font-family:var(--mono);
+      font-size:9px;
+      letter-spacing:0.28em;
+      color:rgba(255,255,255,0.45);
+      text-transform:uppercase;
+    }
+    .bp-led{
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,0.65);
+      background:var(--accent);
+      box-shadow:0 0 10px var(--accent-shadow);
+      cursor:pointer;
+    }
+    /* Blink solo cuando reproduce (JS añade .is-playing) */
+    .player-mini.is-playing .bp-led{ animation:bpBlink 0.7s steps(2,end) infinite; }
+    @keyframes bpBlink{ 50%{ opacity:0.25; } }
+
+    /* Mobile: ultra-compacto */
+    @media (max-width: 620px){
+      .pp-meta{ display:none; }
+      .pp-btn{ width:36px; height:36px; }
+    }
+
     .logo{
       text-decoration:none;
       color:var(--white);
@@ -660,7 +698,7 @@
       :root{ --pad: 18px; }
       .header-inner{grid-template-columns:1fr; text-align:center;}
       .header-controls{justify-self:center; justify-content:center;}
-      .metric{justify-self:center;}
+      .player-mini{justify-self:center;}
       .logo{padding:0 36px;}
       .book-grid{grid-template-columns:1fr; align-items:start;}
       .footer-grid{grid-template-columns: repeat(2, 1fr);}
@@ -681,9 +719,21 @@
     <!-- HEADER -->
     <header class="header">
       <div class="header-inner">
-        <div class="metric">
-          07
-          <span data-i18n="header.metric.markets">MERCADOS ACTIVOS</span>
+        <!-- LEFT: mini player + LED (reemplaza metric) -->
+        <div class="player-mini" id="bp-player" aria-label="Mini player">
+          <button class="pp-btn" id="bp-pp" type="button" aria-label="Play/Pause">
+            <span class="pp-icon" id="bp-pp-icon" aria-hidden="true">▶</span>
+          </button>
+
+          <div class="pp-meta" aria-hidden="true">
+            <div class="pp-title">TAPE 01</div>
+            <div class="pp-status" id="bp-audio-status">READY</div>
+          </div>
+
+          <button class="bp-led" id="bp-led" type="button" aria-label="Theme LED"></button>
+
+          <!-- MP3 local (cámbialo sin tocar JS) -->
+          <audio id="bp-audio" preload="none" loop src="audio/track.mp3"></audio>
         </div>
 
         <a href="#hero" class="logo" aria-label="Booking Plans">
@@ -1066,6 +1116,67 @@
     });
 
     setInterval(nextCity, 3000);
+
+
+    // ====== Header mini player (no autoplay, loop, reset to 0) + LED theme cycle ======
+    (() => {
+      const audio = document.getElementById('bp-audio');
+      const btn = document.getElementById('bp-pp');
+      const icon = document.getElementById('bp-pp-icon');
+      const status = document.getElementById('bp-audio-status');
+      const wrap = document.getElementById('bp-player');
+      const led = document.getElementById('bp-led');
+
+      if (!audio || !btn || !icon || !status || !wrap || !led) return;
+
+      const setUI = (s) => {
+        status.textContent = s;
+        if (s === 'PLAYING') {
+          icon.textContent = '⏸';
+          wrap.classList.add('is-playing');
+        } else {
+          icon.textContent = '▶';
+          wrap.classList.remove('is-playing');
+        }
+      };
+
+      setUI('READY');
+
+      btn.addEventListener('click', async () => {
+        // Pause
+        if (!audio.paused) {
+          audio.pause();
+          audio.currentTime = 0; // regla: no recordar punto
+          setUI('READY');
+          return;
+        }
+
+        // Play (siempre desde 0)
+        audio.currentTime = 0;
+        setUI('LOADING');
+
+        try {
+          await audio.play(); // puede fallar por políticas de autoplay
+          setUI('PLAYING');
+        } catch (e) {
+          console.error('Audio play failed:', e);
+          setUI('ERROR');
+        }
+      });
+
+      audio.addEventListener('pause', () => {
+        if (status.textContent !== 'ERROR') setUI('READY');
+      });
+      audio.addEventListener('error', () => setUI('ERROR'));
+
+      // LED easter egg: cycle theme (orange -> green -> yellow)
+      const ORDER = ['orange', 'green', 'yellow'];
+      led.addEventListener('click', () => {
+        const cur = localStorage.getItem(THEME_KEY) || 'orange';
+        const next = ORDER[(ORDER.indexOf(cur) + 1) % ORDER.length];
+        applyTheme(next); // sync con paleta
+      });
+    })();
   </script>
 </body>
 </html>
