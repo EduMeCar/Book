@@ -16,10 +16,15 @@
       --white:#fff;
       --line:#1f1f1f;
       --muted:#a9a9a9;
+
       --accent:#ff3300;
+      --accent-shadow: rgba(255,51,0,0.25);
+
       --wa:#25D366;
+
       --mono:'Space Mono', monospace;
       --sans:'Inter', -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+
       --max: 900px;
       --pad: 22px;
     }
@@ -186,10 +191,21 @@
       letter-spacing:0.22em;
       text-transform:uppercase;
       cursor:pointer;
+      box-shadow: 8px 8px 0 var(--accent-shadow);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover{
+      transform:translate(3px,3px);
+      box-shadow: 5px 5px 0 var(--accent-shadow);
     }
     .btn.secondary{
       border-color:var(--line);
       color:rgba(255,255,255,0.85);
+      box-shadow:none;
+    }
+    .btn.secondary:hover{
+      transform:none;
+      box-shadow:none;
     }
 
     .note{
@@ -224,6 +240,24 @@
 </head>
 
 <body>
+  <!-- Theme (sin selector) - lo más arriba posible para evitar flash -->
+  <script>
+    (() => {
+      const THEME_KEY = "bp_theme";
+      const THEMES = {
+        orange: { accent: "#ff3300", shadow: "rgba(255,51,0,0.25)" },
+        green:  { accent: "#25D366", shadow: "rgba(37,211,102,0.22)" },
+        yellow: { accent: "#FFD400", shadow: "rgba(255,212,0,0.22)" }
+      };
+
+      const saved = localStorage.getItem(THEME_KEY);
+      const t = (saved && THEMES[saved]) ? THEMES[saved] : THEMES.orange;
+
+      document.documentElement.style.setProperty("--accent", t.accent);
+      document.documentElement.style.setProperty("--accent-shadow", t.shadow);
+    })();
+  </script>
+
   <header class="top">
     <div class="top-inner">
       <a class="brand" href="index.html#book-a-tour">BOOKING<span>PLANS</span></a>
@@ -391,6 +425,5 @@
       }
     });
   </script>
-
 </body>
 </html>
