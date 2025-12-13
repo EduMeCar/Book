@@ -1,5 +1,37 @@
 {
   "hero.tag": "RED INTERNACIONAL DE BOOKING",
+  "hero.sub": "Cinemática analógica. Escena underground. Tratos directos. Routing eficiente.",
+
   "book.title": "RESERVA TOUR",
-  "hero.sub": "Cinemática analógica. Escena underground. Tratos directos. Routing eficiente."
+  "book.sub": "Intake en 2 pasos: primero contacto y contexto, después territorios, fechas y links. (Este demo no envía a servidor; luego se conecta a tu backend o a un provider.)",
+  "book.back": "← VOLVER",
+
+  "book.step1": "PASO 1",
+  "book.step2": "PASO 2",
+
+  "book.label_name": "Nombre / Proyecto *",
+  "book.label_email": "Email *",
+  "book.label_role": "Rol *",
+  "book.role_select": "Selecciona",
+  "book.role_artist": "Artista",
+  "book.role_manager": "Management",
+  "book.role_label": "Sello",
+  "book.role_venue": "Sala",
+
+  "book.label_service": "Servicio (desde landing)",
+  "book.service_not_specified": "No especificado",
+  "book.service_artist": "Booking Artista",
+  "book.service_label": "Servicios para Sello",
+  "book.service_venue": "Programación de Sala",
+
+  "book.btn_continue": "CONTINUAR →",
+  "book.btn_view_services": "VER SERVICIOS",
+  "book.label_territories": "Territorios / Ciudades",
+  "book.label_datewindow": "Ventana de fechas",
+  "book.label_links": "Links (EPK / Spotify / Prensa)",
+  "book.label_budget": "Rango de presupuesto (opcional)",
+  "book.label_notes": "Notas",
+  "book.btn_back": "← VOLVER",
+  "book.btn_submit": "ENVIAR",
+  "book.note_required": "* Los campos obligatorios están en el Paso 1."
 }
