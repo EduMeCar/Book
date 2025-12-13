@@ -202,7 +202,6 @@
       line-height:1.7;
     }
 
-    /* WhatsApp flotante */
     .wa{
       position:fixed;
       right:18px;
@@ -246,7 +245,6 @@
       </div>
 
       <form id="tourForm">
-        <!-- STEP 1 -->
         <div class="step" id="step1">
           <div class="grid">
             <div>
@@ -287,33 +285,32 @@
           </div>
         </div>
 
-        <!-- STEP 2 -->
         <div class="step" id="step2" style="display:none;">
           <div class="grid">
             <div>
               <label for="territories" data-i18n="book.label_territories">Territories / Cities</label>
-              <input id="territories" name="territories" type="text" placeholder="Barcelona, Madrid, Lisbon..." />
+              <input id="territories" name="territories" type="text" placeholder="Barcelona, Madrid, Lisbon..." data-i18n-placeholder="book.ph_territories" />
             </div>
             <div>
               <label for="datewindow" data-i18n="book.label_datewindow">Date window</label>
-              <input id="datewindow" name="datewindow" type="text" placeholder="Mar–Apr 2026" />
+              <input id="datewindow" name="datewindow" type="text" placeholder="Mar–Apr 2026" data-i18n-placeholder="book.ph_datewindow" />
             </div>
           </div>
 
           <div class="grid">
             <div>
               <label for="links" data-i18n="book.label_links">Links (EPK / Spotify / Press)</label>
-              <input id="links" name="links" type="url" placeholder="https://..." />
+              <input id="links" name="links" type="url" placeholder="https://..." data-i18n-placeholder="book.ph_links" />
             </div>
             <div>
               <label for="budget" data-i18n="book.label_budget">Budget range (optional)</label>
-              <input id="budget" name="budget" type="text" placeholder="Optional" />
+              <input id="budget" name="budget" type="text" placeholder="Optional" data-i18n-placeholder="book.ph_budget" />
             </div>
           </div>
 
           <div>
             <label for="notes" data-i18n="book.label_notes">Notes</label>
-            <textarea id="notes" name="notes" placeholder="Routing constraints, tech rider notes, preferred deal terms..."></textarea>
+            <textarea id="notes" name="notes" placeholder="Routing constraints, tech rider notes, preferred deal terms..." data-i18n-placeholder="book.ph_notes"></textarea>
           </div>
 
           <div class="actions">
@@ -321,43 +318,31 @@
             <button class="btn" type="submit" data-i18n="book.btn_submit">SUBMIT</button>
           </div>
 
-          <div class="note" data-i18n="book.note_required">
-            * Required fields are in Step 1.
-          </div>
+          <div class="note" data-i18n="book.note_required">* Required fields are in Step 1.</div>
         </div>
       </form>
     </section>
   </main>
 
-  <a class="wa"
-     href="https://wa.me/34123456789?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour"
-     target="_blank" rel="noopener"
-     aria-label="WhatsApp">
-    WA
-  </a>
+  <a class="wa" href="https://wa.me/34123456789?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
 
   <script src="i18n.js" defer></script>
-
   <script defer>
     document.addEventListener('DOMContentLoaded', async () => {
-      // 1) Aplicar idioma (lee ?lang= o localStorage y traduce [data-i18n])
       try {
         await window.BP_I18N.setLang(window.BP_I18N.getLang());
       } catch (e) {
         console.error('i18n error:', e);
       }
 
-      // 2) Prefill service desde URL (?service=artist|label|venue)
       const params = new URLSearchParams(window.location.search);
       const serviceParam = params.get('service');
-
       const serviceSelect = document.getElementById('service');
       if (serviceParam && serviceSelect) {
         const exists = [...serviceSelect.options].some(o => o.value === serviceParam);
         if (exists) serviceSelect.value = serviceParam;
       }
 
-      // 3) Navegación step1/step2
       const step1 = document.getElementById('step1');
       const step2 = document.getElementById('step2');
       const b1 = document.getElementById('b1');
