@@ -63,5 +63,26 @@
   "services.venue.point1": "Scene-led curation",
   "services.venue.point2": "Fast matching",
   "services.venue.point3": "Dates ready for routing",
-  "services.venue.cta": "SUBMIT DATES →"
+  "services.venue.cta": "SUBMIT DATES →"  ,
+  "footer.services.title": "SERVICES",
+  "footer.services.artist": "Artist Booking",
+  "footer.services.label": "Label Services",
+  "footer.services.venue": "Venue Programming",
+  
+  "footer.network.title": "NETWORK",
+  "footer.network.markets": "Active Markets",
+  "footer.network.venues": "Verified Venues",
+  "footer.network.territories": "Territories",
+  
+  "footer.process.title": "PROCESS",
+  "footer.process.intake": "Data Intake",
+  "footer.process.routing": "Routing Build",
+  "footer.process.deals": "Deal Structure",
+  
+  "footer.contact.title": "CONTACT",
+  "footer.contact.barcelona": "Barcelona HQ",
+  "footer.contact.mexico": "Mexico City",
+  
+  "footer.copyright": "BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK",
+  "footer.status": "SYSTEM STATUS: OPERATIONAL"
 }
