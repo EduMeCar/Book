@@ -17,14 +17,22 @@
   };
 
   const applyDict = (dict) => {
+    // Text nodes (labels, buttons, headings, etc.)
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (dict[key] != null) el.textContent = dict[key];
+    });
+
+    // Placeholders (inputs, textarea)
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
     });
   };
 
   const setLang = async (lang) => {
     if (!SUPPORTED.includes(lang)) lang = "es";
+
     localStorage.setItem(KEY, lang);
     document.documentElement.lang = lang;
 
@@ -34,10 +42,18 @@
     // Mantener lang en links entre páginas
     document.querySelectorAll("a[href]").forEach((a) => {
       const href = a.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+      if (!href) return;
+      if (href.startsWith("#")) return;
+      if (href.startsWith("http")) return;
+      if (href.startsWith("mailto:")) return;
+      if (href.startsWith("tel:")) return;
+
       const u = new URL(href, window.location.href);
       u.searchParams.set("lang", lang);
-      a.setAttribute("href", u.pathname + "?" + u.searchParams.toString() + (u.hash || ""));
+
+      // Reconstruir preservando hash
+      const next = u.pathname + "?" + u.searchParams.toString() + (u.hash || "");
+      a.setAttribute("href", next);
     });
   };
 
