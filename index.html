@@ -571,6 +571,14 @@
       text-transform:uppercase;
     }
     .f-col a:hover{color:var(--white);}
+
+    /* ✅ Language en footer (por defecto oculto; aparece en móvil) */
+    .footer-lang{
+      display:none;
+      margin-top:22px;
+      justify-content:center;
+    }
+
     .footer-bottom{
       margin-top:38px;
       padding-top:18px;
@@ -663,9 +671,13 @@
     @media (max-width: 992px){
       :root{ --pad: 18px; }
       .header-inner{grid-template-columns:1fr; text-align:center;}
-      .header-controls{justify-self:center; justify-content:center;}
       .player-mini{justify-self:center;}
       .logo-img{ height:38px; }
+
+      /* ✅ Idioma: oculto en header; visible en footer */
+      .header-controls{ display:none; }
+      .footer-lang{ display:flex; }
+
       .book-grid{grid-template-columns:1fr; align-items:start;}
       .footer-grid{grid-template-columns: repeat(2, 1fr);}
       .wa-box{min-width: 190px;}
@@ -707,7 +719,7 @@
           <img id="bp-logo" class="logo-img" src="assets/logo-orange.png" alt="BOOKING PLANS" />
         </a>
 
-        <!-- RIGHT: solo idioma -->
+        <!-- RIGHT: solo idioma (en móvil se oculta por CSS) -->
         <div class="header-controls">
           <div class="lang-toggle" role="group" aria-label="Language">
             <button class="lang-btn active" data-lang="es" type="button">ES</button>
@@ -867,6 +879,14 @@
           </div>
         </div>
 
+        <!-- ✅ MOBILE: Language en footer (solo visible en móvil por CSS) -->
+        <div class="footer-lang" aria-label="Language">
+          <div class="lang-toggle" role="group" aria-label="Language">
+            <button class="lang-btn active" data-lang="es" type="button">ES</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
+        </div>
+
         <div class="footer-bottom">
           <div data-i18n="footer.copyright">BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK</div>
           <div class="status" style="margin-top:6px;">
@@ -894,7 +914,6 @@
   </div>
 
   <script src="i18n.js"></script>
-
   <script>
     // ====== Accent theme (CSS var + localStorage) ======
     const THEME_KEY = "bp_theme";
@@ -1069,7 +1088,7 @@
     // ✅ Render inicial
     renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
 
-    // ✅ Opcional: si cambia el breakpoint (rotación / resize), re-render del nombre actual
+    // ✅ Si cambia breakpoint (rotación / resize), re-render del nombre actual
     isMobileMQ.addEventListener("change", () => {
       renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
     });
