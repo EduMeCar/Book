@@ -105,7 +105,9 @@
       justify-content:center;
       cursor:pointer;
     }
-    .pp-icon{ font-weight:900; font-size:14px; line-height:1; }
+    /* Icon sizing (Font Awesome) */
+    #bp-pp-icon{ font-size:14px; line-height:1; }
+
     .pp-meta{ display:flex; flex-direction:column; line-height:1; }
     .pp-title{
       font-family:var(--mono);
@@ -141,30 +143,25 @@
       .pp-btn{ width:36px; height:36px; }
     }
 
+    /* LOGO (image) */
     .logo{
       text-decoration:none;
-      color:var(--white);
-      font-weight:900;
-      font-size:30px;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
       position:relative;
-      padding:0 44px;
       text-align:center;
       white-space:nowrap;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .logo span{color:var(--accent);}
-    .logo::before,.logo::after{
-      content:"";
-      position:absolute;
-      top:50%;
-      width:30px; height:2px;
-      background:var(--accent);
-      transform:translateY(-50%);
-      opacity:0.9;
+    /* Apaga las barras del logo anterior (eran pseudo-elementos) */
+    .logo::before,.logo::after{ display:none; }
+
+    .logo-img{
+      height:34px;
+      width:auto;
+      display:block;
     }
-    .logo::before{left:0;}
-    .logo::after{right:0;}
 
     /* Controles derecha: theme + lang */
     .header-controls{
@@ -192,9 +189,7 @@
       justify-content:center;
     }
     .theme-btn:last-child{border-right:none;}
-    .theme-btn.active{
-      background:var(--white);
-    }
+    .theme-btn.active{ background:var(--white); }
     .swatch{
       width:14px;
       height:14px;
@@ -699,7 +694,7 @@
       .header-inner{grid-template-columns:1fr; text-align:center;}
       .header-controls{justify-self:center; justify-content:center;}
       .player-mini{justify-self:center;}
-      .logo{padding:0 36px;}
+      .logo-img{ height:30px; }
       .book-grid{grid-template-columns:1fr; align-items:start;}
       .footer-grid{grid-template-columns: repeat(2, 1fr);}
       .wa-box{min-width: 190px;}
@@ -719,10 +714,10 @@
     <!-- HEADER -->
     <header class="header">
       <div class="header-inner">
-        <!-- LEFT: mini player + LED (reemplaza metric) -->
+        <!-- LEFT: mini player + LED -->
         <div class="player-mini" id="bp-player" aria-label="Mini player">
           <button class="pp-btn" id="bp-pp" type="button" aria-label="Play/Pause">
-            <span class="pp-icon" id="bp-pp-icon" aria-hidden="true">▶</span>
+            <i class="fa-solid fa-play" id="bp-pp-icon" aria-hidden="true"></i>
           </button>
 
           <div class="pp-meta" aria-hidden="true">
@@ -736,8 +731,9 @@
           <audio id="bp-audio" preload="none" loop src="audio/track.mp3"></audio>
         </div>
 
+        <!-- CENTER: logo (PNG swap by theme) -->
         <a href="#hero" class="logo" aria-label="Booking Plans">
-          BOOKING<span>PLANS</span>
+          <img id="bp-logo" class="logo-img" src="assets/logo-orange.png" alt="BOOKING PLANS" />
         </a>
 
         <div class="header-controls">
@@ -950,12 +946,20 @@
 
     const themeBtns = document.querySelectorAll(".theme-btn");
 
+    function syncLogo(themeName){
+      const img = document.getElementById('bp-logo');
+      if (!img) return;
+      const safe = (themeName === 'green' || themeName === 'yellow' || themeName === 'orange') ? themeName : 'orange';
+      img.src = `assets/logo-${safe}.png`;
+    }
+
     function applyTheme(themeName) {
       const t = THEMES[themeName] || THEMES.orange;
       document.documentElement.style.setProperty("--accent", t.accent);
       document.documentElement.style.setProperty("--accent-shadow", t.shadow);
       localStorage.setItem(THEME_KEY, themeName);
       themeBtns.forEach(b => b.classList.toggle("active", b.dataset.theme === themeName));
+      syncLogo(themeName);
     }
 
     themeBtns.forEach(btn => {
@@ -1131,13 +1135,12 @@
 
       const setUI = (s) => {
         status.textContent = s;
-        if (s === 'PLAYING') {
-          icon.textContent = '⏸';
-          wrap.classList.add('is-playing');
-        } else {
-          icon.textContent = '▶';
-          wrap.classList.remove('is-playing');
-        }
+        const playing = (s === 'PLAYING');
+
+        icon.classList.toggle('fa-play', !playing);
+        icon.classList.toggle('fa-pause', playing);
+
+        wrap.classList.toggle('is-playing', playing);
       };
 
       setUI('READY');
@@ -1174,7 +1177,7 @@
       led.addEventListener('click', () => {
         const cur = localStorage.getItem(THEME_KEY) || 'orange';
         const next = ORDER[(ORDER.indexOf(cur) + 1) % ORDER.length];
-        applyTheme(next); // sync con paleta
+        applyTheme(next); // sync con paleta + logo
       });
     })();
   </script>
