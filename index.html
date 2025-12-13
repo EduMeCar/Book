@@ -105,6 +105,7 @@
       justify-content:center;
       cursor:pointer;
     }
+
     /* Icon sizing (Font Awesome) */
     #bp-pp-icon{ font-size:14px; line-height:1; }
 
@@ -154,51 +155,21 @@
       align-items:center;
       justify-content:center;
     }
-    /* Apaga las barras del logo anterior (eran pseudo-elementos) */
     .logo::before,.logo::after{ display:none; }
 
     .logo-img{
-      height:34px;
+      height:48px;
       width:auto;
       display:block;
     }
 
-    /* Controles derecha: theme + lang */
+    /* Controles derecha: SOLO lang */
     .header-controls{
       justify-self:end;
       display:flex;
       align-items:center;
       gap:10px;
     }
-
-    /* Theme swatches */
-    .theme-toggle{
-      display:flex;
-      border:2px solid var(--white);
-      background:transparent;
-      box-shadow:6px 6px 0 rgba(255,255,255,0.10);
-    }
-    .theme-btn{
-      border:0;
-      background:transparent;
-      padding:10px 14px;
-      cursor:pointer;
-      border-right:2px solid var(--white);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .theme-btn:last-child{border-right:none;}
-    .theme-btn.active{ background:var(--white); }
-    .swatch{
-      width:14px;
-      height:14px;
-      border:2px solid var(--black);
-      display:block;
-    }
-    .swatch-orange{ background:#ff3300; }
-    .swatch-green{ background:#25D366; }
-    .swatch-yellow{ background:#FFD400; }
 
     /* ES/EN estilo portfolio */
     .lang-toggle{
@@ -694,7 +665,7 @@
       .header-inner{grid-template-columns:1fr; text-align:center;}
       .header-controls{justify-self:center; justify-content:center;}
       .player-mini{justify-self:center;}
-      .logo-img{ height:30px; }
+      .logo-img{ height:38px; }
       .book-grid{grid-template-columns:1fr; align-items:start;}
       .footer-grid{grid-template-columns: repeat(2, 1fr);}
       .wa-box{min-width: 190px;}
@@ -736,19 +707,8 @@
           <img id="bp-logo" class="logo-img" src="assets/logo-orange.png" alt="BOOKING PLANS" />
         </a>
 
+        <!-- RIGHT: solo idioma -->
         <div class="header-controls">
-          <div class="theme-toggle" role="group" aria-label="Accent color">
-            <button class="theme-btn active" data-theme="orange" type="button" aria-label="Orange accent">
-              <span class="swatch swatch-orange" aria-hidden="true"></span>
-            </button>
-            <button class="theme-btn" data-theme="green" type="button" aria-label="Green accent">
-              <span class="swatch swatch-green" aria-hidden="true"></span>
-            </button>
-            <button class="theme-btn" data-theme="yellow" type="button" aria-label="Yellow accent">
-              <span class="swatch swatch-yellow" aria-hidden="true"></span>
-            </button>
-          </div>
-
           <div class="lang-toggle" role="group" aria-label="Language">
             <button class="lang-btn active" data-lang="es" type="button">ES</button>
             <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -936,15 +896,13 @@
   <script src="i18n.js"></script>
 
   <script>
-    // ====== Accent theme toggle (CSS var + localStorage) ======
+    // ====== Accent theme (CSS var + localStorage) ======
     const THEME_KEY = "bp_theme";
     const THEMES = {
       orange: { accent: "#ff3300", shadow: "rgba(255,51,0,0.25)" },
       green:  { accent: "#25D366", shadow: "rgba(37,211,102,0.22)" },
       yellow: { accent: "#FFD400", shadow: "rgba(255,212,0,0.22)" }
     };
-
-    const themeBtns = document.querySelectorAll(".theme-btn");
 
     function syncLogo(themeName){
       const img = document.getElementById('bp-logo');
@@ -958,13 +916,8 @@
       document.documentElement.style.setProperty("--accent", t.accent);
       document.documentElement.style.setProperty("--accent-shadow", t.shadow);
       localStorage.setItem(THEME_KEY, themeName);
-      themeBtns.forEach(b => b.classList.toggle("active", b.dataset.theme === themeName));
       syncLogo(themeName);
     }
-
-    themeBtns.forEach(btn => {
-      btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
-    });
 
     (() => {
       const saved = localStorage.getItem(THEME_KEY);
@@ -1016,6 +969,7 @@
     }
     setTimeout(typeEffect, 800);
 
+
     // ====== Services tabs ======
     const tabs = Array.from(document.querySelectorAll('.tab'));
     const panels = Array.from(document.querySelectorAll('.tabpanel'));
@@ -1026,6 +980,7 @@
     }
 
     tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
+
 
     // ====== Territories splitflap (random, no immediate repeat) ======
     const cities = [
@@ -1135,12 +1090,22 @@
 
       const setUI = (s) => {
         status.textContent = s;
-        const playing = (s === 'PLAYING');
 
-        icon.classList.toggle('fa-play', !playing);
-        icon.classList.toggle('fa-pause', playing);
+        const isPlaying = (s === 'PLAYING');
+        const isLoading = (s === 'LOADING');
 
-        wrap.classList.toggle('is-playing', playing);
+        // Reset icon classes
+        icon.className = 'fa-solid';
+
+        if (isLoading) {
+          icon.classList.add('fa-circle-notch', 'fa-spin');
+        } else if (isPlaying) {
+          icon.classList.add('fa-pause');
+        } else {
+          icon.classList.add('fa-play');
+        }
+
+        wrap.classList.toggle('is-playing', isPlaying);
       };
 
       setUI('READY');
@@ -1177,7 +1142,7 @@
       led.addEventListener('click', () => {
         const cur = localStorage.getItem(THEME_KEY) || 'orange';
         const next = ORDER[(ORDER.indexOf(cur) + 1) % ORDER.length];
-        applyTheme(next); // sync con paleta + logo
+        applyTheme(next); // sync con accent + logo
       });
     })();
   </script>
