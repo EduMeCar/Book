@@ -22,6 +22,7 @@
 
       /* Acento controlado (no saturar) */
       --accent:#ff3300;
+      --accent-shadow: rgba(255,51,0,0.25);
 
       /* WhatsApp */
       --wa:#25D366;
@@ -127,9 +128,47 @@
     .logo::before{left:0;}
     .logo::after{right:0;}
 
+    /* Controles derecha: theme + lang */
+    .header-controls{
+      justify-self:end;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    /* Theme swatches */
+    .theme-toggle{
+      display:flex;
+      border:2px solid var(--white);
+      background:transparent;
+      box-shadow:6px 6px 0 rgba(255,255,255,0.10);
+    }
+    .theme-btn{
+      border:0;
+      background:transparent;
+      padding:10px 12px;
+      cursor:pointer;
+      border-right:2px solid var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .theme-btn:last-child{border-right:none;}
+    .theme-btn.active{
+      background:var(--white);
+    }
+    .swatch{
+      width:12px;
+      height:12px;
+      border:2px solid var(--black);
+      display:block;
+    }
+    .swatch-orange{ background:#ff3300; }
+    .swatch-green{ background:#25D366; }
+    .swatch-yellow{ background:#FFD400; }
+
     /* ES/EN estilo portfolio */
     .lang-toggle{
-      justify-self:end;
       display:flex;
       border:2px solid var(--white);
       background:transparent;
@@ -474,12 +513,12 @@
       font-size:12px;
       letter-spacing:0.22em;
       text-transform:uppercase;
-      box-shadow: 10px 10px 0 rgba(255,51,0,0.25);
+      box-shadow: 10px 10px 0 var(--accent-shadow);
       transition:transform 0.15s ease, box-shadow 0.15s ease;
     }
     .cta-primary:hover{
       transform:translate(4px,4px);
-      box-shadow: 4px 4px 0 rgba(255,51,0,0.25);
+      box-shadow: 4px 4px 0 var(--accent-shadow);
     }
     .cta-secondary{
       display:inline-flex;
@@ -620,7 +659,7 @@
     @media (max-width: 992px){
       :root{ --pad: 18px; }
       .header-inner{grid-template-columns:1fr; text-align:center;}
-      .lang-toggle{justify-self:center;}
+      .header-controls{justify-self:center; justify-content:center;}
       .metric{justify-self:center;}
       .logo{padding:0 36px;}
       .book-grid{grid-template-columns:1fr; align-items:start;}
@@ -651,9 +690,23 @@
           BOOKING<span>PLANS</span>
         </a>
 
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button class="lang-btn active" data-lang="es" type="button">ES</button>
-          <button class="lang-btn" data-lang="en" type="button">EN</button>
+        <div class="header-controls">
+          <div class="theme-toggle" role="group" aria-label="Accent color">
+            <button class="theme-btn active" data-theme="orange" type="button" aria-label="Orange accent">
+              <span class="swatch swatch-orange" aria-hidden="true"></span>
+            </button>
+            <button class="theme-btn" data-theme="green" type="button" aria-label="Green accent">
+              <span class="swatch swatch-green" aria-hidden="true"></span>
+            </button>
+            <button class="theme-btn" data-theme="yellow" type="button" aria-label="Yellow accent">
+              <span class="swatch swatch-yellow" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div class="lang-toggle" role="group" aria-label="Language">
+            <button class="lang-btn active" data-lang="es" type="button">ES</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
         </div>
       </div>
     </header>
@@ -745,7 +798,6 @@
       </div>
     </section>
 
-
     <!-- BOOK A TOUR (pre-form, scroll target) -->
     <section class="book" id="book-a-tour">
       <div class="wrap">
@@ -785,7 +837,7 @@
             <h3 data-i18n="footer.network.title">NETWORK</h3>
             <ul>
               <li><a href="#hero" data-i18n="footer.network.markets">Active Markets</a></li>
-              <li><a href="#hero" data-i18n="footer.network.venues">Verified Venues</a></li>
+              <li><a href="#hero" data-i18n="footer.network.venues">Partner Venues</a></li>
               <li><a href="#territories" data-i18n="footer.network.territories">Territories</a></li>
             </ul>
           </div>
@@ -838,27 +890,56 @@
   <script src="i18n.js"></script>
 
   <script>
+    // ====== Accent theme toggle (CSS var + localStorage) ======
+    const THEME_KEY = "bp_theme";
+    const THEMES = {
+      orange: { accent: "#ff3300", shadow: "rgba(255,51,0,0.25)" },
+      green:  { accent: "#25D366", shadow: "rgba(37,211,102,0.22)" },
+      yellow: { accent: "#FFD400", shadow: "rgba(255,212,0,0.22)" }
+    };
+
+    const themeBtns = document.querySelectorAll(".theme-btn");
+
+    function applyTheme(themeName) {
+      const t = THEMES[themeName] || THEMES.orange;
+      document.documentElement.style.setProperty("--accent", t.accent);
+      document.documentElement.style.setProperty("--accent-shadow", t.shadow);
+      localStorage.setItem(THEME_KEY, themeName);
+      themeBtns.forEach(b => b.classList.toggle("active", b.dataset.theme === themeName));
+    }
+
+    themeBtns.forEach(btn => {
+      btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
+    });
+
+    (() => {
+      const saved = localStorage.getItem(THEME_KEY);
+      const initial = (saved && THEMES[saved]) ? saved : "orange";
+      applyTheme(initial);
+    })();
+
+
     // ====== Language toggle (ES/EN) - i18n.js ======
-const langBtns = document.querySelectorAll('.lang-btn');
+    const langBtns = document.querySelectorAll('.lang-btn');
 
-function syncLangButtons(lang) {
-  langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
-}
+    function syncLangButtons(lang) {
+      langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    }
 
-langBtns.forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const lang = btn.dataset.lang;
-    await window.BP_I18N.setLang(lang);
-    syncLangButtons(lang);
-  });
-});
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const lang = btn.dataset.lang;
+        await window.BP_I18N.setLang(lang);
+        syncLangButtons(lang);
+      });
+    });
 
-// Aplicar idioma al cargar (URL ?lang= o localStorage)
-(async () => {
-  const lang = window.BP_I18N.getLang();
-  await window.BP_I18N.setLang(lang);
-  syncLangButtons(lang);
-})();
+    // Aplicar idioma al cargar (URL ?lang= o localStorage)
+    (async () => {
+      const lang = window.BP_I18N.getLang();
+      await window.BP_I18N.setLang(lang);
+      syncLangButtons(lang);
+    })();
 
 
     // ====== Hero typing effect ======
@@ -985,7 +1066,6 @@ langBtns.forEach(btn => {
     });
 
     setInterval(nextCity, 3000);
-
   </script>
 </body>
 </html>
