@@ -6,12 +6,18 @@
   <title>BOOKING PLANS | International Booking Agency</title>
   <meta name="description" content="Analog booking network. Underground touring. Direct deals." />
 
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
   
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
 <body>
   <div class="layer">
     <!-- HEADER -->
@@ -30,16 +36,16 @@
 
           <button class="bp-led" id="bp-led" type="button" aria-label="Theme LED"></button>
 
-          <!-- MP3 local (cámbialo sin tocar JS) -->
+          <!-- Audio -->
           <audio id="bp-audio" preload="none" loop src="audio/track.mp3"></audio>
         </div>
 
-        <!-- CENTER: logo (PNG swap by theme) -->
+        <!-- CENTER: logo -->
         <a href="#hero" class="logo" aria-label="Booking Plans">
           <img id="bp-logo" class="logo-img" src="assets/logo-orange.png" alt="BOOKING PLANS" />
         </a>
 
-        <!-- RIGHT: solo idioma (en móvil se oculta por CSS) -->
+        <!-- RIGHT: idioma selector -->
         <div class="header-controls">
           <div class="lang-toggle" role="group" aria-label="Language">
             <button class="lang-btn active" data-lang="es" type="button">ES</button>
@@ -49,7 +55,7 @@
       </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero" id="hero">
       <div class="hero-video" aria-hidden="true">
         <video autoplay muted loop playsinline preload="metadata">
@@ -71,7 +77,7 @@
       </div>
     </section>
 
-    <!-- TERRITORIES -->
+    <!-- TERRITORIES SECTION -->
     <section class="territories" id="territories">
       <div class="wrap">
         <div class="section-label" data-i18n="territories.live_label">TERRITORIES • NETWORK LIVE</div>
@@ -82,7 +88,7 @@
       </div>
     </section>
 
-    <!-- SERVICES (LIGHT INVERT) -->
+    <!-- SERVICES SECTION -->
     <section class="services" id="services">
       <div class="wrap">
         <div class="section-label" data-i18n="services.label">SERVICES</div>
@@ -136,7 +142,7 @@
       </div>
     </section>
 
-    <!-- BOOK A TOUR (pre-form, scroll target) -->
+    <!-- BOOK A TOUR SECTION -->
     <section class="book" id="book-a-tour">
       <div class="wrap">
         <div class="book-grid">
@@ -158,7 +164,7 @@
       </div>
     </section>
 
-    <!-- FOOTER (tipo código 1) -->
+    <!-- FOOTER -->
     <footer>
       <div class="wrap">
         <div class="footer-grid">
@@ -199,7 +205,7 @@
           </div>
         </div>
 
-        <!-- ✅ MOBILE: Language en footer (solo visible en móvil por CSS) -->
+        <!-- Idioma para móvil -->
         <div class="footer-lang" aria-label="Language">
           <div class="lang-toggle" role="group" aria-label="Language">
             <button class="lang-btn active" data-lang="es" type="button">ES</button>
@@ -217,7 +223,7 @@
       </div>
     </footer>
 
-    <!-- WhatsApp flotante -->
+    <!-- WhatsApp Button -->
     <a class="wa-float"
        href="https://wa.me/5512478139?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour"
        target="_blank" rel="noopener"
@@ -233,9 +239,8 @@
     </a>
   </div>
 
+  <!-- Scripts -->
   <script src="i18n.js"></script>
-  <script src="script.js">
-  </script>
-  
+  <script src="script.js"></script>
 </body>
 </html>
