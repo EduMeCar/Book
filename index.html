@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BOOKING PLANS | International Booking Agency</title>
-  <meta name="description" content="Analog booking network. Underground touring. Direct deals." />
-
+  <meta name="description" content="Analog booking network. Underground touring. Direct deals.">
+  
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,228 +19,185 @@
 </head>
 
 <body>
-  <div class="layer">
-    <!-- HEADER -->
-    <header class="header">
-      <div class="header-inner">
-        <!-- LEFT: mini player + LED -->
-        <div class="player-mini" id="bp-player" aria-label="Mini player">
-          <button class="pp-btn" id="bp-pp" type="button" aria-label="Play/Pause">
-            <i class="fa-solid fa-play" id="bp-pp-icon" aria-hidden="true"></i>
-          </button>
-
-          <div class="pp-meta" aria-hidden="true">
-            <div class="pp-title">TAPE 01</div>
-            <div class="pp-status" id="bp-audio-status">READY</div>
-          </div>
-
-          <button class="bp-led" id="bp-led" type="button" aria-label="Theme LED"></button>
-
-          <!-- Audio -->
-          <audio id="bp-audio" preload="none" loop src="audio/track.mp3"></audio>
-        </div>
-
-        <!-- CENTER: logo -->
-        <a href="#hero" class="logo" aria-label="Booking Plans">
-          <img id="bp-logo" class="logo-img" src="assets/logo-orange.png" alt="BOOKING PLANS" />
-        </a>
-
-        <!-- RIGHT: idioma selector -->
-        <div class="header-controls">
-          <div class="lang-toggle" role="group" aria-label="Language">
-            <button class="lang-btn active" data-lang="es" type="button">ES</button>
-            <button class="lang-btn" data-lang="en" type="button">EN</button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero" id="hero">
-      <div class="hero-video" aria-hidden="true">
-        <video autoplay muted loop playsinline preload="metadata">
-          <source src="video/concierto-background.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="wrap hero-content">
-        <div class="tag" data-i18n="hero.tag">RED INTERNACIONAL DE BOOKING</div>
-
-        <h1 class="hero-title">
-          ARTIST<br>
-          <span class="live" id="typing-text">BOOKING</span>
-        </h1>
-
-        <p class="hero-sub" data-i18n="hero.sub">
-          Cinemática analógica. Escena underground. Tratos directos. Routing eficiente.
-        </p>
-      </div>
-    </section>
-
-    <!-- TERRITORIES SECTION -->
-    <section class="territories" id="territories">
-      <div class="wrap">
-        <div class="section-label" data-i18n="territories.live_label">TERRITORIES • NETWORK LIVE</div>
-
-        <div class="splitflap-wrap" aria-label="Territories city board">
-          <div class="splitflap-row" id="city-row"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES SECTION -->
-    <section class="services" id="services">
-      <div class="wrap">
-        <div class="section-label" data-i18n="services.label">SERVICES</div>
-        <h2 data-i18n="services.heading">HOW WE WORK</h2>
-        <p class="sub" data-i18n="services.sub">
-          Tres líneas claras. Sin humo. Cada servicio tiene un camino directo al cuestionario.
-        </p>
-
-        <div class="tabs" id="services-tabs">
-          <div class="tablist" role="tablist" aria-label="Services tabs">
-            <button class="tab" role="tab" aria-selected="true" aria-controls="panel-booking" id="tab-booking" type="button"
-              data-i18n="services.tab_artist">ARTIST BOOKING</button>
-
-            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-label" id="tab-label" type="button"
-              data-i18n="services.tab_label">LABEL SERVICES</button>
-
-            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-venue" id="tab-venue" type="button"
-              data-i18n="services.tab_venue">VENUE PROGRAMMING</button>
-          </div>
-
-          <div class="tabpanel active" role="tabpanel" id="panel-booking" aria-labelledby="tab-booking">
-            <div class="service-title" data-i18n="services.artist.title">Artist Booking</div>
-            <ul class="service-points">
-              <li data-i18n="services.artist.point1">Tour booking internacional</li>
-              <li data-i18n="services.artist.point2">Routing por red + datos</li>
-              <li data-i18n="services.artist.point3">Deals directos y claros</li>
-            </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=artist" data-i18n="services.artist.cta">SUBMIT ARTIST →</a>
-          </div>
-
-          <div class="tabpanel" role="tabpanel" id="panel-label" aria-labelledby="tab-label">
-            <div class="service-title" data-i18n="services.label_service.title">Label Services</div>
-            <ul class="service-points">
-              <li data-i18n="services.label_service.point1">Paquetes por territorio</li>
-              <li data-i18n="services.label_service.point2">Estrategia + timing</li>
-              <li data-i18n="services.label_service.point3">Tour support multiciudad</li>
-            </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=label" data-i18n="services.label_service.cta">REQUEST PACKAGE →</a>
-          </div>
-
-          <div class="tabpanel" role="tabpanel" id="panel-venue" aria-labelledby="tab-venue">
-            <div class="service-title" data-i18n="services.venue.title">Venue Programming</div>
-            <ul class="service-points">
-              <li data-i18n="services.venue.point1">Curaduría por escena</li>
-              <li data-i18n="services.venue.point2">Matches rápidos</li>
-              <li data-i18n="services.venue.point3">Fechas listas para ruta</li>
-            </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=venue" data-i18n="services.venue.cta">SUBMIT DATES →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BOOK A TOUR SECTION -->
-    <section class="book" id="book-a-tour">
-      <div class="wrap">
-        <div class="book-grid">
-          <div>
-            <div class="section-label" data-i18n="book.section_label">BOOKING INTAKE</div>
-            <h2 data-i18n="book.title">BOOK A TOUR</h2>
-            <p data-i18n="book.lead">Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.</p>
-          </div>
-
-          <div class="book-actions">
-            <a class="cta-primary" href="book-a-tour.html">
-              <span data-i18n="book.cta_continue">CONTINUE TO QUESTIONNAIRE</span> <span aria-hidden="true">→</span>
-            </a>
-            <a class="cta-secondary" href="#territories">
-              <span data-i18n="book.cta_back_territories">BACK TO TERRITORIES</span> <span aria-hidden="true">↑</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="wrap">
-        <div class="footer-grid">
-          <div class="f-col">
-            <h3 data-i18n="footer.services.title">SERVICES</h3>
-            <ul>
-              <li><a href="#services" data-i18n="footer.services.artist">Artist Booking</a></li>
-              <li><a href="#services" data-i18n="footer.services.label">Label Services</a></li>
-              <li><a href="#services" data-i18n="footer.services.venue">Venue Programming</a></li>
-            </ul>
-          </div>
-
-          <div class="f-col">
-            <h3 data-i18n="footer.network.title">NETWORK</h3>
-            <ul>
-              <li><a href="#hero" data-i18n="footer.network.markets">Active Markets</a></li>
-              <li><a href="#hero" data-i18n="footer.network.venues">Partner Venues</a></li>
-              <li><a href="#territories" data-i18n="footer.network.territories">Territories</a></li>
-            </ul>
-          </div>
-
-          <div class="f-col">
-            <h3 data-i18n="footer.process.title">PROCESS</h3>
-            <ul>
-              <li><a href="#services" data-i18n="footer.process.intake">Data Intake</a></li>
-              <li><a href="#services" data-i18n="footer.process.routing">Routing Build</a></li>
-              <li><a href="#services" data-i18n="footer.process.deals">Deal Structure</a></li>
-            </ul>
-          </div>
-
-          <div class="f-col">
-            <h3 data-i18n="footer.contact.title">CONTACT</h3>
-            <ul>
-              <li><a href="mailto:booking@bookingplans.com">booking@bookingplans.com</a></li>
-              <li><a href="#" data-i18n="footer.contact.barcelona">Barcelona HQ</a></li>
-              <li><a href="#" data-i18n="footer.contact.mexico">Mexico City</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Idioma para móvil -->
-        <div class="footer-lang" aria-label="Language">
-          <div class="lang-toggle" role="group" aria-label="Language">
-            <button class="lang-btn active" data-lang="es" type="button">ES</button>
-            <button class="lang-btn" data-lang="en" type="button">EN</button>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <div data-i18n="footer.copyright">BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK</div>
-          <div class="status" style="margin-top:6px;">
-            <span class="dot" aria-hidden="true"></span>
-            <span data-i18n="footer.status">SYSTEM STATUS: OPERATIONAL</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- WhatsApp Button -->
-    <a class="wa-float"
-       href="https://wa.me/5512478139?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour"
-       target="_blank" rel="noopener"
-       aria-label="Direct WhatsApp">
-      <div class="wa-box">
-        <div class="wa-icon">WA</div>
-        <div class="wa-text">
-          <div class="wa-title">LIVE BOOKING</div>
-          <div class="wa-sub">DIRECT WHATSAPP</div>
-        </div>
-        <div class="wa-arrow" aria-hidden="true">→</div>
-      </div>
-    </a>
+  <!-- Player Mini -->
+  <div class="player-mini" id="bp-player">
+    <button class="pp-btn" id="bp-pp">
+      <i class="fa-solid fa-play" id="bp-pp-icon"></i>
+    </button>
+    <div class="pp-meta">
+      <div class="pp-title">TAPE 01</div>
+      <div class="pp-status" id="bp-audio-status">READY</div>
+    </div>
+    <button class="bp-led" id="bp-led"></button>
+    <audio id="bp-audio" preload="none" loop src="audio/track.mp3"></audio>
   </div>
 
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo">
+        <img id="bp-logo" src="assets/logo-orange.png" alt="BOOKING PLANS">
+      </a>
+      <div class="header-controls">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="es">ES</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-video">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="video/concierto-background.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="wrap hero-content">
+      <div class="tag" data-i18n="hero.tag">RED INTERNACIONAL DE BOOKING</div>
+      <h1 class="hero-title">ARTIST<br><span id="typing-text">BOOKING</span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Cinemática analógica. Escena underground. Tratos directos.</p>
+    </div>
+  </section>
+
+  <!-- Territories -->
+  <section class="territories" id="territories">
+    <div class="wrap">
+      <div class="section-label">TERRITORIES • NETWORK LIVE</div>
+      <div class="splitflap-wrap">
+        <div class="splitflap-row" id="city-row"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-label">SERVICES</div>
+      <h2>HOW WE WORK</h2>
+      <p class="sub">Tres líneas claras. Sin humo. Cada servicio tiene un camino directo al cuestionario.</p>
+      
+      <div class="tabs" id="services-tabs">
+        <div class="tablist">
+          <button class="tab active" data-tab="booking">ARTIST BOOKING</button>
+          <button class="tab" data-tab="label">LABEL SERVICES</button>
+          <button class="tab" data-tab="venue">VENUE PROGRAMMING</button>
+        </div>
+        
+        <div class="tab-content">
+          <div class="tabpanel active" data-tab="booking">
+            <div class="service-title">Artist Booking</div>
+            <ul class="service-points">
+              <li>Tour booking internacional</li>
+              <li>Routing por red + datos</li>
+              <li>Deals directos y claros</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=artist">SUBMIT ARTIST →</a>
+          </div>
+          
+          <div class="tabpanel" data-tab="label">
+            <div class="service-title">Label Services</div>
+            <ul class="service-points">
+              <li>Paquetes por territorio</li>
+              <li>Estrategia + timing</li>
+              <li>Tour support multiciudad</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=label">REQUEST PACKAGE →</a>
+          </div>
+          
+          <div class="tabpanel" data-tab="venue">
+            <div class="service-title">Venue Programming</div>
+            <ul class="service-points">
+              <li>Curaduría por escena</li>
+              <li>Matches rápidos</li>
+              <li>Fechas listas para ruta</li>
+            </ul>
+            <a class="mini-cta" href="book-a-tour.html?service=venue">SUBMIT DATES →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book a Tour -->
+  <section class="book" id="book-a-tour">
+    <div class="wrap">
+      <div class="book-grid">
+        <div>
+          <div class="section-label">BOOKING INTAKE</div>
+          <h2>BOOK A TOUR</h2>
+          <p>Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios.</p>
+        </div>
+        <div class="book-actions">
+          <a class="cta-primary" href="book-a-tour.html">CONTINUE TO QUESTIONNAIRE →</a>
+          <a class="cta-secondary" href="#territories">BACK TO TERRITORIES ↑</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="f-col">
+          <h3>SERVICES</h3>
+          <ul>
+            <li><a href="#services">Artist Booking</a></li>
+            <li><a href="#services">Label Services</a></li>
+            <li><a href="#services">Venue Programming</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>NETWORK</h3>
+          <ul>
+            <li><a href="#hero">Active Markets</a></li>
+            <li><a href="#hero">Partner Venues</a></li>
+            <li><a href="#territories">Territories</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>PROCESS</h3>
+          <ul>
+            <li><a href="#services">Data Intake</a></li>
+            <li><a href="#services">Routing Build</a></li>
+            <li><a href="#services">Deal Structure</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h3>CONTACT</h3>
+          <ul>
+            <li><a href="mailto:booking@bookingplans.com">booking@bookingplans.com</a></li>
+            <li><a href="#">Barcelona HQ</a></li>
+            <li><a href="#">Mexico City</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING NETWORK</div>
+        <div class="status">
+          <span class="dot"></span>
+          <span>SYSTEM STATUS: OPERATIONAL</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a class="wa-float" href="https://wa.me/5512478139" target="_blank">
+    <div class="wa-box">
+      <div class="wa-icon">WA</div>
+      <div class="wa-text">
+        <div class="wa-title">LIVE BOOKING</div>
+        <div class="wa-sub">DIRECT WHATSAPP</div>
+      </div>
+      <div class="wa-arrow">→</div>
+    </div>
+  </a>
+
   <!-- Scripts -->
-  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
