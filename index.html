@@ -1039,6 +1039,7 @@
         const lang = btn.dataset.lang;
         await window.BP_I18N.setLang(lang);
         syncLangButtons(lang);
+        window.dispatchEvent(new Event('languageChanged')); 
       });
     });
 
@@ -1082,9 +1083,8 @@
 
     tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
-
-    // ====== Territories splitflap (random, no immediate repeat) ======
-    const cities = [
+    // ====== Territories splitflap ======
+    const citiesES = [
       "CIUDAD DE MÉXICO",
       "BARCELONA",
       "GUADALAJARA",
@@ -1093,120 +1093,151 @@
       "MONTERREY",
       "PARÍS"
     ];
-
-    // ✅ Alias solo para móvil (sin tocar desktop)
-    const CITY_ALIASES_MOBILE = {
-      "CIUDAD DE MEXICO": "CDMX",
-      "GUADALAJARA": "GDL"
+    
+    const citiesEN = [
+      "MEXICO CITY",
+      "BARCELONA",
+      "GUADALAJARA",
+      "LISBON",
+      "MADRID",
+      "MONTERREY",
+      "PARIS"
+    ];
+    
+    // Aliases móviles (ES)
+    const CITY_ALIASES_MOBILE_ES = {
+      "CIUDAD DE MÉXICO": "CDMX",
+      "GUADALAJARA": "GDL",
+      "MONTERREY": "MTY",
+      "BARCELONA": "BCN"
     };
-
+    
+    // Aliases móviles (EN)
+    const CITY_ALIASES_MOBILE_EN = {
+      "MEXICO CITY": "CDMX",
+      "GUADALAJARA": "GDL",
+      "MONTERREY": "MTY",
+      "BARCELONA": "BCN"
+    };
+    
     const isMobileMQ = window.matchMedia("(max-width: 480px)");
-
-    function cityDisplayName(name) {
-      return (isMobileMQ.matches && CITY_ALIASES_MOBILE[name])
-        ? CITY_ALIASES_MOBILE[name]
-        : name;
-    }
-
     const cityRow = document.getElementById('city-row');
     let currentCityIndex = 0;
-
-const FLIP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-function renderCityMechanical(name) {
-  if (!cityRow) return;
-  
-  // 1. Flip out
-  const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
-  existingCells.forEach((cell, i) => {
-    setTimeout(() => {
-      cell.classList.remove('ready');
-      cell.classList.add('flip-out');
-    }, i * 18);
-  });
-
-  const totalOutTime = existingCells.length * 18 + 180;
-
-  setTimeout(() => {
-    cityRow.innerHTML = '';
-    let isStartOfWord = true;
-    const chars = [...name];
-
-    chars.forEach((char, i) => {
-      const cell = document.createElement('div');
+    
+    // Obtener lista de ciudades según idioma actual
+    function getCurrentCities() {
+      const lang = window.BP_I18N.getLang();
+      return lang === 'en' ? citiesEN : citiesES;
+    }
+    
+    // Obtener nombre para mostrar (con alias móvil si aplica)
+    function cityDisplayName(name) {
+      const lang = window.BP_I18N.getLang();
+      const aliases = lang === 'en' ? CITY_ALIASES_MOBILE_EN : CITY_ALIASES_MOBILE_ES;
+      return (isMobileMQ.matches && aliases[name]) ? aliases[name] : name;
+    }
+    
+    const FLIP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    function renderCityMechanical(name) {
+      if (!cityRow) return;
       
-      if (char === ' ') {
-        cell.className = 'cell separator ready';
-        isStartOfWord = true;
-      } else {
-        cell.className = 'cell flip-in';
-        cell.setAttribute('data-char', char);
-        
-        if (isStartOfWord) {
-          cell.classList.add('highlight');
-          isStartOfWord = false;
-        }
-        
-        // Añadir divider y shadow
-        const divider = document.createElement('div');
-        divider.className = 'cell-divider';
-        cell.appendChild(divider);
-        
-        const shadow = document.createElement('div');
-        shadow.className = 'cell-shadow';
-        cell.appendChild(shadow);
-      }
-
-      cityRow.appendChild(cell);
-
-      // Animación de flip con letras aleatorias
+      // 1. Flip out
+      const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
+      existingCells.forEach((cell, i) => {
+        setTimeout(() => {
+          cell.classList.remove('ready');
+          cell.classList.add('flip-out');
+        }, i * 18);
+      });
+    
+      const totalOutTime = existingCells.length * 18 + 180;
+    
       setTimeout(() => {
-        if (char !== ' ') {
-          const maxFlips = Math.floor(Math.random() * 5) + 3;
-          let flipCount = 0;
+        cityRow.innerHTML = '';
+        let isStartOfWord = true;
+        const chars = [...name];
+    
+        chars.forEach((char, i) => {
+          const cell = document.createElement('div');
           
-          const flipInterval = setInterval(() => {
-            if (flipCount < maxFlips) {
-              const randomChar = FLIP_CHARS[Math.floor(Math.random() * FLIP_CHARS.length)];
-              cell.setAttribute('data-char', randomChar);
-              cell.classList.add('flipping');
-              flipCount++;
-            } else {
-              cell.setAttribute('data-char', char);
-              cell.classList.remove('flip-in', 'flipping');
-              cell.classList.add('ready');
-              clearInterval(flipInterval);
+          if (char === ' ') {
+            cell.className = 'cell separator ready';
+            isStartOfWord = true;
+          } else {
+            cell.className = 'cell flip-in';
+            cell.setAttribute('data-char', char);
+            
+            if (isStartOfWord) {
+              cell.classList.add('highlight');
+              isStartOfWord = false;
             }
-          }, 50);
-        } else {
-          cell.classList.remove('flip-in');
-          cell.classList.add('ready');
-        }
-      }, totalOutTime + (i * 18));
-    });
-  }, totalOutTime);
-}
-
+            
+            // Añadir divider y shadow
+            const divider = document.createElement('div');
+            divider.className = 'cell-divider';
+            cell.appendChild(divider);
+            
+            const shadow = document.createElement('div');
+            shadow.className = 'cell-shadow';
+            cell.appendChild(shadow);
+          }
+    
+          cityRow.appendChild(cell);
+    
+          // Animación de flip con letras aleatorias
+          setTimeout(() => {
+            if (char !== ' ') {
+              const maxFlips = Math.floor(Math.random() * 5) + 3;
+              let flipCount = 0;
+              
+              const flipInterval = setInterval(() => {
+                if (flipCount < maxFlips) {
+                  const randomChar = FLIP_CHARS[Math.floor(Math.random() * FLIP_CHARS.length)];
+                  cell.setAttribute('data-char', randomChar);
+                  cell.classList.add('flipping');
+                  flipCount++;
+                } else {
+                  cell.setAttribute('data-char', char);
+                  cell.classList.remove('flip-in', 'flipping');
+                  cell.classList.add('ready');
+                  clearInterval(flipInterval);
+                }
+              }, 50);
+            } else {
+              cell.classList.remove('flip-in');
+              cell.classList.add('ready');
+            }
+          }, totalOutTime + (i * 18));
+        });
+      }, totalOutTime);
+    }
+    
     function nextCity() {
+      const cities = getCurrentCities();
       let nextIndex;
       do {
         nextIndex = Math.floor(Math.random() * cities.length);
       } while (nextIndex === currentCityIndex);
-
       currentCityIndex = nextIndex;
-      renderCityMechanical(cityDisplayName(cities[currentCityIndex])); // ✅
-    }
-
-    // ✅ Render inicial
-    renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
-
-    // ✅ Si cambia breakpoint (rotación / resize), re-render del nombre actual
-    isMobileMQ.addEventListener("change", () => {
       renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
+    }
+    
+    // Render inicial
+    renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
+    
+    // Re-render al cambiar breakpoint móvil
+    isMobileMQ.addEventListener("change", () => {
+      renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
     });
-
+    
+    // Re-render al cambiar idioma
+    window.addEventListener('languageChanged', () => {
+      renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
+    });
+    
     setInterval(nextCity, 3000);
-
+    
 
     // ====== Header mini player (no autoplay, loop, reset to 0) + LED theme cycle ======
     (() => {
