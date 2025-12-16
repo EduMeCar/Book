@@ -1,94 +1,147 @@
-// PARTE 1/8 - Datos de Territorios
-const territories = [
-  {
-    id: 'madrid',
-    name: 'Madrid Centro',
-    country: 'Spain',
-    description: 'Zona premium en el corazón de Madrid',
-    price: '€2,500/mes',
-    features: ['Alta densidad turística', 'Transporte público excelente', 'Zonas comerciales'],
-    bookingInfo: { minDuration: '3 meses', deposit: '€5,000', availability: 'Inmediata' }
-  }
-  // ... más territorios
-];
+// ===== AUDIO PLAYER =====
+const audio = document.getElementById('bp-audio');
+const playBtn = document.getElementById('bp-pp');
+const playIcon = document.getElementById('bp-pp-icon');
+const statusEl = document.getElementById('bp-audio-status');
+const led = document.getElementById('bp-led');
 
-// PARTE 2/8 - Renderizado de Territorios
-function renderTerritories() {
-  const grid = document.getElementById('territory-grid');
-  territories.forEach(territory => {
-    const card = document.createElement('div');
-    card.className = 'territory-card';
-    card.innerHTML = `
-      <h3>${territory.name}</h3>
-      <p class="description">${territory.description}</p>
-      <p class="price">${territory.price}</p>
-      <a href="#" class="cta" data-territory="${territory.id}">Ver Detalles</a>
-    `;
-    grid.appendChild(card);
-  });
-}
-
-// PARTE 3/8 - Modal Functions
-function openModal(territoryId) {
-  const territory = territories.find(t => t.id === territoryId);
-  if (!territory) return;
-  
-  const modal = document.getElementById('modal');
-  document.getElementById('modal-title').textContent = territory.name;
-  document.getElementById('modal-subtitle').textContent = territory.country;
-  document.getElementById('modal-description').textContent = territory.description;
-  
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-// PARTE 5/8 - Splitflap Animation
-function updateSplitflap(targetText) {
-  const container = document.querySelector('.splitflap-container');
-  container.innerHTML = '';
-  
-  targetText.split('').forEach((char, index) => {
-    const digit = document.createElement('div');
-    digit.className = 'splitflap-digit';
-    digit.textContent = char;
-    setTimeout(() => {
-      digit.classList.add('flipping');
-    }, index * 100);
-    container.appendChild(digit);
-  });
-}
-
-// PARTE 6/8 - Event Listeners Setup
-function setupEventListeners() {
-  document.getElementById('territory-grid').addEventListener('click', (e) => {
-    if (e.target.classList.contains('cta')) {
-      e.preventDefault();
-      const territoryId = e.target.dataset.territory;
-      openModal(territoryId);
-      updateSplitflap(territories.find(t => t.id === territoryId).name);
+playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playIcon.classList.remove('fa-play');
+        playIcon.classList.add('fa-pause');
+        statusEl.textContent = 'PLAYING';
+        led.style.animation = 'pulse 0.5s infinite';
+    } else {
+        audio.pause();
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+        statusEl.textContent = 'PAUSED';
+        led.style.animation = 'none';
     }
-  });
-  
-  document.getElementById('close-modal').addEventListener('click', closeModal);
-  
-  document.getElementById('modal').addEventListener('click', (e) => {
-    if (e.target.id === 'modal') closeModal();
-  });
-}
-
-// PARTE 7/8 - Keyboard Shortcuts
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
 });
 
-// PARTE 8/8 - Initialization
-document.addEventListener('DOMContentLoaded', () => {
-  renderTerritories();
-  setupEventListeners();
+// ===== THEME LED =====
+const logo = document.getElementById('bp-logo');
+let themeIndex = 0;
+const themes = [
+    { color: '#ff6b00', logo: 'assets/logo-orange.png' },
+    { color: '#00ff88', logo: 'assets/logo-green.png' },
+    { color: '#0088ff', logo: 'assets/logo-blue.png' }
+];
+
+led.addEventListener('click', () => {
+    themeIndex = (themeIndex + 1) % themes.length;
+    const theme = themes[themeIndex];
+    
+    led.style.background = theme.color;
+    logo.src = theme.logo;
+    
+    // Cambiar variables CSS
+    document.documentElement.style.setProperty('--orange', theme.color);
+});
+
+// ===== TYPING EFFECT =====
+const typingText = document.getElementById('typing-text');
+const words = ['BOOKING', 'ROUTING', 'DEALS', 'TOURING'];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeEffect() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+        typingText.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+    } else {
+        typingText.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+    }
+    
+    if (!isDeleting && charIndex === currentWord.length) {
+        isDeleting = true;
+        typingSpeed = 1000;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typingSpeed = 500;
+    }
+    
+    setTimeout(typeEffect, typingSpeed);
+}
+
+// Iniciar typing effect después de 1 segundo
+setTimeout(typeEffect, 1000);
+
+// ===== SERVICES TABS =====
+const tabs = document.querySelectorAll('.tab');
+const tabPanels = document.querySelectorAll('.tabpanel');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remover clase active de todos los tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+        
+        // Agregar clase active al tab clickeado
+        tab.classList.add('active');
+        
+        // Mostrar el panel correspondiente
+        const tabId = tab.getAttribute('data-tab');
+        const panel = document.querySelector(`.tabpanel[data-tab="${tabId}"]`);
+        if (panel) panel.classList.add('active');
+    });
+});
+
+// ===== SPLITFLAP TERRITORIES =====
+const cityRow = document.getElementById('city-row');
+const cities = ['MEXICO CITY', 'BARCELONA', 'BERLIN', 'LONDON', 'TOKYO', 'NEW YORK'];
+let currentCityIndex = 0;
+
+function updateCityDisplay() {
+    cityRow.textContent = cities[currentCityIndex];
+    currentCityIndex = (currentCityIndex + 1) % cities.length;
+}
+
+// Actualizar cada 3 segundos
+updateCityDisplay();
+setInterval(updateCityDisplay, 3000);
+
+// ===== LANGUAGE TOGGLE =====
+const langButtons = document.querySelectorAll('.lang-btn');
+
+langButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remover clase active de todos
+        langButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Agregar clase active al botón clickeado
+        button.classList.add('active');
+        
+        // Aquí puedes agregar la lógica de cambio de idioma
+        const lang = button.getAttribute('data-lang');
+        console.log('Idioma cambiado a:', lang);
+    });
+});
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
 });
