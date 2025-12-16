@@ -66,7 +66,9 @@
       white-space:nowrap;
       font-size:14px;
       font-family:var(--mono);
+      transition:color 0.2s ease;
     }
+    .brand:hover{color:var(--accent);}
     .brand span{color:var(--accent);}
     .back{
       text-decoration:none;
@@ -77,6 +79,11 @@
       font-size:11px;
       border:2px solid var(--line);
       padding:10px 12px;
+      transition:border-color 0.2s ease, color 0.2s ease;
+    }
+    .back:hover{
+      border-color:var(--accent);
+      color:var(--white);
     }
     .wrap{
       max-width:var(--max);
@@ -108,6 +115,10 @@
       border:2px solid var(--line);
       background:rgba(255,255,255,0.02);
       padding:18px;
+      transition:box-shadow 0.2s ease;
+    }
+    .card:hover{
+      box-shadow:0 4px 16px rgba(255,51,0,0.1);
     }
 
     .steps{
@@ -124,6 +135,7 @@
     .badge{
       border:2px solid var(--line);
       padding:8px 10px;
+      transition:border-color 0.2s ease, color 0.2s ease;
     }
     .badge.active{
       border-color:var(--accent);
@@ -163,6 +175,7 @@
       font-size:12px;
       letter-spacing:0.06em;
       outline:none;
+      transition:border-color 0.2s ease;
     }
     textarea{min-height:120px; resize:vertical;}
     input:focus, select:focus, textarea:focus{
@@ -204,6 +217,7 @@
       box-shadow:none;
     }
     .btn.secondary:hover{
+      border-color:var(--accent);
       transform:none;
       box-shadow:none;
     }
@@ -235,14 +249,24 @@
       font-family:var(--mono);
       font-weight:900;
       box-shadow: 10px 10px 0 rgba(0,0,0,0.7);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .wa:hover{
+      transform:translate(4px,4px);
+      box-shadow:4px 4px 0 rgba(0,0,0,0.7);
     }
   </style>
 </head>
 
 <body>
-  <!-- Theme (sin selector) - lo más arriba posible para evitar flash -->
+  <!-- Theme sync (cookies) -->
   <script>
     (() => {
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+
       const THEME_KEY = "bp_theme";
       const THEMES = {
         orange: { accent: "#ff3300", shadow: "rgba(255,51,0,0.25)" },
@@ -250,7 +274,7 @@
         yellow: { accent: "#FFD400", shadow: "rgba(255,212,0,0.22)" }
       };
 
-      const saved = localStorage.getItem(THEME_KEY);
+      const saved = getCookie(THEME_KEY);
       const t = (saved && THEMES[saved]) ? THEMES[saved] : THEMES.orange;
 
       document.documentElement.style.setProperty("--accent", t.accent);
@@ -269,7 +293,6 @@
     <h1 data-i18n="book.title">BOOK A TOUR</h1>
     <p class="sub" data-i18n="book.sub">
       Intake en 2 pasos: primero contacto y contexto, después territorios, fechas y links.
-      (Este demo no envía a servidor; luego se conecta a tu backend o a un provider.)
     </p>
 
     <section class="card">
@@ -358,17 +381,21 @@
     </section>
   </main>
 
-  <a class="wa" href="https://wa.me/34123456789?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+  <a class="wa" href="https://wa.me/5512478139?text=Hi%20BOOKING%20PLANS,%20I%20want%20to%20book%20a%20tour" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
 
-  <script src="i18n.js" defer></script>
-  <script defer>
+  <script src="i18n.js"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        await window.BP_I18N.setLang(window.BP_I18N.getLang());
-      } catch (e) {
-        console.error('i18n error:', e);
+      // Esperar i18n
+      if (window.BP_I18N) {
+        try {
+          await window.BP_I18N.setLang(window.BP_I18N.getLang());
+        } catch (e) {
+          console.error('i18n error:', e);
+        }
       }
 
+      // Auto-fill service desde URL
       const params = new URLSearchParams(window.location.search);
       const serviceParam = params.get('service');
       const serviceSelect = document.getElementById('service');
@@ -377,6 +404,7 @@
         if (exists) serviceSelect.value = serviceParam;
       }
 
+      // Step navigation
       const step1 = document.getElementById('step1');
       const step2 = document.getElementById('step2');
       const b1 = document.getElementById('b1');
@@ -403,7 +431,7 @@
           if (!ok) {
             required.forEach(id => {
               const el = document.getElementById(id);
-              if (el) el.reportValidity();
+              if (el && !el.checkValidity()) el.reportValidity();
             });
             return;
           }
@@ -418,7 +446,14 @@
       if (form) {
         form.addEventListener('submit', (e) => {
           e.preventDefault();
-          alert('Submitted (demo). Connect this form to your backend / email automation next.');
+          
+          // Aquí conectarías con tu backend
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+          
+          console.log('Form submitted:', data);
+          alert('✅ Submitted! (Demo mode - connect to your backend next)');
+          
           showStep(1);
           form.reset();
         });
