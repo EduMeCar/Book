@@ -347,16 +347,16 @@ section.visible{
 .splitflap-row{
   display:flex;
   flex-wrap:wrap;
-  gap:clamp(2px, 0.5vw, 8px);
+  gap:clamp(3px, 0.6vw, 10px);
   justify-content:center;
   perspective:2000px;
 }
 
-/* CELDA INDIVIDUAL */
+/* CELDA INDIVIDUAL - AUMENTADA */
 .cell{
   position:relative;
-  width:clamp(32px, 4vw, 80px);
-  height:clamp(48px, 6vw, 120px);
+  width:clamp(42px, 5vw, 90px);
+  height:clamp(64px, 7.5vw, 140px);
   background:#1a1a1a;
   border:2px solid #000;
   border-radius:2px;
@@ -387,7 +387,7 @@ section.visible{
   justify-content:center;
   font-family:'Inter', sans-serif;
   font-weight:900;
-  font-size:clamp(24px, 3.5vw, 72px);
+  font-size:clamp(32px, 4.5vw, 82px);
   color:#f5f5dc;
   text-transform:uppercase;
   letter-spacing:0.08em;
@@ -423,7 +423,7 @@ section.visible{
   justify-content:center;
   font-family:'Inter', sans-serif;
   font-weight:900;
-  font-size:clamp(24px, 3.5vw, 72px);
+  font-size:clamp(32px, 4.5vw, 82px);
   color:#f5f5dc;
   text-transform:uppercase;
   letter-spacing:0.08em;
