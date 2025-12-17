@@ -312,7 +312,7 @@ if (cityRow) {
   });
   
   // ✅ Cambiar cada 5 segundos (antes 3) para disfrutar la animación
-  setInterval(nextCity, 5000);
+  setInterval(nextCity, 4000);
 }
 
 // ====== MINI PLAYER ======
