@@ -1,4 +1,4 @@
-// ====== COOKIE HELPERS (reemplazo de localStorage) ======
+// ====== COOKIE HELPERS ======
 function setCookie(name, value, days = 365) {
   const d = new Date();
   d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
@@ -10,7 +10,7 @@ function getCookie(name) {
   return match ? match[2] : null;
 }
 
-// ====== THEME SYSTEM (con cookies) ======
+// ====== THEME SYSTEM ======
 const THEME_KEY = "bp_theme";
 const THEMES = {
   orange: { accent: "#ff3300", shadow: "rgba(255,51,0,0.25)" },
@@ -29,11 +29,10 @@ function applyTheme(themeName) {
   const t = THEMES[themeName] || THEMES.orange;
   document.documentElement.style.setProperty("--accent", t.accent);
   document.documentElement.style.setProperty("--accent-shadow", t.shadow);
-  setCookie(THEME_KEY, themeName); // ✅ Cookie en vez de localStorage
+  setCookie(THEME_KEY, themeName);
   syncLogo(themeName);
 }
 
-// Aplicar tema guardado al cargar
 (() => {
   const saved = getCookie(THEME_KEY);
   const initial = (saved && THEMES[saved]) ? saved : "orange";
@@ -52,7 +51,7 @@ function applyTheme(themeName) {
   });
 })();
 
-// ====== PARALLAX HERO (sutil) ======
+// ====== PARALLAX HERO ======
 (() => {
   const heroVideo = document.querySelector('.hero-video video');
   if (!heroVideo) return;
@@ -65,7 +64,7 @@ function applyTheme(themeName) {
   });
 })();
 
-// ====== AOS (Animate On Scroll) ======
+// ====== AOS (ANIMATE ON SCROLL) ======
 (() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -76,7 +75,7 @@ function applyTheme(themeName) {
   }, { threshold: 0.15 });
 
   document.querySelectorAll('section').forEach(s => {
-    if (!s.classList.contains('hero')) { // Hero sin AOS
+    if (!s.classList.contains('hero')) {
       observer.observe(s);
     }
   });
@@ -100,7 +99,6 @@ langBtns.forEach(btn => {
   });
 });
 
-// Aplicar idioma al cargar
 (async () => {
   if (!window.BP_I18N) return;
   const lang = window.BP_I18N.getLang();
@@ -108,7 +106,7 @@ langBtns.forEach(btn => {
   syncLangButtons(lang);
 })();
 
-// ====== HERO TYPING EFFECT (con cursor) ======
+// ====== HERO TYPING EFFECT ======
 const typingText = document.getElementById('typing-text');
 if (typingText) {
   const words = ['BOOKING', 'TOURING', 'NETWORK', 'ROUTING'];
@@ -146,158 +144,174 @@ function activateTab(tab) {
 
 tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
-// ====== TERRITORIES SPLITFLAP ======
-const citiesES = [
-  "CIUDAD DE MÉXICO",
+// ====== SPLIT-FLAP RETRO (LENTO Y REALISTA) ======
+const citiesDesktop = [
+  "MONTERREY",
+  "GUADALAJARA", 
+  "PARIS",
+  "MADRID",
   "BARCELONA",
-  "GUADALAJARA",
   "LISBOA",
-  "MADRID",
-  "MONTERREY",
-  "PARÍS"
+  "CIUDAD DE MEXICO"
 ];
 
-const citiesEN = [
-  "MEXICO CITY",
+const citiesMobile = [
+  "MONTERREY",
+  "GDL",
+  "PARIS", 
+  "MADRID",
   "BARCELONA",
-  "GUADALAJARA",
-  "LISBON",
-  "MADRID",
-  "MONTERREY",
-  "PARIS"
+  "LISBOA",
+  "CDMX"
 ];
 
-const CITY_ALIASES_MOBILE_ES = {
-  "CIUDAD DE MÉXICO": "CDMX",
-  "GUADALAJARA": "GDL",
-  "MONTERREY": "MTY",
-  "BARCELONA": "BCN"
-};
-
-const CITY_ALIASES_MOBILE_EN = {
-  "MEXICO CITY": "CDMX",
-  "GUADALAJARA": "GDL",
-  "MONTERREY": "MTY",
-  "BARCELONA": "BCN"
-};
-
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 const isMobileMQ = window.matchMedia("(max-width: 480px)");
 const cityRow = document.getElementById('city-row');
 let currentCityIndex = 0;
+let isFlipping = false;
 
 function getCurrentCities() {
-  if (!window.BP_I18N) return citiesES;
-  const lang = window.BP_I18N.getLang();
-  return lang === 'en' ? citiesEN : citiesES;
+  return isMobileMQ.matches ? citiesMobile : citiesDesktop;
 }
 
-function cityDisplayName(name) {
-  if (!window.BP_I18N) return name;
-  const lang = window.BP_I18N.getLang();
-  const aliases = lang === 'en' ? CITY_ALIASES_MOBILE_EN : CITY_ALIASES_MOBILE_ES;
-  return (isMobileMQ.matches && aliases[name]) ? aliases[name] : name;
-}
-
-const FLIP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-function renderCityMechanical(name) {
-  if (!cityRow) return;
+// Crear estructura HTML de una celda
+function createCell(char, index, isFirstOfWord) {
+  const cell = document.createElement('div');
   
-  const existingCells = Array.from(cityRow.querySelectorAll('.cell'));
-  existingCells.forEach((cell, i) => {
-    setTimeout(() => {
-      cell.classList.remove('ready');
-      cell.classList.add('flip-out');
-    }, i * 18);
+  if (char === ' ') {
+    cell.className = 'cell separator';
+    return cell;
+  }
+
+  cell.className = 'cell';
+  if (isFirstOfWord) {
+    cell.classList.add('highlight');
+  }
+  cell.dataset.index = index;
+  cell.dataset.targetChar = char;
+
+  cell.innerHTML = `
+    <div class="cell-top">
+      <div class="cell-char-top">${char}</div>
+    </div>
+    <div class="cell-divider"></div>
+    <div class="cell-shadow"></div>
+    <div class="cell-bottom">
+      <div class="cell-char-bottom">${char}</div>
+    </div>
+  `;
+
+  return cell;
+}
+
+// Animar UNA celda con flip lento
+function animateCell(cell, targetChar, delay) {
+  setTimeout(() => {
+    cell.classList.add('flipping');
+
+    const topChar = cell.querySelector('.cell-char-top');
+    const bottomChar = cell.querySelector('.cell-char-bottom');
+    
+    // ✅ 5-8 flips aleatorios (antes 3-5)
+    const maxFlips = Math.floor(Math.random() * 4) + 5;
+    let flipCount = 0;
+
+    const flipInterval = setInterval(() => {
+      if (flipCount < maxFlips) {
+        // Mostrar carácter aleatorio
+        const randomChar = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+        topChar.textContent = randomChar;
+        bottomChar.textContent = randomChar;
+        flipCount++;
+      } else {
+        // Mostrar carácter final
+        topChar.textContent = targetChar;
+        bottomChar.textContent = targetChar;
+        cell.classList.remove('flipping');
+        clearInterval(flipInterval);
+      }
+    }, 120); // ✅ 120ms entre flips (antes 50ms) - MUCHO MÁS LENTO
+
+  }, delay);
+}
+
+// Renderizar ciudad completa
+function renderCity(cityName) {
+  if (!cityRow || isFlipping) return;
+  
+  isFlipping = true;
+  const chars = cityName.split('');
+  
+  // Limpiar contenedor
+  cityRow.innerHTML = '';
+
+  // Crear todas las celdas
+  let charIndex = 0;
+  chars.forEach((char, i) => {
+    const isFirstOfWord = i === 0 || chars[i - 1] === ' ';
+    const cell = createCell(char, charIndex, isFirstOfWord);
+    cityRow.appendChild(cell);
+    
+    // Solo incrementar index si NO es espacio
+    if (char !== ' ') {
+      charIndex++;
+    }
   });
 
-  const totalOutTime = existingCells.length * 18 + 180;
+  // Animar todas las celdas con delay escalonado
+  const allCells = Array.from(cityRow.querySelectorAll('.cell:not(.separator)'));
+  allCells.forEach((cell, index) => {
+    const targetChar = cell.dataset.targetChar;
+    // ✅ 120ms delay entre letras (antes 40ms) - MUCHO MÁS LENTO
+    animateCell(cell, targetChar, index * 120);
+  });
 
+  // Desbloquear después de que termine la animación
+  const totalAnimTime = allCells.length * 120 + (8 * 120) + 500;
   setTimeout(() => {
-    cityRow.innerHTML = '';
-    let isStartOfWord = true;
-    const chars = [...name];
-
-    chars.forEach((char, i) => {
-      const cell = document.createElement('div');
-      
-      if (char === ' ') {
-        cell.className = 'cell separator ready';
-        isStartOfWord = true;
-      } else {
-        cell.className = 'cell flip-in';
-        cell.setAttribute('data-char', char);
-        
-        if (isStartOfWord) {
-          cell.classList.add('highlight');
-          isStartOfWord = false;
-        }
-        
-        const divider = document.createElement('div');
-        divider.className = 'cell-divider';
-        cell.appendChild(divider);
-        
-        const shadow = document.createElement('div');
-        shadow.className = 'cell-shadow';
-        cell.appendChild(shadow);
-      }
-
-      cityRow.appendChild(cell);
-
-      setTimeout(() => {
-        if (char !== ' ') {
-          const maxFlips = Math.floor(Math.random() * 5) + 3;
-          let flipCount = 0;
-          
-          const flipInterval = setInterval(() => {
-            if (flipCount < maxFlips) {
-              const randomChar = FLIP_CHARS[Math.floor(Math.random() * FLIP_CHARS.length)];
-              cell.setAttribute('data-char', randomChar);
-              cell.classList.add('flipping');
-              flipCount++;
-            } else {
-              cell.setAttribute('data-char', char);
-              cell.classList.remove('flip-in', 'flipping');
-              cell.classList.add('ready');
-              clearInterval(flipInterval);
-            }
-          }, 50);
-        } else {
-          cell.classList.remove('flip-in');
-          cell.classList.add('ready');
-        }
-      }, totalOutTime + (i * 18));
-    });
-  }, totalOutTime);
+    isFlipping = false;
+  }, totalAnimTime);
 }
 
+// Cambiar a siguiente ciudad random
 function nextCity() {
+  if (isFlipping) return;
+  
   const cities = getCurrentCities();
   let nextIndex;
+  
   do {
     nextIndex = Math.floor(Math.random() * cities.length);
   } while (nextIndex === currentCityIndex);
+  
   currentCityIndex = nextIndex;
-  renderCityMechanical(cityDisplayName(cities[currentCityIndex]));
+  renderCity(cities[currentCityIndex]);
 }
 
-// Render inicial
+// Inicializar
 if (cityRow) {
-  renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
+  renderCity(getCurrentCities()[currentCityIndex]);
   
+  // Re-render si cambia el breakpoint móvil
   isMobileMQ.addEventListener("change", () => {
-    renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
+    if (!isFlipping) {
+      renderCity(getCurrentCities()[currentCityIndex]);
+    }
   });
   
+  // Re-render al cambiar idioma
   window.addEventListener('languageChanged', () => {
-    renderCityMechanical(cityDisplayName(getCurrentCities()[currentCityIndex]));
+    if (!isFlipping) {
+      renderCity(getCurrentCities()[currentCityIndex]);
+    }
   });
   
-  // ✅ 7 segundos (antes 3) - timing mejorado
-  setInterval(nextCity, 7000);
+  // ✅ Cambiar cada 5 segundos (antes 3) para disfrutar la animación
+  setInterval(nextCity, 5000);
 }
 
-// ====== MINI PLAYER (mejorado) ======
+// ====== MINI PLAYER ======
 (() => {
   const audio = document.getElementById('bp-audio');
   const btn = document.getElementById('bp-pp');
@@ -345,7 +359,7 @@ if (cityRow) {
       setUI('PLAYING');
     } catch (e) {
       console.error('Audio play failed:', e);
-      setUI('READY'); // ✅ Volver a READY silenciosamente
+      setUI('READY');
       btn.disabled = true;
       btn.style.opacity = '0.5';
       btn.title = 'Audio unavailable';
@@ -358,13 +372,13 @@ if (cityRow) {
   
   audio.addEventListener('error', (e) => {
     console.error('Audio error:', e);
-    setUI('READY'); // ✅ No mostrar ERROR al usuario
+    setUI('READY');
     btn.disabled = true;
     btn.style.opacity = '0.5';
     btn.title = 'Audio unavailable';
   });
 
-  // LED easter egg: cycle theme
+  // LED: cycle theme
   const ORDER = ['orange', 'green', 'yellow'];
   led.addEventListener('click', () => {
     const cur = getCookie(THEME_KEY) || 'orange';
@@ -373,7 +387,7 @@ if (cityRow) {
   });
 })();
 
-// ====== LOGO EASTER EGG (triple click) ======
+// ====== LOGO EASTER EGG ======
 (() => {
   const logo = document.querySelector('.logo');
   if (!logo) return;
@@ -389,7 +403,6 @@ if (cityRow) {
     resetTimer = setTimeout(() => logoClicks = 0, 1000);
 
     if (logoClicks === 3) {
-      // Matrix mode effect
       document.body.style.filter = 'hue-rotate(120deg) saturate(2)';
       setTimeout(() => {
         document.body.style.filter = '';
