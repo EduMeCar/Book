@@ -858,4 +858,61 @@ footer{
     height:48px;
     font-size:20px;
   }
+
+  /* ===== FIX VIDEO MOBILE PLAY OVERLAY ===== */
+  .hero-video video{
+    pointer-events: none;
+  }
+
+  .hero-video video::-webkit-media-controls,
+  .hero-video video::-webkit-media-controls-panel,
+  .hero-video video::-webkit-media-controls-start-playback-button{
+    display: none !important;
+    -webkit-appearance: none;
+  }
+}
+
+/* ===== BACK TO TOP FLOAT ===== */
+.top-float{
+  position:fixed;
+  bottom:28px;
+  left:28px;
+  z-index:3000;
+  text-decoration:none;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.2s ease;
+}
+
+.top-float.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.top-box{
+  width:56px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:3px solid var(--accent);
+  background:var(--black);
+  color:var(--accent);
+  font-family:var(--mono);
+  font-size:22px;
+  font-weight:900;
+  box-shadow:10px 10px 0 var(--accent-shadow);
+  transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.top-box:hover{
+  transform:translate(4px,4px);
+  box-shadow:4px 4px 0 var(--accent-shadow);
+}
+
+@media (max-width:640px){
+  .top-float{
+    left:16px;
+    bottom:16px;
+  }
 }
