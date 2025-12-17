@@ -307,15 +307,14 @@ section.visible{
   50%{ opacity:0; }
 }
 
+/* HERO SUBTITLE: más grande, más premium, sin romper mobile */
 .hero-sub{
-  max-width:760px;
-  font-family:var(--mono);
-  color:rgba(255,255,255,0.78);
-  border-top:1px solid var(--line);
-  padding-top:18px;
-  letter-spacing:0.08em;
-  line-height:1.6;
-  font-size:14px;
+  font-size: clamp(1.15rem, 0.9rem + 1.2vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  max-width: 52ch;
+  text-wrap: balance;
+  opacity: 0.92;
 }
 
 /* ===== SPLIT-FLAP RETRO (ESTILO TU IMAGEN) ===== */
