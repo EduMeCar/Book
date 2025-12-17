@@ -416,12 +416,14 @@ if (cityRow) {
   });
 })();
 
-// ===== BACK TO TOP VISIBILITY =====
+// ===== BACK TO TOP VISIBILITY (APARECE A 75% DE PÁGINA) =====
 (() => {
   const btn = document.querySelector('.top-float');
   if (!btn) return;
 
   window.addEventListener('scroll', () => {
-    btn.classList.toggle('visible', window.scrollY > 400);
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollThreshold = scrollHeight * 0.75;
+    btn.classList.toggle('visible', window.scrollY > scrollThreshold);
   });
 })();
