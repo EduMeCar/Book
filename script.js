@@ -415,3 +415,13 @@ if (cityRow) {
     }
   });
 })();
+
+// ===== BACK TO TOP VISIBILITY =====
+(() => {
+  const btn = document.querySelector('.top-float');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+})();
