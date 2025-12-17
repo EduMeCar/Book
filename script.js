@@ -147,9 +147,11 @@ tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 // ====== SPLIT-FLAP RETRO (LENTO Y REALISTA) ======
 const citiesDesktop = [
   "MONTERREY",
+  "MEDELLIN",
   "GUADALAJARA", 
   "PARIS",
   "MADRID",
+  "BOGOTA",
   "BARCELONA",
   "LISBOA",
   "CIUDAD DE MEXICO"
@@ -157,9 +159,11 @@ const citiesDesktop = [
 
 const citiesMobile = [
   "MONTERREY",
-  "GDL",
+  "GUADALAJARA",
+  "BOGOTA",
   "PARIS", 
   "MADRID",
+  "MEDELLIN",
   "BARCELONA",
   "LISBOA",
   "CDMX"
