@@ -310,11 +310,14 @@ section.visible{
 /* HERO SUBTITLE: más grande, más premium, sin romper mobile */
 .hero-sub{
   font-family: inherit;
-  font-size: clamp(1.25rem, 1.05rem + 1.25vw, 1.85rem);
-  line-height: 1.15;
-  letter-spacing: 0;
-  opacity: 1;
+  font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.1rem);
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  opacity: 0.55;
+  margin-top: 22px;
+  max-width: 44ch;
 }
+
 
 
 /* ===== SPLIT-FLAP RETRO (ESTILO TU IMAGEN) ===== */
