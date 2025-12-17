@@ -158,13 +158,13 @@ const citiesDesktop = [
 ];
 
 const citiesMobile = [
-  "MONTERREY",
-  "GUADALAJARA",
+  "MTY",
+  "GDL",
   "BOGOTA",
   "PARIS", 
   "MADRID",
-  "MEDELLIN",
-  "BARCELONA",
+  "MDN",
+  "BCN",
   "LISBOA",
   "CDMX"
 ];
