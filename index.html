@@ -76,7 +76,7 @@
         </h1>
 
         <p class="hero-sub" data-i18n="hero.sub">
-          Tu sonido, decisiones con datos, salas verificadas. Solo deals claros.
+          BOOKING INTERNACIONAL DATA-DRIVEN. RED VERIFICADA, DEALS TRANSPARENTES, ROUTING EFICIENTE.
         </p>
       </div>
     </section>
@@ -120,7 +120,7 @@
               <li data-i18n="services.artist.point2">Artistas y Managers</li>
               <li data-i18n="services.artist.point3">Ruta por red + datos</li>
             </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=artist" data-i18n="services.artist.cta">ENVIAR ARTISTA →</a>
+            <a class="mini-cta" href="#submit-music" onclick="event.preventDefault(); window.openBookingModal('music');" data-i18n="services.artist.cta">ENVIAR MÚSICA →</a>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="panel-label" aria-labelledby="tab-label">
@@ -130,7 +130,7 @@
               <li data-i18n="services.label_service.point2">Sellos y Distribuidoras.</li>
               <li data-i18n="services.label_service.point3">Negocio diseñado con Red y Datos</li>
             </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=label" data-i18n="services.label_service.cta">PEDIR PROPUESTA →</a>
+            <a class="mini-cta" href="#request-package" onclick="event.preventDefault(); window.openBookingModal('package');" data-i18n="services.label_service.cta">SOLICITAR PAQUETE →</a>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="panel-venue" aria-labelledby="tab-venue">
@@ -140,7 +140,7 @@
               <li data-i18n="services.venue.point2">Fechas listas para ruta: propuesta, hold y confirmación.</li>
               <li data-i18n="services.venue.point3">Local e Internacional.</li>
             </ul>
-            <a class="mini-cta" href="book-a-tour.html?service=venue" data-i18n="services.venue.cta">PROPONER FECHAS →</a>
+            <a class="mini-cta" href="#submit-dates" onclick="event.preventDefault(); window.openBookingModal('dates');" data-i18n="services.venue.cta">ENVIAR FECHAS →</a>
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@
           </div>
 
           <div class="book-actions">
-            <a class="cta-primary" href="book-a-tour.html">
+            <a class="cta-primary" href="#book-a-tour" onclick="event.preventDefault(); window.openBookingModal('music');">
               <span data-i18n="book.cta_continue">IR AL FORMULARIO</span> <span aria-hidden="true">→</span>
             </a>
             <a class="cta-secondary" href="#territories">
@@ -241,166 +241,162 @@
       </div>
     </a>
 
-    <!-- Back to Top (NUEVO) -->
+    <!-- Back to Top -->
     <a href="#hero" class="top-float" aria-label="Back to top">
       <div class="top-box">↑</div>
     </a>
   </div>
 
-  <script src="i18n.js"></script>
-  <script src="script.js"></script>
-
   <!-- MODALS OVERLAY SYSTEM -->
-  <!-- Insertar ANTES del cierre de </body> en index.html -->
   
   <!-- MODAL 1: SUBMIT MUSIC (Artists) -->
-  <div class="modal-overlay" id="modal-submit-music" style="display:none;">
+  <div class="modal-overlay" id="modal-submit-music">
     <div class="modal">
       <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.music.title">SUBMIT MUSIC</h2>
+        <h2 class="modal-title" data-i18n="modal.music.title">ENVIAR MÚSICA</h2>
         <button class="modal-close" aria-label="Close modal" type="button">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <form class="modal-form" id="form-music">
         <div class="form-field">
-          <label for="music-artist" data-i18n="modal.music.artist">Artist Name *</label>
+          <label for="music-artist" data-i18n="modal.music.artist">Nombre del Artista *</label>
           <input type="text" id="music-artist" name="artist" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="music-genre" data-i18n="modal.music.genre">Genre *</label>
+          <label for="music-genre" data-i18n="modal.music.genre">Género *</label>
           <input type="text" id="music-genre" name="genre" required placeholder="Electronic, Rock, Hip-Hop..." />
         </div>
-  
+
         <div class="form-field">
           <label for="music-email" data-i18n="modal.music.email">Email *</label>
           <input type="email" id="music-email" name="email" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="music-country" data-i18n="modal.music.country">Country</label>
+          <label for="music-country" data-i18n="modal.music.country">País</label>
           <input type="text" id="music-country" name="country" placeholder="Spain, Mexico, USA..." />
         </div>
-  
+
         <div class="form-field">
           <label for="music-links" data-i18n="modal.music.links">Links (Spotify, SoundCloud, Bandcamp)</label>
           <input type="url" id="music-links" name="links" placeholder="https://open.spotify.com/artist/..." />
         </div>
-  
+
         <div class="form-field">
-          <label for="music-message" data-i18n="modal.music.message">Message</label>
+          <label for="music-message" data-i18n="modal.music.message">Mensaje</label>
           <textarea id="music-message" name="message" rows="4" placeholder="Tour dates, territories of interest, tech requirements..."></textarea>
         </div>
-  
+
         <button type="submit" class="submit-btn" data-i18n="modal.submit">
-          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+          <span>ENVIAR</span> <span aria-hidden="true">→</span>
         </button>
       </form>
     </div>
   </div>
-  
+
   <!-- MODAL 2: REQUEST PACKAGE (Labels) -->
-  <div class="modal-overlay" id="modal-request-package" style="display:none;">
+  <div class="modal-overlay" id="modal-request-package">
     <div class="modal">
       <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.package.title">REQUEST PACKAGE</h2>
+        <h2 class="modal-title" data-i18n="modal.package.title">SOLICITAR PAQUETE</h2>
         <button class="modal-close" aria-label="Close modal" type="button">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <form class="modal-form" id="form-package">
         <div class="form-field">
-          <label for="package-label" data-i18n="modal.package.label">Label Name *</label>
+          <label for="package-label" data-i18n="modal.package.label">Nombre del Sello *</label>
           <input type="text" id="package-label" name="label" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="package-contact" data-i18n="modal.package.contact">Contact Name *</label>
+          <label for="package-contact" data-i18n="modal.package.contact">Nombre de Contacto *</label>
           <input type="text" id="package-contact" name="contact" required />
         </div>
-  
+
         <div class="form-field">
           <label for="package-email" data-i18n="modal.package.email">Email *</label>
           <input type="email" id="package-email" name="email" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="package-roster" data-i18n="modal.package.roster">Artist Roster</label>
+          <label for="package-roster" data-i18n="modal.package.roster">Roster de Artistas</label>
           <input type="text" id="package-roster" name="roster" placeholder="Artist 1, Artist 2, Artist 3..." />
         </div>
-  
+
         <div class="form-field">
-          <label for="package-territory" data-i18n="modal.package.territory">Territory Focus</label>
+          <label for="package-territory" data-i18n="modal.package.territory">Territorio de Interés</label>
           <input type="text" id="package-territory" name="territory" placeholder="Europe, Latin America, USA..." />
         </div>
-  
+
         <div class="form-field">
-          <label for="package-message" data-i18n="modal.package.message">Message</label>
+          <label for="package-message" data-i18n="modal.package.message">Mensaje</label>
           <textarea id="package-message" name="message" rows="4" placeholder="Business objectives, investment range, timeline..."></textarea>
         </div>
-  
+
         <button type="submit" class="submit-btn" data-i18n="modal.submit">
-          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+          <span>ENVIAR</span> <span aria-hidden="true">→</span>
         </button>
       </form>
     </div>
   </div>
-  
+
   <!-- MODAL 3: SUBMIT DATES (Venues) -->
-  <div class="modal-overlay" id="modal-submit-dates" style="display:none;">
+  <div class="modal-overlay" id="modal-submit-dates">
     <div class="modal">
       <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.dates.title">SUBMIT DATES</h2>
+        <h2 class="modal-title" data-i18n="modal.dates.title">ENVIAR FECHAS</h2>
         <button class="modal-close" aria-label="Close modal" type="button">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <form class="modal-form" id="form-dates">
         <div class="form-field">
-          <label for="dates-venue" data-i18n="modal.dates.venue">Venue Name *</label>
+          <label for="dates-venue" data-i18n="modal.dates.venue">Nombre del Venue *</label>
           <input type="text" id="dates-venue" name="venue" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="dates-city" data-i18n="modal.dates.city">City *</label>
+          <label for="dates-city" data-i18n="modal.dates.city">Ciudad *</label>
           <input type="text" id="dates-city" name="city" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="dates-capacity" data-i18n="modal.dates.capacity">Capacity *</label>
+          <label for="dates-capacity" data-i18n="modal.dates.capacity">Capacidad *</label>
           <input type="number" id="dates-capacity" name="capacity" required min="50" max="10000" placeholder="500" />
         </div>
-  
+
         <div class="form-field">
           <label for="dates-email" data-i18n="modal.dates.email">Email *</label>
           <input type="email" id="dates-email" name="email" required />
         </div>
-  
+
         <div class="form-field">
-          <label for="dates-available" data-i18n="modal.dates.available">Available Dates</label>
+          <label for="dates-available" data-i18n="modal.dates.available">Fechas Disponibles</label>
           <input type="text" id="dates-available" name="available" placeholder="March 15-20, April 10-15..." />
         </div>
-  
+
         <div class="form-field">
-          <label for="dates-genre" data-i18n="modal.dates.genre">Genre / Scene Focus</label>
+          <label for="dates-genre" data-i18n="modal.dates.genre">Género / Escena</label>
           <input type="text" id="dates-genre" name="genre" placeholder="Electronic, Underground, Live bands..." />
         </div>
-  
+
         <div class="form-field">
-          <label for="dates-message" data-i18n="modal.dates.message">Message</label>
+          <label for="dates-message" data-i18n="modal.dates.message">Mensaje</label>
           <textarea id="dates-message" name="message" rows="4" placeholder="Technical requirements, production capabilities, previous bookings..."></textarea>
         </div>
-  
+
         <button type="submit" class="submit-btn" data-i18n="modal.submit">
-          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+          <span>ENVIAR</span> <span aria-hidden="true">→</span>
         </button>
       </form>
     </div>
   </div>
-  
+
   <!-- SUCCESS STATE MODAL -->
-  <div class="modal-overlay" id="modal-success" style="display:none;">
+  <div class="modal-overlay" id="modal-success">
     <div class="modal modal-success">
       <div class="success-content">
         <div class="success-progress">
@@ -410,7 +406,7 @@
           <div class="success-status" id="success-status">PROCESSING DATA INTAKE...</div>
           <div class="success-percent" id="success-percent">0%</div>
         </div>
-  
+
         <div class="success-complete" id="success-complete" style="display:none;">
           <div class="success-icon">✓</div>
           <div class="success-title">DATA RECEIVED</div>
@@ -430,5 +426,8 @@
       </button>
     </div>
   </div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
