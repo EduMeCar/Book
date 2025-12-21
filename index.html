@@ -6,12 +6,22 @@
   <title>BOOKING PLANS | SISTEMA INTERNACIONAL DE BOOKING</title>
   <meta name="description" content="Sistema de booking analógica. Giras underground. Deals directos." />
       
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://edumecar.github.io/Book/" />
-    <meta property="og:title" content="BOOKING PLANS | Sistema internacional de booking" />
-    <meta property="og:description" content="Booking internacional para artistas, sellos y salas. Rutas data-driven, red verificada y deals transparentes desde España, Colombia y México." />
-    <meta property="og:image" content="https://edumecar.github.io/Book/assets/og-booking-plans.png" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edumecar.github.io/Book/" />
+  <meta property="og:title" content="BOOKING PLANS | Sistema internacional de booking" />
+  <meta property="og:description" content="Booking internacional para artistas, sellos y salas. Rutas data-driven, red verificada y deals transparentes desde España, Colombia y México." />
+  <meta property="og:image" content="https://edumecar.github.io/Book/assets/og-booking-plans.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://edumecar.github.io/Book/" />
+  <meta name="twitter:title" content="BOOKING PLANS | Sistema internacional de booking" />
+  <meta name="twitter:description" content="Booking internacional para artistas, sellos y salas. Rutas data-driven, red verificada y deals transparentes." />
+  <meta name="twitter:image" content="https://edumecar.github.io/Book/assets/og-booking-plans.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,10 +101,51 @@
     <!-- TERRITORIES - SPLIT-FLAP -->
     <section class="territories" id="territories">
       <div class="wrap">
-        <div class="section-label" data-i18n="territories.live_label">TERRITORIOS • RED ACTIVA</div>
+        <div class="section-label" data-i18n="territories.label">TERRITORIOS • RED ACTIVA</div>
 
         <div class="splitflap-wrap" aria-label="Territories city board">
           <div class="splitflap-row" id="city-row"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIÉN ESTÁ DETRÁS -->
+    <section class="about" id="about">
+      <div class="wrap">
+        <div class="section-label" data-i18n="about.label">EQUIPO</div>
+        <h2 class="about-title" data-i18n="about.title">QUIÉN ESTÁ DETRÁS</h2>
+        <p class="about-text" data-i18n="about.text">
+          Equipo internacional con presencia directa en Barcelona, Ciudad de México y Medellín. 
+          Experiencia verificada en booking transatlántico, gestión de catálogos y relaciones 
+          estratégicas con la industria en Europa y LatAm. Operamos con criterio profesional 
+          y red construida en más de 10 años de rutas reales.
+        </p>
+        <div class="about-locations">
+          <div class="location-badge">BARCELONA</div>
+          <div class="location-badge">CIUDAD DE MÉXICO</div>
+          <div class="location-badge">MEDELLÍN</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="wrap">
+        <div class="section-label" data-i18n="how.label">PROCESO</div>
+        <h2 data-i18n="how.title">CÓMO FUNCIONA</h2>
+        <div class="how-steps">
+          <div class="step">
+            <div class="step-number">01</div>
+            <p data-i18n="how.step1">Envías datos básicos: música, territorios y ventanas de fechas.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <p data-i18n="how.step2">Diseñamos una ruta viable según red, datos y contexto de tu proyecto.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <p data-i18n="how.step3">Cerramos fechas y deals transparentes, con reporting claro.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -127,7 +178,7 @@
               <li data-i18n="services.artist.point2">Artistas y Managers</li>
               <li data-i18n="services.artist.point3">Ruta por red + datos</li>
             </ul>
-            <a class="mini-cta" href="#submit-music" onclick="event.preventDefault(); window.openBookingModal('music');" data-i18n="services.artist.cta">ENVIAR MÚSICA →</a>
+            <a class="mini-cta" href="#book-tour" onclick="event.preventDefault(); window.openBookingModal('artist');" data-i18n="services.artist.cta">ENVIAR MÚSICA →</a>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="panel-label" aria-labelledby="tab-label">
@@ -137,7 +188,7 @@
               <li data-i18n="services.label_service.point2">Sellos y Distribuidoras.</li>
               <li data-i18n="services.label_service.point3">Negocio diseñado con Red y Datos</li>
             </ul>
-            <a class="mini-cta" href="#request-package" onclick="event.preventDefault(); window.openBookingModal('package');" data-i18n="services.label_service.cta">SOLICITAR PAQUETE →</a>
+            <a class="mini-cta" href="#book-tour" onclick="event.preventDefault(); window.openBookingModal('label');" data-i18n="services.label_service.cta">SOLICITAR PAQUETE →</a>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="panel-venue" aria-labelledby="tab-venue">
@@ -147,31 +198,10 @@
               <li data-i18n="services.venue.point2">Fechas listas para ruta: propuesta, hold y confirmación.</li>
               <li data-i18n="services.venue.point3">Local e Internacional.</li>
             </ul>
-            <a class="mini-cta" href="#submit-dates" onclick="event.preventDefault(); window.openBookingModal('dates');" data-i18n="services.venue.cta">ENVIAR FECHAS →</a>
+            <a class="mini-cta" href="#book-tour" onclick="event.preventDefault(); window.openBookingModal('venue');" data-i18n="services.venue.cta">ENVIAR FECHAS →</a>
           </div>
         </div>
       </div>
-    </section>
-
-        <!-- CÓMO FUNCIONA -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="wrap">
-            <h2 data-i18n="howItWorks.heading">CÓMO FUNCIONA</h2>
-            <div class="how-steps">
-                <div class="step">
-                    <div class="step-number">01</div>
-                    <p data-i18n="howItWorks.step1">Envías datos básicos: música, territorios y ventanas de fechas.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">02</div>
-                    <p data-i18n="howItWorks.step2">Diseñamos una ruta viable según red, datos y contexto de tu proyecto.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">03</div>
-                    <p data-i18n="howItWorks.step3">Cerramos fechas y deals transparentes, con reporting claro.</p>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- BOOK A TOUR -->
@@ -179,17 +209,17 @@
       <div class="wrap">
         <div class="book-grid">
           <div>
-            <div class="section-label" data-i18n="book.section_label">ENTRADA DE DATOS</div>
+            <div class="section-label" data-i18n="book.label">ENTRADA DE DATOS</div>
             <h2 data-i18n="book.title">ARMA TU GIRA</h2>
-            <p data-i18n="book.lead">Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.</p>
+            <p data-i18n="book.text">Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.</p>
           </div>
 
           <div class="book-actions">
-            <a class="cta-primary" href="#book-a-tour" onclick="event.preventDefault(); window.openBookingModal('music');">
-              <span data-i18n="book.cta_continue">IR AL FORMULARIO</span> <span aria-hidden="true">→</span>
-            </a>
-            <a class="cta-secondary" href="#territories">
-              <span data-i18n="book.cta_back_territories">REGRESAR A TERRITORIOS</span> <span aria-hidden="true">↑</span>
+            <button class="cta-primary" onclick="window.openBookingModal();">
+              <span data-i18n="book.cta_main">IR AL FORMULARIO</span> <span aria-hidden="true">→</span>
+            </button>
+            <a class="cta-secondary" href="#services">
+              <span data-i18n="book.cta_back">REGRESAR A SERVICIOS</span> <span aria-hidden="true">↑</span>
             </a>
           </div>
         </div>
@@ -201,38 +231,38 @@
       <div class="wrap">
         <div class="footer-grid">
           <div class="f-col">
-            <h3 data-i18n="footer.services.title">SERVICIOS</h3>
+            <h3 data-i18n="footer.services_title">SERVICIOS</h3>
             <ul>
-              <li><a href="#services" data-i18n="footer.services.artist">Booking de Artistas</a></li>
-              <li><a href="#services" data-i18n="footer.services.label">Servicio para Industria</a></li>
-              <li><a href="#services" data-i18n="footer.services.venue">Programación en Salas</a></li>
+              <li><a href="#services" data-i18n="footer.services_artist">Booking de Artistas</a></li>
+              <li><a href="#services" data-i18n="footer.services_label">Servicio para Industria</a></li>
+              <li><a href="#services" data-i18n="footer.services_venue">Programación en Salas</a></li>
             </ul>
           </div>
 
           <div class="f-col">
-            <h3 data-i18n="footer.network.title">RED</h3>
+            <h3 data-i18n="footer.network_title">RED</h3>
             <ul>
-              <li><a href="#hero" data-i18n="footer.network.markets">Rutas Activas</a></li>
-              <li><a href="#hero" data-i18n="footer.network.venues">Salas Verificadas</a></li>
-              <li><a href="#territories" data-i18n="footer.network.territories">Territorios</a></li>
+              <li><a href="#territories" data-i18n="footer.network_routes">Rutas Activas</a></li>
+              <li><a href="#territories" data-i18n="footer.network_venues">Salas Verificadas</a></li>
+              <li><a href="#territories" data-i18n="footer.network_territories">Territorios</a></li>
             </ul>
           </div>
 
           <div class="f-col">
-            <h3 data-i18n="footer.process.title">PROCESO</h3>
+            <h3 data-i18n="footer.process_title">PROCESO</h3>
             <ul>
-              <li><a href="#services" data-i18n="footer.process.intake">Entrada de Datos</a></li>
-              <li><a href="#services" data-i18n="footer.process.routing">Diseño de Negocio</a></li>
-              <li><a href="#services" data-i18n="footer.process.deals">Ejecución en Directo</a></li>
+              <li><a href="#how-it-works" data-i18n="footer.process_data">Entrada de Datos</a></li>
+              <li><a href="#how-it-works" data-i18n="footer.process_design">Diseño de Negocio</a></li>
+              <li><a href="#how-it-works" data-i18n="footer.process_execution">Ejecución en Directo</a></li>
             </ul>
           </div>
 
           <div class="f-col">
-            <h3 data-i18n="footer.contact.title">CONTACTO</h3>
+            <h3 data-i18n="footer.contact_title">CONTACTO</h3>
             <ul>
               <li><a href="mailto:booking@bookingplans.com">booking@bookingplans.com</a></li>
-              <li><a href="#" data-i18n="footer.contact.barcelona">Barcelona</a></li>
-              <li><a href="#" data-i18n="footer.contact.mexico">Ciudad de México</a></li>
+              <li><a href="#about" data-i18n="footer.contact_barcelona">Barcelona</a></li>
+              <li><a href="#about" data-i18n="footer.contact_mexico">Ciudad de México</a></li>
             </ul>
           </div>
         </div>
@@ -244,22 +274,14 @@
           </div>
         </div>
 
-
-                <!-- ABOUT & PRIVACY -->
-        <div class="footer-about">
-            <div class="f-col">
-                <h3 data-i18n="footer.about_title">QUIÉN ESTÁ DETRÁS</h3>
-                <p data-i18n="footer.about_text">Equipo con base en España, Colombia y México, con experiencia en booking en Europa y LatAm.</p>
-            </div>
-        </div>
-        <div class="footer-privacy">
-            <p data-i18n="footer.privacy">Tus datos se usan solo para evaluar tu proyecto y responder a tu solicitud. No se comparten con terceros sin consentimiento.</p>
-        </div>
         <div class="footer-bottom">
           <div data-i18n="footer.copyright">BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING SYSTEM</div>
           <div class="status" style="margin-top:6px;">
             <span class="dot" aria-hidden="true"></span>
             <span data-i18n="footer.status">SYSTEM STATUS: OPERATIONAL</span>
+          </div>
+          <div style="margin-top:12px; font-size:9px; opacity:0.5; max-width:600px; margin-left:auto; margin-right:auto;">
+            <span data-i18n="footer.privacy">Tus datos se usan solo para evaluar tu proyecto. No se comparten con terceros sin consentimiento.</span>
           </div>
         </div>
       </div>
@@ -286,147 +308,34 @@
     </a>
   </div>
 
-  <!-- MODALS OVERLAY SYSTEM -->
-  
-  <!-- MODAL 1: SUBMIT MUSIC (Artists) -->
-  <div class="modal-overlay" id="modal-submit-music">
+  <!-- MODAL UNIFICADO: BOOK A TOUR -->
+  <div class="modal-overlay" id="modal-book-tour">
     <div class="modal">
       <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.music.title">ENVIAR MÚSICA</h2>
-                        <p class="modal-filter" data-i18n="modal.music.filter">Trabajamos principalmente con proyectos con al menos 10k oyentes mensuales o trayectoria equivalente en vivo.</p>
+        <h2 class="modal-title" data-i18n="modal.unified.title">BOOK A TOUR</h2>
         <button class="modal-close" aria-label="Close modal" type="button">
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form class="modal-form" id="form-music">
-        <div class="form-field">
-          <label for="music-artist" data-i18n="modal.music.artist">Nombre del Artista *</label>
-          <input type="text" id="music-artist" name="artist" required />
-        </div>
-
-        <div class="form-field">
-          <label for="music-genre" data-i18n="modal.music.genre">Género *</label>
-          <input type="text" id="music-genre" name="genre" required placeholder="Electronic, Rock, Hip-Hop..." />
-        </div>
-
-        <div class="form-field">
-          <label for="music-email" data-i18n="modal.music.email">Email *</label>
-          <input type="email" id="music-email" name="email" required />
-        </div>
-
-        <div class="form-field">
-          <label for="music-country" data-i18n="modal.music.country">País</label>
-          <input type="text" id="music-country" name="country" placeholder="Spain, Mexico, USA..." />
-        </div>
-
-        <div class="form-field">
-          <label for="music-links" data-i18n="modal.music.links">Links (Spotify, SoundCloud, Bandcamp)</label>
-          <input type="url" id="music-links" name="links" placeholder="https://open.spotify.com/artist/..." />
-        </div>
-
-        <div class="form-field">
-          <label for="music-message" data-i18n="modal.music.message">Mensaje</label>
-          <textarea id="music-message" name="message" rows="4" placeholder="Tour dates, territories of interest, tech requirements..."></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn" data-i18n="modal.submit">
-          <span>ENVIAR</span> <span aria-hidden="true">→</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL 2: REQUEST PACKAGE (Labels) -->
-  <div class="modal-overlay" id="modal-request-package">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.package.title">SOLICITAR PAQUETE</h2>
-        <button class="modal-close" aria-label="Close modal" type="button">
-          <span aria-hidden="true">×</span>
-        </button>
+      
+      <div class="modal-privacy-banner">
+        <span data-i18n="modal.privacy_banner">🔒 Tus datos se usan solo para evaluar tu proyecto. No se comparten con terceros sin consentimiento.</span>
       </div>
-      <form class="modal-form" id="form-package">
+
+      <form class="modal-form" id="form-unified">
+        <!-- SERVICE TYPE SELECTOR -->
         <div class="form-field">
-          <label for="package-label" data-i18n="modal.package.label">Nombre del Sello *</label>
-          <input type="text" id="package-label" name="label" required />
+          <label for="service-type" data-i18n="modal.unified.service_type">¿Qué servicio necesitas? *</label>
+          <select id="service-type" name="service_type" required>
+            <option value="">-- Selecciona --</option>
+            <option value="artist" data-i18n="modal.unified.opt_artist">Booking de Artista</option>
+            <option value="label" data-i18n="modal.unified.opt_label">Servicios para Industria</option>
+            <option value="venue" data-i18n="modal.unified.opt_venue">Programación de Sala</option>
+          </select>
         </div>
 
-        <div class="form-field">
-          <label for="package-contact" data-i18n="modal.package.contact">Nombre de Contacto *</label>
-          <input type="text" id="package-contact" name="contact" required />
-        </div>
-
-        <div class="form-field">
-          <label for="package-email" data-i18n="modal.package.email">Email *</label>
-          <input type="email" id="package-email" name="email" required />
-        </div>
-
-        <div class="form-field">
-          <label for="package-roster" data-i18n="modal.package.roster">Roster de Artistas</label>
-          <input type="text" id="package-roster" name="roster" placeholder="Artist 1, Artist 2, Artist 3..." />
-        </div>
-
-        <div class="form-field">
-          <label for="package-territory" data-i18n="modal.package.territory">Territorio de Interés</label>
-          <input type="text" id="package-territory" name="territory" placeholder="Europe, Latin America, USA..." />
-        </div>
-
-        <div class="form-field">
-          <label for="package-message" data-i18n="modal.package.message">Mensaje</label>
-          <textarea id="package-message" name="message" rows="4" placeholder="Business objectives, investment range, timeline..."></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn" data-i18n="modal.submit">
-          <span>ENVIAR</span> <span aria-hidden="true">→</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL 3: SUBMIT DATES (Venues) -->
-  <div class="modal-overlay" id="modal-submit-dates">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 class="modal-title" data-i18n="modal.dates.title">ENVIAR FECHAS</h2>
-        <button class="modal-close" aria-label="Close modal" type="button">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <form class="modal-form" id="form-dates">
-        <div class="form-field">
-          <label for="dates-venue" data-i18n="modal.dates.venue">Nombre del Venue *</label>
-          <input type="text" id="dates-venue" name="venue" required />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-city" data-i18n="modal.dates.city">Ciudad *</label>
-          <input type="text" id="dates-city" name="city" required />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-capacity" data-i18n="modal.dates.capacity">Capacidad *</label>
-          <input type="number" id="dates-capacity" name="capacity" required min="50" max="10000" placeholder="500" />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-email" data-i18n="modal.dates.email">Email *</label>
-          <input type="email" id="dates-email" name="email" required />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-available" data-i18n="modal.dates.available">Fechas Disponibles</label>
-          <input type="text" id="dates-available" name="available" placeholder="March 15-20, April 10-15..." />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-genre" data-i18n="modal.dates.genre">Género / Escena</label>
-          <input type="text" id="dates-genre" name="genre" placeholder="Electronic, Underground, Live bands..." />
-        </div>
-
-        <div class="form-field">
-          <label for="dates-message" data-i18n="modal.dates.message">Mensaje</label>
-          <textarea id="dates-message" name="message" rows="4" placeholder="Technical requirements, production capabilities, previous bookings..."></textarea>
-        </div>
+        <!-- DYNAMIC FIELDS CONTAINER -->
+        <div id="dynamic-fields"></div>
 
         <button type="submit" class="submit-btn" data-i18n="modal.submit">
           <span>ENVIAR</span> <span aria-hidden="true">→</span>
