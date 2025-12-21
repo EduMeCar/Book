@@ -1236,11 +1236,10 @@ footer{
 
 /* ====== HOW IT WORKS ====== */
 .how-it-works {
-  padding: 80px 20px 100px;
+  padding: 60px 20px 40px;
   background: var(--black);
 }
 
-.how-it-works h2 {
   font-size: 24px;  font-weight: 700;
   letter-spacing: 0.1em;
   margin-bottom: 60px;  text-align: center;
@@ -1274,7 +1273,7 @@ footer{
 
 /* ====== FOOTER ABOUT & PRIVACY ====== */
 .footer-about {
-  padding: 60px 0 40px;  border-top: 1px solid var(--line);
+  padding: 30px 0 20px;  border-top: 1px solid var(--line);
   margin-top: 40px;
 }
 
