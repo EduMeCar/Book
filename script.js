@@ -179,7 +179,6 @@ function getCurrentCities() {
   return isMobileMQ.matches ? citiesMobile : citiesDesktop;
 }
 
-// Crear estructura HTML de una celda
 function createCell(char, index, isFirstOfWord) {
   const cell = document.createElement('div');
   
@@ -209,7 +208,6 @@ function createCell(char, index, isFirstOfWord) {
   return cell;
 }
 
-// Animar UNA celda con flip lento
 function animateCell(cell, targetChar, delay) {
   setTimeout(() => {
     cell.classList.add('flipping');
@@ -217,68 +215,57 @@ function animateCell(cell, targetChar, delay) {
     const topChar = cell.querySelector('.cell-char-top');
     const bottomChar = cell.querySelector('.cell-char-bottom');
     
-    // ✅ 5-8 flips aleatorios (antes 3-5)
     const maxFlips = Math.floor(Math.random() * 4) + 5;
     let flipCount = 0;
 
     const flipInterval = setInterval(() => {
       if (flipCount < maxFlips) {
-        // Mostrar carácter aleatorio
         const randomChar = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
         topChar.textContent = randomChar;
         bottomChar.textContent = randomChar;
         flipCount++;
       } else {
-        // Mostrar carácter final
         topChar.textContent = targetChar;
         bottomChar.textContent = targetChar;
         cell.classList.remove('flipping');
         clearInterval(flipInterval);
       }
-    }, 120); // ✅ 120ms entre flips (antes 50ms) - MUCHO MÁS LENTO
+    }, 120);
 
   }, delay);
 }
 
-// Renderizar ciudad completa
 function renderCity(cityName) {
   if (!cityRow || isFlipping) return;
   
   isFlipping = true;
   const chars = cityName.split('');
   
-  // Limpiar contenedor
   cityRow.innerHTML = '';
 
-  // Crear todas las celdas
   let charIndex = 0;
   chars.forEach((char, i) => {
     const isFirstOfWord = i === 0 || chars[i - 1] === ' ';
     const cell = createCell(char, charIndex, isFirstOfWord);
     cityRow.appendChild(cell);
     
-    // Solo incrementar index si NO es espacio
     if (char !== ' ') {
       charIndex++;
     }
   });
 
-  // Animar todas las celdas con delay escalonado
   const allCells = Array.from(cityRow.querySelectorAll('.cell:not(.separator)'));
   allCells.forEach((cell, index) => {
     const targetChar = cell.dataset.targetChar;
-    // ✅ 120ms delay entre letras (antes 40ms) - MUCHO MÁS LENTO
     animateCell(cell, targetChar, index * 120);
   });
 
-  // Desbloquear después de que termine la animación
   const totalAnimTime = allCells.length * 120 + (8 * 120) + 500;
   setTimeout(() => {
     isFlipping = false;
   }, totalAnimTime);
 }
 
-// Cambiar a siguiente ciudad random
 function nextCity() {
   if (isFlipping) return;
   
@@ -293,25 +280,21 @@ function nextCity() {
   renderCity(cities[currentCityIndex]);
 }
 
-// Inicializar
 if (cityRow) {
   renderCity(getCurrentCities()[currentCityIndex]);
   
-  // Re-render si cambia el breakpoint móvil
   isMobileMQ.addEventListener("change", () => {
     if (!isFlipping) {
       renderCity(getCurrentCities()[currentCityIndex]);
     }
   });
   
-  // Re-render al cambiar idioma
   window.addEventListener('languageChanged', () => {
     if (!isFlipping) {
       renderCity(getCurrentCities()[currentCityIndex]);
     }
   });
   
-  // ✅ Cambiar cada 5 segundos (antes 3) para disfrutar la animación
   setInterval(nextCity, 4000);
 }
 
@@ -382,7 +365,6 @@ if (cityRow) {
     btn.title = 'Audio unavailable';
   });
 
-  // LED: cycle theme
   const ORDER = ['orange', 'green', 'yellow'];
   led.addEventListener('click', () => {
     const cur = getCookie(THEME_KEY) || 'orange';
@@ -416,7 +398,7 @@ if (cityRow) {
   });
 })();
 
-// ===== BACK TO TOP VISIBILITY (APARECE A 75% DE PÁGINA) =====
+// ===== BACK TO TOP VISIBILITY =====
 (() => {
   const btn = document.querySelector('.top-float');
   if (!btn) return;
@@ -425,5 +407,245 @@ if (cityRow) {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollThreshold = scrollHeight * 0.75;
     btn.classList.toggle('visible', window.scrollY > scrollThreshold);
+  });
+})();
+
+// ===== MODAL SYSTEM =====
+(() => {
+  const modals = {
+    music: document.getElementById('modal-submit-music'),
+    package: document.getElementById('modal-request-package'),
+    dates: document.getElementById('modal-submit-dates'),
+    success: document.getElementById('modal-success')
+  };
+
+  const forms = {
+    music: document.getElementById('form-music'),
+    package: document.getElementById('form-package'),
+    dates: document.getElementById('form-dates')
+  };
+
+  function openModal(modalId) {
+    const modal = modals[modalId];
+    if (!modal) return;
+
+    Object.values(modals).forEach(m => m.classList.remove('active'));
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      const firstInput = modal.querySelector('input:not([type="hidden"])');
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
+
+  function closeModal(modalId) {
+    const modal = modalId ? modals[modalId] : document.querySelector('.modal-overlay.active');
+    if (!modal) return;
+
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+
+    if (modal !== modals.success) {
+      const form = modal.querySelector('form');
+      if (form) {
+        form.reset();
+        form.querySelectorAll('.valid, .invalid').forEach(el => {
+          el.classList.remove('valid', 'invalid');
+        });
+      }
+    }
+  }
+
+  document.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', () => closeModal());
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // VALIDACIÓN
+  
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validateURL(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  Object.values(forms).forEach(form => {
+    if (!form) return;
+
+    form.querySelectorAll('input[type="email"]').forEach(input => {
+      input.addEventListener('blur', () => {
+        if (input.value) {
+          if (validateEmail(input.value)) {
+            input.classList.add('valid');
+            input.classList.remove('invalid');
+          } else {
+            input.classList.add('invalid');
+            input.classList.remove('valid');
+          }
+        } else {
+          input.classList.remove('valid', 'invalid');
+        }
+      });
+    });
+
+    form.querySelectorAll('input[type="url"]').forEach(input => {
+      input.addEventListener('blur', () => {
+        if (input.value) {
+          if (validateURL(input.value)) {
+            input.classList.add('valid');
+            input.classList.remove('invalid');
+          } else {
+            input.classList.add('invalid');
+            input.classList.remove('valid');
+          }
+        } else {
+          input.classList.remove('valid', 'invalid');
+        }
+      });
+    });
+
+    form.querySelectorAll('input[required]').forEach(input => {
+      input.addEventListener('blur', () => {
+        if (input.value.trim()) {
+          input.classList.add('valid');
+          input.classList.remove('invalid');
+        } else {
+          input.classList.remove('valid', 'invalid');
+        }
+      });
+    });
+  });
+
+  // GENERADOR DE REFERENCIA
+  
+  function generateRefID() {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `#BP-2025-${timestamp}-${random}`;
+  }
+
+  // ANIMACIÓN DE SUCCESS
+  
+  function showSuccessAnimation(refID) {
+    const successModal = modals.success;
+    const progressDiv = successModal.querySelector('.success-progress');
+    const completeDiv = successModal.querySelector('.success-complete');
+    const bar = successModal.querySelector('#success-bar');
+    const status = successModal.querySelector('#success-status');
+    const percent = successModal.querySelector('#success-percent');
+    const refEl = successModal.querySelector('#success-ref');
+    const closeBtn = successModal.querySelector('.modal-close');
+
+    progressDiv.style.display = 'block';
+    completeDiv.style.display = 'none';
+    bar.style.width = '0%';
+    closeBtn.style.display = 'none';
+
+    successModal.classList.add('active');
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15 + 5;
+      if (progress > 100) progress = 100;
+
+      bar.style.width = progress + '%';
+      percent.textContent = Math.floor(progress) + '%';
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        
+        setTimeout(() => {
+          progressDiv.style.display = 'none';
+          completeDiv.style.display = 'block';
+          refEl.textContent = refID;
+          closeBtn.style.display = 'flex';
+
+          setTimeout(() => {
+            closeModal('success');
+          }, 5000);
+        }, 500);
+      }
+    }, 150);
+  }
+
+  // ENVÍO DE FORMULARIOS
+  
+  function submitForm(formData, serviceType) {
+    const subject = `[BOOKING PLANS] ${serviceType} - ${formData.get('artist') || formData.get('label') || formData.get('venue')}`;
+    
+    let body = `SERVICE TYPE: ${serviceType}\n\n`;
+    for (let [key, value] of formData.entries()) {
+      if (value) {
+        body += `${key.toUpperCase()}: ${value}\n`;
+      }
+    }
+    body += `\n---\nSubmitted: ${new Date().toLocaleString()}`;
+
+    const mailtoLink = `mailto:emc121091@me.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const refID = generateRefID();
+
+    showSuccessAnimation(refID);
+
+    setTimeout(() => {
+      window.location.href = mailtoLink;
+    }, 1000);
+  }
+
+  if (forms.music) {
+    forms.music.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(forms.music);
+      closeModal('music');
+      submitForm(formData, 'ARTIST BOOKING');
+    });
+  }
+
+  if (forms.package) {
+    forms.package.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(forms.package);
+      closeModal('package');
+      submitForm(formData, 'LABEL SERVICES');
+    });
+  }
+
+  if (forms.dates) {
+    forms.dates.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(forms.dates);
+      closeModal('dates');
+      submitForm(formData, 'VENUE PROGRAMMING');
+    });
+  }
+
+  // EXPONER FUNCIÓN GLOBAL
+  window.openBookingModal = openModal;
+
+  // DETECCIÓN DE HASH EN URL
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash === 'submit-music') openModal('music');
+    if (hash === 'request-package') openModal('package');
+    if (hash === 'submit-dates') openModal('dates');
   });
 })();
