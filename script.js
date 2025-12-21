@@ -410,91 +410,111 @@ if (cityRow) {
   });
 })();
 
-// ===== MODAL SYSTEM =====
+// ===== UNIFIED MODAL SYSTEM =====
 (() => {
-  const modals = {
-    music: document.getElementById('modal-submit-music'),
-    package: document.getElementById('modal-request-package'),
-    dates: document.getElementById('modal-submit-dates'),
-    success: document.getElementById('modal-success')
+  const modal = document.getElementById('modal-book-tour');
+  const successModal = document.getElementById('modal-success');
+  const form = document.getElementById('form-unified');
+  const serviceTypeSelect = document.getElementById('service-type');
+  const dynamicFields = document.getElementById('dynamic-fields');
+
+  // Field templates por tipo de servicio
+  const fieldTemplates = {
+    artist: [
+      { type: 'text', name: 'artist', label: 'modal.unified.artist_name', required: true, placeholder: '' },
+      { type: 'text', name: 'genre', label: 'modal.unified.genre', required: true, placeholder: 'Electronic, Rock, Hip-Hop...' },
+      { type: 'email', name: 'email', label: 'modal.unified.email', required: true, placeholder: '' },
+      { type: 'text', name: 'country', label: 'modal.unified.country', required: false, placeholder: 'Spain, Mexico, USA...' },
+      { type: 'url', name: 'links', label: 'modal.unified.links', required: false, placeholder: 'https://open.spotify.com/artist/...' },
+      { type: 'textarea', name: 'message', label: 'modal.unified.message', required: false, placeholder: 'Tour dates, territories of interest, tech requirements...' }
+    ],
+    label: [
+      { type: 'text', name: 'label', label: 'modal.unified.label_name', required: true, placeholder: '' },
+      { type: 'text', name: 'contact', label: 'modal.unified.contact_name', required: true, placeholder: '' },
+      { type: 'email', name: 'email', label: 'modal.unified.email', required: true, placeholder: '' },
+      { type: 'text', name: 'roster', label: 'modal.unified.roster', required: false, placeholder: 'Artist 1, Artist 2, Artist 3...' },
+      { type: 'text', name: 'territory', label: 'modal.unified.territory', required: false, placeholder: 'Europe, Latin America, USA...' },
+      { type: 'textarea', name: 'message', label: 'modal.unified.message', required: false, placeholder: 'Business objectives, investment range, timeline...' }
+    ],
+    venue: [
+      { type: 'text', name: 'venue', label: 'modal.unified.venue_name', required: true, placeholder: '' },
+      { type: 'text', name: 'city', label: 'modal.unified.city', required: true, placeholder: '' },
+      { type: 'number', name: 'capacity', label: 'modal.unified.capacity', required: true, placeholder: '500', min: '50', max: '10000' },
+      { type: 'email', name: 'email', label: 'modal.unified.email', required: true, placeholder: '' },
+      { type: 'text', name: 'available', label: 'modal.unified.available_dates', required: false, placeholder: 'March 15-20, April 10-15...' },
+      { type: 'text', name: 'genre', label: 'modal.unified.genre_scene', required: false, placeholder: 'Electronic, Underground, Live bands...' },
+      { type: 'textarea', name: 'message', label: 'modal.unified.message', required: false, placeholder: 'Technical requirements, production capabilities, previous bookings...' }
+    ]
   };
 
-  const forms = {
-    music: document.getElementById('form-music'),
-    package: document.getElementById('form-package'),
-    dates: document.getElementById('form-dates')
-  };
-
-  function openModal(modalId) {
-    const modal = modals[modalId];
-    if (!modal) return;
-
-    Object.values(modals).forEach(m => m.classList.remove('active'));
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    setTimeout(() => {
-      const firstInput = modal.querySelector('input:not([type="hidden"])');
-      if (firstInput) firstInput.focus();
-    }, 100);
-  }
-
-  function closeModal(modalId) {
-    const modal = modalId ? modals[modalId] : document.querySelector('.modal-overlay.active');
-    if (!modal) return;
-
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-
-    if (modal !== modals.success) {
-      const form = modal.querySelector('form');
-      if (form) {
-        form.reset();
-        form.querySelectorAll('.valid, .invalid').forEach(el => {
-          el.classList.remove('valid', 'invalid');
-        });
+  function getTranslation(key) {
+    if (!window.BP_I18N) return key;
+    const parts = key.split('.');
+    let obj = window.BP_I18N.currentTranslations || {};
+    for (const part of parts) {
+      if (obj[part] !== undefined) {
+        obj = obj[part];
+      } else {
+        return key;
       }
     }
+    return typeof obj === 'string' ? obj : key;
   }
 
-  document.querySelectorAll('.modal-close').forEach(btn => {
-    btn.addEventListener('click', () => closeModal());
-  });
-
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // VALIDACIÓN
-  
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  function validateURL(url) {
-    try {
-      new URL(url);
-      return true;
-    } catch {
-      return false;
+  function renderFields(serviceType) {
+    if (!serviceType || !fieldTemplates[serviceType]) {
+      dynamicFields.innerHTML = '';
+      return;
     }
+
+    const fields = fieldTemplates[serviceType];
+    const html = fields.map(field => {
+      const labelText = getTranslation(field.label);
+      const requiredMark = field.required ? ' *' : '';
+      
+      if (field.type === 'textarea') {
+        return `
+          <div class="form-field">
+            <label for="${field.name}" data-i18n="${field.label}">${labelText}${requiredMark}</label>
+            <textarea 
+              id="${field.name}" 
+              name="${field.name}" 
+              ${field.required ? 'required' : ''}
+              rows="4"
+              placeholder="${field.placeholder}"
+            ></textarea>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="form-field">
+          <label for="${field.name}" data-i18n="${field.label}">${labelText}${requiredMark}</label>
+          <input 
+            type="${field.type}" 
+            id="${field.name}" 
+            name="${field.name}" 
+            ${field.required ? 'required' : ''}
+            ${field.placeholder ? `placeholder="${field.placeholder}"` : ''}
+            ${field.min ? `min="${field.min}"` : ''}
+            ${field.max ? `max="${field.max}"` : ''}
+          />
+        </div>
+      `;
+    }).join('');
+
+    dynamicFields.innerHTML = html;
+
+    // Re-aplicar validaciones
+    setupValidation();
   }
 
-  Object.values(forms).forEach(form => {
-    if (!form) return;
-
-    form.querySelectorAll('input[type="email"]').forEach(input => {
+  function setupValidation() {
+    dynamicFields.querySelectorAll('input[type="email"]').forEach(input => {
       input.addEventListener('blur', () => {
         if (input.value) {
-          if (validateEmail(input.value)) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (re.test(input.value)) {
             input.classList.add('valid');
             input.classList.remove('invalid');
           } else {
@@ -507,13 +527,14 @@ if (cityRow) {
       });
     });
 
-    form.querySelectorAll('input[type="url"]').forEach(input => {
+    dynamicFields.querySelectorAll('input[type="url"]').forEach(input => {
       input.addEventListener('blur', () => {
         if (input.value) {
-          if (validateURL(input.value)) {
+          try {
+            new URL(input.value);
             input.classList.add('valid');
             input.classList.remove('invalid');
-          } else {
+          } catch {
             input.classList.add('invalid');
             input.classList.remove('valid');
           }
@@ -523,7 +544,7 @@ if (cityRow) {
       });
     });
 
-    form.querySelectorAll('input[required]').forEach(input => {
+    dynamicFields.querySelectorAll('input[required]').forEach(input => {
       input.addEventListener('blur', () => {
         if (input.value.trim()) {
           input.classList.add('valid');
@@ -533,24 +554,55 @@ if (cityRow) {
         }
       });
     });
+  }
+
+  serviceTypeSelect.addEventListener('change', (e) => {
+    renderFields(e.target.value);
   });
 
-  // GENERADOR DE REFERENCIA
-  
+  function openModal(preselectedType = null) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    if (preselectedType && fieldTemplates[preselectedType]) {
+      serviceTypeSelect.value = preselectedType;
+      renderFields(preselectedType);
+    }
+
+    setTimeout(() => {
+      const firstInput = modal.querySelector('select, input:not([type="hidden"])');
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    form.reset();
+    dynamicFields.innerHTML = '';
+    form.querySelectorAll('.valid, .invalid').forEach(el => {
+      el.classList.remove('valid', 'invalid');
+    });
+  }
+
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
   function generateRefID() {
     const timestamp = Date.now().toString(36).toUpperCase();
     const random = Math.random().toString(36).substring(2, 6).toUpperCase();
     return `#BP-2025-${timestamp}-${random}`;
   }
 
-  // ANIMACIÓN DE SUCCESS
-  
   function showSuccessAnimation(refID) {
-    const successModal = modals.success;
     const progressDiv = successModal.querySelector('.success-progress');
     const completeDiv = successModal.querySelector('.success-complete');
     const bar = successModal.querySelector('#success-bar');
-    const status = successModal.querySelector('#success-status');
     const percent = successModal.querySelector('#success-percent');
     const refEl = successModal.querySelector('#success-ref');
     const closeBtn = successModal.querySelector('.modal-close');
@@ -580,21 +632,26 @@ if (cityRow) {
           closeBtn.style.display = 'flex';
 
           setTimeout(() => {
-            closeModal('success');
+            successModal.classList.remove('active');
+            document.body.style.overflow = '';
           }, 5000);
         }, 500);
       }
     }, 150);
   }
 
-  // ENVÍO DE FORMULARIOS
-  
   function submitForm(formData, serviceType) {
-    const subject = `[BOOKING PLANS] ${serviceType} - ${formData.get('artist') || formData.get('label') || formData.get('venue')}`;
+    const serviceNames = {
+      artist: 'ARTIST BOOKING',
+      label: 'LABEL SERVICES',
+      venue: 'VENUE PROGRAMMING'
+    };
+
+    const subject = `[BOOKING PLANS] ${serviceNames[serviceType]} - ${formData.get('artist') || formData.get('label') || formData.get('venue')}`;
     
-    let body = `SERVICE TYPE: ${serviceType}\n\n`;
+    let body = `SERVICE TYPE: ${serviceNames[serviceType]}\n\n`;
     for (let [key, value] of formData.entries()) {
-      if (value) {
+      if (value && key !== 'service_type') {
         body += `${key.toUpperCase()}: ${value}\n`;
       }
     }
@@ -611,41 +668,29 @@ if (cityRow) {
     }, 1000);
   }
 
-  if (forms.music) {
-    forms.music.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(forms.music);
-      closeModal('music');
-      submitForm(formData, 'ARTIST BOOKING');
-    });
-  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const serviceType = formData.get('service_type');
+    closeModal();
+    submitForm(formData, serviceType);
+  });
 
-  if (forms.package) {
-    forms.package.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(forms.package);
-      closeModal('package');
-      submitForm(formData, 'LABEL SERVICES');
-    });
-  }
-
-  if (forms.dates) {
-    forms.dates.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(forms.dates);
-      closeModal('dates');
-      submitForm(formData, 'VENUE PROGRAMMING');
-    });
-  }
-
-  // EXPONER FUNCIÓN GLOBAL
+  // Exponer función global
   window.openBookingModal = openModal;
 
-  // DETECCIÓN DE HASH EN URL
+  // Detección de hash en URL
   window.addEventListener('load', () => {
     const hash = window.location.hash.substring(1);
-    if (hash === 'submit-music') openModal('music');
-    if (hash === 'request-package') openModal('package');
-    if (hash === 'submit-dates') openModal('dates');
+    if (hash === 'book-tour') openModal();
+    if (hash === 'artist') openModal('artist');
+    if (hash === 'label') openModal('label');
+    if (hash === 'venue') openModal('venue');
+  });
+
+  // Success modal close
+  successModal.querySelector('.modal-close').addEventListener('click', () => {
+    successModal.classList.remove('active');
+    document.body.style.overflow = '';
   });
 })();
