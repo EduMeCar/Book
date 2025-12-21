@@ -1,4 +1,4 @@
-// ====== I18N SYSTEM (INLINE TRANSLATIONS) ======
+// ====== I18N SYSTEM (FIXED - ALL TRANSLATIONS) ======
 
 // Cookie helpers
 function setCookie(name, value, days = 365) {
@@ -22,12 +22,27 @@ const translations = {
   es: {
     hero: {
       tag: "SISTEMA INTERNACIONAL DE BOOKING",
-      sub: "Giras internacionales para artistas, sellos y salas, diseñadas con datos reales y una red verificada en Europa y LatAm."
+      sub: "Booking internacional data-driven. Red verificada, deals transparentes, routing eficiente."
+    },
+    territories: {
+      label: "TERRITORIOS • RED ACTIVA"
+    },
+    about: {
+      label: "EQUIPO",
+      title: "QUIÉN ESTÁ DETRÁS",
+      text: "Equipo internacional con presencia directa en Barcelona, Ciudad de México y Medellín. Experiencia verificada en booking transatlántico, gestión de catálogos y relaciones estratégicas con la industria en Europa y LatAm. Operamos con criterio profesional y red construida en más de 10 años de rutas reales."
+    },
+    how: {
+      label: "PROCESO",
+      title: "CÓMO FUNCIONA",
+      step1: "Envías datos básicos: música, territorios y ventanas de fechas.",
+      step2: "Diseñamos una ruta viable según red, datos y contexto de tu proyecto.",
+      step3: "Cerramos fechas y deals transparentes, con reporting claro."
     },
     services: {
       label: "SERVICIOS",
       heading: "¿CÓMO TRABAJAMOS?",
-      sub: "Elige un servicio y envía tu info. Respondemos en 3–5 días hábiles con propuesta de ruta y condiciones básicas.",
+      sub: "Elige un servicio y envía tu info. Respondemos con ruta y propuesta.",
       tab_artist: "BOOKING DE ARTISTAS",
       tab_label: "SERVICIOS PARA INDUSTRIA",
       tab_venue: "PROGRAMACIÓN DE SALAS",
@@ -35,60 +50,55 @@ const translations = {
         title: "BOOKING DE ARTISTAS",
         point1: "Fechas internacionales",
         point2: "Artistas y Managers",
-        point3: "Diseñamos rutas internacionales realistas según tus datos y la capacidad real de la red.",
+        point3: "Ruta por red + datos",
         cta: "ENVIAR MÚSICA →"
       },
       label_service: {
         title: "SERVICIOS PARA INDUSTRIA",
         point1: "Inversión por objetivos",
         point2: "Sellos y Distribuidoras",
-        point3: "Paquetes de booking para catálogos completos, con reporting accionable y transparencia total en deals.",
+        point3: "Negocio diseñado con Red y Datos",
         cta: "SOLICITAR PAQUETE →"
       },
       venue: {
         title: "PROGRAMACIÓN DE SALAS",
         point1: "Curaduría por escena",
         point2: "Fechas listas para ruta: propuesta, hold y confirmación",
-        point3: "Programación con artistas filtrados por datos, escena y capacidad real de tu venue.",
+        point3: "Local e Internacional",
         cta: "ENVIAR FECHAS →"
       }
     },
-    howItWorks: {
-      heading: "CÓMO FUNCIONA",
-      step1: "Envías datos básicos: música, territorios y ventanas de fechas.",
-      step2: "Diseñamos una ruta viable según red, datos y contexto de tu proyecto.",
-      step3: "Cerramos fechas y deals transparentes, con reporting claro."
+    book: {
+      label: "ENTRADA DE DATOS",
+      title: "ARMA TU GIRA",
+      text: "Cuestionario rápido para entender tu proyecto, ventanas de fechas y territorios. Sin burocracia: un paso y seguimos.",
+      cta_main: "IR AL FORMULARIO",
+      cta_back: "REGRESAR A SERVICIOS"
     },
     modal: {
       submit: "ENVIAR",
-      music: {
-        title: "ENVIAR MÚSICA",
-        artist: "Nombre del Artista *",
-        genre: "Género *",
-        email: "Email *",
+      privacy_banner: "🔒 Tus datos se usan solo para evaluar tu proyecto. No se comparten con terceros sin consentimiento.",
+      unified: {
+        title: "BOOK A TOUR",
+        service_type: "¿Qué servicio necesitas?",
+        opt_artist: "Booking de Artista",
+        opt_label: "Servicios para Industria",
+        opt_venue: "Programación de Sala",
+        artist_name: "Nombre del Artista",
+        genre: "Género",
+        email: "Email",
         country: "País",
         links: "Links (Spotify, SoundCloud, Bandcamp)",
         message: "Mensaje",
-        filter: "Trabajamos principalmente con proyectos con al menos 10k oyentes mensuales o trayectoria equivalente en vivo."
-      },
-      package: {
-        title: "SOLICITAR PAQUETE",
-        label: "Nombre del Sello *",
-        contact: "Nombre de Contacto *",
-        email: "Email *",
+        label_name: "Nombre del Sello",
+        contact_name: "Nombre de Contacto",
         roster: "Roster de Artistas",
         territory: "Territorio de Interés",
-        message: "Mensaje"
-      },
-      dates: {
-        title: "ENVIAR FECHAS",
-        venue: "Nombre del Venue *",
-        city: "Ciudad *",
-        capacity: "Capacidad *",
-        email: "Email *",
-        available: "Fechas Disponibles",
-        genre: "Género / Escena",
-        message: "Mensaje"
+        venue_name: "Nombre del Venue",
+        city: "Ciudad",
+        capacity: "Capacidad",
+        available_dates: "Fechas Disponibles",
+        genre_scene: "Género / Escena"
       }
     },
     footer: {
@@ -105,9 +115,9 @@ const translations = {
       process_design: "Diseño de Negocio",
       process_execution: "Ejecución en Directo",
       contact_title: "CONTACTO",
-      about_title: "QUIÉN ESTÁ DETRÁS",
-      about_text: "Equipo con base en España, Colombia y México, con experiencia en booking en Europa y LatAm.",
-      privacy: "Tus datos se usan solo para evaluar tu proyecto y responder a tu solicitud. No se comparten con terceros sin consentimiento.",
+      contact_barcelona: "Barcelona",
+      contact_mexico: "Ciudad de México",
+      privacy: "Tus datos se usan solo para evaluar tu proyecto. No se comparten con terceros sin consentimiento.",
       copyright: "BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING SYSTEM",
       status: "SYSTEM STATUS: OPERATIONAL"
     }
@@ -115,12 +125,27 @@ const translations = {
   en: {
     hero: {
       tag: "INTERNATIONAL BOOKING SYSTEM",
-      sub: "International tours for artists, labels, and venues, built on real data and a verified network across Europe and LatAm."
+      sub: "Data-driven international booking. Verified network, transparent deals, efficient routing."
+    },
+    territories: {
+      label: "TERRITORIES • ACTIVE NETWORK"
+    },
+    about: {
+      label: "TEAM",
+      title: "WHO WE ARE",
+      text: "International team with direct presence in Barcelona, Mexico City, and Medellín. Verified experience in transatlantic booking, catalog management, and strategic relationships with the industry in Europe and LatAm. We operate with professional criteria and a network built over 10+ years of real touring."
+    },
+    how: {
+      label: "PROCESS",
+      title: "HOW IT WORKS",
+      step1: "You submit basic data: music, territories, and date windows.",
+      step2: "We design a viable route based on network, data, and your project's context.",
+      step3: "We close dates and transparent deals, with clear reporting."
     },
     services: {
       label: "SERVICES",
       heading: "HOW WE WORK",
-      sub: "Choose a service and submit your info. We respond within 3–5 business days with routing proposal and basic terms.",
+      sub: "Choose a service and submit your info. We respond with route and proposal.",
       tab_artist: "ARTIST BOOKING",
       tab_label: "LABEL SERVICES",
       tab_venue: "VENUE PROGRAMMING",
@@ -128,60 +153,55 @@ const translations = {
         title: "ARTIST BOOKING",
         point1: "International dates",
         point2: "Artists and Managers",
-        point3: "We design realistic international routes based on your data and the network's actual capacity.",
+        point3: "Route by network + data",
         cta: "SUBMIT MUSIC →"
       },
       label_service: {
         title: "LABEL SERVICES",
         point1: "Goal-oriented investment",
         point2: "Labels and Distributors",
-        point3: "Booking packages for full catalogs, with actionable reporting and full transparency on deals.",
+        point3: "Business designed with Network and Data",
         cta: "REQUEST PACKAGE →"
       },
       venue: {
         title: "VENUE PROGRAMMING",
         point1: "Scene-based curation",
         point2: "Tour-ready dates: proposal, hold, confirmation",
-        point3: "Programming with artists filtered by data, scene, and your venue's actual capacity.",
+        point3: "Local and International",
         cta: "SUBMIT DATES →"
       }
     },
-    howItWorks: {
-      heading: "HOW IT WORKS",
-      step1: "You submit basic data: music, territories, and date windows.",
-      step2: "We design a viable route based on network, data, and your project's context.",
-      step3: "We close dates and transparent deals, with clear reporting."
+    book: {
+      label: "DATA INTAKE",
+      title: "BUILD YOUR TOUR",
+      text: "Quick questionnaire to understand your project, date windows, and territories. No bureaucracy: one step and we move forward.",
+      cta_main: "GO TO FORM",
+      cta_back: "BACK TO SERVICES"
     },
     modal: {
       submit: "SUBMIT",
-      music: {
-        title: "SUBMIT MUSIC",
-        artist: "Artist Name *",
-        genre: "Genre *",
-        email: "Email *",
+      privacy_banner: "🔒 Your data is used only to evaluate your project. Not shared with third parties without consent.",
+      unified: {
+        title: "BOOK A TOUR",
+        service_type: "What service do you need?",
+        opt_artist: "Artist Booking",
+        opt_label: "Label Services",
+        opt_venue: "Venue Programming",
+        artist_name: "Artist Name",
+        genre: "Genre",
+        email: "Email",
         country: "Country",
         links: "Links (Spotify, SoundCloud, Bandcamp)",
         message: "Message",
-        filter: "We primarily work with projects with at least 10k monthly listeners or equivalent live track record."
-      },
-      package: {
-        title: "REQUEST PACKAGE",
-        label: "Label Name *",
-        contact: "Contact Name *",
-        email: "Email *",
+        label_name: "Label Name",
+        contact_name: "Contact Name",
         roster: "Artist Roster",
         territory: "Territory Focus",
-        message: "Message"
-      },
-      dates: {
-        title: "SUBMIT DATES",
-        venue: "Venue Name *",
-        city: "City *",
-        capacity: "Capacity *",
-        email: "Email *",
-        available: "Available Dates",
-        genre: "Genre / Scene Focus",
-        message: "Message"
+        venue_name: "Venue Name",
+        city: "City",
+        capacity: "Capacity",
+        available_dates: "Available Dates",
+        genre_scene: "Genre / Scene Focus"
       }
     },
     footer: {
@@ -198,9 +218,9 @@ const translations = {
       process_design: "Deal Design",
       process_execution: "Live Execution",
       contact_title: "CONTACT",
-      about_title: "WHO WE ARE",
-      about_text: "Team based in Spain, Colombia, and Mexico, with booking experience across Europe and LatAm.",
-      privacy: "Your data is used only to evaluate your project and respond to your request. It is not shared with third parties without consent.",
+      contact_barcelona: "Barcelona",
+      contact_mexico: "Mexico City",
+      privacy: "Your data is used only to evaluate your project. Not shared with third parties without consent.",
       copyright: "BOOKING PLANS © 2025 | DATA-DRIVEN BOOKING SYSTEM",
       status: "SYSTEM STATUS: OPERATIONAL"
     }
@@ -210,6 +230,7 @@ const translations = {
 // ====== I18N CORE ======
 window.BP_I18N = {
   currentLang: "es",
+  currentTranslations: translations.es,
   getLang() {
     const urlParams = new URLSearchParams(window.location.search);
     const urlLang = urlParams.get("lang");
@@ -230,6 +251,7 @@ window.BP_I18N = {
   async setLang(lang) {
     if (!translations[lang]) lang = "es";
     this.currentLang = lang;
+    this.currentTranslations = translations[lang];
     setCookie("bp_lang", lang);
     document.documentElement.lang = lang;
 
