@@ -1233,3 +1233,105 @@ footer{
     font-size: 18px;
   }
 }
+
+/* ====== HOW IT WORKS ====== */
+.how-it-works {
+  padding: 60px 20px;
+  background: var(--black);
+}
+
+.how-it-works h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
+  text-align: center;
+  color: var(--white);
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.step {
+  border: 1px solid var(--line);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.step-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.step p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+/* ====== FOOTER ABOUT & PRIVACY ====== */
+.footer-about {
+  padding: 40px 0 24px;
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+}
+
+.footer-about h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.footer-about p {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.7;
+  max-width: 600px;
+}
+
+.footer-privacy {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+}
+
+.footer-privacy p {
+  font-size: 11px;
+  line-height: 1.5;
+  opacity: 0.5;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ====== MODAL FILTER ====== */
+.modal-filter {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 16px;
+  background: rgba(255, 193, 0, 0.1);
+  border-left: 2px solid var(--accent);
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .how-steps {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-about p,
+  .footer-privacy p {
+    padding: 0 20px;
+  }
+}
