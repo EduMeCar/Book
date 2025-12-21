@@ -36,7 +36,7 @@ const translations = {
       label: "PROCESO",
       title: "CÓMO FUNCIONA",
       step1: "Envías datos básicos: música, territorios y ventanas de fechas.",
-      step2: "Diseñamos una ruta viable según red, datos y contexto de tu proyecto.",
+      step2: "Diseñamos una propuesta según red, datos y contexto de tu proyecto.",
       step3: "Cerramos fechas y deals transparentes, con reporting claro."
     },
     services: {
@@ -139,7 +139,7 @@ const translations = {
       label: "PROCESS",
       title: "HOW IT WORKS",
       step1: "You submit basic data: music, territories, and date windows.",
-      step2: "We design a viable route based on network, data, and your project's context.",
+      step2: "We design a proposer based on network, data, and your project's context.",
       step3: "We close dates and transparent deals, with clear reporting."
     },
     services: {
