@@ -307,18 +307,17 @@ section.visible{
   50%{ opacity:0; }
 }
 
-/* HERO SUBTITLE: más grande, más premium, sin romper mobile */
+/* HERO SUBTITLE: más técnico, más data-driven */
 .hero-sub{
-  font-family: inherit;
-  font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.1rem);
-  line-height: 1.55;
-  letter-spacing: 0.02em;
-  opacity: 0.55;
+  font-family: var(--mono);  /* Space Mono en lugar de Inter */
+  font-size: 11px;           /* Más pequeño */
+  letter-spacing: 0.28em;    /* Tracking amplio */
+  text-transform: uppercase; /* Todo mayúsculas */
+  opacity: 0.65;             /* Más apagado */
+  line-height: 1.8;          /* Más espaciado vertical */
   margin-top: 22px;
-  max-width: 44ch;
+  max-width: 56ch;           /* Ajustado para el nuevo tamaño */
 }
-
-
 
 /* ===== SPLIT-FLAP RETRO (ESTILO TU IMAGEN) ===== */
 .territories{
