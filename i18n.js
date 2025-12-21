@@ -30,7 +30,7 @@ const translations = {
     about: {
       label: "EQUIPO",
       title: "QUIÉN ESTÁ DETRÁS",
-      text: "Equipo internacional con presencia directa en Barcelona, Ciudad de México y Medellín. Experiencia verificada en booking transatlántico, gestión de catálogos y relaciones estratégicas con la industria en Europa y LatAm. Operamos con criterio profesional y red construida en más de 10 años de rutas reales."
+      text: "Equipo internacional con presencia directa en Barcelona, Ciudad de México y Medellín. Experiencia verificada en Managment, Booking, Gestión de Catálogos y Relaciones Estratégicas con la Industria en Europa y LatAm. Operamos con criterio profesional  y red construida en más de 10 años de trayectoria."
     },
     how: {
       label: "PROCESO",
@@ -133,7 +133,7 @@ const translations = {
     about: {
       label: "TEAM",
       title: "WHO WE ARE",
-      text: "International team with direct presence in Barcelona, Mexico City, and Medellín. Verified experience in transatlantic booking, catalog management, and strategic relationships with the industry in Europe and LatAm. We operate with professional criteria and a network built over 10+ years of real touring."
+      text: "International team with direct presence in Barcelona, Mexico City, and Medellín. Verified experience in managment, booking, catalog management, and strategic relationships with the industry in Europe and LatAm. We operate with professional criteria and a network built over 10+ years of career."
     },
     how: {
       label: "PROCESS",
