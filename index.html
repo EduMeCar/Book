@@ -249,5 +249,186 @@
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+
+  <!-- MODALS OVERLAY SYSTEM -->
+  <!-- Insertar ANTES del cierre de </body> en index.html -->
+  
+  <!-- MODAL 1: SUBMIT MUSIC (Artists) -->
+  <div class="modal-overlay" id="modal-submit-music" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="modal.music.title">SUBMIT MUSIC</h2>
+        <button class="modal-close" aria-label="Close modal" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form class="modal-form" id="form-music">
+        <div class="form-field">
+          <label for="music-artist" data-i18n="modal.music.artist">Artist Name *</label>
+          <input type="text" id="music-artist" name="artist" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="music-genre" data-i18n="modal.music.genre">Genre *</label>
+          <input type="text" id="music-genre" name="genre" required placeholder="Electronic, Rock, Hip-Hop..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="music-email" data-i18n="modal.music.email">Email *</label>
+          <input type="email" id="music-email" name="email" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="music-country" data-i18n="modal.music.country">Country</label>
+          <input type="text" id="music-country" name="country" placeholder="Spain, Mexico, USA..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="music-links" data-i18n="modal.music.links">Links (Spotify, SoundCloud, Bandcamp)</label>
+          <input type="url" id="music-links" name="links" placeholder="https://open.spotify.com/artist/..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="music-message" data-i18n="modal.music.message">Message</label>
+          <textarea id="music-message" name="message" rows="4" placeholder="Tour dates, territories of interest, tech requirements..."></textarea>
+        </div>
+  
+        <button type="submit" class="submit-btn" data-i18n="modal.submit">
+          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- MODAL 2: REQUEST PACKAGE (Labels) -->
+  <div class="modal-overlay" id="modal-request-package" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="modal.package.title">REQUEST PACKAGE</h2>
+        <button class="modal-close" aria-label="Close modal" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form class="modal-form" id="form-package">
+        <div class="form-field">
+          <label for="package-label" data-i18n="modal.package.label">Label Name *</label>
+          <input type="text" id="package-label" name="label" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="package-contact" data-i18n="modal.package.contact">Contact Name *</label>
+          <input type="text" id="package-contact" name="contact" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="package-email" data-i18n="modal.package.email">Email *</label>
+          <input type="email" id="package-email" name="email" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="package-roster" data-i18n="modal.package.roster">Artist Roster</label>
+          <input type="text" id="package-roster" name="roster" placeholder="Artist 1, Artist 2, Artist 3..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="package-territory" data-i18n="modal.package.territory">Territory Focus</label>
+          <input type="text" id="package-territory" name="territory" placeholder="Europe, Latin America, USA..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="package-message" data-i18n="modal.package.message">Message</label>
+          <textarea id="package-message" name="message" rows="4" placeholder="Business objectives, investment range, timeline..."></textarea>
+        </div>
+  
+        <button type="submit" class="submit-btn" data-i18n="modal.submit">
+          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- MODAL 3: SUBMIT DATES (Venues) -->
+  <div class="modal-overlay" id="modal-submit-dates" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="modal.dates.title">SUBMIT DATES</h2>
+        <button class="modal-close" aria-label="Close modal" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form class="modal-form" id="form-dates">
+        <div class="form-field">
+          <label for="dates-venue" data-i18n="modal.dates.venue">Venue Name *</label>
+          <input type="text" id="dates-venue" name="venue" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-city" data-i18n="modal.dates.city">City *</label>
+          <input type="text" id="dates-city" name="city" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-capacity" data-i18n="modal.dates.capacity">Capacity *</label>
+          <input type="number" id="dates-capacity" name="capacity" required min="50" max="10000" placeholder="500" />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-email" data-i18n="modal.dates.email">Email *</label>
+          <input type="email" id="dates-email" name="email" required />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-available" data-i18n="modal.dates.available">Available Dates</label>
+          <input type="text" id="dates-available" name="available" placeholder="March 15-20, April 10-15..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-genre" data-i18n="modal.dates.genre">Genre / Scene Focus</label>
+          <input type="text" id="dates-genre" name="genre" placeholder="Electronic, Underground, Live bands..." />
+        </div>
+  
+        <div class="form-field">
+          <label for="dates-message" data-i18n="modal.dates.message">Message</label>
+          <textarea id="dates-message" name="message" rows="4" placeholder="Technical requirements, production capabilities, previous bookings..."></textarea>
+        </div>
+  
+        <button type="submit" class="submit-btn" data-i18n="modal.submit">
+          <span>SUBMIT</span> <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- SUCCESS STATE MODAL -->
+  <div class="modal-overlay" id="modal-success" style="display:none;">
+    <div class="modal modal-success">
+      <div class="success-content">
+        <div class="success-progress">
+          <div class="success-bar-wrap">
+            <div class="success-bar" id="success-bar"></div>
+          </div>
+          <div class="success-status" id="success-status">PROCESSING DATA INTAKE...</div>
+          <div class="success-percent" id="success-percent">0%</div>
+        </div>
+  
+        <div class="success-complete" id="success-complete" style="display:none;">
+          <div class="success-icon">✓</div>
+          <div class="success-title">DATA RECEIVED</div>
+          <div class="success-subtitle">WE'LL BE IN TOUCH</div>
+          <div class="success-meta">
+            <div class="success-label">STATUS:</div>
+            <div class="success-value">OPERATIONAL</div>
+          </div>
+          <div class="success-meta">
+            <div class="success-label">REF:</div>
+            <div class="success-value" id="success-ref">#BP-2025-XXXX</div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" aria-label="Close" type="button" style="display:none;">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </div>
 </body>
 </html>
